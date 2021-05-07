@@ -6,16 +6,16 @@ import com.badlogic.gdx.ScreenAdapter;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.maps.tiled.TiledMapRenderer;
-import com.badlogic.gdx.maps.tiled.renderers.OrthogonalTiledMapRenderer;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.InputListener;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.utils.viewport.FitViewport;
-import com.badlogic.gdx.utils.viewport.ScalingViewport;
 import com.blacksoft.NewGameInitializer;
 import com.blacksoft.build.BuildTool;
+import com.blacksoft.dungeon.actions.CleanIndicatorUpdater;
 import com.blacksoft.screen.input.MapClickHandler;
 import com.blacksoft.screen.input.MapMouseMovedHandler;
+import com.blacksoft.screen.render.OrthogonalTiledMapRenderer;
 import com.blacksoft.state.GameState;
 import com.blacksoft.ui.TileMarker;
 
@@ -66,7 +66,7 @@ public class BuilderScreen extends ScreenAdapter {
             @Override
             public boolean keyUp(InputEvent event,
                                  int keycode) {
-                if(Input.Keys.ESCAPE == keycode) {
+                if (Input.Keys.ESCAPE == keycode) {
                     System.exit(0);
                 }
                 return true;
@@ -79,8 +79,9 @@ public class BuilderScreen extends ScreenAdapter {
 
         NewGameInitializer.init();
         this.tiledMapRenderer = new OrthogonalTiledMapRenderer(GameState.dungeon.tiledMap, spriteBatch);
-    }
 
+        CleanIndicatorUpdater.update(GameState.dungeon);
+    }
 
     @Override
     public void render(float delta) {

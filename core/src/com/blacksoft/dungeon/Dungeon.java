@@ -12,7 +12,11 @@ import static com.blacksoft.state.Config.TEXTURE_SIZE;
 
 public class Dungeon {
 
+    public static final String BUILD_INDICATORS_LAYER = "buildIndicators";
+    public static final String DUNGEON_LAYER = "dungeon";
+
     private static final Tile DEFAULT_TILE = Tile.Rock;
+
     public Node[][] nodes = new Node[MAP_WIDTH][MAP_HEIGHT];
 
     public TiledMap tiledMap;
@@ -21,9 +25,8 @@ public class Dungeon {
 
         tiledMap = new TiledMap();
 
-        TiledMapTileLayer layer = new TiledMapTileLayer(MAP_WIDTH, MAP_HEIGHT, TEXTURE_SIZE, TEXTURE_SIZE);
-        layer.setName("dungeon");
-        tiledMap.getLayers().add(layer);
+        TiledMapTileLayer layer = addLayer(DUNGEON_LAYER);
+        TiledMapTileLayer buildIndicatorLayer = addLayer(BUILD_INDICATORS_LAYER);
 
         for (int i = 0; i < MAP_WIDTH; i++) {
             for (int j = 0; j < MAP_HEIGHT; j++) {
@@ -41,5 +44,12 @@ public class Dungeon {
         }
 
         TileCleaner.clean(this, 0, MAP_HEIGHT / 2);
+    }
+
+    private TiledMapTileLayer addLayer(String name) {
+        TiledMapTileLayer layer = new TiledMapTileLayer(MAP_WIDTH, MAP_HEIGHT, TEXTURE_SIZE, TEXTURE_SIZE);
+        layer.setName(name);
+        tiledMap.getLayers().add(layer);
+        return layer;
     }
 }

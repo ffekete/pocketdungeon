@@ -1,6 +1,7 @@
 package com.blacksoft.screen.input;
 
 import com.blacksoft.build.BuildTool;
+import com.blacksoft.dungeon.actions.CleanIndicatorUpdater;
 import com.blacksoft.dungeon.actions.TileCleaner;
 import com.blacksoft.state.GameState;
 
@@ -19,6 +20,7 @@ public class MapClickHandler {
 
             if(GameState.buildTool == BuildTool.Clean) {
                 TileCleaner.cleanConditionally(GameState.dungeon, vx, vy);
+                CleanIndicatorUpdater.update(GameState.dungeon);
             }
 
         }
