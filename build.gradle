@@ -66,6 +66,8 @@ project(":core") {
         api "com.badlogicgames.box2dlights:box2dlights:$box2DLightsVersion"
         api "com.badlogicgames.gdx:gdx-freetype:$gdxVersion"
         api group: 'com.badlogicgames.gdx', name: 'gdx-ai', version: '1.8.2'
+        api group: 'com.badlogicgames.gdx', name: 'gdx-freetype', version: '0.9.9'
+
 
 
     }

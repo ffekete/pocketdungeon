@@ -16,4 +16,5 @@ public class GameState {
     public static TileMarker tileMarker;
     public static BuildTool buildTool;
 
+    public static int loopProgress = 0;
 }

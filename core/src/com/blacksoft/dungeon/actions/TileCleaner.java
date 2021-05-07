@@ -24,13 +24,14 @@ public class TileCleaner {
         CleanIndicatorUpdater.update(dungeon);
     }
 
-    public static void cleanConditionally(Dungeon dungeon,
-                                          int x,
-                                          int y) {
+    public static boolean cleanConditionally(Dungeon dungeon,
+                                             int x,
+                                             int y) {
         if (!canClean(dungeon, x, y)) {
-            return;
+            return false;
         }
         clean(dungeon, x, y);
+        return true;
     }
 
     public static boolean canClean(Dungeon dungeon,

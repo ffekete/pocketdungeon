@@ -19,8 +19,10 @@ public class MapClickHandler {
         if (vx >= 0 && vx < MAP_WIDTH && vy >= 0 && vy < MAP_HEIGHT) {
 
             if(GameState.buildTool == BuildTool.Clean) {
-                TileCleaner.cleanConditionally(GameState.dungeon, vx, vy);
-                CleanIndicatorUpdater.update(GameState.dungeon);
+                if(TileCleaner.cleanConditionally(GameState.dungeon, vx, vy)) {
+                    CleanIndicatorUpdater.update(GameState.dungeon);
+                    GameState.loopProgress += 1;
+                }
             }
 
         }
