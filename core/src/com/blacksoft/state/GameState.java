@@ -17,4 +17,7 @@ public class GameState {
     public static BuildTool buildTool;
 
     public static int loopProgress = 0;
+    public static  int gold = 0;
+    public static  int iron = 0;
+    public static  int gems = 0;
 }

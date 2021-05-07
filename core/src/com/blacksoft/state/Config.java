@@ -3,7 +3,7 @@ package com.blacksoft.state;
 public class Config {
 
     public static final int MAP_HEIGHT = 20;
-    public static final int MAP_WIDTH = 20;
+    public static final int MAP_WIDTH = 30;
 
     public static final int TEXTURE_SIZE = 16;
 
