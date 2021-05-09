@@ -3,7 +3,11 @@ package com.blacksoft.dungeon;
 import com.badlogic.gdx.maps.tiled.TiledMap;
 import com.badlogic.gdx.maps.tiled.TiledMapTileLayer;
 import com.badlogic.gdx.maps.tiled.tiles.AnimatedTiledMapTile;
+import com.badlogic.gdx.math.Vector2;
 import com.blacksoft.dungeon.actions.TileCleaner;
+
+import java.util.ArrayList;
+import java.util.List;
 
 import static com.blacksoft.animation.TileAnimationProvider.getAnimatedTiledMapTile;
 import static com.blacksoft.state.Config.MAP_HEIGHT;
@@ -51,5 +55,17 @@ public class Dungeon {
         layer.setName(name);
         tiledMap.getLayers().add(layer);
         return layer;
+    }
+
+    public List<Vector2> getTilesOf(Tile tile) {
+        List<Vector2> result = new ArrayList<>();
+        for (int i = 0; i < MAP_WIDTH; i++) {
+            for (int j = 0; j < MAP_HEIGHT; j++) {
+                if (nodes[i][j].tile == tile) {
+                    result.add(new Vector2(i, j));
+                }
+            }
+        }
+        return result;
     }
 }

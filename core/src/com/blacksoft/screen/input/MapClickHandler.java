@@ -3,6 +3,7 @@ package com.blacksoft.screen.input;
 import com.blacksoft.build.BuildTool;
 import com.blacksoft.dungeon.actions.CleanIndicatorUpdater;
 import com.blacksoft.dungeon.actions.TileCleaner;
+import com.blacksoft.state.Config;
 import com.blacksoft.state.GameState;
 
 import static com.blacksoft.state.Config.MAP_HEIGHT;
@@ -21,7 +22,7 @@ public class MapClickHandler {
             if(GameState.buildTool == BuildTool.Clean) {
                 if(TileCleaner.cleanConditionally(GameState.dungeon, vx, vy)) {
                     CleanIndicatorUpdater.update(GameState.dungeon);
-                    GameState.loopProgress += 1;
+                    GameState.loopProgress += Config.CLEAN_PROGRESS_VALUE;
                 }
             }
 

@@ -10,4 +10,10 @@ public class Config {
     public static final int SCREEN_WIDTH = 1366;
     public static final int SCREEN_HEIGHT = 768;
 
+    public static final int STARTING_DUNGEON_LENGTH = 15;
+
+
+    // progress values
+    public static final int CLEAN_PROGRESS_VALUE = 5;
+
 }

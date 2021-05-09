@@ -37,7 +37,7 @@ public class TileCleaner {
     public static boolean canClean(Dungeon dungeon,
                                    int x,
                                    int y) {
-        return (isClean(dungeon, x - 1, y) || isClean(dungeon, x + 1, y) || isClean(dungeon, x, y - 1) || isClean(dungeon, x, y + 1)) && !isClean(dungeon, x, y);
+        return ((isClean(dungeon, x - 1, y) || isClean(dungeon, x + 1, y)) ^ ((isClean(dungeon, x, y - 1) || isClean(dungeon, x, y + 1))) && !isClean(dungeon, x, y));
     }
 
     private static boolean isClean(Dungeon dungeon,
