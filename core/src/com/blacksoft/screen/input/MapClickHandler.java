@@ -2,6 +2,7 @@ package com.blacksoft.screen.input;
 
 import com.blacksoft.build.BuildTool;
 import com.blacksoft.dungeon.actions.CleanIndicatorUpdater;
+import com.blacksoft.dungeon.actions.CleanIndicatorsAction;
 import com.blacksoft.dungeon.actions.TileCleaner;
 import com.blacksoft.state.Config;
 import com.blacksoft.state.GameState;
@@ -21,6 +22,7 @@ public class MapClickHandler {
 
             if(GameState.buildTool == BuildTool.Clean) {
                 if(TileCleaner.cleanConditionally(GameState.dungeon, vx, vy)) {
+                    CleanIndicatorsAction.cleanAll(GameState.dungeon);
                     CleanIndicatorUpdater.update(GameState.dungeon);
                     GameState.loopProgress += Config.CLEAN_PROGRESS_VALUE;
                 }

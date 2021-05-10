@@ -23,8 +23,7 @@ public class CleanIndicatorUpdater {
 
         for (int i = 0; i < MAP_WIDTH; i++) {
             for (int j = 0; j < MAP_HEIGHT; j++) {
-                layer.setCell(i, j, null);
-                if (TileCleaner.canClean(dungeon, i, j)) {
+                if (GameState.buildTool == BuildTool.Clean && TileCleaner.canClean(dungeon, i, j)) {
                     if (TileCleaner.canClean(dungeon, i, j)) {
                         layer.setCell(i, j, getEmptyCell());
                     }

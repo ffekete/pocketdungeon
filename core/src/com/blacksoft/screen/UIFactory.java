@@ -5,13 +5,19 @@ import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.freetype.FreeTypeFontGenerator;
+import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.Group;
+import com.badlogic.gdx.scenes.scene2d.InputEvent;
+import com.badlogic.gdx.scenes.scene2d.InputListener;
 import com.badlogic.gdx.scenes.scene2d.actions.*;
-import com.badlogic.gdx.scenes.scene2d.ui.HorizontalGroup;
-import com.badlogic.gdx.scenes.scene2d.ui.Image;
-import com.badlogic.gdx.scenes.scene2d.ui.Label;
+import com.badlogic.gdx.scenes.scene2d.ui.*;
+import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
+import com.blacksoft.build.BuildTool;
+import com.blacksoft.dungeon.actions.AbstractAction;
+import com.blacksoft.dungeon.actions.CleanIndicatorsAction;
 import com.blacksoft.state.Config;
 import com.blacksoft.state.GameState;
+import com.blacksoft.state.UIState;
 import com.blacksoft.ui.DynamicLabel;
 
 import static com.blacksoft.state.Config.SCREEN_HEIGHT;
@@ -23,19 +29,19 @@ public class UIFactory {
 
     private BitmapFont bitmapFont12;
     private BitmapFont bitmapFont24;
-    private Label.LabelStyle labelStyle12;
-    private Label.LabelStyle labelStyle24;
+    private Label.LabelStyle labelStyle14;
+    private Label.LabelStyle labelStyle30;
 
     public UIFactory() {
-        FreeTypeFontGenerator generator = new FreeTypeFontGenerator(Gdx.files.internal("ui/ARCADECLASSIC.ttf"));
+        FreeTypeFontGenerator generator = new FreeTypeFontGenerator(Gdx.files.internal("ui/orange_kid.ttf"));
 
-        bitmapFont12 = getFont(generator, 12);
-        labelStyle12 = new Label.LabelStyle();
-        labelStyle12.font = bitmapFont12;
+        bitmapFont12 = getFont(generator, 14);
+        labelStyle14 = new Label.LabelStyle();
+        labelStyle14.font = bitmapFont12;
 
-        bitmapFont24 = getFont(generator, 24);
-        labelStyle24 = new Label.LabelStyle();
-        labelStyle24.font = bitmapFont24;
+        bitmapFont24 = getFont(generator, 30);
+        labelStyle30 = new Label.LabelStyle();
+        labelStyle30.font = bitmapFont24;
 
         generator.dispose(); // don't forget to dispose to avoid memory leaks!
     }
@@ -52,7 +58,7 @@ public class UIFactory {
 
         SequenceAction sequenceAction = new SequenceAction();
 
-        Label label = new Label(text, labelStyle24);
+        Label label = new Label(text, labelStyle30);
         label.setColor(Color.GREEN);
         label.setPosition(-50, SCREEN_HEIGHT / 4f);
 
@@ -83,7 +89,7 @@ public class UIFactory {
 
         SequenceAction sequenceAction = new SequenceAction();
 
-        Label label = new Label(text, labelStyle24);
+        Label label = new Label(text, labelStyle30);
         label.setColor(Color.GRAY);
         label.setPosition(SCREEN_WIDTH / 2f - 60, SCREEN_HEIGHT / 4f - 2);
 
@@ -123,30 +129,29 @@ public class UIFactory {
 
         HorizontalGroup horizontalGroup = new HorizontalGroup();
 
-        horizontalGroup.addActor(new Label("Progress", labelStyle12));
-        horizontalGroup.addActor(new Label("   ", labelStyle12));
-        horizontalGroup.addActor(new DynamicLabel(labelStyle12, () -> Integer.toString(GameState.loopProgress)));
-        horizontalGroup.addActor(new Label("          ", labelStyle12));
+        horizontalGroup.addActor(new Label("Progress", labelStyle14));
+        horizontalGroup.addActor(new Label("   ", labelStyle14));
+        horizontalGroup.addActor(new DynamicLabel(labelStyle14, () -> Integer.toString(GameState.loopProgress)));
+        horizontalGroup.addActor(new Label("          ", labelStyle14));
 
-        horizontalGroup.addActor(new Label("Gold", labelStyle12));
-        horizontalGroup.addActor(new Label("   ", labelStyle12));
-        horizontalGroup.addActor(new DynamicLabel(labelStyle12, () -> Integer.toString(GameState.gold)));
-        horizontalGroup.addActor(new Label("          ", labelStyle12));
+        horizontalGroup.addActor(new Label("Gold", labelStyle14));
+        horizontalGroup.addActor(new Label("   ", labelStyle14));
+        horizontalGroup.addActor(new DynamicLabel(labelStyle14, () -> Integer.toString(GameState.gold)));
+        horizontalGroup.addActor(new Label("          ", labelStyle14));
 
-        horizontalGroup.addActor(new Label("Iron", labelStyle12));
-        horizontalGroup.addActor(new Label("   ", labelStyle12));
-        horizontalGroup.addActor(new DynamicLabel(labelStyle12, () -> Integer.toString(GameState.iron)));
-        horizontalGroup.addActor(new Label("          ", labelStyle12));
+        horizontalGroup.addActor(new Label("Iron", labelStyle14));
+        horizontalGroup.addActor(new Label("   ", labelStyle14));
+        horizontalGroup.addActor(new DynamicLabel(labelStyle14, () -> Integer.toString(GameState.iron)));
+        horizontalGroup.addActor(new Label("          ", labelStyle14));
 
-        horizontalGroup.addActor(new Label("Gems", labelStyle12));
-        horizontalGroup.addActor(new Label("   ", labelStyle12));
-        horizontalGroup.addActor(new DynamicLabel(labelStyle12, () -> Integer.toString(GameState.gems)));
-        horizontalGroup.addActor(new Label("          ", labelStyle12));
+        horizontalGroup.addActor(new Label("Gems", labelStyle14));
+        horizontalGroup.addActor(new Label("   ", labelStyle14));
+        horizontalGroup.addActor(new DynamicLabel(labelStyle14, () -> Integer.toString(GameState.gems)));
+        horizontalGroup.addActor(new Label("          ", labelStyle14));
 
         Group group = new Group();
         group.addActor(new Image(new Texture(Gdx.files.internal("ui/StatusBar.png"))));
         group.addActor(horizontalGroup);
-        horizontalGroup.setDebug(true);
         horizontalGroup.setFillParent(true);
         horizontalGroup.center();
         group.setPosition(0, SCREEN_HEIGHT / 2 - 60);
@@ -156,9 +161,108 @@ public class UIFactory {
     }
 
     public DynamicLabel getFpsIndicator() {
-        DynamicLabel fpsIndicator = new DynamicLabel(labelStyle12, () -> Integer.toString(Gdx.graphics.getFramesPerSecond()));
+        DynamicLabel fpsIndicator = new DynamicLabel(labelStyle14, () -> Integer.toString(Gdx.graphics.getFramesPerSecond()));
         fpsIndicator.setPosition(SCREEN_WIDTH / 2 - 60, SCREEN_HEIGHT / 2 - 60);
         return fpsIndicator;
+    }
+
+    public Group getActionsGroup() {
+
+        Group group = new Group();
+
+        group.addActor(new Image(new Texture(Gdx.files.internal("ui/ActionPanel.png"))));
+
+        HorizontalGroup horizontalGroup = new HorizontalGroup();
+        UIState.actionsGroup = horizontalGroup;
+
+        for (AbstractAction action : GameState.actions) {
+            ImageButton.ImageButtonStyle imageButtonStyle = new ImageButton.ImageButtonStyle();
+            imageButtonStyle.imageUp = new TextureRegionDrawable(action.getTexture());
+            imageButtonStyle.imageDown = new TextureRegionDrawable(action.getTexture());
+            ImageButton image = new ImageButton(imageButtonStyle);
+            image.pad(0.5f);
+
+            image.addListener(new InputListener() {
+                @Override
+                public void enter(InputEvent event,
+                                  float x,
+                                  float y,
+                                  int pointer,
+                                  Actor fromActor) {
+                    image.setY(image.getY() + 2);
+                    GameState.highlightedAction = action;
+                    GameState.highlightedActionImage = image;
+                }
+
+                @Override
+                public void exit(InputEvent event,
+                                 float x,
+                                 float y,
+                                 int pointer,
+                                 Actor toActor) {
+                    image.setY(image.getY() - 2);
+                    GameState.highlightedAction = null;
+                    GameState.highlightedActionImage = null;
+                }
+
+                @Override
+                public boolean touchDown(InputEvent event,
+                                         float x,
+                                         float y,
+                                         int pointer,
+                                         int button) {
+
+                    if(GameState.buildTool == BuildTool.Place) {
+                        // already placing, cannot place until the current item is placed
+                        return true;
+                    }
+
+                    GameState.buildTool = BuildTool.Place;
+                    CleanIndicatorsAction.cleanAll(GameState.dungeon);
+
+                    GameState.selectedAction = action;
+
+                    ParallelAction moveAndScaleAction = new ParallelAction();
+
+                    RemoveActorAction removeActorAction = new RemoveActorAction();
+                    image.setTransform(true);
+                    removeActorAction.setTarget(image);
+
+                    SequenceAction sequenceAction = new SequenceAction();
+                    moveAndScaleAction.addAction(Actions.scaleTo(2f, 2f, 0.2f));
+                    moveAndScaleAction.addAction(Actions.moveTo(image.getX(), image.getY() + 40, 0.2f));
+
+                    sequenceAction.addAction(moveAndScaleAction);
+                    sequenceAction.addAction(removeActorAction);
+
+                    image.addAction(sequenceAction);
+
+                    return true;
+                }
+            });
+
+            horizontalGroup.addActor(image);
+        }
+
+        group.setPosition(482, 0);
+        horizontalGroup.setPosition(6, 128);
+        horizontalGroup.setScale(2f);
+
+        group.addActor(horizontalGroup);
+
+        Group descriptionGroup = new Group();
+        descriptionGroup.setPosition(10, 55);
+
+        group.addActor(descriptionGroup);
+
+        DynamicLabel descriptionLabel = new DynamicLabel(labelStyle14, () -> GameState.highlightedAction != null ? getDescription() : "");
+        descriptionGroup.addActor(descriptionLabel);
+
+        return group;
+    }
+
+    private String getDescription() {
+        return String.format("%s\n%s", GameState.highlightedAction.getTitle(), GameState.highlightedAction.getDescription());
     }
 
 }

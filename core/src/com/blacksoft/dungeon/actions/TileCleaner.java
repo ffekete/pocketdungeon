@@ -21,6 +21,7 @@ public class TileCleaner {
         tiledMapTileLayer.setCell(x, y, cell);
         dungeon.nodes[x][y].tile = Tile.Empty;
 
+        CleanIndicatorsAction.cleanAll(dungeon);
         CleanIndicatorUpdater.update(dungeon);
     }
 

@@ -13,6 +13,9 @@ public class Config {
     public static final int STARTING_DUNGEON_LENGTH = 15;
 
 
+    // priorities
+    public static final int GRAVEYARD_PRIORITY = 5;
+
     // progress values
     public static final int CLEAN_PROGRESS_VALUE = 5;
 

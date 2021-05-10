@@ -3,6 +3,6 @@ package com.blacksoft.dungeon;
 public enum Tile {
 
     Rock,
-    Empty;
-
+    Empty,
+    GraveYard;
 }

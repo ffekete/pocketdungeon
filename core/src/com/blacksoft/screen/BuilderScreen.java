@@ -4,26 +4,20 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.ScreenAdapter;
 import com.badlogic.gdx.graphics.OrthographicCamera;
-import com.badlogic.gdx.graphics.Texture;
-import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
-import com.badlogic.gdx.graphics.g2d.freetype.FreeTypeFontGenerator;
 import com.badlogic.gdx.maps.tiled.TiledMapRenderer;
-import com.badlogic.gdx.scenes.scene2d.Group;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.InputListener;
 import com.badlogic.gdx.scenes.scene2d.Stage;
-import com.badlogic.gdx.scenes.scene2d.actions.ParallelAction;
-import com.badlogic.gdx.scenes.scene2d.ui.*;
 import com.badlogic.gdx.utils.viewport.FitViewport;
 import com.blacksoft.NewGameInitializer;
 import com.blacksoft.build.BuildTool;
 import com.blacksoft.dungeon.actions.CleanIndicatorUpdater;
+import com.blacksoft.dungeon.actions.CleanIndicatorsAction;
 import com.blacksoft.screen.input.MapClickHandler;
 import com.blacksoft.screen.input.MapMouseMovedHandler;
 import com.blacksoft.screen.render.OrthogonalTiledMapRenderer;
 import com.blacksoft.state.GameState;
-import com.blacksoft.ui.DynamicLabel;
 import com.blacksoft.ui.TileMarker;
 
 import static com.blacksoft.state.Config.SCREEN_HEIGHT;
@@ -89,6 +83,7 @@ public class BuilderScreen extends ScreenAdapter {
         NewGameInitializer.init();
         this.tiledMapRenderer = new OrthogonalTiledMapRenderer(GameState.dungeon.tiledMap, spriteBatch);
 
+        CleanIndicatorsAction.cleanAll(GameState.dungeon);
         CleanIndicatorUpdater.update(GameState.dungeon);
 
         // add ui elements
@@ -96,6 +91,7 @@ public class BuilderScreen extends ScreenAdapter {
         GameState.stage.addActor(UIFactory.I.getFpsIndicator());
         GameState.stage.addActor(UIFactory.I.addMovingLabelShadow("BUILD PHASE"));
         GameState.stage.addActor(UIFactory.I.addMovingLabel("BUILD PHASE"));
+        GameState.stage.addActor(UIFactory.I.getActionsGroup());
 
     }
 
