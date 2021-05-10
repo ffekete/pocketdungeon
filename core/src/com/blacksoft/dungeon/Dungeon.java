@@ -1,15 +1,16 @@
 package com.blacksoft.dungeon;
 
+import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.maps.tiled.TiledMap;
 import com.badlogic.gdx.maps.tiled.TiledMapTileLayer;
-import com.badlogic.gdx.maps.tiled.tiles.AnimatedTiledMapTile;
 import com.badlogic.gdx.math.Vector2;
 import com.blacksoft.dungeon.actions.TileCleaner;
 
 import java.util.ArrayList;
 import java.util.List;
 
-import static com.blacksoft.animation.TileAnimationProvider.getAnimatedTiledMapTile;
 import static com.blacksoft.state.Config.MAP_HEIGHT;
 import static com.blacksoft.state.Config.MAP_WIDTH;
 import static com.blacksoft.state.Config.TEXTURE_SIZE;
@@ -40,7 +41,7 @@ public class Dungeon {
                 nodes[i][j].x = i;
                 nodes[i][j].y = j;
 
-                AnimatedTiledMapTile tile = getAnimatedTiledMapTile(DEFAULT_TILE);
+                GroundTiledMapTile tile = new GroundTiledMapTile(new TextureRegion(new Texture(Gdx.files.internal("tile/Rock.png"))), i, j, Tile.Rock);
                 TiledMapTileLayer.Cell cell = new TiledMapTileLayer.Cell();
                 cell.setTile(tile);
                 layer.setCell(i, j, cell);
@@ -57,22 +58,12 @@ public class Dungeon {
         return layer;
     }
 
-    public List<Vector2> getTilesOf(Tile tile) {
-        List<Vector2> result = new ArrayList<>();
-        for (int i = 0; i < MAP_WIDTH; i++) {
-            for (int j = 0; j < MAP_HEIGHT; j++) {
-                if (nodes[i][j].tile == tile) {
-                    result.add(new Vector2(i, j));
-                }
-            }
-        }
-        return result;
-    }
-
-    public void replaceTile(int x, int y, Tile target) {
-        TiledMapTileLayer layer = (TiledMapTileLayer)tiledMap.getLayers().get(DUNGEON_LAYER);
+    public void replaceTile(int x,
+                            int y,
+                            Tile target) {
+        TiledMapTileLayer layer = (TiledMapTileLayer) tiledMap.getLayers().get(DUNGEON_LAYER);
         nodes[x][y].tile = target;
-        AnimatedTiledMapTile tile = getAnimatedTiledMapTile(target);
+        GroundTiledMapTile tile = new GroundTiledMapTile(new TextureRegion(new Texture(Gdx.files.internal(String.format("tile/%s.png", target)))), x, y, target);
         TiledMapTileLayer.Cell cell = new TiledMapTileLayer.Cell();
         cell.setTile(tile);
         layer.setCell(x, y, cell);

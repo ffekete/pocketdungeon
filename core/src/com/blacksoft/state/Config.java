@@ -10,7 +10,7 @@ public class Config {
     public static final int SCREEN_WIDTH = 1366;
     public static final int SCREEN_HEIGHT = 768;
 
-    public static final int STARTING_DUNGEON_LENGTH = 15;
+    public static final int STARTING_DUNGEON_LENGTH = 0;
 
 
     // priorities
@@ -19,5 +19,8 @@ public class Config {
     // progress values
     public static final int CLEAN_PROGRESS_VALUE = 5;
     public static final int GRAVEYARD_PROGRESS_VALUE = 10;
+
+    // spawn limits
+    public static final int GRAVEYARD_SPAWN_TIME_LIMIT = 30;
 
 }

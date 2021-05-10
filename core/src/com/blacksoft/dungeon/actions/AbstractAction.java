@@ -1,6 +1,6 @@
 package com.blacksoft.dungeon.actions;
 
-import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 
 public abstract class AbstractAction extends Actor {
@@ -9,7 +9,7 @@ public abstract class AbstractAction extends Actor {
 
     public abstract ActionLevel getActionLevel();
 
-    public abstract Texture getTexture();
+    public abstract TextureRegion getTexture();
 
     public abstract String getTitle();
 

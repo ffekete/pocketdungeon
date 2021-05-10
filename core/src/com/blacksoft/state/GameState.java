@@ -42,5 +42,7 @@ public class GameState {
 
     public static List<Creature> creatures = new ArrayList<>();
 
+    public static float skeletonLimit = 0;
+
 
 }

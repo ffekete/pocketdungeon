@@ -3,6 +3,7 @@ package com.blacksoft.dungeon.actions;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Batch;
+import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.blacksoft.dungeon.building.Graveyard;
 import com.blacksoft.state.Config;
 import com.blacksoft.state.GameState;
@@ -15,15 +16,18 @@ public class PlaceGraveyardAction extends AbstractAction {
     public static final PlaceGraveyardAction I = new PlaceGraveyardAction();
 
     private static final Texture texture;
+    private static final TextureRegion graveyardDrawable;
 
     static {
         texture = new Texture(Gdx.files.internal("tile/GraveYard.png"));
+        graveyardDrawable = new TextureRegion(texture);
+        graveyardDrawable.setRegion(48, 48, 16, 16);
     }
 
     @Override
     public void draw(Batch batch,
                      float parentAlpha) {
-        batch.draw(texture, getX(), getY());
+        batch.draw(graveyardDrawable, getX(), getY());
     }
 
     @Override
@@ -37,8 +41,8 @@ public class PlaceGraveyardAction extends AbstractAction {
     }
 
     @Override
-    public Texture getTexture() {
-        return this.texture;
+    public TextureRegion getTexture() {
+        return graveyardDrawable;
     }
 
     @Override

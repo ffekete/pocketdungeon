@@ -1,6 +1,7 @@
 package com.blacksoft.creature;
 
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.Batch;
@@ -27,6 +28,10 @@ public class Skeleton extends Creature {
     public void draw(Batch batch,
                      float parentAlpha) {
         duration += Gdx.graphics.getDeltaTime();
+        Color color = getColor();
+        batch.setColor(color.r, color.g, color.b, color.a * parentAlpha);
+
         batch.draw(animation.getKeyFrame(duration), getX(), getY());
+        batch.setColor(color);
     }
 }

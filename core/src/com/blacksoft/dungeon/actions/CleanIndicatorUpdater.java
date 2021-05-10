@@ -1,13 +1,16 @@
 package com.blacksoft.dungeon.actions;
 
+import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.maps.tiled.TiledMapTileLayer;
 import com.badlogic.gdx.maps.tiled.tiles.AnimatedTiledMapTile;
 import com.blacksoft.build.UserAction;
 import com.blacksoft.dungeon.Dungeon;
+import com.blacksoft.dungeon.GroundTiledMapTile;
 import com.blacksoft.dungeon.Tile;
 import com.blacksoft.state.GameState;
 
-import static com.blacksoft.animation.TileAnimationProvider.getAnimatedTiledMapTile;
 import static com.blacksoft.state.Config.MAP_HEIGHT;
 import static com.blacksoft.state.Config.MAP_WIDTH;
 
@@ -25,17 +28,18 @@ public class CleanIndicatorUpdater {
             for (int j = 0; j < MAP_HEIGHT; j++) {
                 if (GameState.userAction == UserAction.Clean && TileCleaner.canClean(dungeon, i, j)) {
                     if (TileCleaner.canClean(dungeon, i, j)) {
-                        layer.setCell(i, j, getEmptyCell());
+                        layer.setCell(i, j, getEmptyCell(i, j));
                     }
                 }
             }
         }
     }
 
-    private static TiledMapTileLayer.Cell getEmptyCell() {
-        AnimatedTiledMapTile animatedTiledMapTile = getAnimatedTiledMapTile(Tile.Empty);
+    private static TiledMapTileLayer.Cell getEmptyCell(int x,
+                                                       int y) {
+        GroundTiledMapTile tile = new GroundTiledMapTile(new TextureRegion(new Texture(Gdx.files.internal("tile/Empty.png"))), x, y, Tile.Empty);
         TiledMapTileLayer.Cell cell = new TiledMapTileLayer.Cell();
-        cell.setTile(animatedTiledMapTile);
+        cell.setTile(tile);
         return cell;
     }
 
