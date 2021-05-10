@@ -4,9 +4,11 @@ import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.ImageButton;
 import com.badlogic.gdx.utils.viewport.Viewport;
-import com.blacksoft.build.BuildTool;
+import com.blacksoft.build.UserAction;
 import com.blacksoft.dungeon.Dungeon;
 import com.blacksoft.dungeon.actions.AbstractAction;
+import com.blacksoft.dungeon.actions.BuildingPlacer;
+import com.blacksoft.dungeon.building.Building;
 import com.blacksoft.ui.TileMarker;
 
 import java.util.ArrayList;
@@ -19,7 +21,7 @@ public class GameState {
     public static Dungeon dungeon;
     public static Stage stage;
     public static TileMarker tileMarker;
-    public static BuildTool buildTool;
+    public static UserAction userAction;
 
     public static int loopProgress = 0;
     public static int gold = 0;
@@ -33,6 +35,9 @@ public class GameState {
     public static AbstractAction highlightedAction = null;
     public static AbstractAction selectedAction = null;
     public static ImageButton highlightedActionImage = null;
+    public static ImageButton selectedActionImage = null;
+
+    public static Building currentBuilding = null;
 
 
 }

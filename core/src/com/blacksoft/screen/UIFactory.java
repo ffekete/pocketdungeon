@@ -5,16 +5,16 @@ import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.freetype.FreeTypeFontGenerator;
-import com.badlogic.gdx.scenes.scene2d.Actor;
-import com.badlogic.gdx.scenes.scene2d.Group;
-import com.badlogic.gdx.scenes.scene2d.InputEvent;
-import com.badlogic.gdx.scenes.scene2d.InputListener;
+import com.badlogic.gdx.scenes.scene2d.*;
 import com.badlogic.gdx.scenes.scene2d.actions.*;
 import com.badlogic.gdx.scenes.scene2d.ui.*;
 import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
-import com.blacksoft.build.BuildTool;
+import com.blacksoft.build.UserAction;
 import com.blacksoft.dungeon.actions.AbstractAction;
 import com.blacksoft.dungeon.actions.CleanIndicatorsAction;
+import com.blacksoft.dungeon.actions.UpgradeIndicatorUpdater;
+import com.blacksoft.screen.action.AddActorAction;
+import com.blacksoft.screen.action.MoveImageButtonToMouseAction;
 import com.blacksoft.state.Config;
 import com.blacksoft.state.GameState;
 import com.blacksoft.state.UIState;
@@ -52,6 +52,10 @@ public class UIFactory {
         parameter.size = size;
         BitmapFont bitmapFont = generator.generateFont(parameter); // font size 12 pixels
         return bitmapFont;
+    }
+
+    public Label getLabel14(String text) {
+        return new Label(text, labelStyle14);
     }
 
     public Label addMovingLabel(String text) {
@@ -129,6 +133,8 @@ public class UIFactory {
 
         HorizontalGroup horizontalGroup = new HorizontalGroup();
 
+        UIState.statusBar = horizontalGroup;
+
         horizontalGroup.addActor(new Label("Progress", labelStyle14));
         horizontalGroup.addActor(new Label("   ", labelStyle14));
         horizontalGroup.addActor(new DynamicLabel(labelStyle14, () -> Integer.toString(GameState.loopProgress)));
@@ -160,6 +166,19 @@ public class UIFactory {
         return group;
     }
 
+    public Label updateProgress(int newAmount, int x, int y) {
+        Label label = new Label(Integer.toString(newAmount), labelStyle14);
+
+        label.setPosition(x + 2, y);
+        SequenceAction sequenceAction = new SequenceAction();
+        sequenceAction.addAction(Actions.moveTo(x + 2, y + 10, 0.5f));
+        sequenceAction.addAction(Actions.removeActor());
+
+        label.addAction(sequenceAction);
+
+        return label;
+    }
+
     public DynamicLabel getFpsIndicator() {
         DynamicLabel fpsIndicator = new DynamicLabel(labelStyle14, () -> Integer.toString(Gdx.graphics.getFramesPerSecond()));
         fpsIndicator.setPosition(SCREEN_WIDTH / 2 - 60, SCREEN_HEIGHT / 2 - 60);
@@ -176,72 +195,7 @@ public class UIFactory {
         UIState.actionsGroup = horizontalGroup;
 
         for (AbstractAction action : GameState.actions) {
-            ImageButton.ImageButtonStyle imageButtonStyle = new ImageButton.ImageButtonStyle();
-            imageButtonStyle.imageUp = new TextureRegionDrawable(action.getTexture());
-            imageButtonStyle.imageDown = new TextureRegionDrawable(action.getTexture());
-            ImageButton image = new ImageButton(imageButtonStyle);
-            image.pad(0.5f);
-
-            image.addListener(new InputListener() {
-                @Override
-                public void enter(InputEvent event,
-                                  float x,
-                                  float y,
-                                  int pointer,
-                                  Actor fromActor) {
-                    image.setY(image.getY() + 2);
-                    GameState.highlightedAction = action;
-                    GameState.highlightedActionImage = image;
-                }
-
-                @Override
-                public void exit(InputEvent event,
-                                 float x,
-                                 float y,
-                                 int pointer,
-                                 Actor toActor) {
-                    image.setY(image.getY() - 2);
-                    GameState.highlightedAction = null;
-                    GameState.highlightedActionImage = null;
-                }
-
-                @Override
-                public boolean touchDown(InputEvent event,
-                                         float x,
-                                         float y,
-                                         int pointer,
-                                         int button) {
-
-                    if(GameState.buildTool == BuildTool.Place) {
-                        // already placing, cannot place until the current item is placed
-                        return true;
-                    }
-
-                    GameState.buildTool = BuildTool.Place;
-                    CleanIndicatorsAction.cleanAll(GameState.dungeon);
-
-                    GameState.selectedAction = action;
-
-                    ParallelAction moveAndScaleAction = new ParallelAction();
-
-                    RemoveActorAction removeActorAction = new RemoveActorAction();
-                    image.setTransform(true);
-                    removeActorAction.setTarget(image);
-
-                    SequenceAction sequenceAction = new SequenceAction();
-                    moveAndScaleAction.addAction(Actions.scaleTo(2f, 2f, 0.2f));
-                    moveAndScaleAction.addAction(Actions.moveTo(image.getX(), image.getY() + 40, 0.2f));
-
-                    sequenceAction.addAction(moveAndScaleAction);
-                    sequenceAction.addAction(removeActorAction);
-
-                    image.addAction(sequenceAction);
-
-                    return true;
-                }
-            });
-
-            horizontalGroup.addActor(image);
+            addAction(horizontalGroup, action);
         }
 
         group.setPosition(482, 0);
@@ -259,6 +213,95 @@ public class UIFactory {
         descriptionGroup.addActor(descriptionLabel);
 
         return group;
+    }
+
+    public void addAction(Group horizontalGroup,
+                           AbstractAction action) {
+        ImageButton.ImageButtonStyle imageButtonStyle = new ImageButton.ImageButtonStyle();
+        imageButtonStyle.imageUp = new TextureRegionDrawable(action.getTexture());
+        imageButtonStyle.imageDown = new TextureRegionDrawable(action.getTexture());
+        ImageButton image = new ImageButton(imageButtonStyle);
+        image.pad(0.5f);
+
+        image.addListener(new InputListener() {
+            @Override
+            public void enter(InputEvent event,
+                              float x,
+                              float y,
+                              int pointer,
+                              Actor fromActor) {
+                if(GameState.userAction != UserAction.Place) {
+                    image.setY(image.getY() + 2);
+                    GameState.highlightedAction = action;
+                    GameState.highlightedActionImage = image;
+                }
+            }
+
+            @Override
+            public void exit(InputEvent event,
+                             float x,
+                             float y,
+                             int pointer,
+                             Actor toActor) {
+                if(GameState.userAction != UserAction.Place) {
+                    image.setY(image.getY() - 2);
+                    GameState.highlightedAction = null;
+                    GameState.highlightedActionImage = null;
+                }
+            }
+
+            @Override
+            public boolean touchDown(InputEvent event,
+                                     float x,
+                                     float y,
+                                     int pointer,
+                                     int button) {
+
+                if(GameState.userAction == UserAction.Place) {
+                    // already placing, cannot place until the current item is placed
+                    return true;
+                }
+
+                GameState.selectedActionImage = image;
+
+                GameState.userAction = UserAction.Place;
+                CleanIndicatorsAction.cleanAll(GameState.dungeon);
+
+                GameState.selectedAction = action;
+
+                UpgradeIndicatorUpdater.update(GameState.dungeon);
+
+                ParallelAction moveAndScaleAction = new ParallelAction();
+
+                RemoveActorAction removeActorAction = new RemoveActorAction();
+                image.setTransform(true);
+                removeActorAction.setTarget(image);
+
+                SequenceAction sequenceAction = new SequenceAction();
+                moveAndScaleAction.addAction(Actions.scaleTo(2f, 2f, 0.2f));
+                moveAndScaleAction.addAction(Actions.moveTo(image.getX(), image.getY() + 40, 0.2f));
+
+                sequenceAction.addAction(moveAndScaleAction);
+                sequenceAction.addAction(Actions.visible(false));
+                sequenceAction.addAction(new AddActorAction(image));
+                sequenceAction.addAction(Actions.scaleTo(1f, 1f));
+                sequenceAction.addAction(Actions.visible(true));
+                sequenceAction.addAction(new MoveImageButtonToMouseAction(image));
+
+                image.addAction(sequenceAction);
+
+                return true;
+            }
+        });
+
+        image.setTransform(true);
+        SequenceAction sequenceAction = new SequenceAction();
+        sequenceAction.addAction(Actions.scaleTo(2f, 2f));
+        sequenceAction.addAction(Actions.scaleTo(1f, 1f, 0.1f));
+
+        image.addAction(sequenceAction);
+
+        horizontalGroup.addActor(image);
     }
 
     private String getDescription() {

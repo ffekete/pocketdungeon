@@ -1,6 +1,6 @@
 package com.blacksoft.build;
 
-public enum BuildTool {
+public enum UserAction {
 
     Clean,
     Place;

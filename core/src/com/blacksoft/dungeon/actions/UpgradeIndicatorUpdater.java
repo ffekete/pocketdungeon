@@ -4,18 +4,17 @@ import com.badlogic.gdx.maps.tiled.TiledMapTileLayer;
 import com.badlogic.gdx.maps.tiled.tiles.AnimatedTiledMapTile;
 import com.blacksoft.build.UserAction;
 import com.blacksoft.dungeon.Dungeon;
-import com.blacksoft.dungeon.Tile;
 import com.blacksoft.state.GameState;
 
-import static com.blacksoft.animation.TileAnimationProvider.getAnimatedTiledMapTile;
+import static com.blacksoft.animation.TileAnimationProvider.getAnimatedTiledMapTileForAnimation;
 import static com.blacksoft.state.Config.MAP_HEIGHT;
 import static com.blacksoft.state.Config.MAP_WIDTH;
 
-public class CleanIndicatorUpdater {
+public class UpgradeIndicatorUpdater {
 
     public static void update(Dungeon dungeon) {
 
-        if (GameState.userAction != UserAction.Clean) {
+        if (GameState.userAction != UserAction.Place) {
             return;
         }
 
@@ -23,17 +22,16 @@ public class CleanIndicatorUpdater {
 
         for (int i = 0; i < MAP_WIDTH; i++) {
             for (int j = 0; j < MAP_HEIGHT; j++) {
-                if (GameState.userAction == UserAction.Clean && TileCleaner.canClean(dungeon, i, j)) {
-                    if (TileCleaner.canClean(dungeon, i, j)) {
-                        layer.setCell(i, j, getEmptyCell());
-                    }
+                if (GameState.userAction == UserAction.Place && dungeon.nodes[i][j].canUpgradeBy(GameState.selectedAction)) {
+                    layer.setCell(i, j, getUpgradeIconCell());
                 }
             }
         }
     }
 
-    private static TiledMapTileLayer.Cell getEmptyCell() {
-        AnimatedTiledMapTile animatedTiledMapTile = getAnimatedTiledMapTile(Tile.Empty);
+
+    private static TiledMapTileLayer.Cell getUpgradeIconCell() {
+        AnimatedTiledMapTile animatedTiledMapTile = getAnimatedTiledMapTileForAnimation("ui/UpgradeIndicator.png");
         TiledMapTileLayer.Cell cell = new TiledMapTileLayer.Cell();
         cell.setTile(animatedTiledMapTile);
         return cell;

@@ -20,6 +20,7 @@ public class TileCleaner {
         cell.setTile(animatedTiledMapTile);
         tiledMapTileLayer.setCell(x, y, cell);
         dungeon.nodes[x][y].tile = Tile.Empty;
+        dungeon.nodes[x][y].building = null;
 
         CleanIndicatorsAction.cleanAll(dungeon);
         CleanIndicatorUpdater.update(dungeon);
@@ -38,12 +39,37 @@ public class TileCleaner {
     public static boolean canClean(Dungeon dungeon,
                                    int x,
                                    int y) {
-        return ((isClean(dungeon, x - 1, y) || isClean(dungeon, x + 1, y)) ^ ((isClean(dungeon, x, y - 1) || isClean(dungeon, x, y + 1))) && !isClean(dungeon, x, y));
+
+        int adjacent = 0;
+        if (isClean(dungeon, x - 1, y)) {
+            adjacent += 1;
+        }
+
+        if (isClean(dungeon, x, y + 1)) {
+            adjacent += 2;
+        }
+
+        if (isClean(dungeon, x + 1, y)) {
+            adjacent += 4;
+        }
+
+        if (isClean(dungeon, x, y - 1)) {
+            adjacent += 8;
+        }
+
+        return (adjacent == 1 ||
+                adjacent == 2 ||
+                adjacent == 4 ||
+                adjacent == 8 ||
+                adjacent == 10 ||
+                adjacent == 5)
+
+                && dungeon.nodes[x][y].tile == Tile.Rock;
     }
 
-    private static boolean isClean(Dungeon dungeon,
-                                   int x,
-                                   int y) {
+    public static boolean isClean(Dungeon dungeon,
+                                  int x,
+                                  int y) {
 
         if (x < 0 || y < 0 || x >= MAP_WIDTH || y >= MAP_HEIGHT) {
             return false;

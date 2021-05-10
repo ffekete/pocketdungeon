@@ -11,7 +11,7 @@ import com.badlogic.gdx.scenes.scene2d.InputListener;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.utils.viewport.FitViewport;
 import com.blacksoft.NewGameInitializer;
-import com.blacksoft.build.BuildTool;
+import com.blacksoft.build.UserAction;
 import com.blacksoft.dungeon.actions.CleanIndicatorUpdater;
 import com.blacksoft.dungeon.actions.CleanIndicatorsAction;
 import com.blacksoft.screen.input.MapClickHandler;
@@ -43,7 +43,7 @@ public class BuilderScreen extends ScreenAdapter {
         GameState.tileMarker = new TileMarker();
         GameState.tileMarker.setVisible(false);
 
-        GameState.buildTool = BuildTool.Clean;
+        GameState.userAction = UserAction.Clean;
 
         GameState.stage = new Stage(GameState.viewport);
         GameState.stage.addActor(GameState.tileMarker);

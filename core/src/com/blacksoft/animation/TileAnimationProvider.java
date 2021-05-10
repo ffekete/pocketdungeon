@@ -19,6 +19,16 @@ public class TileAnimationProvider {
         return TextureRegion.split(animTexture, TEXTURE_SIZE, TEXTURE_SIZE)[0];
     }
 
+    public static AnimatedTiledMapTile getAnimatedTiledMapTileForAnimation(String file) {
+        Array<StaticTiledMapTile> array = new Array<>();
+
+        Arrays.stream(TextureRegion.split(new Texture(Gdx.files.internal(file)), 16 ,16)[0])
+                .map(StaticTiledMapTile::new)
+                .forEach(array::add);
+
+        return new AnimatedTiledMapTile(0.3f, array);
+    }
+
     public static AnimatedTiledMapTile getAnimatedTiledMapTile(Tile tile) {
         Array<StaticTiledMapTile> array = new Array<>();
         Arrays.stream(TileAnimationProvider.getFor(tile))

@@ -1,6 +1,7 @@
 package com.blacksoft.screen.input;
 
-import com.blacksoft.build.BuildTool;
+import com.blacksoft.build.UserAction;
+import com.blacksoft.dungeon.actions.BuildingPlacer;
 import com.blacksoft.dungeon.actions.CleanIndicatorUpdater;
 import com.blacksoft.dungeon.actions.CleanIndicatorsAction;
 import com.blacksoft.dungeon.actions.TileCleaner;
@@ -12,7 +13,6 @@ import static com.blacksoft.state.Config.MAP_WIDTH;
 
 public class MapClickHandler {
 
-
     public static boolean touchDown(int x,
                                     int y) {
         int vx = x / 16;
@@ -20,12 +20,16 @@ public class MapClickHandler {
 
         if (vx >= 0 && vx < MAP_WIDTH && vy >= 0 && vy < MAP_HEIGHT) {
 
-            if(GameState.buildTool == BuildTool.Clean) {
-                if(TileCleaner.cleanConditionally(GameState.dungeon, vx, vy)) {
+            if (GameState.userAction == UserAction.Clean) {
+                if (TileCleaner.cleanConditionally(GameState.dungeon, vx, vy)) {
                     CleanIndicatorsAction.cleanAll(GameState.dungeon);
                     CleanIndicatorUpdater.update(GameState.dungeon);
                     GameState.loopProgress += Config.CLEAN_PROGRESS_VALUE;
                 }
+            }
+
+            if (GameState.userAction == UserAction.Place) {
+                BuildingPlacer.place(x, y);
             }
 
         }

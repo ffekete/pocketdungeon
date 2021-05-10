@@ -18,5 +18,6 @@ public class Config {
 
     // progress values
     public static final int CLEAN_PROGRESS_VALUE = 5;
+    public static final int GRAVEYARD_PROGRESS_VALUE = 10;
 
 }

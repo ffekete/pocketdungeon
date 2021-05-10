@@ -68,4 +68,13 @@ public class Dungeon {
         }
         return result;
     }
+
+    public void replaceTile(int x, int y, Tile target) {
+        TiledMapTileLayer layer = (TiledMapTileLayer)tiledMap.getLayers().get(DUNGEON_LAYER);
+        nodes[x][y].tile = target;
+        AnimatedTiledMapTile tile = getAnimatedTiledMapTile(target);
+        TiledMapTileLayer.Cell cell = new TiledMapTileLayer.Cell();
+        cell.setTile(tile);
+        layer.setCell(x, y, cell);
+    }
 }

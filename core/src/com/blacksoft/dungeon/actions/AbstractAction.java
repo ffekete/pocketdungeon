@@ -14,4 +14,8 @@ public abstract class AbstractAction extends Actor {
     public abstract String getTitle();
 
     public abstract String getDescription();
+
+    public abstract void execute();
+
+    public abstract int getProgressAmount();
 }
