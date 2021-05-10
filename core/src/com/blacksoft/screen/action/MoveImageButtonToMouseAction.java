@@ -12,6 +12,8 @@ import com.blacksoft.dungeon.actions.BuildingPlacer;
 import com.blacksoft.screen.UIFactory;
 import com.blacksoft.state.GameState;
 
+import static com.blacksoft.state.Config.TEXTURE_SIZE;
+
 public class MoveImageButtonToMouseAction extends Action {
 
     public MoveImageButtonToMouseAction(ImageButton actor) {
@@ -34,8 +36,8 @@ public class MoveImageButtonToMouseAction extends Action {
 
                 if (BuildingPlacer.canUpgrade((int) v.x, (int) v.y)) {
 
-                    int mapX = (int) v.x / 16;
-                    int mapY = (int) v.y / 16;
+                    int mapX = (int) v.x / TEXTURE_SIZE;
+                    int mapY = (int) v.y / TEXTURE_SIZE;
 
                     if(previousUpgradeIndicator == null) {
                         previousUpgradeIndicator = UIFactory.I.getLabel14("^" + Integer.toString(GameState.dungeon.nodes[mapX][mapY].building.getUpgradeLevel() + 1));

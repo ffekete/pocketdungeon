@@ -10,13 +10,14 @@ import com.blacksoft.state.GameState;
 
 import static com.blacksoft.state.Config.MAP_HEIGHT;
 import static com.blacksoft.state.Config.MAP_WIDTH;
+import static com.blacksoft.state.Config.TEXTURE_SIZE;
 
 public class MapClickHandler {
 
     public static boolean touchDown(int x,
                                     int y) {
-        int vx = x / 16;
-        int vy = y / 16;
+        int vx = x / TEXTURE_SIZE;
+        int vy = y / TEXTURE_SIZE;
 
         if (vx >= 0 && vx < MAP_WIDTH && vy >= 0 && vy < MAP_HEIGHT) {
 

@@ -18,19 +18,14 @@ import java.util.Random;
 
 import static com.blacksoft.state.Config.MAP_HEIGHT;
 import static com.blacksoft.state.Config.MAP_WIDTH;
+import static com.blacksoft.state.Config.TEXTURE_SIZE;
 
 public class BuildingPlacer {
 
-    private static Texture upgradeIndicatorTexture;
-
-    static {
-        upgradeIndicatorTexture = new Texture(Gdx.files.internal("ui/UpgradeIndicator.png"));
-    }
-
     public static boolean canPlace(int x,
                                    int y) {
-        int vx = x / 16;
-        int vy = y / 16;
+        int vx = x / TEXTURE_SIZE;
+        int vy = y / TEXTURE_SIZE;
 
         if (vx >= 0 && vx < MAP_WIDTH && vy >= 0 && vy < MAP_HEIGHT) {
 
@@ -45,8 +40,8 @@ public class BuildingPlacer {
 
     public static boolean canUpgrade(int x,
                                    int y) {
-        int vx = x / 16;
-        int vy = y / 16;
+        int vx = x / TEXTURE_SIZE;
+        int vy = y / TEXTURE_SIZE;
 
         if (vx >= 0 && vx < MAP_WIDTH && vy >= 0 && vy < MAP_HEIGHT) {
 
@@ -61,8 +56,8 @@ public class BuildingPlacer {
 
     public static void place(int x,
                              int y) {
-        int vx = x / 16;
-        int vy = y / 16;
+        int vx = x / TEXTURE_SIZE;
+        int vy = y / TEXTURE_SIZE;
 
         if (BuildingPlacer.canPlace(x, y)) {
 
@@ -74,14 +69,14 @@ public class BuildingPlacer {
             if (GameState.dungeon.nodes[vx][vy].building == null) { // build a new one
                 GameState.dungeon.nodes[vx][vy].building = GameState.currentBuilding;
                 GameState.dungeon.replaceTile(vx, vy, GameState.currentBuilding.getTile());
-                GameState.dungeon.nodes[vx][vy].building.place(vx, vy);
+                GameState.dungeon.nodes[vx][vy].building.place(x, y);
             } else {
                 // upgrade building
                 GameState.dungeon.nodes[vx][vy].building.upgrade();
             }
 
             sequenceAction.addAction(Actions.scaleTo(1f, 1f, 0.2f));
-            GameState.stage.addActor(UIFactory.I.updateProgress(GameState.selectedAction.getProgressAmount(), x / 16 * 16, y / 16 * 16));
+            GameState.stage.addActor(UIFactory.I.updateProgress(GameState.selectedAction.getProgressAmount(), x / TEXTURE_SIZE * TEXTURE_SIZE, y / TEXTURE_SIZE * TEXTURE_SIZE));
             sequenceAction.addAction(Actions.removeActor());
             GameState.selectedActionImage.addAction(sequenceAction);
 

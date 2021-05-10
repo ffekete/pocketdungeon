@@ -22,7 +22,7 @@ public class TileAnimationProvider {
     public static AnimatedTiledMapTile getAnimatedTiledMapTileForAnimation(String file) {
         Array<StaticTiledMapTile> array = new Array<>();
 
-        Arrays.stream(TextureRegion.split(new Texture(Gdx.files.internal(file)), 16 ,16)[0])
+        Arrays.stream(TextureRegion.split(new Texture(Gdx.files.internal(file)), TEXTURE_SIZE ,TEXTURE_SIZE)[0])
                 .map(StaticTiledMapTile::new)
                 .forEach(array::add);
 

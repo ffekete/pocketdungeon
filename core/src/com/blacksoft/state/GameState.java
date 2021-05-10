@@ -5,6 +5,7 @@ import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.ImageButton;
 import com.badlogic.gdx.utils.viewport.Viewport;
 import com.blacksoft.build.UserAction;
+import com.blacksoft.creature.Creature;
 import com.blacksoft.dungeon.Dungeon;
 import com.blacksoft.dungeon.actions.AbstractAction;
 import com.blacksoft.dungeon.actions.BuildingPlacer;
@@ -38,6 +39,8 @@ public class GameState {
     public static ImageButton selectedActionImage = null;
 
     public static Building currentBuilding = null;
+
+    public static List<Creature> creatures = new ArrayList<>();
 
 
 }
