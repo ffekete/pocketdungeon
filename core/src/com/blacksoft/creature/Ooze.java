@@ -9,19 +9,19 @@ import com.badlogic.gdx.graphics.g2d.TextureRegion;
 
 import static com.blacksoft.state.Config.TEXTURE_SIZE;
 
-public class Skeleton extends Creature {
+public class Ooze extends Creature {
 
     private static final Texture texture;
 
     static {
-        texture = new Texture("creature/Skeleton.png");
+        texture = new Texture("creature/Ooze.png");
     }
 
     private float duration = 0f;
     private final Animation<TextureRegion> animation;
 
-    public Skeleton() {
-        this.animation = new Animation<>(0.3f, TextureRegion.split(texture, TEXTURE_SIZE, TEXTURE_SIZE)[0]);
+    public Ooze() {
+        this.animation = new Animation<>(0.6f, TextureRegion.split(texture, TEXTURE_SIZE, TEXTURE_SIZE)[0]);
     }
 
     @Override

@@ -4,5 +4,6 @@ public enum Tile {
 
     Rock,
     Empty,
-    GraveYard;
+    GraveYard,
+    Torch
 }

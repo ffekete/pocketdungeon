@@ -15,12 +15,15 @@ public class Config {
 
     // priorities
     public static final int GRAVEYARD_PRIORITY = 5;
+    public static final int TORCH_PRIORITY = 5;
 
     // progress values
     public static final int CLEAN_PROGRESS_VALUE = 5;
     public static final int GRAVEYARD_PROGRESS_VALUE = 10;
+    public static final int TORCH_PROGRESS_VALUE = 10;
 
     // spawn limits
     public static final int GRAVEYARD_SPAWN_TIME_LIMIT = 30;
+    public static final int OOZE_SPAWN_TIME_LIMIT = 25;
 
 }
