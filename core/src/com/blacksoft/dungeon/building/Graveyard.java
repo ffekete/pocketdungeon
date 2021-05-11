@@ -1,14 +1,17 @@
 package com.blacksoft.dungeon.building;
 
+import box2dLight.Light;
 import com.blacksoft.dungeon.Tile;
 import com.blacksoft.dungeon.actions.AbstractAction;
 import com.blacksoft.dungeon.actions.PlaceGraveyardAction;
+import com.blacksoft.dungeon.lighting.LightSourceFactory;
 import com.blacksoft.state.Config;
 import com.blacksoft.state.GameState;
 
 public class Graveyard implements Building {
 
     public int level = 1;
+    private Light lightSource;
 
     @Override
     public boolean canUpgradeBy(AbstractAction action) {
@@ -20,6 +23,7 @@ public class Graveyard implements Building {
                       int y) {
         GameState.loopProgress += Config.GRAVEYARD_PROGRESS_VALUE;
         GameState.skeletonLimit += 0.5f;
+        this.lightSource = LightSourceFactory.getGraveyardLightSource(x / 16 * 16 + 8,y / 16 * 16 + 8);
     }
 
     @Override
@@ -32,6 +36,7 @@ public class Graveyard implements Building {
     @Override
     public void destroy() {
         GameState.skeletonLimit -= 0.5f;
+        lightSource.dispose();
     }
 
     @Override

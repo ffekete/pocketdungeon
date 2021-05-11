@@ -1,19 +1,27 @@
 package com.blacksoft.screen;
 
+import box2dLight.PointLight;
+import box2dLight.RayHandler;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
+import com.badlogic.gdx.InputMultiplexer;
 import com.badlogic.gdx.ScreenAdapter;
+import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.maps.tiled.TiledMapRenderer;
+import com.badlogic.gdx.math.Vector2;
+import com.badlogic.gdx.physics.box2d.World;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.InputListener;
 import com.badlogic.gdx.scenes.scene2d.Stage;
+import com.badlogic.gdx.utils.viewport.ExtendViewport;
 import com.badlogic.gdx.utils.viewport.FitViewport;
 import com.blacksoft.NewGameInitializer;
 import com.blacksoft.build.UserAction;
 import com.blacksoft.dungeon.actions.CleanIndicatorUpdater;
 import com.blacksoft.dungeon.actions.CleanIndicatorsAction;
+import com.blacksoft.screen.action.MoveLightToMouseAction;
 import com.blacksoft.screen.input.MapClickHandler;
 import com.blacksoft.screen.input.MapMouseMovedHandler;
 import com.blacksoft.screen.render.OrthogonalTiledMapRenderer;
@@ -25,9 +33,10 @@ import static com.blacksoft.state.Config.SCREEN_WIDTH;
 
 public class BuilderScreen extends ScreenAdapter {
 
-
     private SpriteBatch spriteBatch;
     private TiledMapRenderer tiledMapRenderer;
+    private RayHandler rayHandler;
+    private World world;
 
     public BuilderScreen(SpriteBatch spriteBatch) {
         this.spriteBatch = spriteBatch;
@@ -37,7 +46,9 @@ public class BuilderScreen extends ScreenAdapter {
     public void show() {
 
         GameState.orthographicCamera = new OrthographicCamera();
-        GameState.viewport = new FitViewport(SCREEN_WIDTH / 2f, SCREEN_HEIGHT / 2f, GameState.orthographicCamera);
+        GameState.orthographicUICamera = new OrthographicCamera();
+        GameState.viewport = new ExtendViewport(SCREEN_WIDTH / 2f, SCREEN_HEIGHT / 2f, GameState.orthographicCamera);
+        GameState.uiViewport = new FitViewport(SCREEN_WIDTH / 2f, SCREEN_HEIGHT / 2f, GameState.orthographicCamera);
         GameState.viewport.apply(true);
 
         GameState.tileMarker = new TileMarker();
@@ -46,6 +57,8 @@ public class BuilderScreen extends ScreenAdapter {
         GameState.userAction = UserAction.Clean;
 
         GameState.stage = new Stage(GameState.viewport);
+        GameState.uiStage = new Stage(GameState.uiViewport);
+
         GameState.stage.addActor(GameState.tileMarker);
 
         GameState.stage.addListener(new InputListener() {
@@ -76,7 +89,11 @@ public class BuilderScreen extends ScreenAdapter {
             }
         });
 
-        Gdx.input.setInputProcessor(GameState.stage);
+        InputMultiplexer inputMultiplexer = new InputMultiplexer();
+        inputMultiplexer.addProcessor(GameState.uiStage);
+        inputMultiplexer.addProcessor(GameState.stage);
+
+        Gdx.input.setInputProcessor(inputMultiplexer);
 
         GameState.orthographicCamera.translate(-20, -20);
 
@@ -87,12 +104,23 @@ public class BuilderScreen extends ScreenAdapter {
         CleanIndicatorUpdater.update(GameState.dungeon);
 
         // add ui elements
-        GameState.stage.addActor(UIFactory.I.getStatusBar());
-        GameState.stage.addActor(UIFactory.I.getFpsIndicator());
-        GameState.stage.addActor(UIFactory.I.addMovingLabelShadow("BUILD PHASE"));
-        GameState.stage.addActor(UIFactory.I.addMovingLabel("BUILD PHASE"));
-        GameState.stage.addActor(UIFactory.I.getActionsGroup());
+        GameState.uiStage.addActor(UIFactory.I.getStatusBar());
+        GameState.uiStage.addActor(UIFactory.I.getFpsIndicator());
+        GameState.uiStage.addActor(UIFactory.I.addMovingLabelShadow("BUILD PHASE"));
+        GameState.uiStage.addActor(UIFactory.I.addMovingLabel("BUILD PHASE"));
+        GameState.uiStage.addActor(UIFactory.I.getActionsGroup());
 
+
+        world = new World(new Vector2(0, 0), true);
+        rayHandler = new RayHandler(world);
+        rayHandler.setAmbientLight(0.3f);
+        rayHandler.setShadows(true);
+
+        GameState.rayHandler = rayHandler;
+
+        GameState.mouseLightSource = new PointLight(rayHandler, 15, new Color(1, 1f, 1f, 0.5f), 128, 0, 0);
+
+        GameState.stage.addAction(new MoveLightToMouseAction());
     }
 
     @Override
@@ -104,6 +132,12 @@ public class BuilderScreen extends ScreenAdapter {
         tiledMapRenderer.render();
 
         GameState.stage.draw();
+
+        rayHandler.setCombinedMatrix(GameState.orthographicCamera);
+        rayHandler.updateAndRender();
+
+        GameState.uiStage.act();
+        GameState.uiStage.draw();
     }
 
     @Override
@@ -112,5 +146,12 @@ public class BuilderScreen extends ScreenAdapter {
 
         GameState.viewport.update(width, height, true);
         GameState.viewport.apply(true);
+    }
+
+    @Override
+    public void dispose() {
+        super.dispose();
+        rayHandler.dispose();
+        spriteBatch.dispose();
     }
 }

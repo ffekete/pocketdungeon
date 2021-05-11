@@ -4,7 +4,6 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.math.Vector3;
 import com.badlogic.gdx.scenes.scene2d.Action;
-import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.ui.ImageButton;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.blacksoft.build.UserAction;
@@ -39,7 +38,7 @@ public class MoveImageButtonToMouseAction extends Action {
                     int mapX = (int) v.x / TEXTURE_SIZE;
                     int mapY = (int) v.y / TEXTURE_SIZE;
 
-                    if(previousUpgradeIndicator == null) {
+                    if (previousUpgradeIndicator == null) {
                         previousUpgradeIndicator = UIFactory.I.getLabel14("^" + Integer.toString(GameState.dungeon.nodes[mapX][mapY].building.getUpgradeLevel() + 1));
                         GameState.stage.addActor(previousUpgradeIndicator);
                     }
@@ -49,14 +48,14 @@ public class MoveImageButtonToMouseAction extends Action {
                     previousUpgradeIndicator.setVisible(true);
                     previousUpgradeIndicator.setPosition(v.x + 2, v.y);
                 } else {
-                    if(previousUpgradeIndicator != null) {
+                    if (previousUpgradeIndicator != null) {
                         previousUpgradeIndicator.setVisible(false);
                     }
                 }
 
             } else {
                 imageButton.getImage().setColor(Color.RED);
-                if(previousUpgradeIndicator != null) {
+                if (previousUpgradeIndicator != null) {
                     previousUpgradeIndicator.setVisible(false);
                 }
             }
@@ -64,7 +63,7 @@ public class MoveImageButtonToMouseAction extends Action {
 
             return false;
         } else {
-            if(previousUpgradeIndicator != null) {
+            if (previousUpgradeIndicator != null) {
                 previousUpgradeIndicator.setVisible(false);
             }
         }

@@ -1,5 +1,7 @@
 package com.blacksoft.state;
 
+import box2dLight.PointLight;
+import box2dLight.RayHandler;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.ImageButton;
@@ -8,7 +10,6 @@ import com.blacksoft.build.UserAction;
 import com.blacksoft.creature.Creature;
 import com.blacksoft.dungeon.Dungeon;
 import com.blacksoft.dungeon.actions.AbstractAction;
-import com.blacksoft.dungeon.actions.BuildingPlacer;
 import com.blacksoft.dungeon.building.Building;
 import com.blacksoft.ui.TileMarker;
 
@@ -18,11 +19,17 @@ import java.util.List;
 public class GameState {
 
     public static OrthographicCamera orthographicCamera;
+    public static OrthographicCamera orthographicUICamera;
     public static Viewport viewport;
+    public static Viewport uiViewport;
     public static Dungeon dungeon;
     public static Stage stage;
+    public static Stage uiStage;
     public static TileMarker tileMarker;
     public static UserAction userAction;
+
+    public static RayHandler rayHandler;
+    public static PointLight mouseLightSource;
 
     public static int loopProgress = 0;
     public static int gold = 0;
