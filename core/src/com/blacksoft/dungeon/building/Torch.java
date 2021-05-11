@@ -16,7 +16,7 @@ public class Torch implements Building {
 
     @Override
     public boolean canUpgradeBy(AbstractAction action) {
-        return level <= 4 && PlaceTorchAction.class.isAssignableFrom(action.getClass());
+        return false;
     }
 
     @Override
@@ -39,7 +39,8 @@ public class Torch implements Building {
     @Override
     public void destroy() {
         GameState.oozeLimit -= 0.5f;
-        lightSource.dispose();
+        lightSource.setActive(false);
+        lightSource.remove();
     }
 
     @Override

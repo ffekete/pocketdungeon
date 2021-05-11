@@ -71,19 +71,19 @@ public class GroundTiledMapTile implements TiledMapTile {
     public TextureRegion getTextureRegion() {
 
         int v = 0;
-        if(x == 0 || (x > 0 && GameState.dungeon.nodes[x-1][y].tile == tile)) {
+        if(x == 0 || (x > 0 && GameState.dungeon.nodes[x-1][y].tile.canMergeWith(tile))) {
             v += 1;
         }
 
-        if(y == 0 || (y > 0 && GameState.dungeon.nodes[x][y-1].tile == tile)) {
+        if(y == 0 || (y > 0 && GameState.dungeon.nodes[x][y-1].tile.canMergeWith(tile))) {
             v += 8;
         }
 
-        if(x == GameState.dungeon.nodes.length -1 || (x < GameState.dungeon.nodes.length-1 && GameState.dungeon.nodes[x+1][y].tile == tile)) {
+        if(x == GameState.dungeon.nodes.length -1 || (x < GameState.dungeon.nodes.length-1 && GameState.dungeon.nodes[x+1][y].tile.canMergeWith(tile))) {
             v += 4;
         }
 
-        if(y == GameState.dungeon.nodes[0].length-1 || (y < GameState.dungeon.nodes[0].length-1 && GameState.dungeon.nodes[x][y+1].tile == tile)) {
+        if(y == GameState.dungeon.nodes[0].length-1 || (y < GameState.dungeon.nodes[0].length-1 && GameState.dungeon.nodes[x][y+1].tile.canMergeWith(tile))) {
             v += 2;
         }
 

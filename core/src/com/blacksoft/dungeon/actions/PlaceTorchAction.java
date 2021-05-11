@@ -66,4 +66,9 @@ public class PlaceTorchAction extends AbstractAction {
     public int getProgressAmount() {
         return Config.TORCH_PROGRESS_VALUE;
     }
+
+    @Override
+    public Class<?> getActionResultClass() {
+        return Torch.class;
+    }
 }

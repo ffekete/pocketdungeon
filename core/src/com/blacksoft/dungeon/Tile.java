@@ -1,9 +1,35 @@
 package com.blacksoft.dungeon;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+
 public enum Tile {
 
-    Rock,
-    Empty,
-    GraveYard,
-    Torch
+    Rock(true),
+    Empty(false),
+    GraveYard(false),
+    Torch(true);
+
+    static {
+        Rock.canMergeWith = Arrays.asList(Torch, Rock);
+        Empty.canMergeWith = Arrays.asList(Empty);
+        GraveYard.canMergeWith = Arrays.asList(GraveYard);
+        Torch.canMergeWith = Arrays.asList(Rock, Torch);
+    }
+
+    private boolean solid;
+
+    private List<Tile> canMergeWith;
+
+    Tile(boolean solid) {
+        this.solid = solid;
+    }
+
+    public boolean isSolid() {
+        return solid;
+    }
+    public boolean canMergeWith(Tile tile) {
+        return this.canMergeWith.contains(tile);
+    }
 }

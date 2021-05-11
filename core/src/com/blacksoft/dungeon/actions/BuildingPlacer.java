@@ -1,18 +1,15 @@
 package com.blacksoft.dungeon.actions;
 
-import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.graphics.Texture;
-import com.badlogic.gdx.graphics.g2d.Animation;
-import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.scenes.scene2d.actions.Actions;
-import com.badlogic.gdx.scenes.scene2d.actions.DelayAction;
 import com.badlogic.gdx.scenes.scene2d.actions.SequenceAction;
 import com.blacksoft.ActionsHandler;
 import com.blacksoft.build.UserAction;
+import com.blacksoft.dungeon.building.Building;
+import com.blacksoft.dungeon.building.Graveyard;
+import com.blacksoft.dungeon.building.Torch;
 import com.blacksoft.screen.UIFactory;
 import com.blacksoft.state.GameState;
 import com.blacksoft.state.UIState;
-import com.blacksoft.ui.AnimatedImage;
 
 import java.util.Random;
 
@@ -23,15 +20,24 @@ import static com.blacksoft.state.Config.TEXTURE_SIZE;
 public class BuildingPlacer {
 
     public static boolean canPlace(int x,
-                                   int y) {
+                                   int y,
+                                   Class<?> clazz) {
         int vx = x / TEXTURE_SIZE;
         int vy = y / TEXTURE_SIZE;
 
         if (vx >= 0 && vx < MAP_WIDTH && vy >= 0 && vy < MAP_HEIGHT) {
 
             if (GameState.userAction == UserAction.Place) {
-                if (TileCleaner.isClean(GameState.dungeon, vx, vy) || GameState.dungeon.nodes[vx][vy].canUpgradeBy(GameState.selectedAction)) {
-                    return true;
+                if(clazz == Graveyard.class) {
+                    if (TileCleaner.isClean(GameState.dungeon, vx, vy) || GameState.dungeon.nodes[vx][vy].canUpgradeBy(GameState.selectedAction)) {
+                        return true;
+                    }
+                }
+
+                if(clazz == Torch.class) {
+                    if (TileCleaner.isRockWithCorner(GameState.dungeon, vx, vy) || GameState.dungeon.nodes[vx][vy].canUpgradeBy(GameState.selectedAction)) {
+                        return true;
+                    }
                 }
             }
         }
@@ -59,7 +65,7 @@ public class BuildingPlacer {
         int vx = x / TEXTURE_SIZE;
         int vy = y / TEXTURE_SIZE;
 
-        if (BuildingPlacer.canPlace(x, y)) {
+        if (BuildingPlacer.canPlace(x, y, GameState.selectedAction.getActionResultClass())) {
 
             GameState.selectedAction.execute();
 

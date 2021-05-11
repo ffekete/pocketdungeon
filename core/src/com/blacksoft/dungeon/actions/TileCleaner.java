@@ -4,7 +4,6 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.maps.tiled.TiledMapTileLayer;
-import com.badlogic.gdx.maps.tiled.tiles.AnimatedTiledMapTile;
 import com.blacksoft.dungeon.Dungeon;
 import com.blacksoft.dungeon.GroundTiledMapTile;
 import com.blacksoft.dungeon.Tile;
@@ -25,7 +24,10 @@ public class TileCleaner {
         cell.setTile(tile);
         tiledMapTileLayer.setCell(x, y, cell);
         dungeon.nodes[x][y].tile = Tile.Empty;
-        dungeon.nodes[x][y].building = null;
+        if (dungeon.nodes[x][y].building != null) {
+            dungeon.nodes[x][y].building.destroy();
+            dungeon.nodes[x][y].building = null;
+        }
 
         CleanIndicatorsAction.cleanAll(dungeon);
         CleanIndicatorUpdater.update(dungeon);
@@ -39,6 +41,31 @@ public class TileCleaner {
         }
         clean(dungeon, x, y);
         return true;
+    }
+
+
+    public static boolean isRockWithCorner(Dungeon dungeon,
+                                           int x,
+                                           int y) {
+
+        int adjacent = 0;
+        if (isClean(dungeon, x - 1, y)) {
+            adjacent += 1;
+        }
+
+        if (isClean(dungeon, x, y + 1)) {
+            adjacent += 2;
+        }
+
+        if (isClean(dungeon, x + 1, y)) {
+            adjacent += 4;
+        }
+
+        if (isClean(dungeon, x, y - 1)) {
+            adjacent += 8;
+        }
+
+        return (adjacent > 0) && !isClean(dungeon, x, y);
     }
 
     public static boolean canClean(Dungeon dungeon,
@@ -73,7 +100,7 @@ public class TileCleaner {
             return false;
         }
 
-        return dungeon.nodes[x][y].tile != Tile.Rock;
+        return !dungeon.nodes[x][y].tile.isSolid();
     }
 
 }

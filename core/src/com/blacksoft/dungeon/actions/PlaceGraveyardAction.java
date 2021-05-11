@@ -64,4 +64,9 @@ public class PlaceGraveyardAction extends AbstractAction {
     public int getProgressAmount() {
         return Config.GRAVEYARD_PROGRESS_VALUE;
     }
+
+    @Override
+    public Class<?> getActionResultClass() {
+        return Graveyard.class;
+    }
 }

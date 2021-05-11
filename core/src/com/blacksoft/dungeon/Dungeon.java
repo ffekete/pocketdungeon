@@ -51,9 +51,8 @@ public class Dungeon {
             }
         }
 
-        //TileCleaner.clean(this, 0, MAP_HEIGHT / 2);
-
-        placeBuilding((int) 0, MAP_HEIGHT / 2, new Torch(), Tile.Torch);
+        TileCleaner.clean(this, 0, MAP_HEIGHT / 2);
+        placeBuilding((int) 0, MAP_HEIGHT / 2 +1, new Torch(), Tile.Torch);
     }
 
     private TiledMapTileLayer addLayer(String name) {
@@ -77,5 +76,7 @@ public class Dungeon {
     public void placeBuilding(int x, int y, Building building, Tile tile) {
         replaceTile(x,y,tile);
         building.place(x * 16,y * 16);
+        nodes[x][y].building = building;
+
     }
 }

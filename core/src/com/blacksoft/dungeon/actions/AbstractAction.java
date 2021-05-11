@@ -18,4 +18,6 @@ public abstract class AbstractAction extends Actor {
     public abstract void execute();
 
     public abstract int getProgressAmount();
+
+    public abstract Class<?> getActionResultClass();
 }

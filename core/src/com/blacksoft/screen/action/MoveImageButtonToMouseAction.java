@@ -30,7 +30,7 @@ public class MoveImageButtonToMouseAction extends Action {
 
             ImageButton imageButton = (ImageButton) actor;
 
-            if (BuildingPlacer.canPlace((int) v.x, (int) v.y)) {
+            if (BuildingPlacer.canPlace((int) v.x, (int) v.y, GameState.selectedAction.getActionResultClass())) {
                 imageButton.getImage().setColor(Color.GREEN);
 
                 if (BuildingPlacer.canUpgrade((int) v.x, (int) v.y)) {
