@@ -4,11 +4,14 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.maps.tiled.TiledMap;
+import com.badlogic.gdx.maps.tiled.TiledMapTile;
 import com.badlogic.gdx.maps.tiled.TiledMapTileLayer;
-import com.blacksoft.dungeon.actions.TileCleaner;
+import com.badlogic.gdx.maps.tiled.tiles.StaticTiledMapTile;
 import com.blacksoft.dungeon.building.Building;
+import com.blacksoft.dungeon.building.DungeonEntrance;
 import com.blacksoft.dungeon.building.Torch;
 
+import static com.blacksoft.state.Config.DUNGEON_ENTRANCE_LOCATION;
 import static com.blacksoft.state.Config.MAP_HEIGHT;
 import static com.blacksoft.state.Config.MAP_WIDTH;
 import static com.blacksoft.state.Config.TEXTURE_SIZE;
@@ -46,9 +49,9 @@ public class Dungeon {
             }
         }
 
-        TileCleaner.clean(this, 0, MAP_HEIGHT / 2);
-        placeBuilding((int) 0, MAP_HEIGHT / 2 + 1, new Torch(), Tile.Torch);
-        placeBuilding((int) 0, MAP_HEIGHT / 2 - 1, new Torch(), Tile.Torch);
+        placeBuilding((int) DUNGEON_ENTRANCE_LOCATION.x, (int) DUNGEON_ENTRANCE_LOCATION.y, new DungeonEntrance(), Tile.DungeonEntrance);
+        placeBuilding((int) DUNGEON_ENTRANCE_LOCATION.x, (int) DUNGEON_ENTRANCE_LOCATION.y + 1, new Torch(), Tile.Torch);
+        placeBuilding((int) DUNGEON_ENTRANCE_LOCATION.x, (int) DUNGEON_ENTRANCE_LOCATION.y - 1, new Torch(), Tile.Torch);
     }
 
     private TiledMapTileLayer addLayer(String name) {
@@ -63,7 +66,13 @@ public class Dungeon {
                             Tile target) {
         TiledMapTileLayer layer = (TiledMapTileLayer) tiledMap.getLayers().get(DUNGEON_LAYER);
         nodes[x][y].tile = target;
-        GroundTiledMapTile tile = new GroundTiledMapTile(new TextureRegion(new Texture(Gdx.files.internal(String.format("tile/%s.png", target)))), x, y, target);
+
+        TiledMapTile tile;
+        if (target.isTiled()) {
+            tile = new GroundTiledMapTile(new TextureRegion(new Texture(Gdx.files.internal(String.format("tile/%s.png", target)))), x, y, target);
+        } else {
+            tile = new StaticTiledMapTile(new TextureRegion(new Texture(Gdx.files.internal(String.format("tile/%s.png", target)))));
+        }
         TiledMapTileLayer.Cell cell = new TiledMapTileLayer.Cell();
         cell.setTile(tile);
         layer.setCell(x, y, cell);

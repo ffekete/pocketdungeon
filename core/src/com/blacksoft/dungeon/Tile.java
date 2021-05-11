@@ -1,36 +1,46 @@
 package com.blacksoft.dungeon;
 
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 
 public enum Tile {
 
-    Rock(true),
-    Empty(false),
-    GraveYard(false),
-    Torch(true),
-    BloodPool(false),
-    Treasury(false);
+    Rock(true, true),
+    Empty(false, true),
+    GraveYard(false, true),
+    Torch(true, true),
+    BloodPool(false, true),
+    Treasury(false, true),
+    DungeonEntrance(false, false);
 
     static {
         Rock.canMergeWith = Arrays.asList(Torch, Rock);
-        Empty.canMergeWith = Arrays.asList(Empty);
+        Empty.canMergeWith = Arrays.asList(Empty, DungeonEntrance);
         GraveYard.canMergeWith = Arrays.asList(GraveYard);
         Torch.canMergeWith = Arrays.asList(Rock, Torch);
         BloodPool.canMergeWith = Arrays.asList(BloodPool);
         Treasury.canMergeWith = Arrays.asList(Treasury);
+        DungeonEntrance.canMergeWith = Collections.emptyList();
     }
 
     private boolean solid;
+    private boolean tiled;
 
     private List<Tile> canMergeWith;
 
-    Tile(boolean solid) {
+    Tile(boolean solid,
+         boolean tiled) {
         this.solid = solid;
+        this.tiled = tiled;
     }
 
     public boolean isSolid() {
         return solid;
+    }
+
+    public boolean isTiled() {
+        return tiled;
     }
 
     public boolean canMergeWith(Tile tile) {

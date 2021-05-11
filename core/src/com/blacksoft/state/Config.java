@@ -1,5 +1,7 @@
 package com.blacksoft.state;
 
+import com.badlogic.gdx.math.Vector2;
+
 public class Config {
 
     public static final int MAP_HEIGHT = 20;
@@ -39,4 +41,6 @@ public class Config {
 
     public static final int TREASURY_INCOME_VALUE = 100;
     public static final int CLEAN_COST_VALUE = 10;
+
+    public static final Vector2 DUNGEON_ENTRANCE_LOCATION = new Vector2(0, MAP_HEIGHT / 2);
 }
