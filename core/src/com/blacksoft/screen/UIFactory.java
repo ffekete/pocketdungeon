@@ -19,6 +19,7 @@ import com.blacksoft.state.Config;
 import com.blacksoft.state.GameState;
 import com.blacksoft.state.UIState;
 import com.blacksoft.ui.DynamicLabel;
+import com.blacksoft.ui.IntAction;
 
 import static com.blacksoft.state.Config.SCREEN_HEIGHT;
 import static com.blacksoft.state.Config.SCREEN_WIDTH;
@@ -131,39 +132,45 @@ public class UIFactory {
 
     public Group getStatusBar() {
 
-        HorizontalGroup horizontalGroup = new HorizontalGroup();
+        Group horizontalGroup = new Group();
 
         UIState.statusBar = horizontalGroup;
 
-        horizontalGroup.addActor(new Label("Progress", labelStyle14));
-        horizontalGroup.addActor(new Label("   ", labelStyle14));
-        horizontalGroup.addActor(new DynamicLabel(labelStyle14, () -> Integer.toString(GameState.loopProgress)));
-        horizontalGroup.addActor(new Label("          ", labelStyle14));
+        Table table = new Table();
 
-        horizontalGroup.addActor(new Label("Gold", labelStyle14));
-        horizontalGroup.addActor(new Label("   ", labelStyle14));
-        horizontalGroup.addActor(new DynamicLabel(labelStyle14, () -> Integer.toString(GameState.gold)));
-        horizontalGroup.addActor(new Label("          ", labelStyle14));
+        Label progressLabel = new Label(Integer.toString(GameState.loopProgress), labelStyle14);
+        UIState.progressLabel = progressLabel;
+        table.add(new Label("Progress", labelStyle14)).size(50);
+        table.add(progressLabel).size(30).left();
+        updateLabelAmount(0, GameState.loopProgress, progressLabel, "%s", null);
 
-        horizontalGroup.addActor(new Label("Iron", labelStyle14));
-        horizontalGroup.addActor(new Label("   ", labelStyle14));
-        horizontalGroup.addActor(new DynamicLabel(labelStyle14, () -> Integer.toString(GameState.iron)));
-        horizontalGroup.addActor(new Label("          ", labelStyle14));
+        table.add(new Label("Gold", labelStyle14)).size(30);
+        Label goldLabel = new Label("", labelStyle14);
+        UIState.goldLabel = goldLabel;
+        table.add(goldLabel).size(60).left();
+        updateLabelAmount(0, GameState.gold, goldLabel, "%s/%s", GameState.maxGoldCapacity);
 
-        horizontalGroup.addActor(new Label("Gems", labelStyle14));
-        horizontalGroup.addActor(new Label("   ", labelStyle14));
-        horizontalGroup.addActor(new DynamicLabel(labelStyle14, () -> Integer.toString(GameState.gems)));
-        horizontalGroup.addActor(new Label("          ", labelStyle14));
+        Label ironLabel = new Label("", labelStyle14);
+        UIState.ironLabel = ironLabel;
+        table.add(new Label("Iron", labelStyle14)).size(30);
+        table.add(ironLabel).size(60).left();
+        updateLabelAmount(0, GameState.iron, ironLabel, "%s/%s", GameState.maxIronCapacity);
 
-        Group group = new Group();
-        group.addActor(new Image(new Texture(Gdx.files.internal("ui/StatusBar.png"))));
-        group.addActor(horizontalGroup);
-        horizontalGroup.setFillParent(true);
-        horizontalGroup.center();
-        group.setPosition(0, SCREEN_HEIGHT / 2 - 60);
-        group.setSize(480, 32);
+        Label gemLabel = new Label("", labelStyle14);
+        UIState.gemLabel = gemLabel;
+        table.add(new Label("Gems", labelStyle14)).size(30);
+        table.add(gemLabel).size(60).left();
+        updateLabelAmount(0, GameState.gems, gemLabel, "%s/%s", GameState.maxGemsCapacity);
 
-        return group;
+        horizontalGroup.addActor(new Image(new Texture(Gdx.files.internal("ui/StatusBar.png"))));
+        horizontalGroup.addActor(table);
+
+
+        table.setFillParent(true);
+        horizontalGroup.setPosition(0, SCREEN_HEIGHT / 2 - 60);
+        horizontalGroup.setSize(480, 32);
+
+        return horizontalGroup;
     }
 
     public Label createFloatingLabel(int newAmount, int x, int y) {
@@ -307,6 +314,13 @@ public class UIFactory {
 
     private String getDescription() {
         return String.format("%s\n%s", GameState.highlightedAction.getTitle(), GameState.highlightedAction.getDescription());
+    }
+
+    public void updateLabelAmount(int old, int newValue, Label label, String template, Integer other) {
+        if(label != null) {
+            com.blacksoft.ui.IntAction intAction = new IntAction(old, newValue, 0.5f, label, template, other);
+            GameState.uiStage.addAction(intAction);
+        }
     }
 
 }

@@ -15,6 +15,7 @@ import com.blacksoft.ui.TileMarker;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.concurrent.atomic.AtomicInteger;
 
 public class GameState {
 
@@ -33,8 +34,11 @@ public class GameState {
 
     public static int loopProgress = -20;
     public static int gold = 100;
-    public static int iron = 0;
-    public static int gems = 0;
+    public static int maxGoldCapacity = 500;
+    public static int iron = 10;
+    public static int maxIronCapacity = 20;
+    public static int gems = 20;
+    public static int maxGemsCapacity = 20;
 
     public static List<AbstractAction> unlockedActions = new ArrayList<>();
     public static List<AbstractAction> unlockedActionsPrioritized = new ArrayList<>();

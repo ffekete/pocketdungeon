@@ -11,6 +11,7 @@ import com.blacksoft.dungeon.actions.TileCleaner;
 import com.blacksoft.dungeon.building.BloodPool;
 import com.blacksoft.dungeon.building.Graveyard;
 import com.blacksoft.dungeon.building.Torch;
+import com.blacksoft.dungeon.building.Treasury;
 import com.blacksoft.screen.UIFactory;
 import com.blacksoft.state.GameState;
 import com.blacksoft.state.UIState;
@@ -32,13 +33,15 @@ public class BuildingPlacer {
         if (vx >= 0 && vx < MAP_WIDTH && vy >= 0 && vy < MAP_HEIGHT) {
 
             if (GameState.userAction == UserAction.Place) {
-                if(clazz == Graveyard.class || clazz == BloodPool.class) {
+                if (clazz == Graveyard.class ||
+                        clazz == BloodPool.class ||
+                        clazz == Treasury.class) {
                     if (TileCleaner.isClean(GameState.dungeon, vx, vy) || canUpgrade(vx, vy)) {
                         return true;
                     }
                 }
 
-                if(clazz == Torch.class) {
+                if (clazz == Torch.class) {
                     if (TileCleaner.isRockWithCorner(GameState.dungeon, vx, vy) || canUpgrade(vx, vy)) {
                         return true;
                     }
@@ -49,7 +52,7 @@ public class BuildingPlacer {
     }
 
     public static boolean canUpgrade(int x,
-                                   int y) {
+                                     int y) {
 
         if (x >= 0 && x < MAP_WIDTH && y >= 0 && y < MAP_HEIGHT) {
 

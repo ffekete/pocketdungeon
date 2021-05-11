@@ -1,6 +1,5 @@
 package com.blacksoft.dungeon;
 
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
@@ -10,7 +9,8 @@ public enum Tile {
     Empty(false),
     GraveYard(false),
     Torch(true),
-    BloodPool(false);
+    BloodPool(false),
+    Treasury(false);
 
     static {
         Rock.canMergeWith = Arrays.asList(Torch, Rock);
@@ -18,6 +18,7 @@ public enum Tile {
         GraveYard.canMergeWith = Arrays.asList(GraveYard);
         Torch.canMergeWith = Arrays.asList(Rock, Torch);
         BloodPool.canMergeWith = Arrays.asList(BloodPool);
+        Treasury.canMergeWith = Arrays.asList(Treasury);
     }
 
     private boolean solid;
@@ -31,6 +32,7 @@ public enum Tile {
     public boolean isSolid() {
         return solid;
     }
+
     public boolean canMergeWith(Tile tile) {
         return this.canMergeWith.contains(tile);
     }
