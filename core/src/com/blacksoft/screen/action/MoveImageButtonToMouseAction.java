@@ -40,7 +40,7 @@ public class MoveImageButtonToMouseAction extends Action {
 
                     if (previousUpgradeIndicator == null) {
                         previousUpgradeIndicator = UIFactory.I.getLabel14("^" + Integer.toString(GameState.dungeon.nodes[mapX][mapY].building.getUpgradeLevel() + 1));
-                        GameState.stage.addActor(previousUpgradeIndicator);
+                        GameState.uiStage.addActor(previousUpgradeIndicator);
                     }
 
                     previousUpgradeIndicator.setText("^" + Integer.toString(GameState.dungeon.nodes[mapX][mapY].building.getUpgradeLevel() + 1));

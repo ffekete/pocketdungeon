@@ -10,8 +10,6 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
-import static com.blacksoft.state.Config.TEXTURE_SIZE;
-
 public class WanderingAction extends Action {
 
     @Override
@@ -52,7 +50,7 @@ public class WanderingAction extends Action {
 
         if (!availableTiles.isEmpty()) {
             creature.targetNode = availableTiles.get(new Random().nextInt(availableTiles.size()));
-            creature.addAction(new MoveToTileAction(creature.targetNode.x * 16, creature.targetNode.y * 16));
+            creature.addAction(new MoveToTileAction(creature.targetNode.x * 16, creature.targetNode.y * 16, creature));
             creature.finishedMoving = false;
         }
 

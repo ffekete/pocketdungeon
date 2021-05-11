@@ -188,6 +188,7 @@ public class UIFactory {
     public Group getActionsGroup() {
 
         Group group = new Group();
+        group.setDebug(true);
 
         group.addActor(new Image(new Texture(Gdx.files.internal("ui/ActionPanel.png"))));
 

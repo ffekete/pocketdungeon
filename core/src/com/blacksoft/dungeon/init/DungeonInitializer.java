@@ -2,8 +2,10 @@ package com.blacksoft.dungeon.init;
 
 import com.badlogic.gdx.math.Vector2;
 import com.blacksoft.dungeon.Dungeon;
+import com.blacksoft.dungeon.Tile;
 import com.blacksoft.dungeon.actions.TileCleaner;
 import com.blacksoft.state.Config;
+import com.blacksoft.state.GameState;
 
 import java.util.ArrayList;
 import java.util.List;

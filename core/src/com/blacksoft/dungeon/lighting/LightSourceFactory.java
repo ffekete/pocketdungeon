@@ -10,12 +10,12 @@ public class LightSourceFactory {
 
     public static Light getGraveyardLightSource(int x,
                                                 int y) {
-        return new PointLight(rayHandler, 15, new Color(0, 0.7f, 0.7f, 0.75f), 16, x, y);
+        return new PointLight(rayHandler, 15, new Color(0, 1f, 1f, 1f), 16, x, y);
     }
 
     public static Light getTorchLightSource(int x,
                                                 int y) {
-        return new PointLight(rayHandler, 15, new Color(0.7f, 0.7f, 0f, 0.75f), 16, x, y);
+        return new PointLight(rayHandler, 15, new Color(1f, 1f, 0f, 1f), 128, x, y);
     }
 
 }

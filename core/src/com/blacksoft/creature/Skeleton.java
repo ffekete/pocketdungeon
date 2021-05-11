@@ -21,7 +21,7 @@ public class Skeleton extends Creature {
     private final Animation<TextureRegion> animation;
 
     public Skeleton() {
-        this.animation = new Animation<>(0.3f, TextureRegion.split(texture, TEXTURE_SIZE, TEXTURE_SIZE)[0]);
+        this.animation = new Animation<>(0.4f, TextureRegion.split(texture, TEXTURE_SIZE, TEXTURE_SIZE)[0]);
     }
 
     @Override
@@ -33,5 +33,10 @@ public class Skeleton extends Creature {
 
         batch.draw(animation.getKeyFrame(duration, true), getX(), getY());
         batch.setColor(color);
+    }
+
+    @Override
+    public float getSpeed() {
+        return 1.5f;
     }
 }

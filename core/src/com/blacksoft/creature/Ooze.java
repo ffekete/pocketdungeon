@@ -34,4 +34,9 @@ public class Ooze extends Creature {
         batch.draw(animation.getKeyFrame(duration, true), getX(), getY());
         batch.setColor(color);
     }
+
+    @Override
+    public float getSpeed() {
+        return 2f;
+    }
 }

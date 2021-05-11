@@ -44,23 +44,34 @@ public class BuilderScreen extends ScreenAdapter {
 
     @Override
     public void show() {
-
+        // CAMERA, VIEWPORT
         GameState.orthographicCamera = new OrthographicCamera();
         GameState.orthographicUICamera = new OrthographicCamera();
         GameState.viewport = new ExtendViewport(SCREEN_WIDTH / 2f, SCREEN_HEIGHT / 2f, GameState.orthographicCamera);
         GameState.uiViewport = new FitViewport(SCREEN_WIDTH / 2f, SCREEN_HEIGHT / 2f, GameState.orthographicCamera);
         GameState.viewport.apply(true);
 
+        // LIGHT
+        world = new World(new Vector2(0, 0), true);
+        rayHandler = new RayHandler(world);
+        rayHandler.setBlur(true);
+        RayHandler.useDiffuseLight(true);
+        rayHandler.setBlurNum(3);
+        rayHandler.setShadows(true);
+        GameState.rayHandler = rayHandler;
+        GameState.mouseLightSource = new PointLight(rayHandler, 15, new Color(1, 1f, 1f, 1f), 128, 0, 0);
+
+        // MISC
         GameState.tileMarker = new TileMarker();
         GameState.tileMarker.setVisible(false);
-
         GameState.userAction = UserAction.Clean;
 
+        // STAGE
         GameState.stage = new Stage(GameState.viewport);
         GameState.uiStage = new Stage(GameState.uiViewport);
+        GameState.uiStage.addActor(GameState.tileMarker);
 
-        GameState.stage.addActor(GameState.tileMarker);
-
+        // INPUT
         GameState.stage.addListener(new InputListener() {
             @Override
             public boolean touchDown(InputEvent event,
@@ -103,22 +114,12 @@ public class BuilderScreen extends ScreenAdapter {
         CleanIndicatorsAction.cleanAll(GameState.dungeon);
         CleanIndicatorUpdater.update(GameState.dungeon);
 
-        // add ui elements
+        // UI
         GameState.uiStage.addActor(UIFactory.I.getStatusBar());
         GameState.uiStage.addActor(UIFactory.I.getFpsIndicator());
         GameState.uiStage.addActor(UIFactory.I.addMovingLabelShadow("BUILD PHASE"));
         GameState.uiStage.addActor(UIFactory.I.addMovingLabel("BUILD PHASE"));
         GameState.uiStage.addActor(UIFactory.I.getActionsGroup());
-
-
-        world = new World(new Vector2(0, 0), true);
-        rayHandler = new RayHandler(world);
-        rayHandler.setAmbientLight(0.3f);
-        rayHandler.setShadows(true);
-
-        GameState.rayHandler = rayHandler;
-
-        GameState.mouseLightSource = new PointLight(rayHandler, 15, new Color(1, 1f, 1f, 0.5f), 128, 0, 0);
 
         GameState.stage.addAction(new MoveLightToMouseAction());
     }
@@ -144,8 +145,9 @@ public class BuilderScreen extends ScreenAdapter {
     public void resize(int width,
                        int height) {
 
-        GameState.viewport.update(width, height, true);
-        GameState.viewport.apply(true);
+        GameState.viewport.update(width, height, false);
+        GameState.uiViewport.update(width, height, false);
+        GameState.viewport.apply(false);
     }
 
     @Override

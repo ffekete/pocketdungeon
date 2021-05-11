@@ -1,23 +1,27 @@
 package com.blacksoft.creature.action;
 
-import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.scenes.scene2d.actions.MoveToAction;
 import com.blacksoft.creature.Creature;
 
 public class MoveToTileAction extends MoveToAction {
 
-    public MoveToTileAction(float x, float y) {
+    private Creature creature;
+
+    public MoveToTileAction(float x,
+                            float y,
+                            Creature creature) {
+        this.creature = creature;
         setPosition(x, y);
-        setDuration(1f);
+        setDuration(creature.getSpeed());
     }
 
     @Override
     public boolean act(float delta) {
-        boolean result = super.act(delta);
-        if (result == true) {
+        boolean finished = super.act(delta);
+        if (finished) {
             Creature creature = (Creature) actor;
             creature.finishedMoving = true;
         }
-        return result;
+        return finished;
     }
 }
