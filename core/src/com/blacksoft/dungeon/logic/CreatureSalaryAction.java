@@ -46,13 +46,10 @@ public class CreatureSalaryAction extends Action {
                         Label label = UIFactory.I.createFloatingLabel(creature.getSalaryRequest(), (int) creature.getX() / 16 * 16, (int) creature.getY() / 16 * 16);
                         label.setColor(Color.valueOf("FFD700"));
 
-                        GameState.uiStage.addActor(label);
-
                     } else {
                         Label label = UIFactory.I.createFloatingLabel(((int) -NO_SALARY_MORALE_PENALTY), (int) creature.getX() / 16 * 16, (int) creature.getY() / 16 * 16);
                         label.setColor(Color.RED);
                         creature.reduceMorale(NO_SALARY_MORALE_PENALTY);
-                        GameState.uiStage.addActor(label);
                     }
                 }
             });

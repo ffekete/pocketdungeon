@@ -1,14 +1,18 @@
 package com.blacksoft.dungeon.actions;
 
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.maps.tiled.TiledMapTileLayer;
+import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.blacksoft.dungeon.Dungeon;
 import com.blacksoft.dungeon.GroundTiledMapTile;
 import com.blacksoft.dungeon.Tile;
 import com.blacksoft.dungeon.actions.ui.CleanIndicatorUpdater;
 import com.blacksoft.dungeon.actions.ui.CleanIndicatorsAction;
+import com.blacksoft.screen.UIFactory;
+import com.blacksoft.state.Config;
 
 import static com.blacksoft.state.Config.MAP_HEIGHT;
 import static com.blacksoft.state.Config.MAP_WIDTH;
@@ -33,6 +37,8 @@ public class TileCleaner {
 
         CleanIndicatorsAction.cleanAll(dungeon);
         CleanIndicatorUpdater.update(dungeon);
+        Label label = UIFactory.I.createFloatingLabel(-Config.CLEAN_COST_VALUE, x * 16, y * 16);
+        label.setColor(Color.valueOf("FFD700"));
     }
 
     public static boolean cleanConditionally(Dungeon dungeon,

@@ -183,6 +183,8 @@ public class UIFactory {
 
         label.addAction(sequenceAction);
 
+        GameState.uiStage.addActor(label);
+
         return label;
     }
 

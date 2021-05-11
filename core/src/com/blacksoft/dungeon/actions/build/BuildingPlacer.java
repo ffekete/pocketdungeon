@@ -87,7 +87,7 @@ public class BuildingPlacer {
             }
 
             sequenceAction.addAction(Actions.scaleTo(1f, 1f, 0.2f));
-            GameState.uiStage.addActor(UIFactory.I.createFloatingLabel(GameState.selectedAction.getProgressAmount(), x / TEXTURE_SIZE * TEXTURE_SIZE, y / TEXTURE_SIZE * TEXTURE_SIZE));
+            UIFactory.I.createFloatingLabel(GameState.selectedAction.getProgressAmount(), x / TEXTURE_SIZE * TEXTURE_SIZE, y / TEXTURE_SIZE * TEXTURE_SIZE);
             sequenceAction.addAction(Actions.removeActor());
             GameState.selectedActionImage.addAction(sequenceAction);
 
