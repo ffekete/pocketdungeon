@@ -3,6 +3,7 @@ package com.blacksoft;
 import com.blacksoft.dungeon.CreatureSpawnerAction;
 import com.blacksoft.dungeon.Dungeon;
 import com.blacksoft.dungeon.actions.ActionLevel;
+import com.blacksoft.dungeon.actions.PlaceBloodPoolAction;
 import com.blacksoft.dungeon.actions.PlaceGraveyardAction;
 import com.blacksoft.dungeon.actions.PlaceTorchAction;
 import com.blacksoft.dungeon.init.DungeonInitializer;
@@ -18,7 +19,7 @@ public class NewGameInitializer {
         GameState.dungeon = dungeon;
         DungeonInitializer.init(dungeon);
 
-        GameState.unlockedActions = Arrays.asList(PlaceGraveyardAction.I, PlaceTorchAction.I);
+        GameState.unlockedActions = Arrays.asList(PlaceGraveyardAction.I, PlaceTorchAction.I, PlaceBloodPoolAction.I);
         ActionsHandler.I.initActions();
 
         // three basic actions

@@ -4,6 +4,7 @@ import com.badlogic.gdx.scenes.scene2d.actions.Actions;
 import com.badlogic.gdx.scenes.scene2d.actions.SequenceAction;
 import com.blacksoft.ActionsHandler;
 import com.blacksoft.build.UserAction;
+import com.blacksoft.dungeon.building.BloodPool;
 import com.blacksoft.dungeon.building.Building;
 import com.blacksoft.dungeon.building.Graveyard;
 import com.blacksoft.dungeon.building.Torch;
@@ -28,7 +29,7 @@ public class BuildingPlacer {
         if (vx >= 0 && vx < MAP_WIDTH && vy >= 0 && vy < MAP_HEIGHT) {
 
             if (GameState.userAction == UserAction.Place) {
-                if(clazz == Graveyard.class) {
+                if(clazz == Graveyard.class || clazz == BloodPool.class) {
                     if (TileCleaner.isClean(GameState.dungeon, vx, vy) || canUpgrade(vx, vy)) {
                         return true;
                     }

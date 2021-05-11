@@ -19,7 +19,7 @@ public class PlaceGraveyardAction extends AbstractAction {
     private static final TextureRegion graveyardDrawable;
 
     static {
-        texture = new Texture(Gdx.files.internal("tile/GraveYard.png"));
+        texture = new Texture(Gdx.files.internal("tile/Graveyard.png"));
         graveyardDrawable = new TextureRegion(texture);
         graveyardDrawable.setRegion(48, 48, 16, 16);
     }

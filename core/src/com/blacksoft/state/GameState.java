@@ -51,6 +51,7 @@ public class GameState {
 
     public static float skeletonLimit = 0;
     public static float oozeLimit = 0;
+    public static float vampireLimit = 0;
 
 
 }

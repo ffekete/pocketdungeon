@@ -8,6 +8,11 @@ import static com.blacksoft.state.GameState.rayHandler;
 
 public class LightSourceFactory {
 
+    public static Light getBloodPoolLightSource(int x,
+                                                int y) {
+        return new PointLight(rayHandler, 15, new Color(1, 0.1f, 0.1f, 1f), 16, x, y);
+    }
+
     public static Light getGraveyardLightSource(int x,
                                                 int y) {
         return new PointLight(rayHandler, 15, new Color(0, 1f, 1f, 1f), 16, x, y);

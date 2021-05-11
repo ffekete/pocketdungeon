@@ -26,7 +26,7 @@ public class Torch implements Building {
         GameState.loopProgress += Config.TORCH_PROGRESS_VALUE;
         GameState.oozeLimit
                 += 0.5f;
-        this.lightSource = LightSourceFactory.getTorchLightSource(x / 16 * 16 + 8,y / 16 * 16 + 8);
+        this.lightSource = LightSourceFactory.getTorchLightSource(x / 16 * 16 + 8, y / 16 * 16 + 8);
         this.flickeringLightAction = new FlickeringLightAction(this.lightSource);
         GameState.stage.addAction(flickeringLightAction);
     }

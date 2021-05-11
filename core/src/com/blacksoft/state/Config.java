@@ -12,18 +12,20 @@ public class Config {
 
     public static final int STARTING_DUNGEON_LENGTH = 0;
 
-
     // priorities
     public static final int GRAVEYARD_PRIORITY = 5;
     public static final int TORCH_PRIORITY = 5;
+    public static final int BLOOD_POOL_PRIORITY = 5;
 
     // progress values
     public static final int CLEAN_PROGRESS_VALUE = 5;
     public static final int GRAVEYARD_PROGRESS_VALUE = 10;
     public static final int TORCH_PROGRESS_VALUE = 10;
+    public static final int BLOOD_POOL_PROGRESS_VALUE = 20;
 
     // spawn limits
     public static final int GRAVEYARD_SPAWN_TIME_LIMIT = 30;
     public static final int OOZE_SPAWN_TIME_LIMIT = 25;
+    public static final int VAMPIRE_SPAWN_TIME_LIMIT = 25;
 
 }

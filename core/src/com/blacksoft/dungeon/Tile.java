@@ -9,13 +9,15 @@ public enum Tile {
     Rock(true),
     Empty(false),
     GraveYard(false),
-    Torch(true);
+    Torch(true),
+    BloodPool(false);
 
     static {
         Rock.canMergeWith = Arrays.asList(Torch, Rock);
         Empty.canMergeWith = Arrays.asList(Empty);
         GraveYard.canMergeWith = Arrays.asList(GraveYard);
         Torch.canMergeWith = Arrays.asList(Rock, Torch);
+        BloodPool.canMergeWith = Arrays.asList(BloodPool);
     }
 
     private boolean solid;
