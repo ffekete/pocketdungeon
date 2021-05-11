@@ -31,7 +31,7 @@ public class GameState {
     public static RayHandler rayHandler;
     public static PointLight mouseLightSource;
 
-    public static int loopProgress = 0;
+    public static int loopProgress = -20;
     public static int gold = 0;
     public static int iron = 0;
     public static int gems = 0;

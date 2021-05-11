@@ -13,10 +13,11 @@ public class Torch implements Building {
 
     public int level = 1;
     private Light lightSource;
+    private FlickeringLightAction flickeringLightAction;
 
     @Override
     public boolean canUpgradeBy(AbstractAction action) {
-        return false;
+        return level < 5 && PlaceTorchAction.class.isAssignableFrom(action.getClass());
     }
 
     @Override
@@ -26,7 +27,8 @@ public class Torch implements Building {
         GameState.oozeLimit
                 += 0.5f;
         this.lightSource = LightSourceFactory.getTorchLightSource(x / 16 * 16 + 8,y / 16 * 16 + 8);
-        GameState.stage.addAction(new FlickeringLightAction(this.lightSource));
+        this.flickeringLightAction = new FlickeringLightAction(this.lightSource);
+        GameState.stage.addAction(flickeringLightAction);
     }
 
     @Override
@@ -34,6 +36,8 @@ public class Torch implements Building {
         GameState.loopProgress += Config.TORCH_PROGRESS_VALUE;
         GameState.oozeLimit += 0.5f;
         level++;
+
+        flickeringLightAction.setOriginalDistance(lightSource.getDistance() + level * 5);
     }
 
     @Override

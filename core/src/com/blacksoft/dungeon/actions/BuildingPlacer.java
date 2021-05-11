@@ -29,13 +29,13 @@ public class BuildingPlacer {
 
             if (GameState.userAction == UserAction.Place) {
                 if(clazz == Graveyard.class) {
-                    if (TileCleaner.isClean(GameState.dungeon, vx, vy) || GameState.dungeon.nodes[vx][vy].canUpgradeBy(GameState.selectedAction)) {
+                    if (TileCleaner.isClean(GameState.dungeon, vx, vy) || canUpgrade(vx, vy)) {
                         return true;
                     }
                 }
 
                 if(clazz == Torch.class) {
-                    if (TileCleaner.isRockWithCorner(GameState.dungeon, vx, vy) || GameState.dungeon.nodes[vx][vy].canUpgradeBy(GameState.selectedAction)) {
+                    if (TileCleaner.isRockWithCorner(GameState.dungeon, vx, vy) || canUpgrade(vx, vy)) {
                         return true;
                     }
                 }
@@ -46,13 +46,11 @@ public class BuildingPlacer {
 
     public static boolean canUpgrade(int x,
                                    int y) {
-        int vx = x / TEXTURE_SIZE;
-        int vy = y / TEXTURE_SIZE;
 
-        if (vx >= 0 && vx < MAP_WIDTH && vy >= 0 && vy < MAP_HEIGHT) {
+        if (x >= 0 && x < MAP_WIDTH && y >= 0 && y < MAP_HEIGHT) {
 
             if (GameState.userAction == UserAction.Place) {
-                if (GameState.dungeon.nodes[vx][vy].canUpgradeBy(GameState.selectedAction)) {
+                if (GameState.dungeon.nodes[x][y].canUpgradeBy(GameState.selectedAction)) {
                     return true;
                 }
             }

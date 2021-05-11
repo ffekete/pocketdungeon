@@ -23,9 +23,13 @@ public class FlickeringLightAction extends Action {
         period += delta;
 
         if(period > 0.25f) {
-            light.setDistance(originalDistance + new Random().nextFloat() * 20);
+            light.setDistance(originalDistance + new Random().nextFloat() * 8);
             period = 0;
         }
         return false;
+    }
+
+    public void setOriginalDistance(float originalDistance) {
+        this.originalDistance = originalDistance;
     }
 }

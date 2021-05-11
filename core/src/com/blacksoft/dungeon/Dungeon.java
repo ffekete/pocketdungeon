@@ -5,14 +5,9 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.maps.tiled.TiledMap;
 import com.badlogic.gdx.maps.tiled.TiledMapTileLayer;
-import com.badlogic.gdx.math.Vector2;
 import com.blacksoft.dungeon.actions.TileCleaner;
 import com.blacksoft.dungeon.building.Building;
 import com.blacksoft.dungeon.building.Torch;
-import com.blacksoft.state.GameState;
-
-import java.util.ArrayList;
-import java.util.List;
 
 import static com.blacksoft.state.Config.MAP_HEIGHT;
 import static com.blacksoft.state.Config.MAP_WIDTH;
@@ -52,7 +47,8 @@ public class Dungeon {
         }
 
         TileCleaner.clean(this, 0, MAP_HEIGHT / 2);
-        placeBuilding((int) 0, MAP_HEIGHT / 2 +1, new Torch(), Tile.Torch);
+        placeBuilding((int) 0, MAP_HEIGHT / 2 + 1, new Torch(), Tile.Torch);
+        placeBuilding((int) 0, MAP_HEIGHT / 2 - 1, new Torch(), Tile.Torch);
     }
 
     private TiledMapTileLayer addLayer(String name) {
@@ -73,10 +69,12 @@ public class Dungeon {
         layer.setCell(x, y, cell);
     }
 
-    public void placeBuilding(int x, int y, Building building, Tile tile) {
-        replaceTile(x,y,tile);
-        building.place(x * 16,y * 16);
+    public void placeBuilding(int x,
+                              int y,
+                              Building building,
+                              Tile tile) {
+        replaceTile(x, y, tile);
         nodes[x][y].building = building;
-
+        building.place(x * 16, y * 16);
     }
 }

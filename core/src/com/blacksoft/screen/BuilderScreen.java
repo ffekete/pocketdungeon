@@ -69,7 +69,7 @@ public class BuilderScreen extends ScreenAdapter {
         // STAGE
         GameState.stage = new Stage(GameState.viewport);
         GameState.uiStage = new Stage(GameState.uiViewport);
-        GameState.uiStage.addActor(GameState.tileMarker);
+        GameState.stage.addActor(GameState.tileMarker);
 
         // INPUT
         GameState.stage.addListener(new InputListener() {

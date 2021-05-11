@@ -33,10 +33,10 @@ public class MoveImageButtonToMouseAction extends Action {
             if (BuildingPlacer.canPlace((int) v.x, (int) v.y, GameState.selectedAction.getActionResultClass())) {
                 imageButton.getImage().setColor(Color.GREEN);
 
-                if (BuildingPlacer.canUpgrade((int) v.x, (int) v.y)) {
+                int mapX = (int) v.x / TEXTURE_SIZE;
+                int mapY = (int) v.y / TEXTURE_SIZE;
 
-                    int mapX = (int) v.x / TEXTURE_SIZE;
-                    int mapY = (int) v.y / TEXTURE_SIZE;
+                if (BuildingPlacer.canUpgrade(mapX, mapY)) {
 
                     if (previousUpgradeIndicator == null) {
                         previousUpgradeIndicator = UIFactory.I.getLabel14("^" + Integer.toString(GameState.dungeon.nodes[mapX][mapY].building.getUpgradeLevel() + 1));

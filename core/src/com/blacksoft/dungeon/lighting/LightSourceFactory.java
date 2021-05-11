@@ -15,7 +15,7 @@ public class LightSourceFactory {
 
     public static Light getTorchLightSource(int x,
                                                 int y) {
-        return new PointLight(rayHandler, 15, new Color(1f, 1f, 0f, 1f), 32, x, y);
+        return new PointLight(rayHandler, 15, new Color(1f, 1f, 0f, 1f), 64, x, y);
     }
 
 }

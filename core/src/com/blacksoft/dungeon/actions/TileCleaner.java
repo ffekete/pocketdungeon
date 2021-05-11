@@ -48,6 +48,10 @@ public class TileCleaner {
                                            int x,
                                            int y) {
 
+        if (x < 0 || y < 0 || x >= MAP_WIDTH || y >= MAP_HEIGHT) {
+            return false;
+        }
+
         int adjacent = 0;
         if (isClean(dungeon, x - 1, y)) {
             adjacent += 1;
@@ -65,7 +69,7 @@ public class TileCleaner {
             adjacent += 8;
         }
 
-        return (adjacent > 0) && !isClean(dungeon, x, y);
+        return (adjacent > 0) && dungeon.nodes[x][y].tile == Tile.Rock;
     }
 
     public static boolean canClean(Dungeon dungeon,
