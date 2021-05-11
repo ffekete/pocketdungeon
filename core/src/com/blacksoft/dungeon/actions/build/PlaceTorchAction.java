@@ -1,38 +1,40 @@
-package com.blacksoft.dungeon.actions;
+package com.blacksoft.dungeon.actions.build;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
-import com.blacksoft.dungeon.building.Graveyard;
+import com.blacksoft.dungeon.actions.AbstractAction;
+import com.blacksoft.dungeon.actions.ActionLevel;
+import com.blacksoft.dungeon.building.Torch;
 import com.blacksoft.state.Config;
 import com.blacksoft.state.GameState;
 
 import static com.blacksoft.dungeon.actions.ActionLevel.Basic;
-import static com.blacksoft.state.Config.GRAVEYARD_PRIORITY;
+import static com.blacksoft.state.Config.TORCH_PRIORITY;
 
-public class PlaceGraveyardAction extends AbstractAction {
+public class PlaceTorchAction extends AbstractAction {
 
-    public static final PlaceGraveyardAction I = new PlaceGraveyardAction();
+    public static final PlaceTorchAction I = new PlaceTorchAction();
 
     private static final Texture texture;
-    private static final TextureRegion graveyardDrawable;
+    private static final TextureRegion torchDrawable;
 
     static {
-        texture = new Texture(Gdx.files.internal("tile/Graveyard.png"));
-        graveyardDrawable = new TextureRegion(texture);
-        graveyardDrawable.setRegion(48, 48, 16, 16);
+        texture = new Texture(Gdx.files.internal("tile/Torch.png"));
+        torchDrawable = new TextureRegion(texture);
+        torchDrawable.setRegion(48, 48, 16, 16);
     }
 
     @Override
     public void draw(Batch batch,
                      float parentAlpha) {
-        batch.draw(graveyardDrawable, getX(), getY());
+        batch.draw(torchDrawable, getX(), getY());
     }
 
     @Override
     public int getPriority() {
-        return GRAVEYARD_PRIORITY;
+        return TORCH_PRIORITY;
     }
 
     @Override
@@ -42,31 +44,31 @@ public class PlaceGraveyardAction extends AbstractAction {
 
     @Override
     public TextureRegion getTexture() {
-        return graveyardDrawable;
+        return torchDrawable;
     }
 
     @Override
     public String getTitle() {
-        return "Graveyard";
+        return "Torch";
     }
 
     @Override
     public String getDescription() {
-        return "Places a graveyard on the map \nor upgrades an existing one.\n Spawns a skeleton if placed on\n empty tile.";
+        return "Emits light on the map.\nAttracts oozes.";
     }
 
     @Override
     public void execute() {
-        GameState.currentBuilding = new Graveyard();
+        GameState.currentBuilding = new Torch();
     }
 
     @Override
     public int getProgressAmount() {
-        return Config.GRAVEYARD_PROGRESS_VALUE;
+        return Config.TORCH_PROGRESS_VALUE;
     }
 
     @Override
     public Class<?> getActionResultClass() {
-        return Graveyard.class;
+        return Torch.class;
     }
 }

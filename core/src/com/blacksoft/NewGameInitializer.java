@@ -1,11 +1,11 @@
 package com.blacksoft;
 
-import com.blacksoft.dungeon.CreatureSpawnerAction;
+import com.blacksoft.dungeon.logic.CreatureSpawnerAction;
 import com.blacksoft.dungeon.Dungeon;
 import com.blacksoft.dungeon.actions.ActionLevel;
-import com.blacksoft.dungeon.actions.PlaceBloodPoolAction;
-import com.blacksoft.dungeon.actions.PlaceGraveyardAction;
-import com.blacksoft.dungeon.actions.PlaceTorchAction;
+import com.blacksoft.dungeon.actions.build.PlaceBloodPoolAction;
+import com.blacksoft.dungeon.actions.build.PlaceGraveyardAction;
+import com.blacksoft.dungeon.actions.build.PlaceTorchAction;
 import com.blacksoft.dungeon.init.DungeonInitializer;
 import com.blacksoft.state.GameState;
 

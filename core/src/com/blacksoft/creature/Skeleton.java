@@ -7,6 +7,7 @@ import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 
+import static com.blacksoft.state.Config.SKELETON_SALARY_REQUEST;
 import static com.blacksoft.state.Config.TEXTURE_SIZE;
 
 public class Skeleton extends Creature {
@@ -38,5 +39,10 @@ public class Skeleton extends Creature {
     @Override
     public float getSpeed() {
         return 1.5f;
+    }
+
+    @Override
+    public int getSalaryRequest() {
+        return SKELETON_SALARY_REQUEST;
     }
 }

@@ -19,8 +19,9 @@ import com.badlogic.gdx.utils.viewport.ExtendViewport;
 import com.badlogic.gdx.utils.viewport.FitViewport;
 import com.blacksoft.NewGameInitializer;
 import com.blacksoft.build.UserAction;
-import com.blacksoft.dungeon.actions.CleanIndicatorUpdater;
-import com.blacksoft.dungeon.actions.CleanIndicatorsAction;
+import com.blacksoft.dungeon.actions.ui.CleanIndicatorUpdater;
+import com.blacksoft.dungeon.actions.ui.CleanIndicatorsAction;
+import com.blacksoft.dungeon.logic.CreatureSalaryAction;
 import com.blacksoft.screen.action.MoveLightToMouseAction;
 import com.blacksoft.screen.input.MapClickHandler;
 import com.blacksoft.screen.input.MapMouseMovedHandler;
@@ -122,6 +123,7 @@ public class BuilderScreen extends ScreenAdapter {
         GameState.uiStage.addActor(UIFactory.I.getActionsGroup());
 
         GameState.stage.addAction(new MoveLightToMouseAction());
+        GameState.stage.addAction(new CreatureSalaryAction());
     }
 
     @Override

@@ -7,7 +7,7 @@ import com.badlogic.gdx.scenes.scene2d.Action;
 import com.badlogic.gdx.scenes.scene2d.ui.ImageButton;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.blacksoft.build.UserAction;
-import com.blacksoft.dungeon.actions.BuildingPlacer;
+import com.blacksoft.dungeon.actions.build.BuildingPlacer;
 import com.blacksoft.screen.UIFactory;
 import com.blacksoft.state.GameState;
 

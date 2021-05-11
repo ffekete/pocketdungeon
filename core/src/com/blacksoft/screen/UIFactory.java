@@ -11,8 +11,8 @@ import com.badlogic.gdx.scenes.scene2d.ui.*;
 import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
 import com.blacksoft.build.UserAction;
 import com.blacksoft.dungeon.actions.AbstractAction;
-import com.blacksoft.dungeon.actions.CleanIndicatorsAction;
-import com.blacksoft.dungeon.actions.UpgradeIndicatorUpdater;
+import com.blacksoft.dungeon.actions.ui.CleanIndicatorsAction;
+import com.blacksoft.dungeon.actions.ui.UpgradeIndicatorUpdater;
 import com.blacksoft.screen.action.AddActorAction;
 import com.blacksoft.screen.action.MoveImageButtonToMouseAction;
 import com.blacksoft.state.Config;
@@ -166,7 +166,7 @@ public class UIFactory {
         return group;
     }
 
-    public Label updateProgress(int newAmount, int x, int y) {
+    public Label createFloatingLabel(int newAmount, int x, int y) {
         Label label = new Label(Integer.toString(newAmount), labelStyle14);
 
         label.setPosition(x + 2, y);

@@ -1,4 +1,4 @@
-package com.blacksoft.dungeon.actions;
+package com.blacksoft.dungeon.actions.ui;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Texture;
@@ -9,6 +9,7 @@ import com.blacksoft.build.UserAction;
 import com.blacksoft.dungeon.Dungeon;
 import com.blacksoft.dungeon.GroundTiledMapTile;
 import com.blacksoft.dungeon.Tile;
+import com.blacksoft.dungeon.actions.TileCleaner;
 import com.blacksoft.state.GameState;
 
 import static com.blacksoft.state.Config.MAP_HEIGHT;

@@ -1,4 +1,4 @@
-package com.blacksoft.dungeon.actions;
+package com.blacksoft.dungeon.actions.ui;
 
 import com.badlogic.gdx.maps.tiled.TiledMapTileLayer;
 import com.badlogic.gdx.maps.tiled.tiles.AnimatedTiledMapTile;

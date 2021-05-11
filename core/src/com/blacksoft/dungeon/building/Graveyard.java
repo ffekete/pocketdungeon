@@ -3,7 +3,7 @@ package com.blacksoft.dungeon.building;
 import box2dLight.Light;
 import com.blacksoft.dungeon.Tile;
 import com.blacksoft.dungeon.actions.AbstractAction;
-import com.blacksoft.dungeon.actions.PlaceGraveyardAction;
+import com.blacksoft.dungeon.actions.build.PlaceGraveyardAction;
 import com.blacksoft.dungeon.lighting.LightSourceFactory;
 import com.blacksoft.state.Config;
 import com.blacksoft.state.GameState;

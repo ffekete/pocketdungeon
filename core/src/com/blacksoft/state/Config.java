@@ -28,4 +28,10 @@ public class Config {
     public static final int OOZE_SPAWN_TIME_LIMIT = 25;
     public static final int VAMPIRE_SPAWN_TIME_LIMIT = 25;
 
+    // salaries
+    public static final int VAMPIRE_SALARY_REQUEST = 100;
+    public static final int SKELETON_SALARY_REQUEST = 0;
+    public static final int OOZE_SALARY_REQUEST = 0;
+
+    public static final float NO_SALARY_MORALE_PENALTY = 10f;
 }

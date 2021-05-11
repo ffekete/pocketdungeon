@@ -3,7 +3,7 @@ package com.blacksoft.dungeon.building;
 import box2dLight.Light;
 import com.blacksoft.dungeon.Tile;
 import com.blacksoft.dungeon.actions.AbstractAction;
-import com.blacksoft.dungeon.actions.PlaceTorchAction;
+import com.blacksoft.dungeon.actions.build.PlaceTorchAction;
 import com.blacksoft.dungeon.lighting.FlickeringLightAction;
 import com.blacksoft.dungeon.lighting.LightSourceFactory;
 import com.blacksoft.state.Config;

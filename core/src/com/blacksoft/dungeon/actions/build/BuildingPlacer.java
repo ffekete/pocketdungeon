@@ -1,11 +1,14 @@
-package com.blacksoft.dungeon.actions;
+package com.blacksoft.dungeon.actions.build;
 
 import com.badlogic.gdx.scenes.scene2d.actions.Actions;
 import com.badlogic.gdx.scenes.scene2d.actions.SequenceAction;
 import com.blacksoft.ActionsHandler;
 import com.blacksoft.build.UserAction;
+import com.blacksoft.dungeon.actions.AbstractAction;
+import com.blacksoft.dungeon.actions.ui.CleanIndicatorUpdater;
+import com.blacksoft.dungeon.actions.ui.CleanIndicatorsAction;
+import com.blacksoft.dungeon.actions.TileCleaner;
 import com.blacksoft.dungeon.building.BloodPool;
-import com.blacksoft.dungeon.building.Building;
 import com.blacksoft.dungeon.building.Graveyard;
 import com.blacksoft.dungeon.building.Torch;
 import com.blacksoft.screen.UIFactory;
@@ -81,7 +84,7 @@ public class BuildingPlacer {
             }
 
             sequenceAction.addAction(Actions.scaleTo(1f, 1f, 0.2f));
-            GameState.uiStage.addActor(UIFactory.I.updateProgress(GameState.selectedAction.getProgressAmount(), x / TEXTURE_SIZE * TEXTURE_SIZE, y / TEXTURE_SIZE * TEXTURE_SIZE));
+            GameState.uiStage.addActor(UIFactory.I.createFloatingLabel(GameState.selectedAction.getProgressAmount(), x / TEXTURE_SIZE * TEXTURE_SIZE, y / TEXTURE_SIZE * TEXTURE_SIZE));
             sequenceAction.addAction(Actions.removeActor());
             GameState.selectedActionImage.addAction(sequenceAction);
 

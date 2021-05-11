@@ -1,9 +1,9 @@
 package com.blacksoft.screen.input;
 
 import com.blacksoft.build.UserAction;
-import com.blacksoft.dungeon.actions.BuildingPlacer;
-import com.blacksoft.dungeon.actions.CleanIndicatorUpdater;
-import com.blacksoft.dungeon.actions.CleanIndicatorsAction;
+import com.blacksoft.dungeon.actions.build.BuildingPlacer;
+import com.blacksoft.dungeon.actions.ui.CleanIndicatorUpdater;
+import com.blacksoft.dungeon.actions.ui.CleanIndicatorsAction;
 import com.blacksoft.dungeon.actions.TileCleaner;
 import com.blacksoft.state.Config;
 import com.blacksoft.state.GameState;
