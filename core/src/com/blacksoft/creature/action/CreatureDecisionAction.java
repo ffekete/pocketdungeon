@@ -31,7 +31,7 @@ public class CreatureDecisionAction extends Action {
 
 
             // REST
-            if (creature.fatigue <= 0) {
+            if (creature.hp <= 0) {
                 // look for resting place
                 Vector2 target = TileFinder.findNearest(creature.getX() / 16, creature.getY() / 16, Tile.RestingArea);
 

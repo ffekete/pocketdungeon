@@ -4,6 +4,7 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.math.Vector3;
 import com.badlogic.gdx.scenes.scene2d.Action;
+import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.ui.ImageButton;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.blacksoft.build.UserAction;
@@ -13,9 +14,9 @@ import com.blacksoft.state.GameState;
 
 import static com.blacksoft.state.Config.TEXTURE_SIZE;
 
-public class MoveImageButtonToMouseAction extends Action {
+public class MovePlaceableActorToMouseAction extends Action {
 
-    public MoveImageButtonToMouseAction(ImageButton actor) {
+    public MovePlaceableActorToMouseAction(Actor actor) {
         this.actor = actor;
     }
 

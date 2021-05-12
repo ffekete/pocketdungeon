@@ -12,7 +12,7 @@ public abstract class Creature extends Actor {
     public boolean finishedAllActions = true;
 
     public float morale = 100f;
-    public float fatigue = 10f;
+    public float hp = 10f;
 
     public SequenceAction sequenceActions = new SequenceAction();
 
@@ -38,10 +38,15 @@ public abstract class Creature extends Actor {
         }
     }
 
-    public abstract void reduceFatigue();
+    public void reduceHp(int amount) {
+        this.hp -= amount;
+        if(this.hp < 0) {
+            die();
+        }
+    }
 
-    public float getFatigue() {
-        return fatigue;
+    public float getHp() {
+        return hp;
     }
 
     @Override

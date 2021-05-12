@@ -18,6 +18,8 @@ public class BloodPool implements Building {
 
     private static TextureRegion textureRegion;
 
+    public int x,y;
+
     static {
         textureRegion = new TextureRegion(new Texture(Gdx.files.internal("tile/BloodPool.png")));
     }
@@ -38,6 +40,8 @@ public class BloodPool implements Building {
         UIFactory.I.updateLabelAmount(oldProgress, GameState.loopProgress, UIState.progressLabel, "%s", null);
         GameState.vampireLimit += 0.5f;
         this.lightSource = LightSourceFactory.getBloodPoolLightSource(x / 16 * 16 + 8,y / 16 * 16 + 8);
+        this.x = x / 16;
+        this.y = y / 16;
     }
 
     @Override
@@ -76,5 +80,15 @@ public class BloodPool implements Building {
     @Override
     public TextureRegion getTextureRegion() {
         return textureRegion;
+    }
+
+    @Override
+    public int getX() {
+        return x;
+    }
+
+    @Override
+    public int getY() {
+        return y;
     }
 }

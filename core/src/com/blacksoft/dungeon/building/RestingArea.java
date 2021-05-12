@@ -15,6 +15,8 @@ public class RestingArea implements Building {
 
     private static TextureRegion textureRegion;
 
+    public int x,y;
+
     static {
         textureRegion = new TextureRegion(new Texture(Gdx.files.internal("tile/RestingArea.png")));
     }
@@ -32,6 +34,8 @@ public class RestingArea implements Building {
         int oldProgress = GameState.loopProgress;
         GameState.loopProgress += Config.RESTING_AREA_PROGRESS_VALUE;
         UIFactory.I.updateLabelAmount(oldProgress, GameState.loopProgress, UIState.progressLabel, "%s", null);
+        this.x = x / 16;
+        this.y = y / 16;
     }
 
     @Override
@@ -67,5 +71,15 @@ public class RestingArea implements Building {
     @Override
     public TextureRegion getTextureRegion() {
         return textureRegion;
+    }
+
+    @Override
+    public int getX() {
+        return x;
+    }
+
+    @Override
+    public int getY() {
+        return y;
     }
 }

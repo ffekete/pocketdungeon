@@ -24,4 +24,8 @@ public interface Building {
     void toggleState();
 
     TextureRegion getTextureRegion();
+
+    int getX();
+
+    int getY();
 }

@@ -46,12 +46,4 @@ public class Vampire extends Creature {
     public int getSalaryRequest() {
         return VAMPIRE_SALARY_REQUEST;
     }
-
-    @Override
-    public void reduceFatigue() {
-        this.fatigue -= Config.VAMPIRE_FATIGUE_REDUCTION;
-        if(this.fatigue < 0) {
-            this.fatigue = 0;
-        }
-    }
 }

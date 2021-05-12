@@ -22,6 +22,8 @@ public class Torch implements Building {
         textureRegion = new TextureRegion(new Texture(Gdx.files.internal("tile/Torch.png")));
     }
 
+    public int x,y;
+
     public int level = 1;
     private Light lightSource;
     private FlickeringLightAction flickeringLightAction;
@@ -43,6 +45,8 @@ public class Torch implements Building {
         this.lightSource = LightSourceFactory.getTorchLightSource(x / 16 * 16 + 8, y / 16 * 16 + 8);
         this.flickeringLightAction = new FlickeringLightAction(this.lightSource);
         GameState.stage.addAction(flickeringLightAction);
+        this.x = x / 16;
+        this.y = y / 16;
     }
 
     @Override
@@ -84,5 +88,15 @@ public class Torch implements Building {
     @Override
     public TextureRegion getTextureRegion() {
         return textureRegion;
+    }
+
+    @Override
+    public int getX() {
+        return x;
+    }
+
+    @Override
+    public int getY() {
+        return y;
     }
 }

@@ -85,6 +85,12 @@ public class Dungeon {
         TiledMapTileLayer layer = (TiledMapTileLayer) tiledMap.getLayers().get(DUNGEON_LAYER);
         nodes[x][y].tile = target;
 
+        if(target.isSolid()) {
+            nodes[x][y].disconnect();
+        } else {
+            nodes[x][y].connectWithNeighbours();
+        }
+
         TiledMapTile tile;
         if (target.isTiled()) {
             tile = new GroundTiledMapTile(x, y, target);

@@ -23,6 +23,10 @@ public class GateOpenCheckAction extends Action {
     @Override
     public boolean act(float delta) {
 
+        if(gate.locked) {
+            return false;
+        }
+
         long s = System.currentTimeMillis();
         boolean areThereAnyNearby = GameState.creatures.stream()
                 .anyMatch(creature -> ((int) creature.getX() / 16 - 1 == x && (int) creature.getY() / 16 == y) ||
@@ -41,7 +45,7 @@ public class GateOpenCheckAction extends Action {
                 gate.toggleState();
             }
         }
-        System.out.println("elapsed: " + (System.currentTimeMillis() - s));
+        //System.out.println("elapsed: " + (System.currentTimeMillis() - s));
 
         return false;
     }

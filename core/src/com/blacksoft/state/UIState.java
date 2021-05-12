@@ -1,6 +1,7 @@
 package com.blacksoft.state;
 
 import com.badlogic.gdx.scenes.scene2d.Group;
+import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
 
 public class UIState {
@@ -11,5 +12,8 @@ public class UIState {
     public static Label goldLabel;
     public static Label gemLabel;
     public static Label ironLabel;
+
+    public static Image openLockImage;
+    public static Image closedLockImage;
 
 }

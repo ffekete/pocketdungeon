@@ -5,7 +5,10 @@ import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.freetype.FreeTypeFontGenerator;
-import com.badlogic.gdx.scenes.scene2d.*;
+import com.badlogic.gdx.scenes.scene2d.Actor;
+import com.badlogic.gdx.scenes.scene2d.Group;
+import com.badlogic.gdx.scenes.scene2d.InputEvent;
+import com.badlogic.gdx.scenes.scene2d.InputListener;
 import com.badlogic.gdx.scenes.scene2d.actions.*;
 import com.badlogic.gdx.scenes.scene2d.ui.*;
 import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
@@ -14,7 +17,7 @@ import com.blacksoft.dungeon.actions.AbstractAction;
 import com.blacksoft.dungeon.actions.ui.CleanIndicatorsAction;
 import com.blacksoft.dungeon.actions.ui.UpgradeIndicatorUpdater;
 import com.blacksoft.screen.action.AddActorAction;
-import com.blacksoft.screen.action.MoveImageButtonToMouseAction;
+import com.blacksoft.screen.action.MovePlaceableActorToMouseAction;
 import com.blacksoft.state.Config;
 import com.blacksoft.state.GameState;
 import com.blacksoft.state.UIState;
@@ -173,7 +176,23 @@ public class UIFactory {
         return horizontalGroup;
     }
 
-    public Label createFloatingLabel(int newAmount, int x, int y) {
+    public void createLockImages() {
+        Image openLockImage = new Image(new Texture(Gdx.files.internal("ui/OpenLock.png")));
+        Image closedLockImage = new Image(new Texture(Gdx.files.internal("ui/ClosedLock.png")));
+
+        openLockImage.setVisible(false);
+        closedLockImage.setVisible(false);
+
+        UIState.openLockImage = openLockImage;
+        UIState.closedLockImage = closedLockImage;
+
+        GameState.uiStage.addActor(openLockImage);
+        GameState.uiStage.addActor(closedLockImage);
+    }
+
+    public Label createFloatingLabel(int newAmount,
+                                     int x,
+                                     int y) {
         Label label = new Label(Integer.toString(newAmount), labelStyle14);
 
         label.setPosition(x + 2, y);
@@ -226,7 +245,7 @@ public class UIFactory {
     }
 
     public void addAction(Group horizontalGroup,
-                           AbstractAction action) {
+                          AbstractAction action) {
         ImageButton.ImageButtonStyle imageButtonStyle = new ImageButton.ImageButtonStyle();
         imageButtonStyle.imageUp = new TextureRegionDrawable(action.getTexture());
         imageButtonStyle.imageDown = new TextureRegionDrawable(action.getTexture());
@@ -240,7 +259,7 @@ public class UIFactory {
                               float y,
                               int pointer,
                               Actor fromActor) {
-                if(GameState.userAction != UserAction.Place) {
+                if (GameState.userAction != UserAction.Place) {
                     image.setY(image.getY() + 2);
                     GameState.highlightedAction = action;
                     GameState.highlightedActionImage = image;
@@ -253,7 +272,7 @@ public class UIFactory {
                              float y,
                              int pointer,
                              Actor toActor) {
-                if(GameState.userAction != UserAction.Place) {
+                if (GameState.userAction != UserAction.Place) {
                     image.setY(image.getY() - 2);
                     GameState.highlightedAction = null;
                     GameState.highlightedActionImage = null;
@@ -267,7 +286,7 @@ public class UIFactory {
                                      int pointer,
                                      int button) {
 
-                if(GameState.userAction == UserAction.Place) {
+                if (GameState.userAction == UserAction.Place) {
                     // already placing, cannot place until the current item is placed
                     return true;
                 }
@@ -296,7 +315,7 @@ public class UIFactory {
                 sequenceAction.addAction(new AddActorAction(image));
                 sequenceAction.addAction(Actions.scaleTo(1f, 1f));
                 sequenceAction.addAction(Actions.visible(true));
-                sequenceAction.addAction(new MoveImageButtonToMouseAction(image));
+                sequenceAction.addAction(new MovePlaceableActorToMouseAction(image));
 
                 image.addAction(sequenceAction);
 
@@ -318,8 +337,12 @@ public class UIFactory {
         return String.format("%s\n%s", GameState.highlightedAction.getTitle(), GameState.highlightedAction.getDescription());
     }
 
-    public void updateLabelAmount(int old, int newValue, Label label, String template, Integer other) {
-        if(label != null) {
+    public void updateLabelAmount(int old,
+                                  int newValue,
+                                  Label label,
+                                  String template,
+                                  Integer other) {
+        if (label != null) {
             com.blacksoft.ui.IntAction intAction = new IntAction(old, newValue, 0.5f, label, template, other);
             GameState.uiStage.addAction(intAction);
         }

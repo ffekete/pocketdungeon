@@ -23,6 +23,7 @@ public class Treasury implements Building {
         textureRegion = new TextureRegion(new Texture(Gdx.files.internal("tile/Treasury.png")));
     }
 
+    public int x,y;
     public int level = 1;
     private Light lightSource;
 
@@ -39,6 +40,8 @@ public class Treasury implements Building {
         UIFactory.I.updateLabelAmount(oldProgress, GameState.loopProgress, UIState.progressLabel, "%s", null);
         this.lightSource = LightSourceFactory.getGraveyardLightSource(x / 16 * 16 + 8,y / 16 * 16 + 8);
         GameState.maxGoldCapacity += 500;
+        this.x = x / 16;
+        this.y = y / 16;
     }
 
     @Override
@@ -77,5 +80,15 @@ public class Treasury implements Building {
     @Override
     public TextureRegion getTextureRegion() {
         return textureRegion;
+    }
+
+    @Override
+    public int getX() {
+        return x;
+    }
+
+    @Override
+    public int getY() {
+        return y;
     }
 }

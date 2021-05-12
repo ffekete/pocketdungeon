@@ -15,6 +15,7 @@ import com.blacksoft.state.UIState;
 
 public class DungeonEntrance implements Building {
 
+    public int x,y;
     public int level = 1;
     private Light lightSource;
 
@@ -33,6 +34,8 @@ public class DungeonEntrance implements Building {
     public void place(int x,
                       int y) {
         this.lightSource = LightSourceFactory.getDungeonEntranceLightSource(x / 16 * 16 + 8,y / 16 * 16 + 8);
+        this.x = x / 16;
+        this.y = y / 16;
     }
 
     @Override
@@ -68,5 +71,15 @@ public class DungeonEntrance implements Building {
     @Override
     public TextureRegion getTextureRegion() {
         return textureRegion;
+    }
+
+    @Override
+    public int getX() {
+        return x;
+    }
+
+    @Override
+    public int getY() {
+        return y;
     }
 }

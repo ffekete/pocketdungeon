@@ -21,7 +21,7 @@ public class RestAction extends Action {
         duration += delta;
 
         if (duration >= 5f) {
-            creature.fatigue = 100f;
+            creature.hp = 100f;
             Label label = UIFactory.I.createFloatingLabel(100, (int) creature.getX(), (int) creature.getY());
             label.setColor(Color.GREEN);
             return true;

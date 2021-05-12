@@ -53,8 +53,8 @@ public class TileCleaner {
     }
 
     public static boolean isEmptyCorridor(Dungeon dungeon,
-                                           int x,
-                                           int y) {
+                                          int x,
+                                          int y) {
 
         if (x < 0 || y < 0 || x >= MAP_WIDTH || y >= MAP_HEIGHT) {
             return false;
@@ -113,6 +113,8 @@ public class TileCleaner {
                                    int x,
                                    int y) {
 
+        // todo cannot clean if neighbour is gate
+
         int adjacent = 0;
         if (isClean(dungeon, x - 1, y)) {
             adjacent += 1;
@@ -130,7 +132,22 @@ public class TileCleaner {
             adjacent += 8;
         }
 
-        return (adjacent > 0) && !isClean(dungeon, x, y);
+        return (adjacent > 0) && !isClean(dungeon, x, y)
+                && isNotGate(dungeon, x - 1, y)
+                && isNotGate(dungeon, x + 1, y)
+                && isNotGate(dungeon, x, y - 1)
+                && isNotGate(dungeon, x, y + 1);
+    }
+
+    public static boolean isNotGate(Dungeon dungeon,
+                                    int x,
+                                    int y) {
+
+        if (x < 0 || y < 0 || x >= MAP_WIDTH || y >= MAP_HEIGHT) {
+            return false;
+        }
+
+        return dungeon.nodes[x][y].tile != Tile.GateClosed && dungeon.nodes[x][y].tile != Tile.GateOpened;
     }
 
     public static boolean isClean(Dungeon dungeon,

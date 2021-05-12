@@ -1,10 +1,12 @@
 package com.blacksoft.screen.input;
 
 import com.blacksoft.build.UserAction;
+import com.blacksoft.dungeon.Tile;
+import com.blacksoft.dungeon.actions.TileCleaner;
 import com.blacksoft.dungeon.actions.build.BuildingPlacer;
 import com.blacksoft.dungeon.actions.ui.CleanIndicatorUpdater;
 import com.blacksoft.dungeon.actions.ui.CleanIndicatorsAction;
-import com.blacksoft.dungeon.actions.TileCleaner;
+import com.blacksoft.dungeon.building.Gate;
 import com.blacksoft.screen.UIFactory;
 import com.blacksoft.state.Config;
 import com.blacksoft.state.GameState;
@@ -23,9 +25,26 @@ public class MapClickHandler {
         int vy = y / TEXTURE_SIZE;
 
         if (vx >= 0 && vx < MAP_WIDTH && vy >= 0 && vy < MAP_HEIGHT) {
+            // LOCK GATE
+            if (GameState.dungeon.nodes[vx][vy].tile == Tile.GateClosed) {
 
-            if (GameState.userAction == UserAction.Clean) {
-                if(GameState.gold - CLEAN_COST_VALUE >= 0) {
+                if (((Gate) GameState.dungeon.nodes[vx][vy].building).locked == false) {
+                    ((Gate) GameState.dungeon.nodes[vx][vy].building).locked = true;
+                    UIState.closedLockImage.setVisible(true);
+                    UIState.openLockImage.setVisible(false);
+                    UIState.closedLockImage.setX(vx * TEXTURE_SIZE);
+                    UIState.closedLockImage.setY(vy * TEXTURE_SIZE);
+                } else {
+                    ((Gate) GameState.dungeon.nodes[vx][vy].building).locked = false;
+                    UIState.openLockImage.setVisible(true);
+                    UIState.closedLockImage.setVisible(false);
+                    UIState.openLockImage.setX(vx * TEXTURE_SIZE);
+                    UIState.openLockImage.setY(vy * TEXTURE_SIZE);
+                }
+            }
+            // CLEAN TILE
+            else if (GameState.userAction == UserAction.Clean) {
+                if (GameState.gold - CLEAN_COST_VALUE >= 0) {
                     if (TileCleaner.cleanConditionally(GameState.dungeon, vx, vy)) {
                         int old = GameState.gold;
                         GameState.gold -= CLEAN_COST_VALUE;
@@ -41,8 +60,8 @@ public class MapClickHandler {
                     }
                 }
             }
-
-            if (GameState.userAction == UserAction.Place) {
+            // PLACE BUILDING
+            else if (GameState.userAction == UserAction.Place) {
                 BuildingPlacer.place(x, y);
             }
 

@@ -19,8 +19,8 @@ public class Config {
     public static final int TORCH_PRIORITY = 5;
     public static final int BLOOD_POOL_PRIORITY = 5;
     public static final int TREASURY_PRIORITY = 5;
-    public static final int RESTING_AREA_PRIORITY = 25;
-    public static final int GATE_PRIORITY = 25;
+    public static final int RESTING_AREA_PRIORITY = 5;
+    public static final int GATE_PRIORITY = 5;
 
     // progress values
     public static final int CLEAN_PROGRESS_VALUE = 5;

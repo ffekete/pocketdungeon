@@ -6,9 +6,11 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.InputMultiplexer;
 import com.badlogic.gdx.ScreenAdapter;
+import com.badlogic.gdx.ai.pfa.Connection;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.maps.tiled.TiledMapRenderer;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.World;
@@ -19,6 +21,7 @@ import com.badlogic.gdx.utils.viewport.ExtendViewport;
 import com.badlogic.gdx.utils.viewport.FitViewport;
 import com.blacksoft.NewGameInitializer;
 import com.blacksoft.build.UserAction;
+import com.blacksoft.dungeon.Node;
 import com.blacksoft.dungeon.actions.ui.CleanIndicatorUpdater;
 import com.blacksoft.dungeon.actions.ui.CleanIndicatorsAction;
 import com.blacksoft.creature.action.CreatureSalaryAction;
@@ -38,6 +41,7 @@ public class BuilderScreen extends ScreenAdapter {
     private TiledMapRenderer tiledMapRenderer;
     private RayHandler rayHandler;
     private World world;
+    private ShapeRenderer shapeRenderer;
 
     public BuilderScreen(SpriteBatch spriteBatch) {
         this.spriteBatch = spriteBatch;
@@ -51,6 +55,8 @@ public class BuilderScreen extends ScreenAdapter {
         GameState.viewport = new ExtendViewport(SCREEN_WIDTH / 2f, SCREEN_HEIGHT / 2f, GameState.orthographicCamera);
         GameState.uiViewport = new FitViewport(SCREEN_WIDTH / 2f, SCREEN_HEIGHT / 2f, GameState.orthographicCamera);
         GameState.viewport.apply(true);
+        this.shapeRenderer = new ShapeRenderer();
+        //shapeRenderer.setProjectionMatrix(GameState.orthographicCamera.combined);
 
         // LIGHT
         world = new World(new Vector2(0, 0), true);
@@ -121,6 +127,7 @@ public class BuilderScreen extends ScreenAdapter {
         GameState.uiStage.addActor(UIFactory.I.addMovingLabelShadow("BUILD PHASE"));
         GameState.uiStage.addActor(UIFactory.I.addMovingLabel("BUILD PHASE"));
         GameState.uiStage.addActor(UIFactory.I.getActionsGroup());
+        UIFactory.I.createLockImages();
 
         GameState.stage.addAction(new MoveLightToMouseAction());
         GameState.stage.addAction(new CreatureSalaryAction());
@@ -138,6 +145,18 @@ public class BuilderScreen extends ScreenAdapter {
 
         rayHandler.setCombinedMatrix(GameState.orthographicCamera);
         rayHandler.updateAndRender();
+
+        shapeRenderer.setProjectionMatrix(GameState.orthographicCamera.combined);
+        shapeRenderer.setAutoShapeType(true);
+        shapeRenderer.begin(ShapeRenderer.ShapeType.Line);
+
+        for(Node node : GameState.dungeon.streetsMap.keys()) {
+
+            for(Connection<Node> connection : GameState.dungeon.streetsMap.get(node)) {
+                shapeRenderer.line(connection.getFromNode().x * 16 + 8, connection.getFromNode().y * 16 + 8, connection.getToNode().x * 16+ 8, connection.getToNode().y * 16 + 8);
+            }
+        }
+        shapeRenderer.end();
 
         GameState.uiStage.act();
         GameState.uiStage.draw();

@@ -18,6 +18,7 @@ public class Graveyard implements Building {
     public int level = 1;
     private Light lightSource;
 
+    public int x,y;
 
     private static TextureRegion textureRegion;
 
@@ -38,6 +39,8 @@ public class Graveyard implements Building {
         UIFactory.I.updateLabelAmount(oldProgress, GameState.loopProgress, UIState.progressLabel, "%s", null);
         GameState.skeletonLimit += 0.5f;
         this.lightSource = LightSourceFactory.getGraveyardLightSource(x / 16 * 16 + 8,y / 16 * 16 + 8);
+        this.x = x / 16;
+        this.y = y / 16;
     }
 
     @Override
@@ -76,5 +79,15 @@ public class Graveyard implements Building {
     @Override
     public TextureRegion getTextureRegion() {
         return textureRegion;
+    }
+
+    @Override
+    public int getX() {
+        return x;
+    }
+
+    @Override
+    public int getY() {
+        return y;
     }
 }

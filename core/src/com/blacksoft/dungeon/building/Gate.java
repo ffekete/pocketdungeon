@@ -15,7 +15,9 @@ import com.blacksoft.state.UIState;
 public class Gate implements Building {
 
     public int level = 1;
-    private boolean opened = false;
+    private boolean opened = true;
+    public int x, y;
+    public boolean locked = false;
 
     private static TextureRegion openedTextureRegion;
     private static TextureRegion closedTextureRegion;
@@ -38,6 +40,14 @@ public class Gate implements Building {
         UIFactory.I.updateLabelAmount(oldProgress, GameState.loopProgress, UIState.progressLabel, "%s", null);
 
         GameState.stage.addAction(new GateOpenCheckAction(this, x, y));
+        this.x = x / 16;
+        this.y = y / 16;
+
+        if (opened) {
+            GameState.dungeon.replaceTileToBuilding(this.x, this.y, Tile.GateOpened);
+        } else {
+            GameState.dungeon.replaceTileToBuilding(this.x, this.y, Tile.GateClosed);
+        }
     }
 
     @Override
@@ -67,11 +77,31 @@ public class Gate implements Building {
 
     @Override
     public void toggleState() {
+
+        if(locked) {
+            return;
+        }
+
         opened = !opened;
+        if (opened) {
+            GameState.dungeon.replaceTileToBuilding(x, y, Tile.GateOpened);
+        } else {
+            GameState.dungeon.replaceTileToBuilding(x, y, Tile.GateClosed);
+        }
     }
 
     @Override
     public TextureRegion getTextureRegion() {
         return opened ? openedTextureRegion : closedTextureRegion;
+    }
+
+    @Override
+    public int getX() {
+        return x;
+    }
+
+    @Override
+    public int getY() {
+        return y;
     }
 }

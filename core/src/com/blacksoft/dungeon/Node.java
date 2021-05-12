@@ -23,6 +23,15 @@ public class Node {
         return building != null && building.canUpgradeBy(action);
     }
 
+    public void disconnect() {
+        System.out.println("disconnecting " + x + " " + y);
+        disconnectWith(x - 1, y);
+        disconnectWith(x + 1, y);
+        disconnectWith(x, y - 1);
+        disconnectWith(x, y + 1);
+    }
+
+
     public void connectWithNeighbours() {
         connectWith(x - 1, y);
         connectWith(x + 1, y);
@@ -33,8 +42,9 @@ public class Node {
     private void connectWith(float x,
                              float y) {
 
-        int vx = (int) this.x;
-        int vy = (int) this.y;
+        if (GameState.dungeon == null) { // not initialized yet, nothing to conect here
+            return;
+        }
 
         int tvx = (int) x;
         int tvy = (int) y;
@@ -44,7 +54,7 @@ public class Node {
 
             if (!targetNode.tile.isSolid()) {
 
-                if(!GameState.dungeon.streetsMap.containsKey(this)){
+                if (!GameState.dungeon.streetsMap.containsKey(this)) {
                     GameState.dungeon.streetsMap.put(this, new Array<Connection<Node>>());
                 }
 
@@ -53,7 +63,7 @@ public class Node {
                 GameState.dungeon.streets.add(street);
 
 //                // back
-                if(!GameState.dungeon.streetsMap.containsKey(targetNode)){
+                if (!GameState.dungeon.streetsMap.containsKey(targetNode)) {
                     GameState.dungeon.streetsMap.put(targetNode, new Array<Connection<Node>>());
                 }
 
@@ -62,6 +72,27 @@ public class Node {
                 GameState.dungeon.streets.add(street2);
 
             }
+        }
+    }
+
+    private void disconnectWith(float x,
+                                float y) {
+
+
+        if (GameState.dungeon == null) { // not initialized yet, nothing to conect here
+            return;
+        }
+
+        int tvx = (int) x;
+        int tvy = (int) y;
+
+        if (tvx >= 0 && tvx < MAP_WIDTH && tvy >= 0 && tvy < MAP_HEIGHT) {
+            Node targetNode = GameState.dungeon.nodes[tvx][tvy];
+
+            GameState.dungeon.streetsMap.remove(this);
+            GameState.dungeon.streetsMap.remove(targetNode);
+
+
         }
     }
 }
