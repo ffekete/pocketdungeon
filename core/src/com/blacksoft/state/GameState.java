@@ -11,6 +11,7 @@ import com.blacksoft.creature.Creature;
 import com.blacksoft.dungeon.Dungeon;
 import com.blacksoft.dungeon.actions.AbstractAction;
 import com.blacksoft.dungeon.building.Building;
+import com.blacksoft.dungeon.pathfinder.CityGraph;
 import com.blacksoft.ui.TileMarker;
 
 import java.util.ArrayList;
@@ -57,5 +58,5 @@ public class GameState {
     public static float oozeLimit = 0;
     public static float vampireLimit = 0;
 
-
+    public static CityGraph cityGraph;
 }

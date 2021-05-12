@@ -6,6 +6,7 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
+import com.blacksoft.state.Config;
 
 import static com.blacksoft.state.Config.TEXTURE_SIZE;
 import static com.blacksoft.state.Config.VAMPIRE_SALARY_REQUEST;
@@ -44,5 +45,13 @@ public class Vampire extends Creature {
     @Override
     public int getSalaryRequest() {
         return VAMPIRE_SALARY_REQUEST;
+    }
+
+    @Override
+    public void reduceFatigue() {
+        this.fatigue -= Config.VAMPIRE_FATIGUE_REDUCTION;
+        if(this.fatigue < 0) {
+            this.fatigue = 0;
+        }
     }
 }

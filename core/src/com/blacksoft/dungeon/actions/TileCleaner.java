@@ -30,11 +30,10 @@ public class TileCleaner {
         cell.setTile(tile);
         tiledMapTileLayer.setCell(x, y, cell);
         dungeon.nodes[x][y].tile = Tile.Empty;
+        dungeon.nodes[x][y].connectWithNeighbours();
         if (dungeon.nodes[x][y].building != null) {
             dungeon.nodes[x][y].building.destroy();
             dungeon.nodes[x][y].building = null;
-
-            dungeon.nodes[x][y].connectWithNeighbours();
         }
 
         CleanIndicatorsAction.cleanAll(dungeon);

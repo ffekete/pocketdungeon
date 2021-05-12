@@ -1,5 +1,7 @@
 package com.blacksoft.dungeon;
 
+import com.badlogic.gdx.ai.pfa.Connection;
+import com.badlogic.gdx.utils.Array;
 import com.blacksoft.dungeon.actions.AbstractAction;
 import com.blacksoft.dungeon.building.Building;
 import com.blacksoft.state.GameState;
@@ -15,6 +17,8 @@ public class Node {
     public float x;
     public float y;
 
+    public int index = 0;
+
     public boolean canUpgradeBy(AbstractAction action) {
         return building != null && building.canUpgradeBy(action);
     }
@@ -24,14 +28,13 @@ public class Node {
         connectWith(x + 1, y);
         connectWith(x, y - 1);
         connectWith(x, y + 1);
-
     }
 
     private void connectWith(float x,
                              float y) {
 
-        int vx = (int) x;
-        int vy = (int) y;
+        int vx = (int) this.x;
+        int vy = (int) this.y;
 
         int tvx = (int) x;
         int tvy = (int) y;
@@ -40,8 +43,24 @@ public class Node {
             Node targetNode = GameState.dungeon.nodes[tvx][tvy];
 
             if (!targetNode.tile.isSolid()) {
-                GameState.dungeon.streets.add(new Street(this, targetNode));
-                GameState.dungeon.streets.add(new Street(targetNode, this));
+
+                if(!GameState.dungeon.streetsMap.containsKey(this)){
+                    GameState.dungeon.streetsMap.put(this, new Array<Connection<Node>>());
+                }
+
+                Street street = new Street(this, targetNode);
+                GameState.dungeon.streetsMap.get(this).add(street);
+                GameState.dungeon.streets.add(street);
+
+//                // back
+                if(!GameState.dungeon.streetsMap.containsKey(targetNode)){
+                    GameState.dungeon.streetsMap.put(targetNode, new Array<Connection<Node>>());
+                }
+
+                Street street2 = new Street(targetNode, this);
+                GameState.dungeon.streetsMap.get(targetNode).add(street2);
+                GameState.dungeon.streets.add(street2);
+
             }
         }
     }

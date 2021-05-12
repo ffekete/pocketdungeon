@@ -12,6 +12,10 @@ import java.util.Random;
 
 public class WanderingAction extends Action {
 
+    public WanderingAction(Creature creature) {
+        super.setActor(creature);
+    }
+
     @Override
     public boolean act(float delta) {
 
@@ -49,11 +53,21 @@ public class WanderingAction extends Action {
         creature.previousNode = new Vector2(x, y);
 
         if (!availableTiles.isEmpty()) {
-            creature.targetNode = availableTiles.get(new Random().nextInt(availableTiles.size()));
-            creature.addAction(new MoveToTileAction(creature.targetNode.x * 16, creature.targetNode.y * 16, creature));
+            Vector2 targetNode = availableTiles.get(new Random().nextInt(availableTiles.size()));
+            targetNode.x = targetNode.x * 16;
+            targetNode.y = targetNode.y * 16;
+
+            MoveToTileAction moveToTileAction = new MoveToTileAction(creature, targetNode);
+            moveToTileAction.setActor(creature);
+            creature.sequenceActions.reset();
+            creature.addAction(creature.sequenceActions);
             creature.finishedMoving = false;
+            creature.sequenceActions.addAction(moveToTileAction);
+            return true;  // end of this action
         }
 
-        return false;
+        creature.sequenceActions.reset();
+        creature.addAction(creature.sequenceActions);
+        return true;
     }
 }

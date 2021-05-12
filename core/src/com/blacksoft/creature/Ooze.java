@@ -6,6 +6,7 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
+import com.blacksoft.state.Config;
 
 import static com.blacksoft.state.Config.OOZE_SALARY_REQUEST;
 import static com.blacksoft.state.Config.TEXTURE_SIZE;
@@ -44,5 +45,13 @@ public class Ooze extends Creature {
     @Override
     public int getSalaryRequest() {
         return OOZE_SALARY_REQUEST;
+    }
+
+    @Override
+    public void reduceFatigue() {
+        this.fatigue -= Config.OOZE_FATIGUE_REDUCTION;
+        if(this.fatigue < 0) {
+            this.fatigue = 0;
+        }
     }
 }

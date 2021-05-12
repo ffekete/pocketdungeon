@@ -19,7 +19,7 @@ public class Config {
     public static final int TORCH_PRIORITY = 5;
     public static final int BLOOD_POOL_PRIORITY = 5;
     public static final int TREASURY_PRIORITY = 5;
-    public static final int RESTING_AREA_PRIORITY = 5;
+    public static final int RESTING_AREA_PRIORITY = 25;
 
     // progress values
     public static final int CLEAN_PROGRESS_VALUE = 5;
@@ -31,7 +31,7 @@ public class Config {
 
     // spawn limits
     public static final int GRAVEYARD_SPAWN_TIME_LIMIT = 30;
-    public static final int OOZE_SPAWN_TIME_LIMIT = 25;
+    public static final int OOZE_SPAWN_TIME_LIMIT = 5;
     public static final int VAMPIRE_SPAWN_TIME_LIMIT = 25;
 
     // salaries
@@ -45,4 +45,7 @@ public class Config {
     public static final int CLEAN_COST_VALUE = 10;
 
     public static final Vector2 DUNGEON_ENTRANCE_LOCATION = new Vector2(0, MAP_HEIGHT / 2);
+    public static final float VAMPIRE_FATIGUE_REDUCTION = 5f;
+    public static final float OOZE_FATIGUE_REDUCTION = 0f;
+    public static final float SKELETON_FATIGUE_REDUCTION = 0f;
 }

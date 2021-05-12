@@ -7,6 +7,7 @@ import com.blacksoft.creature.Creature;
 import com.blacksoft.creature.Ooze;
 import com.blacksoft.creature.Skeleton;
 import com.blacksoft.creature.Vampire;
+import com.blacksoft.creature.action.CreatureDecisionAction;
 import com.blacksoft.creature.action.WanderingAction;
 import com.blacksoft.state.Config;
 import com.blacksoft.state.GameState;
@@ -40,7 +41,7 @@ public class CreatureSpawnerAction extends Action {
             GameState.stage.addActor(skeleton);
             GameState.creatures.add(skeleton);
             skeleton.setPosition((int) DUNGEON_ENTRANCE_LOCATION.x * TEXTURE_SIZE, (int) DUNGEON_ENTRANCE_LOCATION.y * TEXTURE_SIZE);
-            skeleton.addAction(new WanderingAction());
+            skeleton.addAction(new CreatureDecisionAction());
             skeleton.addAction(Actions.fadeOut(0.1f));
             skeleton.addAction(Actions.fadeIn(10));
 
@@ -55,7 +56,7 @@ public class CreatureSpawnerAction extends Action {
             GameState.stage.addActor(ooze);
             GameState.creatures.add(ooze);
             ooze.setPosition((int) DUNGEON_ENTRANCE_LOCATION.x * TEXTURE_SIZE, (int) DUNGEON_ENTRANCE_LOCATION.y * TEXTURE_SIZE);
-            ooze.addAction(new WanderingAction());
+            ooze.addAction(new CreatureDecisionAction());
             ooze.addAction(Actions.fadeOut(0.1f));
             ooze.addAction(Actions.fadeIn(10));
 
@@ -69,7 +70,7 @@ public class CreatureSpawnerAction extends Action {
             GameState.stage.addActor(vampire);
             GameState.creatures.add(vampire);
             vampire.setPosition((int) DUNGEON_ENTRANCE_LOCATION.x * TEXTURE_SIZE, (int) DUNGEON_ENTRANCE_LOCATION.y * TEXTURE_SIZE);
-            vampire.addAction(new WanderingAction());
+            vampire.addAction(new CreatureDecisionAction());
             vampire.addAction(Actions.fadeOut(0.1f));
             vampire.addAction(Actions.fadeIn(10));
 
