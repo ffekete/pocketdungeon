@@ -8,10 +8,7 @@ import com.blacksoft.dungeon.actions.AbstractAction;
 import com.blacksoft.dungeon.actions.ui.CleanIndicatorUpdater;
 import com.blacksoft.dungeon.actions.ui.CleanIndicatorsAction;
 import com.blacksoft.dungeon.actions.TileCleaner;
-import com.blacksoft.dungeon.building.BloodPool;
-import com.blacksoft.dungeon.building.Graveyard;
-import com.blacksoft.dungeon.building.Torch;
-import com.blacksoft.dungeon.building.Treasury;
+import com.blacksoft.dungeon.building.*;
 import com.blacksoft.screen.UIFactory;
 import com.blacksoft.state.GameState;
 import com.blacksoft.state.UIState;
@@ -35,7 +32,8 @@ public class BuildingPlacer {
             if (GameState.userAction == UserAction.Place) {
                 if (clazz == Graveyard.class ||
                         clazz == BloodPool.class ||
-                        clazz == Treasury.class) {
+                        clazz == Treasury.class ||
+                        clazz == RestingArea.class) {
                     if (TileCleaner.isClean(GameState.dungeon, vx, vy) || canUpgrade(vx, vy)) {
                         return true;
                     }

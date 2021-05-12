@@ -33,6 +33,8 @@ public class TileCleaner {
         if (dungeon.nodes[x][y].building != null) {
             dungeon.nodes[x][y].building.destroy();
             dungeon.nodes[x][y].building = null;
+
+            dungeon.nodes[x][y].connectWithNeighbours();
         }
 
         CleanIndicatorsAction.cleanAll(dungeon);

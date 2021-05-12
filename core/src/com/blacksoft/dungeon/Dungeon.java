@@ -11,6 +11,9 @@ import com.blacksoft.dungeon.building.Building;
 import com.blacksoft.dungeon.building.DungeonEntrance;
 import com.blacksoft.dungeon.building.Torch;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import static com.blacksoft.state.Config.DUNGEON_ENTRANCE_LOCATION;
 import static com.blacksoft.state.Config.MAP_HEIGHT;
 import static com.blacksoft.state.Config.MAP_WIDTH;
@@ -26,6 +29,8 @@ public class Dungeon {
     public Node[][] nodes = new Node[MAP_WIDTH][MAP_HEIGHT];
 
     public TiledMap tiledMap;
+
+    public List<Street> streets = new ArrayList<>();
 
     public Dungeon() {
 
