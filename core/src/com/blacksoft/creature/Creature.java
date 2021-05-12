@@ -9,7 +9,7 @@ public abstract class Creature extends Actor {
 
     public Vector2 previousNode = null;
     public Vector2 targetNode = null;
-    public boolean finishedMoving = true;
+    public boolean finishedAllActions = true;
 
     public float morale = 100f;
     public float fatigue = 0f;

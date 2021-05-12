@@ -1,30 +1,30 @@
 package com.blacksoft.creature.action;
 
+import com.badlogic.gdx.Game;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.scenes.scene2d.actions.MoveToAction;
 import com.blacksoft.creature.Creature;
-import com.blacksoft.dungeon.Node;
-import com.sun.org.apache.xerces.internal.impl.io.UCSReader;
+import com.blacksoft.state.GameState;
 
 public class MoveToTileAction extends MoveToAction {
 
     Vector2 targetNode;
+    Vector2 previousNode = null;
+    int cycles = 0;
+    long start;
 
     public MoveToTileAction(Creature creature,
                             Vector2 targetNode) {
         super.actor = creature;
         setPosition(targetNode.x, targetNode.y);
         setDuration(creature.getSpeed());
+        System.out.println("duration set to " + creature.getSpeed());
         this.targetNode = targetNode;
     }
 
     @Override
     protected void begin() {
         super.begin();
-        Creature creature = (Creature) actor;
-        creature.previousNode = new Vector2(getX() / 16, getY() / 16);
-        creature.targetNode = new Vector2(targetNode.x / 16, targetNode.y / 16);
-        setStartPosition(super.actor.getX(), super.actor.getY());
     }
 
     @Override
@@ -34,10 +34,36 @@ public class MoveToTileAction extends MoveToAction {
 
     @Override
     public boolean act(float delta) {
-        boolean finished = super.act(delta);
-        if (finished) {
-            Creature creature = (Creature) actor;
+
+        Creature creature = (Creature) actor;
+
+        cycles++;
+
+        if (this.previousNode == null) {
+            System.out.println("new cycle");
+            creature.previousNode = new Vector2(creature.getX() / 16, creature.getY() / 16);
+            this.previousNode = creature.previousNode;
+            creature.targetNode = new Vector2(targetNode.x / 16, targetNode.y / 16);
+            start = System.currentTimeMillis();
         }
-        return finished;
+
+//        System.out.println(creature.previousNode);
+//        System.out.println(creature.targetNode + " / " + targetNode);
+//        System.out.println(creature.getX() + " " + creature.getY());
+//        System.out.println(delta);
+//        System.out.println();
+
+        boolean result = super.act(delta);
+
+        if(result) {
+            System.out.println("nr of runs: " + cycles);
+            System.out.println("Real duration: " + super.getDuration());
+            System.out.println("elapsed: " + (System.currentTimeMillis() - start));
+            System.out.println("Nr of actions: " + creature.sequenceActions.getActions().size);
+            System.out.println("---------------------------------");
+        }
+
+        return result;
+
     }
 }

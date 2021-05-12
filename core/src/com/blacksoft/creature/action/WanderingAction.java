@@ -10,6 +10,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
+import static com.blacksoft.creature.action.CreatureDecisionAction.resetCreatureActions;
+
 public class WanderingAction extends Action {
 
     public WanderingAction(Creature creature) {
@@ -20,10 +22,6 @@ public class WanderingAction extends Action {
     public boolean act(float delta) {
 
         Creature creature = (Creature) actor;
-
-        if (!creature.finishedMoving) {
-            return false;
-        }
 
         int x = (int) actor.getX() / 16;
         int y = (int) actor.getY() / 16;
@@ -59,15 +57,13 @@ public class WanderingAction extends Action {
 
             MoveToTileAction moveToTileAction = new MoveToTileAction(creature, targetNode);
             moveToTileAction.setActor(creature);
-            creature.sequenceActions.reset();
-            creature.addAction(creature.sequenceActions);
-            creature.finishedMoving = false;
             creature.sequenceActions.addAction(moveToTileAction);
+            creature.sequenceActions.addAction(new ResetCreatureActionsAction(creature));
+
             return true;  // end of this action
         }
 
-        creature.sequenceActions.reset();
-        creature.addAction(creature.sequenceActions);
+        resetCreatureActions(creature);
         return true;
     }
 }
