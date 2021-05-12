@@ -10,7 +10,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
-import static com.blacksoft.creature.action.CreatureDecisionAction.resetCreatureActions;
+import static com.blacksoft.creature.util.CreatureActionsUtil.resetCreatureActions;
 
 public class WanderingAction extends Action {
 

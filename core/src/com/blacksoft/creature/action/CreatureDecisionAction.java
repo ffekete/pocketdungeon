@@ -1,6 +1,5 @@
 package com.blacksoft.creature.action;
 
-import com.badlogic.gdx.ai.pfa.GraphPath;
 import com.badlogic.gdx.ai.pfa.indexed.IndexedAStarPathFinder;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.scenes.scene2d.Action;
@@ -8,6 +7,9 @@ import com.blacksoft.creature.Creature;
 import com.blacksoft.dungeon.Node;
 import com.blacksoft.dungeon.Tile;
 import com.blacksoft.state.GameState;
+
+import static com.blacksoft.creature.util.CreatureActionsUtil.moveToTargetNode;
+import static com.blacksoft.creature.util.CreatureActionsUtil.resetCreatureActions;
 
 public class CreatureDecisionAction extends Action {
 
@@ -35,19 +37,7 @@ public class CreatureDecisionAction extends Action {
 
                 if (target != null) {
                     // find a way
-                    GraphPath<Node> path = GameState.cityGraph.findPath(GameState.dungeon.getNode(creature.getX() / 16, creature.getY() / 16),
-                            GameState.dungeon.getNode(target.x, target.y));
-
-                    resetCreatureActions(creature);
-                    creature.finishedAllActions = false;
-                    for (int i = 1; i < path.getCount(); i++) {
-                        Node node = path.get(i);
-                        MoveToTileAction moveToTileAction = new MoveToTileAction(creature, new Vector2(node.x * 16, node.y * 16));
-                        moveToTileAction.setActor(creature);
-                        creature.sequenceActions.addAction(moveToTileAction);
-                    }
-                    creature.sequenceActions.addAction(new RestAction(creature));
-                    creature.sequenceActions.addAction(new ResetCreatureActionsAction(creature));
+                    moveToTargetNode(creature, target);
                 }
 
             }
@@ -63,11 +53,5 @@ public class CreatureDecisionAction extends Action {
 
 
         return false;
-    }
-
-    public static void resetCreatureActions(Creature creature) {
-        creature.sequenceActions.reset();
-        creature.addAction(creature.sequenceActions);
-        creature.finishedAllActions = true;
     }
 }

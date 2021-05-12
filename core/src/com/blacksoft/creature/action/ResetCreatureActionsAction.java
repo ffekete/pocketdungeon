@@ -3,7 +3,7 @@ package com.blacksoft.creature.action;
 import com.badlogic.gdx.scenes.scene2d.Action;
 import com.blacksoft.creature.Creature;
 
-import static com.blacksoft.creature.action.CreatureDecisionAction.resetCreatureActions;
+import static com.blacksoft.creature.util.CreatureActionsUtil.resetCreatureActions;
 
 public class ResetCreatureActionsAction extends Action {
 
