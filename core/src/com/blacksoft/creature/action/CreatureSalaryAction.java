@@ -1,4 +1,4 @@
-package com.blacksoft.dungeon.logic;
+package com.blacksoft.creature.action;
 
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.scenes.scene2d.Action;
@@ -58,7 +58,7 @@ public class CreatureSalaryAction extends Action {
                 GameState.gold = GameState.maxGoldCapacity;
             }
 
-            if(old != GameState.gold) {
+            if (old != GameState.gold) {
                 UIFactory.I.updateLabelAmount(old, GameState.gold, UIState.goldLabel, "%s/%s", GameState.maxGoldCapacity);
             }
 

@@ -3,9 +3,8 @@ package com.blacksoft;
 import com.blacksoft.dungeon.Dungeon;
 import com.blacksoft.dungeon.actions.ActionLevel;
 import com.blacksoft.dungeon.actions.build.*;
-import com.blacksoft.dungeon.building.RestingArea;
 import com.blacksoft.dungeon.init.DungeonInitializer;
-import com.blacksoft.dungeon.logic.CreatureSpawnerAction;
+import com.blacksoft.creature.action.CreatureSpawnerAction;
 import com.blacksoft.state.GameState;
 
 import java.util.Arrays;
@@ -22,7 +21,8 @@ public class NewGameInitializer {
                 PlaceTorchAction.I,
                 PlaceBloodPoolAction.I,
                 PlaceTreasuryAction.I,
-                PlaceRestingAreaAction.I
+                PlaceRestingAreaAction.I,
+                PlaceGateAction.I
         );
 
         ActionsHandler.I.initActions();

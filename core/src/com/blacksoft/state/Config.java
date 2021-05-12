@@ -20,6 +20,7 @@ public class Config {
     public static final int BLOOD_POOL_PRIORITY = 5;
     public static final int TREASURY_PRIORITY = 5;
     public static final int RESTING_AREA_PRIORITY = 25;
+    public static final int GATE_PRIORITY = 25;
 
     // progress values
     public static final int CLEAN_PROGRESS_VALUE = 5;
@@ -28,6 +29,7 @@ public class Config {
     public static final int BLOOD_POOL_PROGRESS_VALUE = 20;
     public static final int TREASURY_PROGRESS_VALUE = 20;
     public static final int RESTING_AREA_PROGRESS_VALUE = 10;
+    public static final int GATE_PROGRESS_VALUE = 10;
 
     // spawn limits
     public static final int GRAVEYARD_SPAWN_TIME_LIMIT = 30;

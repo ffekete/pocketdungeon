@@ -79,15 +79,15 @@ public class Dungeon {
         return layer;
     }
 
-    public void replaceTile(int x,
-                            int y,
-                            Tile target) {
+    public void replaceTileToBuilding(int x,
+                                      int y,
+                                      Tile target) {
         TiledMapTileLayer layer = (TiledMapTileLayer) tiledMap.getLayers().get(DUNGEON_LAYER);
         nodes[x][y].tile = target;
 
         TiledMapTile tile;
         if (target.isTiled()) {
-            tile = new GroundTiledMapTile(new TextureRegion(new Texture(Gdx.files.internal(String.format("tile/%s.png", target)))), x, y, target);
+            tile = new GroundTiledMapTile(x, y, target);
         } else {
             tile = new StaticTiledMapTile(new TextureRegion(new Texture(Gdx.files.internal(String.format("tile/%s.png", target)))));
         }
@@ -100,7 +100,7 @@ public class Dungeon {
                               int y,
                               Building building,
                               Tile tile) {
-        replaceTile(x, y, tile);
+        replaceTileToBuilding(x, y, tile);
         nodes[x][y].building = building;
         building.place(x * 16, y * 16);
     }

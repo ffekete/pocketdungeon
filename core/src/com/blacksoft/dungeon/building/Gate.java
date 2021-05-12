@@ -1,61 +1,58 @@
 package com.blacksoft.dungeon.building;
 
-import box2dLight.Light;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.blacksoft.dungeon.Tile;
 import com.blacksoft.dungeon.actions.AbstractAction;
-import com.blacksoft.dungeon.actions.build.PlaceGraveyardAction;
-import com.blacksoft.dungeon.lighting.LightSourceFactory;
+import com.blacksoft.dungeon.actions.GateOpenCheckAction;
+import com.blacksoft.dungeon.actions.build.PlaceTreasuryAction;
 import com.blacksoft.screen.UIFactory;
 import com.blacksoft.state.Config;
 import com.blacksoft.state.GameState;
 import com.blacksoft.state.UIState;
 
-public class Graveyard implements Building {
+public class Gate implements Building {
 
     public int level = 1;
-    private Light lightSource;
+    private boolean opened = false;
 
-
-    private static TextureRegion textureRegion;
+    private static TextureRegion openedTextureRegion;
+    private static TextureRegion closedTextureRegion;
 
     static {
-        textureRegion = new TextureRegion(new Texture(Gdx.files.internal("tile/Graveyard.png")));
+        openedTextureRegion = new TextureRegion(new Texture(Gdx.files.internal("tile/GateOpened.png")));
+        closedTextureRegion = new TextureRegion(new Texture(Gdx.files.internal("tile/GateClosed.png")));
     }
 
     @Override
     public boolean canUpgradeBy(AbstractAction action) {
-        return level <= 4 && PlaceGraveyardAction.class.isAssignableFrom(action.getClass());
+        return level <= 4 && PlaceTreasuryAction.class.isAssignableFrom(action.getClass());
     }
 
     @Override
     public void place(int x,
                       int y) {
         int oldProgress = GameState.loopProgress;
-        GameState.loopProgress += Config.GRAVEYARD_PROGRESS_VALUE;
+        GameState.loopProgress += Config.GATE_PROGRESS_VALUE;
         UIFactory.I.updateLabelAmount(oldProgress, GameState.loopProgress, UIState.progressLabel, "%s", null);
-        GameState.skeletonLimit += 0.5f;
-        this.lightSource = LightSourceFactory.getGraveyardLightSource(x / 16 * 16 + 8,y / 16 * 16 + 8);
+
+        GameState.stage.addAction(new GateOpenCheckAction(this, x, y));
     }
 
     @Override
     public void upgrade() {
-        GameState.loopProgress += Config.GRAVEYARD_PROGRESS_VALUE;
-        GameState.skeletonLimit += 0.5f;
+        GameState.loopProgress += Config.GATE_PROGRESS_VALUE;
         level++;
     }
 
     @Override
     public void destroy() {
-        GameState.skeletonLimit -= 0.5f;
-        lightSource.dispose();
     }
 
     @Override
     public Tile getTile() {
-        return Tile.GraveYard;
+        return opened ? Tile.GateClosed : Tile.GateOpened;
     }
 
     @Override
@@ -65,16 +62,16 @@ public class Graveyard implements Building {
 
     @Override
     public boolean getState() {
-        return false;
+        return opened;
     }
 
     @Override
     public void toggleState() {
-
+        opened = !opened;
     }
 
     @Override
     public TextureRegion getTextureRegion() {
-        return textureRegion;
+        return opened ? openedTextureRegion : closedTextureRegion;
     }
 }

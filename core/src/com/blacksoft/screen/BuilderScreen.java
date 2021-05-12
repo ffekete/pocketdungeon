@@ -21,7 +21,7 @@ import com.blacksoft.NewGameInitializer;
 import com.blacksoft.build.UserAction;
 import com.blacksoft.dungeon.actions.ui.CleanIndicatorUpdater;
 import com.blacksoft.dungeon.actions.ui.CleanIndicatorsAction;
-import com.blacksoft.dungeon.logic.CreatureSalaryAction;
+import com.blacksoft.creature.action.CreatureSalaryAction;
 import com.blacksoft.screen.action.MoveLightToMouseAction;
 import com.blacksoft.screen.input.MapClickHandler;
 import com.blacksoft.screen.input.MapMouseMovedHandler;

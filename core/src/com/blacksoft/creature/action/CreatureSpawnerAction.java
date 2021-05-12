@@ -1,4 +1,4 @@
-package com.blacksoft.dungeon.logic;
+package com.blacksoft.creature.action;
 
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.scenes.scene2d.Action;
@@ -7,8 +7,6 @@ import com.blacksoft.creature.Creature;
 import com.blacksoft.creature.Ooze;
 import com.blacksoft.creature.Skeleton;
 import com.blacksoft.creature.Vampire;
-import com.blacksoft.creature.action.CreatureDecisionAction;
-import com.blacksoft.creature.action.WanderingAction;
 import com.blacksoft.state.Config;
 import com.blacksoft.state.GameState;
 

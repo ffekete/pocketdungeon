@@ -1,6 +1,9 @@
 package com.blacksoft.dungeon.building;
 
 import box2dLight.Light;
+import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.blacksoft.dungeon.Tile;
 import com.blacksoft.dungeon.actions.AbstractAction;
 import com.blacksoft.dungeon.actions.build.PlaceGraveyardAction;
@@ -14,6 +17,12 @@ public class DungeonEntrance implements Building {
 
     public int level = 1;
     private Light lightSource;
+
+    private static TextureRegion textureRegion;
+
+    static {
+        textureRegion = new TextureRegion(new Texture(Gdx.files.internal("tile/DungeonEntrance.png")));
+    }
 
     @Override
     public boolean canUpgradeBy(AbstractAction action) {
@@ -44,5 +53,20 @@ public class DungeonEntrance implements Building {
     @Override
     public int getUpgradeLevel() {
         return level;
+    }
+
+    @Override
+    public boolean getState() {
+        return false;
+    }
+
+    @Override
+    public void toggleState() {
+
+    }
+
+    @Override
+    public TextureRegion getTextureRegion() {
+        return textureRegion;
     }
 }

@@ -30,6 +30,11 @@ public class BuildingPlacer {
         if (vx >= 0 && vx < MAP_WIDTH && vy >= 0 && vy < MAP_HEIGHT) {
 
             if (GameState.userAction == UserAction.Place) {
+
+                if(clazz == Gate.class) {
+                    return TileCleaner.isEmptyCorridor(GameState.dungeon, vx, vy) || canUpgrade(vx, vy);
+                }
+
                 if (clazz == Graveyard.class ||
                         clazz == BloodPool.class ||
                         clazz == Treasury.class ||
@@ -77,7 +82,7 @@ public class BuildingPlacer {
 
             if (GameState.dungeon.nodes[vx][vy].building == null) { // build a new one
                 GameState.dungeon.nodes[vx][vy].building = GameState.currentBuilding;
-                GameState.dungeon.replaceTile(vx, vy, GameState.currentBuilding.getTile());
+                GameState.dungeon.replaceTileToBuilding(vx, vy, GameState.currentBuilding.getTile());
                 GameState.dungeon.nodes[vx][vy].building.place(x, y);
             } else {
                 // upgrade building

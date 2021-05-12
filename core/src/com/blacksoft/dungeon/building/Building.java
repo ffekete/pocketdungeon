@@ -1,5 +1,6 @@
 package com.blacksoft.dungeon.building;
 
+import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.blacksoft.dungeon.Tile;
 import com.blacksoft.dungeon.actions.AbstractAction;
 
@@ -17,4 +18,10 @@ public interface Building {
     Tile getTile();
 
     int getUpgradeLevel();
+
+    boolean getState();
+
+    void toggleState();
+
+    TextureRegion getTextureRegion();
 }

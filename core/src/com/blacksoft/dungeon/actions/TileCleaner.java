@@ -52,6 +52,34 @@ public class TileCleaner {
         return true;
     }
 
+    public static boolean isEmptyCorridor(Dungeon dungeon,
+                                           int x,
+                                           int y) {
+
+        if (x < 0 || y < 0 || x >= MAP_WIDTH || y >= MAP_HEIGHT) {
+            return false;
+        }
+
+        int adjacent = 0;
+        if (isClean(dungeon, x - 1, y)) {
+            adjacent += 1;
+        }
+
+        if (isClean(dungeon, x, y + 1)) {
+            adjacent += 2;
+        }
+
+        if (isClean(dungeon, x + 1, y)) {
+            adjacent += 4;
+        }
+
+        if (isClean(dungeon, x, y - 1)) {
+            adjacent += 8;
+        }
+
+        return (adjacent == 5 || adjacent == 10) && dungeon.nodes[x][y].tile == Tile.Empty;
+    }
+
 
     public static boolean isRockWithCorner(Dungeon dungeon,
                                            int x,

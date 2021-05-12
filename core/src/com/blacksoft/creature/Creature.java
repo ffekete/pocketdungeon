@@ -12,7 +12,7 @@ public abstract class Creature extends Actor {
     public boolean finishedAllActions = true;
 
     public float morale = 100f;
-    public float fatigue = 0f;
+    public float fatigue = 10f;
 
     public SequenceAction sequenceActions = new SequenceAction();
 
