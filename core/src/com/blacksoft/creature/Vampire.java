@@ -21,6 +21,7 @@ public class Vampire extends Creature {
 
     public Vampire() {
         this.animation = new Animation<>(0.4f, TextureRegion.split(texture, TEXTURE_SIZE, TEXTURE_SIZE)[0]);
+        this.hp = this.getMaxHp();
     }
 
     @Override
