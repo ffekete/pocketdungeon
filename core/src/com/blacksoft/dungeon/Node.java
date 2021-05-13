@@ -78,7 +78,6 @@ public class Node {
     private void disconnectWith(float x,
                                 float y) {
 
-
         if (GameState.dungeon == null) { // not initialized yet, nothing to conect here
             return;
         }

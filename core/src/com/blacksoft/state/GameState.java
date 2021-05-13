@@ -5,6 +5,7 @@ import box2dLight.RayHandler;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.ImageButton;
+import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.utils.viewport.Viewport;
 import com.blacksoft.build.UserAction;
 import com.blacksoft.creature.Creature;
@@ -13,10 +14,12 @@ import com.blacksoft.dungeon.actions.AbstractAction;
 import com.blacksoft.dungeon.building.Building;
 import com.blacksoft.dungeon.pathfinder.CityGraph;
 import com.blacksoft.ui.TileMarker;
+import com.blacksoft.ui.action.FollowCreatureAction;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
-import java.util.concurrent.atomic.AtomicInteger;
+import java.util.Map;
 
 public class GameState {
 
@@ -59,4 +62,8 @@ public class GameState {
     public static float vampireLimit = 0;
 
     public static CityGraph cityGraph;
+
+    public static Map<Creature, Table> creatureListEntries = new HashMap<>();
+
+    public static FollowCreatureAction followCreatureAction;
 }

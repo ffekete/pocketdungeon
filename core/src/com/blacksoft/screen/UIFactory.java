@@ -3,7 +3,9 @@ package com.blacksoft.screen;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
+import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.graphics.g2d.freetype.FreeTypeFontGenerator;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.Group;
@@ -25,9 +27,11 @@ import com.blacksoft.state.UIState;
 import com.blacksoft.ui.AnimatedImage;
 import com.blacksoft.ui.DynamicLabel;
 import com.blacksoft.ui.IntAction;
+import com.blacksoft.ui.action.FollowCreatureAction;
 
 import static com.blacksoft.state.Config.SCREEN_HEIGHT;
 import static com.blacksoft.state.Config.SCREEN_WIDTH;
+import static com.blacksoft.state.Config.TEXTURE_SIZE;
 
 public class UIFactory {
 
@@ -220,7 +224,7 @@ public class UIFactory {
 
     public DynamicLabel getFpsIndicator() {
         DynamicLabel fpsIndicator = new DynamicLabel(labelStyle14, () -> Integer.toString(Gdx.graphics.getFramesPerSecond()));
-        fpsIndicator.setPosition(SCREEN_WIDTH / 2 - 60, SCREEN_HEIGHT / 2 - 60);
+        fpsIndicator.setPosition(0, 10);
         return fpsIndicator;
     }
 
@@ -267,7 +271,7 @@ public class UIFactory {
         group.setSize(180, 200);
 
         Table table = new Table();
-        table.pad(15, 15, 15 ,15);
+        table.pad(15, 15, 15, 15);
         table.center();
         table.top().left();
 
@@ -276,9 +280,7 @@ public class UIFactory {
         group.addActor(scrollPane);
         scrollPane.setFillParent(true);
 
-        UIState.creatureList = table;
-
-        //table.setDebug(true, true);
+        UIState.creatureListTable = table;
 
         return group;
     }
@@ -290,13 +292,77 @@ public class UIFactory {
         Label hpDescrLabel = new Label("hp:", labelStyle14);
         Label separator = new Label("/", labelStyle14);
 
-        UIState.creatureList.add(animatedImage).size(16).left().pad(0, 0, 0, 15);
-        UIState.creatureList.add(hpDescrLabel).left().pad(0, 0, 0, 0);
-        UIState.creatureList.add(hpLabel).left().pad(0, 2.5f, 0, 0);
-        UIState.creatureList.add(separator).left().pad(0, 2.5f, 0, 0);
-        UIState.creatureList.add(maxHpLabel).left().pad(0, 2.5f, 0, 0);
+        Table table = new Table();
 
-        UIState.creatureList.row();
+        table.add(animatedImage).size(16).left().pad(0, 0, 0, 15);
+        table.add(hpDescrLabel).left().pad(0, 0, 0, 0);
+        table.add(hpLabel).left().pad(0, 2.5f, 0, 0);
+        table.add(separator).left().pad(0, 2.5f, 0, 0);
+        table.add(maxHpLabel).left().pad(0, 2.5f, 0, 0);
+
+        table.add().width(85);
+
+        UIState.creatureListTable.add(table);
+
+        GameState.creatureListEntries.put(creature, table);
+
+        FollowCreatureAction followCreatureAction = new FollowCreatureAction(creature, () -> null);
+
+        GameState.followCreatureAction = followCreatureAction;
+
+        table.addListener(new InputListener() {
+
+            @Override
+            public void enter(InputEvent event,
+                              float x,
+                              float y,
+                              int pointer,
+                              Actor fromActor) {
+
+                GameState.creatureListEntries.entrySet().stream()
+                        .filter(entry -> entry.getValue() == table)
+                        .map(entry -> entry.getKey())
+                        .findFirst()
+                        .ifPresent(creature2 -> {
+                            UIState.selectionMarker.setPosition(creature2.getX(), creature2.getY());
+                            UIState.selectionMarker.setVisible(true);
+                            followCreatureAction.setCreature(creature2);
+                            followCreatureAction.setTarget(() -> UIState.selectionMarker);
+                            creature2.addAction(followCreatureAction);
+                        });
+            }
+
+            @Override
+            public void exit(InputEvent event,
+                             float x,
+                             float y,
+                             int pointer,
+                             Actor toActor) {
+                UIState.selectionMarker.setVisible(false);
+
+                GameState.creatureListEntries.entrySet().stream()
+                        .filter(entry -> entry.getValue() == table)
+                        .map(entry -> entry.getKey())
+                        .findFirst()
+                        .ifPresent(creature2 -> {
+                            creature2.removeAction(followCreatureAction);
+                        });
+            }
+        });
+
+        UIState.creatureListTable.row();
+    }
+
+    public void createSelectionMarker() {
+        TextureRegion[] textureRegion = TextureRegion.split(new Texture(Gdx.files.internal("ui/SelectionMarker.png")), TEXTURE_SIZE, TEXTURE_SIZE)[0];
+        Animation<TextureRegion> animation = new Animation<TextureRegion>(0.3f, textureRegion);
+        AnimatedImage animatedImage = new AnimatedImage(animation);
+
+        UIState.selectionMarker = animatedImage;
+
+        UIState.selectionMarker.setVisible(false);
+
+        GameState.uiStage.addActor(animatedImage);
     }
 
     public void addAction(Group horizontalGroup,

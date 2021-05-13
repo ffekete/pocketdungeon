@@ -87,7 +87,9 @@ public class BuilderScreen extends ScreenAdapter {
                                      int pointer,
                                      int button) {
 
-                return MapClickHandler.touchDown((int) x, (int) y);
+                MapClickHandler.touchDown((int) x, (int) y);
+
+                return false;
             }
 
             @Override
@@ -129,6 +131,7 @@ public class BuilderScreen extends ScreenAdapter {
         GameState.uiStage.addActor(UIFactory.I.getActionsGroup());
         GameState.uiStage.addActor(UIFactory.I.getCreatureListPanel());
         UIFactory.I.createLockImages();
+        UIFactory.I.createSelectionMarker();
 
         GameState.stage.addAction(new MoveLightToMouseAction());
         GameState.stage.addAction(new CreatureSalaryAction());

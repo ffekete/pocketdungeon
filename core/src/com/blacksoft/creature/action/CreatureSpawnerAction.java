@@ -1,8 +1,10 @@
 package com.blacksoft.creature.action;
 
 import com.badlogic.gdx.math.Vector2;
-import com.badlogic.gdx.scenes.scene2d.Action;
+import com.badlogic.gdx.scenes.scene2d.*;
 import com.badlogic.gdx.scenes.scene2d.actions.Actions;
+import com.badlogic.gdx.scenes.scene2d.ui.Table;
+import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
 import com.blacksoft.creature.Creature;
 import com.blacksoft.creature.Ooze;
 import com.blacksoft.creature.Skeleton;
@@ -10,6 +12,7 @@ import com.blacksoft.creature.Vampire;
 import com.blacksoft.screen.UIFactory;
 import com.blacksoft.state.Config;
 import com.blacksoft.state.GameState;
+import com.blacksoft.state.UIState;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -45,6 +48,8 @@ public class CreatureSpawnerAction extends Action {
             skeleton.addAction(Actions.fadeIn(10));
             UIFactory.I.addCreatureListEntry(skeleton);
 
+            addHighlightAction(skeleton);
+
             graveyardSpawnDuration = 0;
         }
 
@@ -60,6 +65,8 @@ public class CreatureSpawnerAction extends Action {
             ooze.addAction(Actions.fadeIn(10));
             UIFactory.I.addCreatureListEntry(ooze);
 
+            addHighlightAction(ooze);
+
             oozeSpawnDuration = 0;
         }
 
@@ -74,11 +81,47 @@ public class CreatureSpawnerAction extends Action {
             vampire.addAction(Actions.fadeIn(10));
             UIFactory.I.addCreatureListEntry(vampire);
 
+            addHighlightAction(vampire);
+
             vampireSpawnDuration = 0;
         }
 
         return false;
     }
 
+
+    private void addHighlightAction(Creature creature) {
+
+        creature.setTouchable(Touchable.enabled);
+        creature.setBounds(creature.getX(), creature.getY(), 16, 16);
+
+        creature.addListener(new InputListener() {
+
+            @Override
+            public void enter(InputEvent event,
+                              float x,
+                              float y,
+                              int pointer,
+                              Actor fromActor) {
+                Table table = GameState.creatureListEntries.get(creature);
+                table.getChild(0).setScale(1.5f);
+                table.setBackground(UIState.selectionBackground);
+                table.setPosition(table.getX() -10, table.getY());
+            }
+
+            @Override
+            public void exit(InputEvent event,
+                             float x,
+                             float y,
+                             int pointer,
+                             Actor toActor) {
+                UIState.selectionMarker.setVisible(false);
+                Table table = GameState.creatureListEntries.get(creature);
+                table.getChild(0).setScale(1f);
+                table.setBackground((TextureRegionDrawable)null);
+                table.setPosition(table.getX() + 10, table.getY());
+            }
+        });
+    }
 
 }
