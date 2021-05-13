@@ -7,7 +7,7 @@ import com.badlogic.gdx.scenes.scene2d.Actor;
 
 public class TileMarker extends Actor {
 
-private final Texture texture;
+    private final Texture texture;
 
     public TileMarker() {
         this.texture = new Texture(Gdx.files.internal("ui/Marker.png"));
@@ -16,7 +16,7 @@ private final Texture texture;
     @Override
     public void draw(Batch batch,
                      float parentAlpha) {
-        if(isVisible()) {
+        if (isVisible()) {
             batch.draw(texture, getX(), getY());
         }
     }

@@ -66,4 +66,6 @@ public class GameState {
     public static Map<Creature, Table> creatureListEntries = new HashMap<>();
 
     public static FollowCreatureAction followCreatureAction;
+
+    public static boolean paused;
 }

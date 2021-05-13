@@ -20,6 +20,10 @@ public class CreatureSalaryAction extends Action {
     @Override
     public boolean act(float delta) {
 
+        if(GameState.paused) {
+            return false;
+        }
+
         int old = GameState.gold;
 
         duration += delta;

@@ -272,11 +272,10 @@ public class UIFactory {
 
         Table table = new Table();
         table.pad(15, 15, 15, 15);
-        table.center();
+        table.setFillParent(true);
         table.top().left();
 
         ScrollPane scrollPane = new ScrollPane(table);
-        table.setPosition(490, 160);
         group.addActor(scrollPane);
         scrollPane.setFillParent(true);
 
@@ -294,21 +293,21 @@ public class UIFactory {
 
         Table table = new Table();
 
-        table.add(animatedImage).size(16).left().pad(0, 0, 0, 15);
-        table.add(hpDescrLabel).left().pad(0, 0, 0, 0);
-        table.add(hpLabel).left().pad(0, 2.5f, 0, 0);
-        table.add(separator).left().pad(0, 2.5f, 0, 0);
-        table.add(maxHpLabel).left().pad(0, 2.5f, 0, 0);
+        table.add(animatedImage).size(16).left().pad(3, 5, 3, 15);
+        table.add(hpDescrLabel).left().pad(3, 0, 3, 0).size(16);
+        table.add(hpLabel).left().pad(3, 2.5f, 3, 0);
+        table.add(separator).left().pad(3, 2.5f, 3, 0);
+        table.add(maxHpLabel).left().pad(3, 2.5f, 3, 0).size(16).expandX().fillX();
 
-        table.add().width(85);
-
-        UIState.creatureListTable.add(table);
+        UIState.creatureListTable.add(table).fillX().expandX();
 
         GameState.creatureListEntries.put(creature, table);
 
         FollowCreatureAction followCreatureAction = new FollowCreatureAction(creature, () -> null);
 
         GameState.followCreatureAction = followCreatureAction;
+
+        table.setBackground(UIState.selectionBackground);
 
         table.addListener(new InputListener() {
 

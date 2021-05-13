@@ -3,6 +3,7 @@ package com.blacksoft.creature.action;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.scenes.scene2d.actions.MoveToAction;
 import com.blacksoft.creature.Creature;
+import com.blacksoft.state.GameState;
 
 public class MoveToTileAction extends MoveToAction {
 
@@ -29,6 +30,11 @@ public class MoveToTileAction extends MoveToAction {
 
     @Override
     public boolean act(float delta) {
+
+        if(GameState.paused) {
+            return false;
+        }
+
         Creature creature = (Creature) actor;
 
         if (this.previousNode == null) {

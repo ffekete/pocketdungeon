@@ -4,7 +4,6 @@ import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.scenes.scene2d.*;
 import com.badlogic.gdx.scenes.scene2d.actions.Actions;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
-import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
 import com.blacksoft.creature.Creature;
 import com.blacksoft.creature.Ooze;
 import com.blacksoft.creature.Skeleton;
@@ -27,6 +26,10 @@ public class CreatureSpawnerAction extends Action {
     private float vampireSpawnDuration = 10f;
 
     public boolean act(float v) {
+
+        if(GameState.paused) {
+            return false;
+        }
 
         graveyardSpawnDuration += v;
         oozeSpawnDuration += v;
@@ -105,8 +108,9 @@ public class CreatureSpawnerAction extends Action {
                               Actor fromActor) {
                 Table table = GameState.creatureListEntries.get(creature);
                 table.getChild(0).setScale(1.5f);
-                table.setBackground(UIState.selectionBackground);
-                table.setPosition(table.getX() -10, table.getY());
+                table.setBackground(UIState.selectionBackgroundHighlighted);
+                table.setPosition(table.getX() - 1, table.getY());
+
             }
 
             @Override
@@ -118,8 +122,8 @@ public class CreatureSpawnerAction extends Action {
                 UIState.selectionMarker.setVisible(false);
                 Table table = GameState.creatureListEntries.get(creature);
                 table.getChild(0).setScale(1f);
-                table.setBackground((TextureRegionDrawable)null);
-                table.setPosition(table.getX() + 10, table.getY());
+                table.setBackground(UIState.selectionBackground);
+                table.setPosition(table.getX() + 1, table.getY());
             }
         });
     }

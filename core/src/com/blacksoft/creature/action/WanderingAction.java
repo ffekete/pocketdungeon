@@ -21,6 +21,10 @@ public class WanderingAction extends Action {
     @Override
     public boolean act(float delta) {
 
+        if(GameState.paused) {
+            return false;
+        }
+
         Creature creature = (Creature) actor;
 
         int x = (int) actor.getX() / 16;

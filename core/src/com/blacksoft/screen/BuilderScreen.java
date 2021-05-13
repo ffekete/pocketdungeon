@@ -100,12 +100,24 @@ public class BuilderScreen extends ScreenAdapter {
             }
 
             @Override
+            public boolean keyDown(InputEvent event,
+                                   int keycode) {
+                if(keycode == Input.Keys.SPACE) {
+                    GameState.paused = !GameState.paused;
+                    return true;
+                }
+
+                return false;
+            }
+
+            @Override
             public boolean keyUp(InputEvent event,
                                  int keycode) {
+
                 if (Input.Keys.ESCAPE == keycode) {
                     System.exit(0);
                 }
-                return true;
+                return false;
             }
         });
 

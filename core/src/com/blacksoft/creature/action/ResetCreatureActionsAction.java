@@ -2,6 +2,7 @@ package com.blacksoft.creature.action;
 
 import com.badlogic.gdx.scenes.scene2d.Action;
 import com.blacksoft.creature.Creature;
+import com.blacksoft.state.GameState;
 
 import static com.blacksoft.creature.util.CreatureActionsUtil.resetCreatureActions;
 
@@ -15,6 +16,11 @@ public class ResetCreatureActionsAction extends Action {
 
     @Override
     public boolean act(float delta) {
+
+        if(GameState.paused) {
+            return false;
+        }
+
         resetCreatureActions(creature);
         return true;
     }

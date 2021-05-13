@@ -19,6 +19,10 @@ public class CreatureDecisionAction extends Action {
     @Override
     public boolean act(float delta) {
 
+        if(GameState.paused) {
+            return false;
+        }
+
         duration += delta;
 
         Creature creature = (Creature) this.actor;

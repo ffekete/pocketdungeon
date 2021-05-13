@@ -5,6 +5,7 @@ import com.badlogic.gdx.scenes.scene2d.Action;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.blacksoft.creature.Creature;
 import com.blacksoft.screen.UIFactory;
+import com.blacksoft.state.GameState;
 
 public class RestAction extends Action {
 
@@ -18,6 +19,11 @@ public class RestAction extends Action {
 
     @Override
     public boolean act(float delta) {
+
+        if(GameState.paused) {
+            return false;
+        }
+
         duration += delta;
 
         if (duration >= 5f) {
