@@ -22,7 +22,8 @@ public class NewGameInitializer {
                 PlaceBloodPoolAction.I,
                 PlaceTreasuryAction.I,
                 PlaceRestingAreaAction.I,
-                PlaceGateAction.I
+                PlaceGateAction.I,
+                PlaceLibraryAction.I
         );
 
         ActionsHandler.I.initActions();

@@ -1,20 +1,13 @@
 package com.blacksoft.creature.action;
 
-import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.scenes.scene2d.*;
 import com.badlogic.gdx.scenes.scene2d.actions.Actions;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
-import com.blacksoft.creature.Creature;
-import com.blacksoft.creature.Ooze;
-import com.blacksoft.creature.Skeleton;
-import com.blacksoft.creature.Vampire;
+import com.blacksoft.creature.*;
 import com.blacksoft.screen.UIFactory;
 import com.blacksoft.state.Config;
 import com.blacksoft.state.GameState;
 import com.blacksoft.state.UIState;
-
-import java.util.ArrayList;
-import java.util.List;
 
 import static com.blacksoft.state.Config.DUNGEON_ENTRANCE_LOCATION;
 import static com.blacksoft.state.Config.TEXTURE_SIZE;
@@ -24,16 +17,18 @@ public class CreatureSpawnerAction extends Action {
     private float graveyardSpawnDuration = 0f;
     private float oozeSpawnDuration = 0f;
     private float vampireSpawnDuration = 0f;
+    private float warlockSpawnDuration = 0f;
 
     public boolean act(float v) {
 
-        if(GameState.paused) {
+        if (GameState.paused) {
             return false;
         }
 
         graveyardSpawnDuration += v;
         oozeSpawnDuration += v;
         vampireSpawnDuration += v;
+        warlockSpawnDuration += v;
 
         if (graveyardSpawnDuration >= Config.GRAVEYARD_SPAWN_TIME_LIMIT && GameState.skeletonLimit > GameState.creatures.stream().filter(creature -> Skeleton.class.isAssignableFrom(creature.getClass())).count()) {
 
@@ -83,6 +78,21 @@ public class CreatureSpawnerAction extends Action {
             addHighlightAction(vampire);
 
             vampireSpawnDuration = 0;
+
+            return false;
+        }
+
+        if (warlockSpawnDuration >= Config.WARLOCK_SPAWN_TIME_LIMIT && GameState.warlockLimit > GameState.creatures.stream().filter(creature -> Warlock.class.isAssignableFrom(creature.getClass())).count()) {
+
+            Creature warlock = new Warlock();
+            GameState.stage.addActor(warlock);
+            GameState.creatures.add(warlock);
+            warlock.setPosition((int) DUNGEON_ENTRANCE_LOCATION.x * TEXTURE_SIZE, (int) DUNGEON_ENTRANCE_LOCATION.y * TEXTURE_SIZE);
+            warlock.addAction(new CreatureDecisionAction());
+            UIFactory.I.addCreatureListEntry(warlock);
+            addHighlightAction(warlock);
+
+            warlockSpawnDuration = 0;
 
             return false;
         }

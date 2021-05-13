@@ -53,7 +53,7 @@ public class BloodPool implements Building {
 
     @Override
     public void destroy() {
-        GameState.vampireLimit -= 0.5f;
+        GameState.vampireLimit -= 0.5f * level;
         lightSource.dispose();
     }
 

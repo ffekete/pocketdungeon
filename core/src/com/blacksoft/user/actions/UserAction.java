@@ -1,4 +1,4 @@
-package com.blacksoft.build;
+package com.blacksoft.user.actions;
 
 public enum UserAction {
 

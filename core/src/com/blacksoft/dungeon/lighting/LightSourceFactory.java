@@ -18,6 +18,11 @@ public class LightSourceFactory {
         return new PointLight(rayHandler, 15, new Color(0, 1f, 1f, 1f), 16, x, y);
     }
 
+    public static Light getLibraryLightSource(int x,
+                                                int y) {
+        return new PointLight(rayHandler, 15, new Color(0, 1f, 1f, 1f), 32, x, y);
+    }
+
     public static Light getGraveyardLightSource(int x,
                                                 int y) {
         return new PointLight(rayHandler, 15, new Color(0, 1f, 1f, 1f), 16, x, y);

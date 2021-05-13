@@ -1,6 +1,6 @@
 package com.blacksoft.screen.input;
 
-import com.blacksoft.build.UserAction;
+import com.blacksoft.user.actions.UserAction;
 import com.blacksoft.dungeon.Tile;
 import com.blacksoft.dungeon.actions.TileCleaner;
 import com.blacksoft.dungeon.actions.build.BuildingPlacer;

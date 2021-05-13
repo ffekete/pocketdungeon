@@ -7,7 +7,7 @@ import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.ImageButton;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.utils.viewport.Viewport;
-import com.blacksoft.build.UserAction;
+import com.blacksoft.user.actions.UserAction;
 import com.blacksoft.creature.Creature;
 import com.blacksoft.dungeon.Dungeon;
 import com.blacksoft.dungeon.actions.AbstractAction;
@@ -58,6 +58,7 @@ public class GameState {
     public static List<Creature> creatures = new ArrayList<>();
 
     public static float skeletonLimit = 0;
+    public static float warlockLimit = 0;
     public static float oozeLimit = 0;
     public static float vampireLimit = 0;
 

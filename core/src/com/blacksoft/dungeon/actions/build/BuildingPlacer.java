@@ -3,7 +3,7 @@ package com.blacksoft.dungeon.actions.build;
 import com.badlogic.gdx.scenes.scene2d.actions.Actions;
 import com.badlogic.gdx.scenes.scene2d.actions.SequenceAction;
 import com.blacksoft.ActionsHandler;
-import com.blacksoft.build.UserAction;
+import com.blacksoft.user.actions.UserAction;
 import com.blacksoft.dungeon.actions.AbstractAction;
 import com.blacksoft.dungeon.actions.ui.CleanIndicatorUpdater;
 import com.blacksoft.dungeon.actions.ui.CleanIndicatorsAction;
@@ -38,6 +38,7 @@ public class BuildingPlacer {
                 if (clazz == Graveyard.class ||
                         clazz == BloodPool.class ||
                         clazz == Treasury.class ||
+                        clazz == Library.class ||
                         clazz == RestingArea.class) {
                     if (TileCleaner.isClean(GameState.dungeon, vx, vy) || canUpgrade(vx, vy)) {
                         return true;

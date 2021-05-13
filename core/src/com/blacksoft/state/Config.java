@@ -21,6 +21,7 @@ public class Config {
     public static final int TREASURY_PRIORITY = 5;
     public static final int RESTING_AREA_PRIORITY = 5;
     public static final int GATE_PRIORITY = 5;
+    public static final int LIBRARY_PRIORITY = 25;
 
     // progress values
     public static final int CLEAN_PROGRESS_VALUE = 5;
@@ -30,13 +31,16 @@ public class Config {
     public static final int TREASURY_PROGRESS_VALUE = 20;
     public static final int RESTING_AREA_PROGRESS_VALUE = 10;
     public static final int GATE_PROGRESS_VALUE = 10;
+    public static final int LIBRARY_PROGRESS_VALUE = 10;
 
     // spawn limits
     public static final int GRAVEYARD_SPAWN_TIME_LIMIT = 30;
     public static final int OOZE_SPAWN_TIME_LIMIT = 5;
     public static final int VAMPIRE_SPAWN_TIME_LIMIT = 25;
+    public static final int WARLOCK_SPAWN_TIME_LIMIT = 25;
 
     // salaries
+    public static final int WARLOCK_SALARY_REQUEST = 200;
     public static final int VAMPIRE_SALARY_REQUEST = 100;
     public static final int SKELETON_SALARY_REQUEST = 0;
     public static final int OOZE_SALARY_REQUEST = 0;
@@ -47,6 +51,7 @@ public class Config {
     public static final int CLEAN_COST_VALUE = 10;
 
     public static final Vector2 DUNGEON_ENTRANCE_LOCATION = new Vector2(0, MAP_HEIGHT / 2);
+    public static final int WARLOCK_MAX_HP = 6;
     public static final int VAMPIRE_MAX_HP = 8;
     public static final int OOZE_MAX_HP = 2;
     public static final int SKELETON_MAX_HP = 3;

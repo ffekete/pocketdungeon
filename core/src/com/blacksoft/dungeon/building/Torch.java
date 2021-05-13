@@ -73,7 +73,7 @@ public class Torch implements Building {
 
     @Override
     public void destroy() {
-        GameState.oozeLimit -= 0.5f;
+        GameState.oozeLimit -= 0.5f * level;
         lightSource.setActive(false);
         lightSource.remove();
     }

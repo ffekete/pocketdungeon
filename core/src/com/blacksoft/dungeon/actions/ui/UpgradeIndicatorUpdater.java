@@ -2,7 +2,7 @@ package com.blacksoft.dungeon.actions.ui;
 
 import com.badlogic.gdx.maps.tiled.TiledMapTileLayer;
 import com.badlogic.gdx.maps.tiled.tiles.AnimatedTiledMapTile;
-import com.blacksoft.build.UserAction;
+import com.blacksoft.user.actions.UserAction;
 import com.blacksoft.dungeon.Dungeon;
 import com.blacksoft.state.GameState;
 
