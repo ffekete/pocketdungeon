@@ -7,19 +7,17 @@ import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 
+import static com.blacksoft.state.Config.SKELETON_MAX_HP;
 import static com.blacksoft.state.Config.SKELETON_SALARY_REQUEST;
 import static com.blacksoft.state.Config.TEXTURE_SIZE;
 
 public class Skeleton extends Creature {
-
-    private static final Texture texture;
 
     static {
         texture = new Texture("creature/Skeleton.png");
     }
 
     private float duration = 0f;
-    private final Animation<TextureRegion> animation;
 
     public Skeleton() {
         this.animation = new Animation<>(0.4f, TextureRegion.split(texture, TEXTURE_SIZE, TEXTURE_SIZE)[0]);
@@ -44,5 +42,10 @@ public class Skeleton extends Creature {
     @Override
     public int getSalaryRequest() {
         return SKELETON_SALARY_REQUEST;
+    }
+
+    @Override
+    public int getMaxHp() {
+        return SKELETON_MAX_HP;
     }
 }

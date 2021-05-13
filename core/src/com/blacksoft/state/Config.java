@@ -47,7 +47,7 @@ public class Config {
     public static final int CLEAN_COST_VALUE = 10;
 
     public static final Vector2 DUNGEON_ENTRANCE_LOCATION = new Vector2(0, MAP_HEIGHT / 2);
-    public static final float VAMPIRE_FATIGUE_REDUCTION = 5f;
-    public static final float OOZE_FATIGUE_REDUCTION = 0f;
-    public static final float SKELETON_FATIGUE_REDUCTION = 0f;
+    public static final int VAMPIRE_MAX_HP = 8;
+    public static final int OOZE_MAX_HP = 2;
+    public static final int SKELETON_MAX_HP = 3;
 }

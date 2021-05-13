@@ -6,23 +6,21 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
+import com.blacksoft.state.Config;
 
 import static com.blacksoft.state.Config.OOZE_SALARY_REQUEST;
 import static com.blacksoft.state.Config.TEXTURE_SIZE;
 
 public class Ooze extends Creature {
 
-    private static final Texture texture;
-
     static {
         texture = new Texture("creature/Ooze.png");
     }
 
     private float duration = 0f;
-    private final Animation<TextureRegion> animation;
 
     public Ooze() {
-        this.animation = new Animation<>(0.6f, TextureRegion.split(texture, TEXTURE_SIZE, TEXTURE_SIZE)[0]);
+        animation = new Animation<>(0.6f, TextureRegion.split(texture, TEXTURE_SIZE, TEXTURE_SIZE)[0]);
     }
 
     @Override
@@ -44,5 +42,10 @@ public class Ooze extends Creature {
     @Override
     public int getSalaryRequest() {
         return OOZE_SALARY_REQUEST;
+    }
+
+    @Override
+    public int getMaxHp() {
+        return Config.OOZE_MAX_HP;
     }
 }

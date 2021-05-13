@@ -13,6 +13,7 @@ import com.badlogic.gdx.scenes.scene2d.actions.*;
 import com.badlogic.gdx.scenes.scene2d.ui.*;
 import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
 import com.blacksoft.build.UserAction;
+import com.blacksoft.creature.Creature;
 import com.blacksoft.dungeon.actions.AbstractAction;
 import com.blacksoft.dungeon.actions.ui.CleanIndicatorsAction;
 import com.blacksoft.dungeon.actions.ui.UpgradeIndicatorUpdater;
@@ -21,6 +22,7 @@ import com.blacksoft.screen.action.MovePlaceableActorToMouseAction;
 import com.blacksoft.state.Config;
 import com.blacksoft.state.GameState;
 import com.blacksoft.state.UIState;
+import com.blacksoft.ui.AnimatedImage;
 import com.blacksoft.ui.DynamicLabel;
 import com.blacksoft.ui.IntAction;
 
@@ -32,8 +34,10 @@ public class UIFactory {
     public static final UIFactory I = new UIFactory();
 
     private BitmapFont bitmapFont12;
-    private BitmapFont bitmapFont24;
+    private BitmapFont bitmapFont25;
+    private BitmapFont bitmapFont30;
     private Label.LabelStyle labelStyle14;
+    private Label.LabelStyle labelStyle22;
     private Label.LabelStyle labelStyle30;
 
     public UIFactory() {
@@ -43,9 +47,13 @@ public class UIFactory {
         labelStyle14 = new Label.LabelStyle();
         labelStyle14.font = bitmapFont12;
 
-        bitmapFont24 = getFont(generator, 30);
+        bitmapFont30 = getFont(generator, 30);
         labelStyle30 = new Label.LabelStyle();
-        labelStyle30.font = bitmapFont24;
+        labelStyle30.font = bitmapFont30;
+
+        bitmapFont25 = getFont(generator, 22);
+        labelStyle22 = new Label.LabelStyle();
+        labelStyle22.font = bitmapFont25;
 
         generator.dispose(); // don't forget to dispose to avoid memory leaks!
     }
@@ -183,6 +191,9 @@ public class UIFactory {
         openLockImage.setVisible(false);
         closedLockImage.setVisible(false);
 
+        openLockImage.setColor(1, 1, 1, 0.4f);
+        closedLockImage.setColor(1, 1, 1, 0.4f);
+
         UIState.openLockImage = openLockImage;
         UIState.closedLockImage = closedLockImage;
 
@@ -233,15 +244,59 @@ public class UIFactory {
 
         group.addActor(horizontalGroup);
 
-        Group descriptionGroup = new Group();
-        descriptionGroup.setPosition(10, 55);
+        Container<DynamicLabel> descriptionGroup = new Container<>();
+        descriptionGroup.setPosition(10, 100);
+        descriptionGroup.setFillParent(true);
+        descriptionGroup.top().left();
 
         group.addActor(descriptionGroup);
 
         DynamicLabel descriptionLabel = new DynamicLabel(labelStyle14, () -> GameState.highlightedAction != null ? getDescription() : "");
-        descriptionGroup.addActor(descriptionLabel);
+        descriptionGroup.setActor(descriptionLabel);
 
         return group;
+    }
+
+    public Group getCreatureListPanel() {
+
+        Group group = new Group();
+
+        group.addActor(new Image(new Texture(Gdx.files.internal("ui/CreatureListPanel.png"))));
+
+        group.setPosition(482, 156);
+        group.setSize(180, 200);
+
+        Table table = new Table();
+        table.pad(15, 15, 15 ,15);
+        table.center();
+        table.top().left();
+
+        ScrollPane scrollPane = new ScrollPane(table);
+        table.setPosition(490, 160);
+        group.addActor(scrollPane);
+        scrollPane.setFillParent(true);
+
+        UIState.creatureList = table;
+
+        //table.setDebug(true, true);
+
+        return group;
+    }
+
+    public void addCreatureListEntry(Creature creature) {
+        AnimatedImage animatedImage = new AnimatedImage(creature.getAnimation());
+        DynamicLabel hpLabel = new DynamicLabel(labelStyle14, () -> Integer.toString(creature.getHp()));
+        DynamicLabel maxHpLabel = new DynamicLabel(labelStyle14, () -> Integer.toString(creature.getMaxHp()));
+        Label hpDescrLabel = new Label("hp:", labelStyle14);
+        Label separator = new Label("/", labelStyle14);
+
+        UIState.creatureList.add(animatedImage).size(16).left().pad(0, 0, 0, 15);
+        UIState.creatureList.add(hpDescrLabel).left().pad(0, 0, 0, 0);
+        UIState.creatureList.add(hpLabel).left().pad(0, 2.5f, 0, 0);
+        UIState.creatureList.add(separator).left().pad(0, 2.5f, 0, 0);
+        UIState.creatureList.add(maxHpLabel).left().pad(0, 2.5f, 0, 0);
+
+        UIState.creatureList.row();
     }
 
     public void addAction(Group horizontalGroup,

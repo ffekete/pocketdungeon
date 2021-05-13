@@ -7,6 +7,7 @@ import com.blacksoft.creature.Creature;
 import com.blacksoft.creature.Ooze;
 import com.blacksoft.creature.Skeleton;
 import com.blacksoft.creature.Vampire;
+import com.blacksoft.screen.UIFactory;
 import com.blacksoft.state.Config;
 import com.blacksoft.state.GameState;
 
@@ -42,7 +43,7 @@ public class CreatureSpawnerAction extends Action {
             skeleton.addAction(new CreatureDecisionAction());
             skeleton.addAction(Actions.fadeOut(0.1f));
             skeleton.addAction(Actions.fadeIn(10));
-
+            UIFactory.I.addCreatureListEntry(skeleton);
 
             graveyardSpawnDuration = 0;
         }
@@ -57,7 +58,7 @@ public class CreatureSpawnerAction extends Action {
             ooze.addAction(new CreatureDecisionAction());
             ooze.addAction(Actions.fadeOut(0.1f));
             ooze.addAction(Actions.fadeIn(10));
-
+            UIFactory.I.addCreatureListEntry(ooze);
 
             oozeSpawnDuration = 0;
         }
@@ -71,6 +72,7 @@ public class CreatureSpawnerAction extends Action {
             vampire.addAction(new CreatureDecisionAction());
             vampire.addAction(Actions.fadeOut(0.1f));
             vampire.addAction(Actions.fadeIn(10));
+            UIFactory.I.addCreatureListEntry(vampire);
 
             vampireSpawnDuration = 0;
         }

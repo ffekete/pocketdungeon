@@ -3,6 +3,7 @@ package com.blacksoft.state;
 import com.badlogic.gdx.scenes.scene2d.Group;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
+import com.badlogic.gdx.scenes.scene2d.ui.Table;
 
 public class UIState {
 
@@ -15,5 +16,7 @@ public class UIState {
 
     public static Image openLockImage;
     public static Image closedLockImage;
+
+    public static Table creatureList;
 
 }

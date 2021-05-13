@@ -113,8 +113,6 @@ public class TileCleaner {
                                    int x,
                                    int y) {
 
-        // todo cannot clean if neighbour is gate
-
         int adjacent = 0;
         if (isClean(dungeon, x - 1, y)) {
             adjacent += 1;

@@ -6,21 +6,18 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
-import com.blacksoft.state.Config;
 
 import static com.blacksoft.state.Config.TEXTURE_SIZE;
+import static com.blacksoft.state.Config.VAMPIRE_MAX_HP;
 import static com.blacksoft.state.Config.VAMPIRE_SALARY_REQUEST;
 
 public class Vampire extends Creature {
-
-    private static final Texture texture;
 
     static {
         texture = new Texture("creature/Vampire.png");
     }
 
     private float duration = 0f;
-    private final Animation<TextureRegion> animation;
 
     public Vampire() {
         this.animation = new Animation<>(0.4f, TextureRegion.split(texture, TEXTURE_SIZE, TEXTURE_SIZE)[0]);
@@ -45,5 +42,10 @@ public class Vampire extends Creature {
     @Override
     public int getSalaryRequest() {
         return VAMPIRE_SALARY_REQUEST;
+    }
+
+    @Override
+    public int getMaxHp() {
+        return VAMPIRE_MAX_HP;
     }
 }

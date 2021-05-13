@@ -127,6 +127,7 @@ public class BuilderScreen extends ScreenAdapter {
         GameState.uiStage.addActor(UIFactory.I.addMovingLabelShadow("BUILD PHASE"));
         GameState.uiStage.addActor(UIFactory.I.addMovingLabel("BUILD PHASE"));
         GameState.uiStage.addActor(UIFactory.I.getActionsGroup());
+        GameState.uiStage.addActor(UIFactory.I.getCreatureListPanel());
         UIFactory.I.createLockImages();
 
         GameState.stage.addAction(new MoveLightToMouseAction());
