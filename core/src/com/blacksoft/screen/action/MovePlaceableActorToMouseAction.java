@@ -25,6 +25,10 @@ public class MovePlaceableActorToMouseAction extends Action {
     @Override
     public boolean act(float delta) {
 
+        if(GameState.selectedAction == null || GameState.selectedActionImage == null) {
+            return true;
+        }
+
         if (GameState.userAction == UserAction.Place) {
             Vector3 v = GameState.viewport.unproject(new Vector3(Gdx.input.getX(), Gdx.input.getY(), 0f));
             actor.setPosition(v.x, v.y);

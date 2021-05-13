@@ -318,6 +318,10 @@ public class UIFactory {
                               int pointer,
                               Actor fromActor) {
 
+                table.getChild(0).setScale(1.5f);
+                table.setBackground(UIState.selectionBackgroundHighlighted);
+                table.setPosition(table.getX() - 1, table.getY());
+
                 GameState.creatureListEntries.entrySet().stream()
                         .filter(entry -> entry.getValue() == table)
                         .map(entry -> entry.getKey())
@@ -338,6 +342,10 @@ public class UIFactory {
                              int pointer,
                              Actor toActor) {
                 UIState.selectionMarker.setVisible(false);
+
+                table.getChild(0).setScale(1f);
+                table.setBackground(UIState.selectionBackground);
+                table.setPosition(table.getX() + 1, table.getY());
 
                 GameState.creatureListEntries.entrySet().stream()
                         .filter(entry -> entry.getValue() == table)

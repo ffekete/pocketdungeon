@@ -21,6 +21,7 @@ public class MapClickHandler {
 
     public static boolean touchDown(int x,
                                     int y) {
+
         int vx = x / TEXTURE_SIZE;
         int vy = y / TEXTURE_SIZE;
 
@@ -66,6 +67,9 @@ public class MapClickHandler {
             }
             // PLACE BUILDING
             else if (GameState.userAction == UserAction.Place) {
+                if(GameState.selectedAction == null) {
+                    return true;
+                }
                 BuildingPlacer.place(x, y);
             }
 

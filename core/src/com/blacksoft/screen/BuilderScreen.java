@@ -17,6 +17,7 @@ import com.badlogic.gdx.physics.box2d.World;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.InputListener;
 import com.badlogic.gdx.scenes.scene2d.Stage;
+import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.badlogic.gdx.utils.viewport.ExtendViewport;
 import com.badlogic.gdx.utils.viewport.FitViewport;
 import com.blacksoft.NewGameInitializer;
@@ -30,6 +31,7 @@ import com.blacksoft.screen.input.MapClickHandler;
 import com.blacksoft.screen.input.MapMouseMovedHandler;
 import com.blacksoft.screen.render.OrthogonalTiledMapRenderer;
 import com.blacksoft.state.GameState;
+import com.blacksoft.state.UIState;
 import com.blacksoft.ui.TileMarker;
 
 import static com.blacksoft.state.Config.SCREEN_HEIGHT;
@@ -78,7 +80,24 @@ public class BuilderScreen extends ScreenAdapter {
         GameState.uiStage = new Stage(GameState.uiViewport);
         GameState.stage.addActor(GameState.tileMarker);
 
+
         // INPUT
+        GameState.stage.addListener(new ClickListener(Input.Buttons.RIGHT) {
+            @Override
+            public void clicked(InputEvent event,
+                                float x,
+                                float y) {
+                if(GameState.selectedAction != null) {
+                    UIFactory.I.addAction(UIState.actionsGroup, GameState.selectedAction);
+                    GameState.selectedAction = null;
+                    GameState.selectedActionImage.setVisible(false);
+                    GameState.selectedActionImage = null;
+                    GameState.userAction = UserAction.Clean;
+                    CleanIndicatorUpdater.update(GameState.dungeon);
+                }
+            }
+        });
+
         GameState.stage.addListener(new InputListener() {
             @Override
             public boolean touchDown(InputEvent event,
@@ -151,6 +170,9 @@ public class BuilderScreen extends ScreenAdapter {
 
     @Override
     public void render(float delta) {
+
+        spriteBatch.setColor(Color.WHITE);
+
         GameState.stage.act();
 
         super.render(delta);
