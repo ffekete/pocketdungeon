@@ -30,12 +30,16 @@ public class MapClickHandler {
 
                 if (((Gate) GameState.dungeon.nodes[vx][vy].building).locked == false) {
                     ((Gate) GameState.dungeon.nodes[vx][vy].building).locked = true;
+
+                    GameState.dungeon.nodes[vx][vy].disconnectFromNeighbours();
+
                     UIState.closedLockImage.setVisible(true);
                     UIState.openLockImage.setVisible(false);
                     UIState.closedLockImage.setX(vx * TEXTURE_SIZE);
                     UIState.closedLockImage.setY(vy * TEXTURE_SIZE);
                 } else {
                     ((Gate) GameState.dungeon.nodes[vx][vy].building).locked = false;
+                    GameState.dungeon.nodes[vx][vy].connectWithNeighbours();
                     UIState.openLockImage.setVisible(true);
                     UIState.closedLockImage.setVisible(false);
                     UIState.openLockImage.setX(vx * TEXTURE_SIZE);

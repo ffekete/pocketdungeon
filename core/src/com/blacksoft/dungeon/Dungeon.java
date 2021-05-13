@@ -82,13 +82,21 @@ public class Dungeon {
     public void replaceTileToBuilding(int x,
                                       int y,
                                       Tile target) {
+        replaceTileToBuilding(x,y,target, true);
+    }
+
+    public void replaceTileToBuilding(int x,
+                                      int y,
+                                      Tile target, boolean reConnectNeighbours) {
         TiledMapTileLayer layer = (TiledMapTileLayer) tiledMap.getLayers().get(DUNGEON_LAYER);
         nodes[x][y].tile = target;
 
-        if(target.isSolid()) {
-            nodes[x][y].disconnect();
-        } else {
-            nodes[x][y].connectWithNeighbours();
+        if(reConnectNeighbours) {
+            if (target.isSolid()) {
+                nodes[x][y].disconnectFromNeighbours();
+            } else {
+                nodes[x][y].connectWithNeighbours();
+            }
         }
 
         TiledMapTile tile;

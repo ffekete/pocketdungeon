@@ -84,9 +84,9 @@ public class Gate implements Building {
 
         opened = !opened;
         if (opened) {
-            GameState.dungeon.replaceTileToBuilding(x, y, Tile.GateOpened);
+            GameState.dungeon.replaceTileToBuilding(x, y, Tile.GateOpened, false);
         } else {
-            GameState.dungeon.replaceTileToBuilding(x, y, Tile.GateClosed);
+            GameState.dungeon.replaceTileToBuilding(x, y, Tile.GateClosed, false);
         }
     }
 

@@ -23,7 +23,7 @@ public class Node {
         return building != null && building.canUpgradeBy(action);
     }
 
-    public void disconnect() {
+    public void disconnectFromNeighbours() {
         System.out.println("disconnecting " + x + " " + y);
         disconnectWith(x - 1, y);
         disconnectWith(x + 1, y);
