@@ -3,7 +3,9 @@ package com.blacksoft.dungeon.building;
 import box2dLight.Light;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
+import com.badlogic.gdx.utils.Array;
 import com.blacksoft.dungeon.Tile;
 import com.blacksoft.dungeon.actions.AbstractAction;
 import com.blacksoft.dungeon.actions.build.PlaceTorchAction;
@@ -17,12 +19,23 @@ import com.blacksoft.state.UIState;
 public class Torch implements Building {
 
     private static TextureRegion textureRegion;
+    private static TextureRegion textureRegion2;
+    private static TextureRegion textureRegion3;
+    private static TextureRegion textureRegion4;
+    private static Animation<TextureRegion> animation;
 
     static {
         textureRegion = new TextureRegion(new Texture(Gdx.files.internal("tile/Torch.png")));
+        textureRegion2 = new TextureRegion(new Texture(Gdx.files.internal("tile/TorchSecondPhase.png")));
+        textureRegion3 = new TextureRegion(new Texture(Gdx.files.internal("tile/TorchThirdPhase.png")));
+        textureRegion4 = new TextureRegion(new Texture(Gdx.files.internal("tile/TorchFourthPhase.png")));
+        Array<TextureRegion> regions = new Array<>();
+        regions.add(textureRegion, textureRegion2, textureRegion3, textureRegion4);
+        animation = new Animation<TextureRegion>(0.25f, regions);
     }
 
     public int x,y;
+    private float animationStateTime = 0f;
 
     public int level = 1;
     private Light lightSource;
@@ -87,7 +100,8 @@ public class Torch implements Building {
 
     @Override
     public TextureRegion getTextureRegion() {
-        return textureRegion;
+        animationStateTime += Gdx.graphics.getDeltaTime();
+        return animation.getKeyFrame(animationStateTime, true);
     }
 
     @Override

@@ -89,10 +89,16 @@ public class Node {
         if (tvx >= 0 && tvx < MAP_WIDTH && tvy >= 0 && tvy < MAP_HEIGHT) {
             Node targetNode = GameState.dungeon.nodes[tvx][tvy];
 
-            GameState.dungeon.streetsMap.remove(this);
-            GameState.dungeon.streetsMap.remove(targetNode);
-
-
+            Connection<Node> currentConnection = null;
+            if (GameState.dungeon.streetsMap.get(targetNode) != null) {
+                for (Connection<Node> c : GameState.dungeon.streetsMap.get(targetNode)) {
+                    if (c.getToNode() == this) {
+                        currentConnection = c;
+                    }
+                }
+                GameState.dungeon.streetsMap.remove(this);
+                GameState.dungeon.streetsMap.get(targetNode).removeValue(currentConnection, true);
+            }
         }
     }
 }
