@@ -42,7 +42,9 @@ public class DungeonBuilder extends ApplicationAdapter {
     @Override
     public void resize(int width,
                        int height) {
-        GameState.viewport.update(width, height, true);
-        GameState.orthographicCamera.translate(-20, -20);
+        GameState.viewport.update(width, height, false);
+        GameState.uiViewport.update(width, height, false);
+        GameState.orthographicCamera.translate(10, 0);
+        GameState.orthographicUICamera.translate(-10, -20);
     }
 }

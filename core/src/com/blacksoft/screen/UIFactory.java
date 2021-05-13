@@ -195,8 +195,8 @@ public class UIFactory {
         openLockImage.setVisible(false);
         closedLockImage.setVisible(false);
 
-        openLockImage.setColor(1, 1, 1, 0.4f);
-        closedLockImage.setColor(1, 1, 1, 0.4f);
+        openLockImage.setColor(1, 1, 1, 0.5f);
+        closedLockImage.setColor(1, 1, 1, 0.5f);
 
         UIState.openLockImage = openLockImage;
         UIState.closedLockImage = closedLockImage;

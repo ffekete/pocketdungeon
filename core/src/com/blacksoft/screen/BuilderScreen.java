@@ -54,9 +54,10 @@ public class BuilderScreen extends ScreenAdapter {
         // CAMERA, VIEWPORT
         GameState.orthographicCamera = new OrthographicCamera();
         GameState.orthographicUICamera = new OrthographicCamera();
-        GameState.viewport = new ExtendViewport(SCREEN_WIDTH / 2f, SCREEN_HEIGHT / 2f, GameState.orthographicCamera);
-        GameState.uiViewport = new FitViewport(SCREEN_WIDTH / 2f, SCREEN_HEIGHT / 2f, GameState.orthographicCamera);
+        GameState.viewport = new FitViewport(SCREEN_WIDTH / 2f, SCREEN_HEIGHT / 2f, GameState.orthographicCamera);
+        GameState.uiViewport = new FitViewport(SCREEN_WIDTH / 2f, SCREEN_HEIGHT / 2f, GameState.orthographicUICamera);
         GameState.viewport.apply(true);
+        GameState.uiViewport.apply(true);
         this.shapeRenderer = new ShapeRenderer();
         //shapeRenderer.setProjectionMatrix(GameState.orthographicCamera.combined);
 
@@ -170,7 +171,9 @@ public class BuilderScreen extends ScreenAdapter {
 
     @Override
     public void render(float delta) {
-
+        GameState.viewport.apply();
+        //GameState.orthographicCamera.update();
+        spriteBatch.setProjectionMatrix(GameState.orthographicCamera.combined);
         spriteBatch.setColor(Color.WHITE);
 
         GameState.stage.act();
@@ -196,17 +199,11 @@ public class BuilderScreen extends ScreenAdapter {
         }
         shapeRenderer.end();
 
+        GameState.uiViewport.apply();
+        //GameState.orthographicUICamera.update();
+        spriteBatch.setProjectionMatrix(GameState.orthographicUICamera.combined);
         GameState.uiStage.act();
         GameState.uiStage.draw();
-    }
-
-    @Override
-    public void resize(int width,
-                       int height) {
-
-        GameState.viewport.update(width, height, false);
-        GameState.uiViewport.update(width, height, false);
-        GameState.viewport.apply(false);
     }
 
     @Override
