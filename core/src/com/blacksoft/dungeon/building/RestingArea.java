@@ -31,9 +31,8 @@ public class RestingArea implements Building {
     @Override
     public void place(int x,
                       int y) {
-        int oldProgress = GameState.loopProgress;
         GameState.loopProgress += Config.RESTING_AREA_PROGRESS_VALUE;
-        UIFactory.I.updateLabelAmount(oldProgress, GameState.loopProgress, UIState.progressLabel, "%s", null);
+        UIState.invasionProgressBar.setValue(GameState.loopProgress);
         this.x = x / 16;
         this.y = y / 16;
     }

@@ -35,9 +35,9 @@ public class Gate implements Building {
     @Override
     public void place(int x,
                       int y) {
-        int oldProgress = GameState.loopProgress;
+
         GameState.loopProgress += Config.GATE_PROGRESS_VALUE;
-        UIFactory.I.updateLabelAmount(oldProgress, GameState.loopProgress, UIState.progressLabel, "%s", null);
+        UIState.invasionProgressBar.setValue(GameState.loopProgress);
 
         GameState.stage.addAction(new GateOpenCheckAction(this, x, y));
         this.x = x / 16;
@@ -53,6 +53,7 @@ public class Gate implements Building {
     @Override
     public void upgrade() {
         GameState.loopProgress += Config.GATE_PROGRESS_VALUE;
+        UIState.invasionProgressBar.setValue(GameState.loopProgress);
         level++;
     }
 

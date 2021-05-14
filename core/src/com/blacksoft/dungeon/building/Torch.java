@@ -49,9 +49,8 @@ public class Torch implements Building {
     @Override
     public void place(int x,
                       int y) {
-        int oldProgress = GameState.loopProgress;
         GameState.loopProgress += Config.TORCH_PROGRESS_VALUE;
-        UIFactory.I.updateLabelAmount(oldProgress, GameState.loopProgress, UIState.progressLabel, "%s", null);
+        UIState.invasionProgressBar.setValue(GameState.loopProgress);
 
         GameState.oozeLimit += 1;
         this.lightSource = LightSourceFactory.getTorchLightSource(x / 16 * 16 + 8, y / 16 * 16 + 8);
@@ -64,6 +63,7 @@ public class Torch implements Building {
     @Override
     public void upgrade() {
         GameState.loopProgress += Config.TORCH_PROGRESS_VALUE;
+        UIState.invasionProgressBar.setValue(GameState.loopProgress);
         GameState.oozeLimit += 1;
         level++;
 

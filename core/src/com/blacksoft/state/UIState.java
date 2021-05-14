@@ -24,6 +24,7 @@ public class UIState {
     public static AnimatedImage selectionMarker;
     public static Table creatureListTable;
     public static ProgressBar timeProgressBar;
+    public static ProgressBar invasionProgressBar;
 
     public static TextureRegionDrawable selectionBackground = new TextureRegionDrawable(new Texture(Gdx.files.internal("ui/SelectionBackground.png")));
     public static TextureRegionDrawable selectionBackgroundHighlighted = new TextureRegionDrawable(new Texture(Gdx.files.internal("ui/SelectionBackgroundHighlighted.png")));
@@ -44,7 +45,10 @@ public class UIState {
     public static TextureRegion GemIconImage = new TextureRegion(new Texture(Gdx.files.internal("ui/icon/GemIcon.png")));
 
     // UI elements
-    public static TextureRegion incomeProgressBarImage = new TextureRegion(new Texture(Gdx.files.internal("ui/IncomeProgressBar.png")));
-    public static TextureRegion ProgressBarKnobImage = new TextureRegion(new Texture(Gdx.files.internal("ui/ProgressBarKnob.png")));
+    public static TextureRegion progressBarBackgroundImage = new TextureRegion(new Texture(Gdx.files.internal("ui/IncomeProgressBar.png")));
+    public static TextureRegion incomeProgressBarKnobImage = new TextureRegion(new Texture(Gdx.files.internal("ui/ProgressBarKnob.png")));
+    public static TextureRegion statsProgressBarBackgroundImage = new TextureRegion(new Texture(Gdx.files.internal("ui/StatsProgressBar.png")));
+    public static TextureRegion hpProgressBarKnobImage = new TextureRegion(new Texture(Gdx.files.internal("ui/HpProgressBarKnobBefore.png")));
+    public static TextureRegion mpProgressBarKnobImage = new TextureRegion(new Texture(Gdx.files.internal("ui/MpProgressBarKnobBefore.png")));
 
 }

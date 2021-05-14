@@ -34,11 +34,11 @@ public class Treasury implements Building {
     @Override
     public void place(int x,
                       int y) {
-        int oldProgress = GameState.loopProgress;
+
         GameState.loopProgress += Config.TREASURY_PROGRESS_VALUE;
+        UIState.invasionProgressBar.setValue(GameState.loopProgress);
         this.lightSource = LightSourceFactory.getGraveyardLightSource(x / 16 * 16 + 8,y / 16 * 16 + 8);
         GameState.maxGoldCapacity += 500;
-        UIFactory.I.updateLabelAmount(oldProgress, GameState.loopProgress, UIState.progressLabel, "%s", null);
         UIFactory.I.updateLabelAmount(GameState.gold-1, GameState.gold, UIState.goldLabel, "%s/%s", GameState.maxGoldCapacity);
         this.x = x / 16;
         this.y = y / 16;
@@ -47,6 +47,7 @@ public class Treasury implements Building {
     @Override
     public void upgrade() {
         GameState.loopProgress += Config.TREASURY_PROGRESS_VALUE;
+        UIState.invasionProgressBar.setValue(GameState.loopProgress);
         GameState.maxGoldCapacity += 500;
         level++;
     }

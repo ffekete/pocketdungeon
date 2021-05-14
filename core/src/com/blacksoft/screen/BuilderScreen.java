@@ -58,6 +58,20 @@ public class BuilderScreen extends ScreenAdapter {
         this.shapeRenderer = new ShapeRenderer();
         //shapeRenderer.setProjectionMatrix(GameState.orthographicCamera.combined);
 
+
+        // STAGE
+        GameState.stage = new Stage(GameState.viewport);
+        GameState.uiStage = new Stage(GameState.uiViewport);
+
+        // UI
+        GameState.uiStage.addActor(UIFactory.I.getStatusBar());
+        GameState.uiStage.addActor(UIFactory.I.getFpsIndicator());
+        GameState.uiStage.addActor(UIFactory.I.addMovingLabelShadow("BUILD PHASE"));
+        GameState.uiStage.addActor(UIFactory.I.addMovingLabel("BUILD PHASE"));
+        GameState.uiStage.addActor(UIFactory.I.getCreatureListPanel());
+        UIFactory.I.createLockImages();
+        UIFactory.I.createSelectionMarker();
+
         // LIGHT
         world = new World(new Vector2(0, 0), true);
         rayHandler = new RayHandler(world);
@@ -72,12 +86,6 @@ public class BuilderScreen extends ScreenAdapter {
         GameState.tileMarker = new TileMarker();
         GameState.tileMarker.setVisible(false);
         GameState.userAction = UserAction.Clean;
-
-        // STAGE
-        GameState.stage = new Stage(GameState.viewport);
-        GameState.uiStage = new Stage(GameState.uiViewport);
-        GameState.stage.addActor(GameState.tileMarker);
-
 
         // INPUT
         GameState.stage.addListener(new ClickListener(Input.Buttons.RIGHT) {
@@ -152,18 +160,15 @@ public class BuilderScreen extends ScreenAdapter {
         CleanIndicatorsAction.cleanAll(GameState.dungeon);
         CleanIndicatorUpdater.update(GameState.dungeon);
 
-        // UI
-        GameState.uiStage.addActor(UIFactory.I.getStatusBar());
-        GameState.uiStage.addActor(UIFactory.I.getFpsIndicator());
-        GameState.uiStage.addActor(UIFactory.I.addMovingLabelShadow("BUILD PHASE"));
-        GameState.uiStage.addActor(UIFactory.I.addMovingLabel("BUILD PHASE"));
-        GameState.uiStage.addActor(UIFactory.I.getActionsGroup());
-        GameState.uiStage.addActor(UIFactory.I.getCreatureListPanel());
-        UIFactory.I.createLockImages();
-        UIFactory.I.createSelectionMarker();
-
+        // ACTIONS
         GameState.stage.addAction(new MoveLightToMouseAction());
         GameState.stage.addAction(new CreatureSalaryAction());
+
+        // UI, 2nd part
+        GameState.uiStage.addActor(UIFactory.I.getActionsGroup());
+
+        // OTHER ACTORS
+        GameState.stage.addActor(GameState.tileMarker);
     }
 
     @Override

@@ -23,9 +23,7 @@ import com.blacksoft.screen.action.MovePlaceableActorToMouseAction;
 import com.blacksoft.state.Config;
 import com.blacksoft.state.GameState;
 import com.blacksoft.state.UIState;
-import com.blacksoft.ui.AnimatedDrawable;
-import com.blacksoft.ui.AnimatedImage;
-import com.blacksoft.ui.DynamicLabel;
+import com.blacksoft.ui.*;
 import com.blacksoft.ui.IntAction;
 import com.blacksoft.ui.action.FollowCreatureAction;
 import com.blacksoft.user.actions.UserAction;
@@ -154,37 +152,42 @@ public class UIFactory {
 
         Table table = new Table();
 
-        Label progressLabel = new Label(Integer.toString(GameState.loopProgress), labelStyle14);
-        UIState.progressLabel = progressLabel;
-
-        progressLabel.setColor(Color.valueOf("e3a858"));
-
-        Label progressTextLabel = new Label("Progress", labelStyle14);
-        progressTextLabel.setColor(Color.GREEN);
-        table.add(progressTextLabel).width(50);
-        table.add(progressLabel).width(30).left();
-        updateLabelAmount(0, GameState.loopProgress, progressLabel, "%s", null);
+//        Label progressLabel = new Label(Integer.toString(GameState.loopProgress), labelStyle14);
+//        UIState.progressLabel = progressLabel;
+//        progressLabel.setColor(Color.valueOf("e3a858"));
+//        Label progressTextLabel = new Label("Progress", labelStyle14);
+//        progressTextLabel.setColor(Color.LIGHT_GRAY);
+//        table.add(progressTextLabel).width(50);
+//        table.add(progressLabel).width(30).left();
+//        updateLabelAmount(0, GameState.loopProgress, progressLabel, "%s", null);
 
         // create progress bar
-        ProgressBar.ProgressBarStyle progressBarStyle = new ProgressBar.ProgressBarStyle();
-        progressBarStyle.background = new TextureRegionDrawable(UIState.incomeProgressBarImage);
+        ProgressBar.ProgressBarStyle incomeProgressBarStyle = new ProgressBar.ProgressBarStyle();
+        incomeProgressBarStyle.background = new TextureRegionDrawable(UIState.progressBarBackgroundImage);
 
-        TextureRegion[] textureRegions = TextureRegion.split(UIState.ProgressBarKnobImage.getTexture(), 10, 10)[0];
-        Animation<TextureRegion> knobAnimation = new Animation<>(0.3f, textureRegions);
-        progressBarStyle.knob = new AnimatedDrawable(knobAnimation);
-        ProgressBar progressBar = new ProgressBar(0, Config.TIME_PERIOD, 0.05f, false, progressBarStyle);
-        UIState.timeProgressBar = progressBar;
+
+        incomeProgressBarStyle.knob = new TextureRegionDrawable(UIState.GoldIconImage);
+        ProgressBar incomeProgressBar = new ProgressBar(0, Config.TIME_PERIOD, 0.05f, false, incomeProgressBarStyle);
+        UIState.timeProgressBar = incomeProgressBar;
+
+        ProgressBar.ProgressBarStyle invasionProgressBarStyle = new ProgressBar.ProgressBarStyle();
+        invasionProgressBarStyle.background = new TextureRegionDrawable(UIState.progressBarBackgroundImage);
+        TextureRegion[] textureRegions = TextureRegion.split(UIState.incomeProgressBarKnobImage.getTexture(), 10, 10)[0];
+        Animation<TextureRegion> timeKnobAnimation = new Animation<>(0.3f, textureRegions);
+        invasionProgressBarStyle.knob = new AnimatedDrawable(timeKnobAnimation);
+        ProgressBar invasionProgressBar = new ProgressBar(0, 100, 1f, false, invasionProgressBarStyle);
+        UIState.invasionProgressBar = invasionProgressBar;
 
         table.add(new Image(UIState.GoldIconImage)).size(12).padRight(2);
         Label goldLabel = new Label("", labelStyle14);
-        goldLabel.setColor(Color.GREEN);
+        goldLabel.setColor(Color.valueOf("e3a858"));
         UIState.goldLabel = goldLabel;
         table.add(goldLabel).width(60).left();
 
         updateLabelAmount(0, GameState.gold, goldLabel, "%s/%s", GameState.maxGoldCapacity);
 
         Label ironLabel = new Label("", labelStyle14);
-        ironLabel.setColor(Color.GREEN);
+        ironLabel.setColor(Color.LIGHT_GRAY);
         UIState.ironLabel = ironLabel;
         table.add(new Image(UIState.IronIconImage)).size(16).padRight(2);
         table.add(ironLabel).width(60).left();
@@ -192,17 +195,17 @@ public class UIFactory {
 
         Label gemLabel = new Label("", labelStyle14);
         UIState.gemLabel = gemLabel;
-        gemLabel.setColor(Color.GREEN);
+        gemLabel.setColor(Color.valueOf("50C878"));
         table.add(new Image(UIState.GemIconImage)).size(14).padRight(2);
         table.add(gemLabel).width(60).left();
         updateLabelAmount(0, GameState.gems, gemLabel, "%s/%s", GameState.maxGemsCapacity);
 
-        // Add progress bar
-        table.add(progressBar).height(10).width(60).left();
+        // Add progress bars
+        table.add(incomeProgressBar).height(10).width(60).left();
+        table.add(invasionProgressBar).height(10).width(60).left();
 
         horizontalGroup.addActor(new Image(new Texture(Gdx.files.internal("ui/StatusBar.png"))));
         horizontalGroup.addActor(table);
-
 
         table.setFillParent(true);
         horizontalGroup.setPosition(0, SCREEN_HEIGHT / 2 - 60);
@@ -334,19 +337,42 @@ public class UIFactory {
     }
 
     public void addCreatureListEntry(Creature creature) {
-        AnimatedImage animatedImage = new AnimatedImage(creature.getAnimation());
-        DynamicLabel hpLabel = new DynamicLabel(labelStyle14, () -> Integer.toString(creature.getHp()));
-        DynamicLabel maxHpLabel = new DynamicLabel(labelStyle14, () -> Integer.toString(creature.getMaxHp()));
-        Label hpDescrLabel = new Label("hp:", labelStyle14);
-        Label separator = new Label("/", labelStyle14);
 
         Table table = new Table();
+        AnimatedImage animatedImage = new AnimatedImage(creature.getAnimation());
+        table.add(animatedImage).size(16).left().pad(3, 5, 3, 7);
 
-        table.add(animatedImage).size(16).left().pad(3, 5, 3, 15);
-        table.add(hpDescrLabel).left().pad(3, 0, 3, 0).size(16);
-        table.add(hpLabel).left().pad(3, 2.5f, 3, 0);
-        table.add(separator).left().pad(3, 2.5f, 3, 0);
-        table.add(maxHpLabel).left().pad(3, 2.5f, 3, 0).size(16);
+        Table statsTable = new Table();
+
+        // HP progress bar
+        ProgressBar.ProgressBarStyle hpProgressBarStyle = new ProgressBar.ProgressBarStyle();
+        hpProgressBarStyle.background = new TextureRegionDrawable(UIState.statsProgressBarBackgroundImage);
+        hpProgressBarStyle.knobBefore = new AnimatedDrawable(new Animation<>(0.5f, TextureRegion.split(UIState.hpProgressBarKnobImage.getTexture(), 1, 3)[0]));
+        DynamicProgressBar hpDynamicProgressBar = new DynamicProgressBar(0,
+                1,
+                1,
+                false,
+                hpProgressBarStyle,
+                () -> (float) creature.getHp(),
+                () -> (float) creature.getMaxHp());
+        hpDynamicProgressBar.setSize(16, 5);
+        statsTable.add(hpDynamicProgressBar).size(16, 5).pad(1).row();
+
+        // MP progress bar
+        ProgressBar.ProgressBarStyle mpProgressBarStyle = new ProgressBar.ProgressBarStyle();
+        mpProgressBarStyle.background = new TextureRegionDrawable(UIState.statsProgressBarBackgroundImage);
+        mpProgressBarStyle.knobBefore = new AnimatedDrawable(new Animation<>(0.5f, TextureRegion.split(UIState.mpProgressBarKnobImage.getTexture(), 1, 3)[0]));
+        DynamicProgressBar mpDynamicProgressBar = new DynamicProgressBar(0,
+                1,
+                1,
+                false,
+                mpProgressBarStyle,
+                () -> (float) creature.mp,
+                () -> (float) creature.getMaxMp());
+        mpDynamicProgressBar.setSize(16, 5);
+        statsTable.add(mpDynamicProgressBar).size(16, 5).pad(1);
+
+        table.add(statsTable);
 
         DynamicLabel mpLabel = new DynamicLabel(labelStyle14, () -> String.valueOf(creature.mp));
         table.add(new Label("mp:", labelStyle14));

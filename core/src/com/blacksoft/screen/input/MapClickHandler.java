@@ -59,9 +59,8 @@ public class MapClickHandler {
                         CleanIndicatorsAction.cleanAll(GameState.dungeon);
                         CleanIndicatorUpdater.update(GameState.dungeon);
 
-                        int oldProgress = GameState.loopProgress;
                         GameState.loopProgress += Config.CLEAN_PROGRESS_VALUE;
-                        UIFactory.I.updateLabelAmount(oldProgress, GameState.loopProgress, UIState.progressLabel, "%s", null);
+                        UIState.invasionProgressBar.setValue(GameState.loopProgress);
                     }
                 }
             }
