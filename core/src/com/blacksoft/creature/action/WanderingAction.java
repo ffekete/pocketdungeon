@@ -32,19 +32,19 @@ public class WanderingAction extends Action {
 
         List<Vector2> availableTiles = new ArrayList<>();
 
-        if (TileCleaner.isClean(GameState.dungeon, x - 1, y)) {
+        if (TileCleaner.isNotSolid(GameState.dungeon, x - 1, y)) {
             availableTiles.add(new Vector2(x - 1, y));
         }
 
-        if (TileCleaner.isClean(GameState.dungeon, x + 1, y)) {
+        if (TileCleaner.isNotSolid(GameState.dungeon, x + 1, y)) {
             availableTiles.add(new Vector2(x + 1, y));
         }
 
-        if (TileCleaner.isClean(GameState.dungeon, x, y - 1)) {
+        if (TileCleaner.isNotSolid(GameState.dungeon, x, y - 1)) {
             availableTiles.add(new Vector2(x, y - 1));
         }
 
-        if (TileCleaner.isClean(GameState.dungeon, x, y + 1)) {
+        if (TileCleaner.isNotSolid(GameState.dungeon, x, y + 1)) {
             availableTiles.add(new Vector2(x, y + 1));
         }
 

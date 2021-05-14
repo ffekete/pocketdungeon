@@ -61,19 +61,19 @@ public class TileCleaner {
         }
 
         int adjacent = 0;
-        if (isClean(dungeon, x - 1, y)) {
+        if (isWall(dungeon, x - 1, y)) {
             adjacent += 1;
         }
 
-        if (isClean(dungeon, x, y + 1)) {
+        if (isWall(dungeon, x, y + 1)) {
             adjacent += 2;
         }
 
-        if (isClean(dungeon, x + 1, y)) {
+        if (isWall(dungeon, x + 1, y)) {
             adjacent += 4;
         }
 
-        if (isClean(dungeon, x, y - 1)) {
+        if (isWall(dungeon, x, y - 1)) {
             adjacent += 8;
         }
 
@@ -90,19 +90,19 @@ public class TileCleaner {
         }
 
         int adjacent = 0;
-        if (isClean(dungeon, x - 1, y)) {
+        if (isNotSolid(dungeon, x - 1, y)) {
             adjacent += 1;
         }
 
-        if (isClean(dungeon, x, y + 1)) {
+        if (isNotSolid(dungeon, x, y + 1)) {
             adjacent += 2;
         }
 
-        if (isClean(dungeon, x + 1, y)) {
+        if (isNotSolid(dungeon, x + 1, y)) {
             adjacent += 4;
         }
 
-        if (isClean(dungeon, x, y - 1)) {
+        if (isNotSolid(dungeon, x, y - 1)) {
             adjacent += 8;
         }
 
@@ -114,23 +114,23 @@ public class TileCleaner {
                                    int y) {
 
         int adjacent = 0;
-        if (isClean(dungeon, x - 1, y)) {
+        if (!isWall(dungeon, x - 1, y)) {
             adjacent += 1;
         }
 
-        if (isClean(dungeon, x, y + 1)) {
+        if (!isWall(dungeon, x, y + 1)) {
             adjacent += 2;
         }
 
-        if (isClean(dungeon, x + 1, y)) {
+        if (!isWall(dungeon, x + 1, y)) {
             adjacent += 4;
         }
 
-        if (isClean(dungeon, x, y - 1)) {
+        if (!isWall(dungeon, x, y - 1)) {
             adjacent += 8;
         }
 
-        return (adjacent > 0) && !isClean(dungeon, x, y)
+        return adjacent > 0 && isWall(dungeon, x, y)
                 && isNotGate(dungeon, x - 1, y)
                 && isNotGate(dungeon, x + 1, y)
                 && isNotGate(dungeon, x, y - 1)
@@ -148,6 +148,28 @@ public class TileCleaner {
         return dungeon.nodes[x][y].tile != Tile.GateClosed && dungeon.nodes[x][y].tile != Tile.GateOpened;
     }
 
+    public static boolean isNotSolid(Dungeon dungeon,
+                                     int x,
+                                     int y) {
+
+        if (x < 0 || y < 0 || x >= MAP_WIDTH || y >= MAP_HEIGHT) {
+            return false;
+        }
+
+        return !dungeon.nodes[x][y].tile.isSolid();
+    }
+
+    public static boolean isWall(Dungeon dungeon,
+                                  int x,
+                                  int y) {
+
+        if (x < 0 || y < 0 || x >= MAP_WIDTH || y >= MAP_HEIGHT) {
+            return false;
+        }
+
+        return dungeon.nodes[x][y].tile == Tile.Rock || dungeon.nodes[x][y].tile == Tile.Torch;
+    }
+
     public static boolean isClean(Dungeon dungeon,
                                   int x,
                                   int y) {
@@ -156,7 +178,19 @@ public class TileCleaner {
             return false;
         }
 
-        return !dungeon.nodes[x][y].tile.isSolid();
+        return dungeon.nodes[x][y].tile == Tile.Empty;
+    }
+
+    public static boolean is(Dungeon dungeon,
+                             int x,
+                             int y,
+                             Tile tile) {
+
+        if (x < 0 || y < 0 || x >= MAP_WIDTH || y >= MAP_HEIGHT) {
+            return false;
+        }
+
+        return dungeon.nodes[x][y].tile == tile;
     }
 
 }

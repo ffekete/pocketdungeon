@@ -38,7 +38,7 @@ public class Library implements Building {
         int oldProgress = GameState.loopProgress;
         GameState.loopProgress += Config.LIBRARY_PROGRESS_VALUE;
         UIFactory.I.updateLabelAmount(oldProgress, GameState.loopProgress, UIState.progressLabel, "%s", null);
-        GameState.warlockLimit += 0.5f;
+        GameState.warlockLimit += 1;
         this.lightSource = LightSourceFactory.getLibraryLightSource(x / 16 * 16 + 8,y / 16 * 16 + 8);
         this.x = x / 16;
         this.y = y / 16;
@@ -47,13 +47,13 @@ public class Library implements Building {
     @Override
     public void upgrade() {
         GameState.loopProgress += Config.LIBRARY_PROGRESS_VALUE;
-        GameState.warlockLimit += 0.5f;
+        GameState.warlockLimit += 1;
         level++;
     }
 
     @Override
     public void destroy() {
-        GameState.warlockLimit -= 0.5f * level;
+        GameState.warlockLimit -= level;
         lightSource.dispose();
     }
 

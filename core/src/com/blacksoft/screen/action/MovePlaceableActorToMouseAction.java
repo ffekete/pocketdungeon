@@ -26,6 +26,10 @@ public class MovePlaceableActorToMouseAction extends Action {
     public boolean act(float delta) {
 
         if(GameState.selectedAction == null || GameState.selectedActionImage == null) {
+
+            if(previousUpgradeIndicator != null) {
+                previousUpgradeIndicator.setVisible(false);
+            }
             return true;
         }
 
@@ -41,7 +45,7 @@ public class MovePlaceableActorToMouseAction extends Action {
                 int mapX = (int) v.x / TEXTURE_SIZE;
                 int mapY = (int) v.y / TEXTURE_SIZE;
 
-                if (BuildingPlacer.canUpgrade(mapX, mapY)) {
+                if (BuildingPlacer.canUpgradeTile(mapX, mapY)) {
 
                     if (previousUpgradeIndicator == null) {
                         previousUpgradeIndicator = UIFactory.I.getLabel14("^" + Integer.toString(GameState.dungeon.nodes[mapX][mapY].building.getUpgradeLevel() + 1));

@@ -37,7 +37,7 @@ public class Graveyard implements Building {
         int oldProgress = GameState.loopProgress;
         GameState.loopProgress += Config.GRAVEYARD_PROGRESS_VALUE;
         UIFactory.I.updateLabelAmount(oldProgress, GameState.loopProgress, UIState.progressLabel, "%s", null);
-        GameState.skeletonLimit += 0.5f;
+        GameState.skeletonLimit += 1;
         this.lightSource = LightSourceFactory.getGraveyardLightSource(x / 16 * 16 + 8,y / 16 * 16 + 8);
         this.x = x / 16;
         this.y = y / 16;
@@ -46,13 +46,13 @@ public class Graveyard implements Building {
     @Override
     public void upgrade() {
         GameState.loopProgress += Config.GRAVEYARD_PROGRESS_VALUE;
-        GameState.skeletonLimit += 0.5f;
+        GameState.skeletonLimit += 1;
         level++;
     }
 
     @Override
     public void destroy() {
-        GameState.skeletonLimit -= 0.5f * level;
+        GameState.skeletonLimit -= level;
         lightSource.dispose();
     }
 

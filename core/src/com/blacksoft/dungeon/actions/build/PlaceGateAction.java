@@ -23,7 +23,7 @@ public class PlaceGateAction extends AbstractAction {
     static {
         texture = new Texture(Gdx.files.internal("tile/GateClosed.png"));
         drawable = new TextureRegion(texture);
-        drawable.setRegion(48, 48, 16, 16);
+        drawable.setRegion(16, 48, 16, 16);
     }
 
     @Override

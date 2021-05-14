@@ -57,10 +57,10 @@ public class GameState {
 
     public static List<Creature> creatures = new ArrayList<>();
 
-    public static float skeletonLimit = 0;
-    public static float warlockLimit = 0;
-    public static float oozeLimit = 0;
-    public static float vampireLimit = 0;
+    public static int skeletonLimit = 0;
+    public static int warlockLimit = 0;
+    public static int oozeLimit = 0;
+    public static int vampireLimit = 0;
 
     public static CityGraph cityGraph;
 

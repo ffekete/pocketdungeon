@@ -32,7 +32,7 @@ public class BuildingPlacer {
             if (GameState.userAction == UserAction.Place) {
 
                 if(clazz == Gate.class) {
-                    return TileCleaner.isEmptyCorridor(GameState.dungeon, vx, vy) || canUpgrade(vx, vy);
+                    return TileCleaner.isEmptyCorridor(GameState.dungeon, vx, vy) || canUpgradeTile(vx, vy);
                 }
 
                 if (clazz == Graveyard.class ||
@@ -40,13 +40,13 @@ public class BuildingPlacer {
                         clazz == Treasury.class ||
                         clazz == Library.class ||
                         clazz == RestingArea.class) {
-                    if (TileCleaner.isClean(GameState.dungeon, vx, vy) || canUpgrade(vx, vy)) {
+                    if (TileCleaner.isClean(GameState.dungeon, vx, vy) || canUpgradeTile(vx, vy)) {
                         return true;
                     }
                 }
 
                 if (clazz == Torch.class) {
-                    if (TileCleaner.isRockWithCorner(GameState.dungeon, vx, vy) || canUpgrade(vx, vy)) {
+                    if (TileCleaner.isRockWithCorner(GameState.dungeon, vx, vy) || canUpgradeTile(vx, vy)) {
                         return true;
                     }
                 }
@@ -55,8 +55,8 @@ public class BuildingPlacer {
         return false;
     }
 
-    public static boolean canUpgrade(int x,
-                                     int y) {
+    public static boolean canUpgradeTile(int x,
+                                         int y) {
 
         if (x >= 0 && x < MAP_WIDTH && y >= 0 && y < MAP_HEIGHT) {
 

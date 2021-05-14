@@ -38,7 +38,7 @@ public class BloodPool implements Building {
         int oldProgress = GameState.loopProgress;
         GameState.loopProgress += Config.BLOOD_POOL_PROGRESS_VALUE;
         UIFactory.I.updateLabelAmount(oldProgress, GameState.loopProgress, UIState.progressLabel, "%s", null);
-        GameState.vampireLimit += 0.5f;
+        GameState.vampireLimit += 1;
         this.lightSource = LightSourceFactory.getBloodPoolLightSource(x / 16 * 16 + 8,y / 16 * 16 + 8);
         this.x = x / 16;
         this.y = y / 16;
@@ -47,13 +47,13 @@ public class BloodPool implements Building {
     @Override
     public void upgrade() {
         GameState.loopProgress += Config.BLOOD_POOL_PROGRESS_VALUE;
-        GameState.vampireLimit += 0.5f;
+        GameState.vampireLimit += 1;
         level++;
     }
 
     @Override
     public void destroy() {
-        GameState.vampireLimit -= 0.5f * level;
+        GameState.vampireLimit -= level;
         lightSource.dispose();
     }
 
