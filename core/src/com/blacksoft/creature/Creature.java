@@ -15,6 +15,9 @@ public abstract class Creature extends Actor {
 
     public float morale = 100f;
     public int hp;
+    public int mp;
+
+    public int level = 1;
 
     public SequenceAction sequenceActions = new SequenceAction();
 
@@ -59,6 +62,7 @@ public abstract class Creature extends Actor {
     }
 
     public abstract int getMaxHp();
+    public abstract int getMaxMp();
 
     public abstract Animation<TextureRegion> getAnimation();
 }

@@ -57,4 +57,9 @@ public class Config {
     public static final int VAMPIRE_MAX_HP = 8;
     public static final int OOZE_MAX_HP = 2;
     public static final int SKELETON_MAX_HP = 3;
+
+    public static final int WARLOCK_MAX_MP = 6;
+    public static final int VAMPIRE_MAX_MP = 8;
+    public static final int OOZE_MAX_MP = 0;
+    public static final int SKELETON_MAX_MP = 0;
 }

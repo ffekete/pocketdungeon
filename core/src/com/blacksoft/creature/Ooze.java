@@ -26,6 +26,7 @@ public class Ooze extends Creature {
     public Ooze() {
         animation = new Animation<>(0.6f, TextureRegion.split(texture, TEXTURE_SIZE, TEXTURE_SIZE)[0]);
         this.hp = this.getMaxHp();
+        this.mp = getMaxMp();
     }
 
     @Override
@@ -51,7 +52,12 @@ public class Ooze extends Creature {
 
     @Override
     public int getMaxHp() {
-        return Config.OOZE_MAX_HP;
+        return level * Config.OOZE_MAX_HP;
+    }
+
+    @Override
+    public int getMaxMp() {
+        return level * Config.OOZE_MAX_MP;
     }
 
     @Override

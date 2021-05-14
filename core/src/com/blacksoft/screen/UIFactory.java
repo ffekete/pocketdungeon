@@ -156,7 +156,12 @@ public class UIFactory {
 
         Label progressLabel = new Label(Integer.toString(GameState.loopProgress), labelStyle14);
         UIState.progressLabel = progressLabel;
-        table.add(new Label("Progress", labelStyle14)).width(50);
+
+        progressLabel.setColor(Color.valueOf("e3a858"));
+
+        Label progressTextLabel = new Label("Progress", labelStyle14);
+        progressTextLabel.setColor(Color.GREEN);
+        table.add(progressTextLabel).width(50);
         table.add(progressLabel).width(30).left();
         updateLabelAmount(0, GameState.loopProgress, progressLabel, "%s", null);
 
@@ -172,12 +177,14 @@ public class UIFactory {
 
         table.add(new Image(UIState.GoldIconImage)).size(12).padRight(2);
         Label goldLabel = new Label("", labelStyle14);
+        goldLabel.setColor(Color.GREEN);
         UIState.goldLabel = goldLabel;
         table.add(goldLabel).width(60).left();
 
         updateLabelAmount(0, GameState.gold, goldLabel, "%s/%s", GameState.maxGoldCapacity);
 
         Label ironLabel = new Label("", labelStyle14);
+        ironLabel.setColor(Color.GREEN);
         UIState.ironLabel = ironLabel;
         table.add(new Image(UIState.IronIconImage)).size(16).padRight(2);
         table.add(ironLabel).width(60).left();
@@ -185,6 +192,7 @@ public class UIFactory {
 
         Label gemLabel = new Label("", labelStyle14);
         UIState.gemLabel = gemLabel;
+        gemLabel.setColor(Color.GREEN);
         table.add(new Image(UIState.GemIconImage)).size(14).padRight(2);
         table.add(gemLabel).width(60).left();
         updateLabelAmount(0, GameState.gems, gemLabel, "%s/%s", GameState.maxGemsCapacity);
@@ -338,7 +346,15 @@ public class UIFactory {
         table.add(hpDescrLabel).left().pad(3, 0, 3, 0).size(16);
         table.add(hpLabel).left().pad(3, 2.5f, 3, 0);
         table.add(separator).left().pad(3, 2.5f, 3, 0);
-        table.add(maxHpLabel).left().pad(3, 2.5f, 3, 0).size(16).expandX().fillX();
+        table.add(maxHpLabel).left().pad(3, 2.5f, 3, 0).size(16);
+
+        DynamicLabel mpLabel = new DynamicLabel(labelStyle14, () -> String.valueOf(creature.mp));
+        table.add(new Label("mp:", labelStyle14));
+        table.add(mpLabel).size(16);
+
+        DynamicLabel levelLabel = new DynamicLabel(labelStyle14, () -> String.valueOf(creature.level));
+        table.add(new Label("lv:", labelStyle14));
+        table.add(levelLabel).expandX().fillX();
 
         UIState.creatureListTable.add(table).fillX().expandX();
 

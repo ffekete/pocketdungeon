@@ -9,6 +9,7 @@ import com.badlogic.gdx.graphics.g2d.TextureRegion;
 
 import static com.blacksoft.state.Config.TEXTURE_SIZE;
 import static com.blacksoft.state.Config.WARLOCK_MAX_HP;
+import static com.blacksoft.state.Config.WARLOCK_MAX_MP;
 import static com.blacksoft.state.Config.WARLOCK_SALARY_REQUEST;
 
 public class Warlock extends Creature {
@@ -26,6 +27,7 @@ public class Warlock extends Creature {
     public Warlock() {
         this.animation = new Animation<>(0.4f, TextureRegion.split(texture, TEXTURE_SIZE, TEXTURE_SIZE)[0]);
         this.hp = this.getMaxHp();
+        this.mp = getMaxMp();
     }
 
     @Override
@@ -51,7 +53,12 @@ public class Warlock extends Creature {
 
     @Override
     public int getMaxHp() {
-        return WARLOCK_MAX_HP;
+        return level * WARLOCK_MAX_HP;
+    }
+
+    @Override
+    public int getMaxMp() {
+        return level * WARLOCK_MAX_MP;
     }
 
     @Override
