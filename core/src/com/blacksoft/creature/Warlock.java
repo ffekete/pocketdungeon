@@ -7,7 +7,9 @@ import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 
-import static com.blacksoft.state.Config.*;
+import static com.blacksoft.state.Config.TEXTURE_SIZE;
+import static com.blacksoft.state.Config.WARLOCK_MAX_HP;
+import static com.blacksoft.state.Config.WARLOCK_SALARY_REQUEST;
 
 public class Warlock extends Creature {
 

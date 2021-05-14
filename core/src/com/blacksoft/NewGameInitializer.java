@@ -1,10 +1,10 @@
 package com.blacksoft;
 
+import com.blacksoft.creature.action.CreatureSpawnerAction;
 import com.blacksoft.dungeon.Dungeon;
 import com.blacksoft.dungeon.actions.ActionLevel;
 import com.blacksoft.dungeon.actions.build.*;
 import com.blacksoft.dungeon.init.DungeonInitializer;
-import com.blacksoft.creature.action.CreatureSpawnerAction;
 import com.blacksoft.state.GameState;
 
 import java.util.Arrays;

@@ -7,10 +7,10 @@ import com.badlogic.gdx.scenes.scene2d.Action;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.ui.ImageButton;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
-import com.blacksoft.user.actions.UserAction;
 import com.blacksoft.dungeon.actions.build.BuildingPlacer;
 import com.blacksoft.screen.UIFactory;
 import com.blacksoft.state.GameState;
+import com.blacksoft.user.actions.UserAction;
 
 import static com.blacksoft.state.Config.TEXTURE_SIZE;
 

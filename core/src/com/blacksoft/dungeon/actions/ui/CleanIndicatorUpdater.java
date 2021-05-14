@@ -4,12 +4,12 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.maps.tiled.TiledMapTileLayer;
-import com.blacksoft.user.actions.UserAction;
 import com.blacksoft.dungeon.Dungeon;
 import com.blacksoft.dungeon.GroundTiledMapTile;
 import com.blacksoft.dungeon.Tile;
 import com.blacksoft.dungeon.actions.TileCleaner;
 import com.blacksoft.state.GameState;
+import com.blacksoft.user.actions.UserAction;
 
 import static com.blacksoft.state.Config.MAP_HEIGHT;
 import static com.blacksoft.state.Config.MAP_WIDTH;

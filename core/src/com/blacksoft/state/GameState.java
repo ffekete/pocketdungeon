@@ -7,7 +7,6 @@ import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.ImageButton;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.utils.viewport.Viewport;
-import com.blacksoft.user.actions.UserAction;
 import com.blacksoft.creature.Creature;
 import com.blacksoft.dungeon.Dungeon;
 import com.blacksoft.dungeon.actions.AbstractAction;
@@ -15,6 +14,7 @@ import com.blacksoft.dungeon.building.Building;
 import com.blacksoft.dungeon.pathfinder.CityGraph;
 import com.blacksoft.ui.TileMarker;
 import com.blacksoft.ui.action.FollowCreatureAction;
+import com.blacksoft.user.actions.UserAction;
 
 import java.util.ArrayList;
 import java.util.HashMap;

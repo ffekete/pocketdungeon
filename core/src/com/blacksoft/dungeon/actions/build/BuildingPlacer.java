@@ -3,15 +3,15 @@ package com.blacksoft.dungeon.actions.build;
 import com.badlogic.gdx.scenes.scene2d.actions.Actions;
 import com.badlogic.gdx.scenes.scene2d.actions.SequenceAction;
 import com.blacksoft.ActionsHandler;
-import com.blacksoft.user.actions.UserAction;
 import com.blacksoft.dungeon.actions.AbstractAction;
+import com.blacksoft.dungeon.actions.TileCleaner;
 import com.blacksoft.dungeon.actions.ui.CleanIndicatorUpdater;
 import com.blacksoft.dungeon.actions.ui.CleanIndicatorsAction;
-import com.blacksoft.dungeon.actions.TileCleaner;
 import com.blacksoft.dungeon.building.*;
 import com.blacksoft.screen.UIFactory;
 import com.blacksoft.state.GameState;
 import com.blacksoft.state.UIState;
+import com.blacksoft.user.actions.UserAction;
 
 import java.util.Random;
 

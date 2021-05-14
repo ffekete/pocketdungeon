@@ -2,9 +2,9 @@ package com.blacksoft.dungeon.actions.ui;
 
 import com.badlogic.gdx.maps.tiled.TiledMapTileLayer;
 import com.badlogic.gdx.maps.tiled.tiles.AnimatedTiledMapTile;
-import com.blacksoft.user.actions.UserAction;
 import com.blacksoft.dungeon.Dungeon;
 import com.blacksoft.state.GameState;
+import com.blacksoft.user.actions.UserAction;
 
 import static com.blacksoft.animation.TileAnimationProvider.getAnimatedTiledMapTileForAnimation;
 import static com.blacksoft.state.Config.MAP_HEIGHT;

@@ -3,7 +3,6 @@ package com.blacksoft.screen.action;
 import com.badlogic.gdx.scenes.scene2d.Action;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.Group;
-import com.blacksoft.state.GameState;
 
 public class RemoveActorAction extends Action {
 

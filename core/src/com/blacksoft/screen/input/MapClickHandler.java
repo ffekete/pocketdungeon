@@ -1,6 +1,5 @@
 package com.blacksoft.screen.input;
 
-import com.blacksoft.user.actions.UserAction;
 import com.blacksoft.dungeon.Tile;
 import com.blacksoft.dungeon.actions.TileCleaner;
 import com.blacksoft.dungeon.actions.build.BuildingPlacer;
@@ -11,6 +10,7 @@ import com.blacksoft.screen.UIFactory;
 import com.blacksoft.state.Config;
 import com.blacksoft.state.GameState;
 import com.blacksoft.state.UIState;
+import com.blacksoft.user.actions.UserAction;
 
 import static com.blacksoft.state.Config.CLEAN_COST_VALUE;
 import static com.blacksoft.state.Config.MAP_HEIGHT;

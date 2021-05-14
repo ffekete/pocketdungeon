@@ -7,7 +7,6 @@ import com.blacksoft.state.GameState;
 
 import java.util.ArrayDeque;
 import java.util.Deque;
-import java.util.Vector;
 
 import static com.blacksoft.state.Config.MAP_HEIGHT;
 import static com.blacksoft.state.Config.MAP_WIDTH;

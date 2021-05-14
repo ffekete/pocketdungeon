@@ -1,7 +1,6 @@
 package com.blacksoft.dungeon.lighting;
 
 import box2dLight.Light;
-import box2dLight.RayHandler;
 import com.badlogic.gdx.scenes.scene2d.Action;
 
 import java.util.Random;

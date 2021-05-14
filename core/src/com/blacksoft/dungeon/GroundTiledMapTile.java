@@ -6,8 +6,6 @@ import com.badlogic.gdx.maps.MapProperties;
 import com.badlogic.gdx.maps.tiled.TiledMapTile;
 import com.blacksoft.state.GameState;
 
-import static com.blacksoft.dungeon.Tile.Rock;
-
 /**
  * @brief Represents a non changing {@link TiledMapTile} (can be cached)
  */
