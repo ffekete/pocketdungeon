@@ -9,6 +9,7 @@ import com.blacksoft.dungeon.actions.ActionLevel;
 import com.blacksoft.dungeon.building.RestingArea;
 import com.blacksoft.state.Config;
 import com.blacksoft.state.GameState;
+import com.blacksoft.state.UIState;
 
 import static com.blacksoft.dungeon.actions.ActionLevel.Basic;
 import static com.blacksoft.state.Config.RESTING_AREA_PRIORITY;
@@ -17,19 +18,10 @@ public class PlaceRestingAreaAction extends AbstractAction {
 
     public static final PlaceRestingAreaAction I = new PlaceRestingAreaAction();
 
-    private static final Texture texture;
-    private static final TextureRegion drawable;
-
-    static {
-        texture = new Texture(Gdx.files.internal("tile/RestingArea.png"));
-        drawable = new TextureRegion(texture);
-        drawable.setRegion(48, 48, 16, 16);
-    }
-
     @Override
     public void draw(Batch batch,
                      float parentAlpha) {
-        batch.draw(drawable, getX(), getY());
+        batch.draw(UIState.RestingAreaCardImage.getRegion(), getX(), getY());
     }
 
     @Override
@@ -44,7 +36,7 @@ public class PlaceRestingAreaAction extends AbstractAction {
 
     @Override
     public TextureRegion getTexture() {
-        return drawable;
+        return UIState.RestingAreaCardImage.getRegion();
     }
 
     @Override
@@ -54,7 +46,7 @@ public class PlaceRestingAreaAction extends AbstractAction {
 
     @Override
     public String getDescription() {
-        return "Creatures can rest here.";
+        return "Creatures can rest here when \ntheir HP or MP is down.";
     }
 
     @Override

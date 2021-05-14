@@ -10,6 +10,7 @@ import com.blacksoft.dungeon.building.Graveyard;
 import com.blacksoft.dungeon.building.Library;
 import com.blacksoft.state.Config;
 import com.blacksoft.state.GameState;
+import com.blacksoft.state.UIState;
 
 import static com.blacksoft.dungeon.actions.ActionLevel.Advanced;
 import static com.blacksoft.dungeon.actions.ActionLevel.Basic;
@@ -21,19 +22,10 @@ public class PlaceLibraryAction extends AbstractAction {
 
     public static final PlaceLibraryAction I = new PlaceLibraryAction();
 
-    private static final Texture texture;
-    private static final TextureRegion drawable;
-
-    static {
-        texture = new Texture(Gdx.files.internal("tile/Library.png"));
-        drawable = new TextureRegion(texture);
-        drawable.setRegion(48, 48, 16, 16);
-    }
-
     @Override
     public void draw(Batch batch,
                      float parentAlpha) {
-        batch.draw(drawable, getX(), getY());
+        batch.draw(UIState.LibraryCardImage.getRegion(), getX(), getY());
     }
 
     @Override
@@ -48,7 +40,7 @@ public class PlaceLibraryAction extends AbstractAction {
 
     @Override
     public TextureRegion getTexture() {
-        return drawable;
+        return UIState.LibraryCardImage.getRegion();
     }
 
     @Override

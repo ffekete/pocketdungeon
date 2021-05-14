@@ -9,6 +9,7 @@ import com.blacksoft.dungeon.actions.ActionLevel;
 import com.blacksoft.dungeon.building.Treasury;
 import com.blacksoft.state.Config;
 import com.blacksoft.state.GameState;
+import com.blacksoft.state.UIState;
 
 import static com.blacksoft.dungeon.actions.ActionLevel.Basic;
 import static com.blacksoft.state.Config.GRAVEYARD_PRIORITY;
@@ -18,19 +19,10 @@ public class PlaceTreasuryAction extends AbstractAction {
 
     public static final PlaceTreasuryAction I = new PlaceTreasuryAction();
 
-    private static final Texture texture;
-    private static final TextureRegion drawable;
-
-    static {
-        texture = new Texture(Gdx.files.internal("tile/Treasury.png"));
-        drawable = new TextureRegion(texture);
-        drawable.setRegion(48, 48, 16, 16);
-    }
-
     @Override
     public void draw(Batch batch,
                      float parentAlpha) {
-        batch.draw(drawable, getX(), getY());
+        batch.draw(UIState.TreasuryCardImage.getRegion(), getX(), getY());
     }
 
     @Override
@@ -45,7 +37,7 @@ public class PlaceTreasuryAction extends AbstractAction {
 
     @Override
     public TextureRegion getTexture() {
-        return drawable;
+        return UIState.TreasuryCardImage.getRegion();
     }
 
     @Override

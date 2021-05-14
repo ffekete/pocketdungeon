@@ -9,6 +9,7 @@ import com.blacksoft.dungeon.actions.ActionLevel;
 import com.blacksoft.dungeon.building.Graveyard;
 import com.blacksoft.state.Config;
 import com.blacksoft.state.GameState;
+import com.blacksoft.state.UIState;
 
 import static com.blacksoft.dungeon.actions.ActionLevel.Basic;
 import static com.blacksoft.state.Config.GRAVEYARD_PRIORITY;
@@ -17,19 +18,14 @@ public class PlaceGraveyardAction extends AbstractAction {
 
     public static final PlaceGraveyardAction I = new PlaceGraveyardAction();
 
-    private static final Texture texture;
-    private static final TextureRegion graveyardDrawable;
-
     static {
-        texture = new Texture(Gdx.files.internal("tile/Graveyard.png"));
-        graveyardDrawable = new TextureRegion(texture);
-        graveyardDrawable.setRegion(48, 48, 16, 16);
+
     }
 
     @Override
     public void draw(Batch batch,
                      float parentAlpha) {
-        batch.draw(graveyardDrawable, getX(), getY());
+        batch.draw(UIState.GraveyardCardImage.getRegion(), getX(), getY());
     }
 
     @Override
@@ -44,7 +40,7 @@ public class PlaceGraveyardAction extends AbstractAction {
 
     @Override
     public TextureRegion getTexture() {
-        return graveyardDrawable;
+        return UIState.GraveyardCardImage.getRegion();
     }
 
     @Override

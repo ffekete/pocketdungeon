@@ -9,6 +9,7 @@ import com.blacksoft.dungeon.actions.ActionLevel;
 import com.blacksoft.dungeon.building.Torch;
 import com.blacksoft.state.Config;
 import com.blacksoft.state.GameState;
+import com.blacksoft.state.UIState;
 
 import static com.blacksoft.dungeon.actions.ActionLevel.Basic;
 import static com.blacksoft.state.Config.TORCH_PRIORITY;
@@ -17,19 +18,10 @@ public class PlaceTorchAction extends AbstractAction {
 
     public static final PlaceTorchAction I = new PlaceTorchAction();
 
-    private static final Texture texture;
-    private static final TextureRegion torchDrawable;
-
-    static {
-        texture = new Texture(Gdx.files.internal("tile/Torch.png"));
-        torchDrawable = new TextureRegion(texture);
-        torchDrawable.setRegion(48, 48, 16, 16);
-    }
-
     @Override
     public void draw(Batch batch,
                      float parentAlpha) {
-        batch.draw(torchDrawable, getX(), getY());
+        batch.draw(UIState.TorchCardImage.getRegion(), getX(), getY());
     }
 
     @Override
@@ -44,7 +36,7 @@ public class PlaceTorchAction extends AbstractAction {
 
     @Override
     public TextureRegion getTexture() {
-        return torchDrawable;
+        return UIState.TorchCardImage.getRegion();
     }
 
     @Override

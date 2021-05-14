@@ -9,6 +9,7 @@ import com.blacksoft.dungeon.actions.ActionLevel;
 import com.blacksoft.dungeon.building.BloodPool;
 import com.blacksoft.state.Config;
 import com.blacksoft.state.GameState;
+import com.blacksoft.state.UIState;
 
 import static com.blacksoft.dungeon.actions.ActionLevel.Advanced;
 import static com.blacksoft.state.Config.BLOOD_POOL_PRIORITY;
@@ -17,19 +18,10 @@ public class PlaceBloodPoolAction extends AbstractAction {
 
     public static final PlaceBloodPoolAction I = new PlaceBloodPoolAction();
 
-    private static final Texture texture;
-    private static final TextureRegion drawable;
-
-    static {
-        texture = new Texture(Gdx.files.internal("tile/BloodPool.png"));
-        drawable = new TextureRegion(texture);
-        drawable.setRegion(48, 48, 16, 16);
-    }
-
     @Override
     public void draw(Batch batch,
                      float parentAlpha) {
-        batch.draw(drawable, getX(), getY());
+        batch.draw(UIState.BloodPoolCardImage.getRegion(), getX(), getY());
     }
 
     @Override
@@ -44,7 +36,7 @@ public class PlaceBloodPoolAction extends AbstractAction {
 
     @Override
     public TextureRegion getTexture() {
-        return drawable;
+        return UIState.BloodPoolCardImage.getRegion();
     }
 
     @Override
@@ -54,7 +46,7 @@ public class PlaceBloodPoolAction extends AbstractAction {
 
     @Override
     public String getDescription() {
-        return "Places a pool of blood on the map \nor upgrades an existing one.\nAttracts vampires.";
+        return "Places a pool of blood on the map.\nAttracts vampires.";
     }
 
     @Override

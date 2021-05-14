@@ -28,4 +28,13 @@ public class UIState {
     public static TextureRegionDrawable selectionBackground = new TextureRegionDrawable(new Texture(Gdx.files.internal("ui/SelectionBackground.png")));
     public static TextureRegionDrawable selectionBackgroundHighlighted = new TextureRegionDrawable(new Texture(Gdx.files.internal("ui/SelectionBackgroundHighlighted.png")));
 
+    // CARDS
+    public static TextureRegionDrawable GraveyardCardImage = new TextureRegionDrawable(new Texture(Gdx.files.internal("card/GraveyardCard.png")));
+    public static TextureRegionDrawable DoorCardImage = new TextureRegionDrawable(new Texture(Gdx.files.internal("card/DoorCard.png")));
+    public static TextureRegionDrawable LibraryCardImage = new TextureRegionDrawable(new Texture(Gdx.files.internal("card/LibraryCard.png")));
+    public static TextureRegionDrawable TorchCardImage = new TextureRegionDrawable(new Texture(Gdx.files.internal("card/TorchCard.png")));
+    public static TextureRegionDrawable TreasuryCardImage = new TextureRegionDrawable(new Texture(Gdx.files.internal("card/TreasuryCard.png")));
+    public static TextureRegionDrawable RestingAreaCardImage = new TextureRegionDrawable(new Texture(Gdx.files.internal("card/RestingAreaCard.png")));
+    public static TextureRegionDrawable BloodPoolCardImage = new TextureRegionDrawable(new Texture(Gdx.files.internal("card/BloodPoolCard.png")));
+
 }
