@@ -13,9 +13,11 @@ import com.blacksoft.dungeon.actions.ui.CleanIndicatorUpdater;
 import com.blacksoft.dungeon.actions.ui.CleanIndicatorsAction;
 import com.blacksoft.screen.UIFactory;
 import com.blacksoft.state.Config;
+import com.blacksoft.state.UIState;
 
 import static com.blacksoft.state.Config.MAP_HEIGHT;
 import static com.blacksoft.state.Config.MAP_WIDTH;
+import static com.blacksoft.state.Config.TEXTURE_SIZE;
 
 public class TileCleaner {
 
@@ -38,7 +40,7 @@ public class TileCleaner {
 
         CleanIndicatorsAction.cleanAll(dungeon);
         CleanIndicatorUpdater.update(dungeon);
-        Label label = UIFactory.I.createFloatingLabel(-Config.CLEAN_COST_VALUE, x * 16, y * 16);
+        Label label = UIFactory.I.createFloatingLabelWithIcon(-Config.CLEAN_COST_VALUE, UIState.GoldIconImage, x * TEXTURE_SIZE, y * TEXTURE_SIZE);
         label.setColor(Color.valueOf("FFD700"));
     }
 

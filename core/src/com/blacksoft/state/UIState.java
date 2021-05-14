@@ -2,6 +2,7 @@ package com.blacksoft.state;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.scenes.scene2d.Group;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
@@ -36,5 +37,9 @@ public class UIState {
     public static TextureRegionDrawable TreasuryCardImage = new TextureRegionDrawable(new Texture(Gdx.files.internal("card/TreasuryCard.png")));
     public static TextureRegionDrawable RestingAreaCardImage = new TextureRegionDrawable(new Texture(Gdx.files.internal("card/RestingAreaCard.png")));
     public static TextureRegionDrawable BloodPoolCardImage = new TextureRegionDrawable(new Texture(Gdx.files.internal("card/BloodPoolCard.png")));
+
+
+    public static TextureRegion GoldIconImage = new TextureRegion(new Texture(Gdx.files.internal("ui/icon/GoldIcon.png")));
+    public static TextureRegion MoraleIconImage = new TextureRegion(new Texture(Gdx.files.internal("ui/icon/MoraleIcon.png")));
 
 }

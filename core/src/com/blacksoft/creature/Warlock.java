@@ -13,6 +13,10 @@ import static com.blacksoft.state.Config.WARLOCK_SALARY_REQUEST;
 
 public class Warlock extends Creature {
 
+    public static Texture texture;
+
+    private final Animation<TextureRegion> animation;
+
     static {
         texture = new Texture("creature/Warlock.png");
     }
@@ -48,5 +52,10 @@ public class Warlock extends Creature {
     @Override
     public int getMaxHp() {
         return WARLOCK_MAX_HP;
+    }
+
+    @Override
+    public Animation<TextureRegion> getAnimation() {
+        return this.animation;
     }
 }

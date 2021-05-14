@@ -1,6 +1,5 @@
 package com.blacksoft.creature;
 
-import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.math.Vector2;
@@ -9,10 +8,6 @@ import com.badlogic.gdx.scenes.scene2d.actions.SequenceAction;
 import com.blacksoft.state.GameState;
 
 public abstract class Creature extends Actor {
-
-    public static Texture texture;
-
-    protected Animation<TextureRegion> animation;
 
     public Vector2 previousNode = null;
     public Vector2 targetNode = null;
@@ -31,6 +26,7 @@ public abstract class Creature extends Actor {
     public void die() {
         GameState.creatures.remove(this);
         GameState.stage.getActors().removeIndex(GameState.stage.getActors().indexOf(this, true));
+        System.out.println();
     }
 
     public abstract float getSpeed();
@@ -40,7 +36,7 @@ public abstract class Creature extends Actor {
     public void reduceMorale(float amount) {
         morale -= amount;
 
-        if(morale < -50f) {
+        if (morale < -50f) {
             // leave
             this.die();
         }
@@ -48,7 +44,7 @@ public abstract class Creature extends Actor {
 
     public void reduceHp(int amount) {
         this.hp -= amount;
-        if(this.hp < 0) {
+        if (this.hp < 0) {
             die();
         }
     }
@@ -65,7 +61,5 @@ public abstract class Creature extends Actor {
 
     public abstract int getMaxHp();
 
-    public Animation<TextureRegion> getAnimation() {
-        return this.animation;
-    }
+    public abstract Animation<TextureRegion> getAnimation();
 }

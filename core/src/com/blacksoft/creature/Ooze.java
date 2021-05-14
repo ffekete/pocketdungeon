@@ -13,6 +13,10 @@ import static com.blacksoft.state.Config.TEXTURE_SIZE;
 
 public class Ooze extends Creature {
 
+    public static Texture texture;
+
+    private final Animation<TextureRegion> animation;
+
     static {
         texture = new Texture("creature/Ooze.png");
     }
@@ -48,5 +52,10 @@ public class Ooze extends Creature {
     @Override
     public int getMaxHp() {
         return Config.OOZE_MAX_HP;
+    }
+
+    @Override
+    public Animation<TextureRegion> getAnimation() {
+        return this.animation;
     }
 }

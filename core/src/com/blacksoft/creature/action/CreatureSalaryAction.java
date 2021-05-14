@@ -3,6 +3,7 @@ package com.blacksoft.creature.action;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.scenes.scene2d.Action;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
+import com.blacksoft.creature.Creature;
 import com.blacksoft.dungeon.Tile;
 import com.blacksoft.screen.UIFactory;
 import com.blacksoft.state.Config;
@@ -41,22 +42,22 @@ public class CreatureSalaryAction extends Action {
 
             GameState.gold += amount;
 
-            GameState.creatures.forEach(creature -> {
+            for(Creature creature : GameState.creatures) {
 
                 if (creature.getSalaryRequest() > 0) {
                     if (GameState.gold - creature.getSalaryRequest() >= 0) {
                         GameState.gold -= creature.getSalaryRequest();
 
-                        Label label = UIFactory.I.createFloatingLabel(creature.getSalaryRequest(), (int) creature.getX() / 16 * 16, (int) creature.getY() / 16 * 16);
+                        Label label = UIFactory.I.createFloatingLabelWithIcon(creature.getSalaryRequest(), UIState.GoldIconImage, (int) creature.getX() / 16 * 16, (int) creature.getY() / 16 * 16);
                         label.setColor(Color.valueOf("FFD700"));
 
                     } else {
-                        Label label = UIFactory.I.createFloatingLabel(((int) -NO_SALARY_MORALE_PENALTY), (int) creature.getX() / 16 * 16, (int) creature.getY() / 16 * 16);
+                        Label label = UIFactory.I.createFloatingLabelWithIcon(((int) -NO_SALARY_MORALE_PENALTY), UIState.MoraleIconImage, (int) creature.getX() / 16 * 16, (int) creature.getY() / 16 * 16);
                         label.setColor(Color.RED);
                         creature.reduceMorale(NO_SALARY_MORALE_PENALTY);
                     }
                 }
-            });
+            }
 
             if (GameState.gold > GameState.maxGoldCapacity) {
                 GameState.gold = GameState.maxGoldCapacity;

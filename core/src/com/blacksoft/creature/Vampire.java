@@ -13,6 +13,10 @@ import static com.blacksoft.state.Config.VAMPIRE_SALARY_REQUEST;
 
 public class Vampire extends Creature {
 
+    public static Texture texture;
+
+    private final Animation<TextureRegion> animation;
+
     static {
         texture = new Texture("creature/Vampire.png");
     }
@@ -48,5 +52,10 @@ public class Vampire extends Creature {
     @Override
     public int getMaxHp() {
         return VAMPIRE_MAX_HP;
+    }
+
+    @Override
+    public Animation<TextureRegion> getAnimation() {
+        return this.animation;
     }
 }

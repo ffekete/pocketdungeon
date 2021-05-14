@@ -24,7 +24,6 @@ public class Node {
     }
 
     public void disconnectFromNeighbours() {
-        System.out.println("disconnecting " + x + " " + y);
         disconnectWith(x - 1, y);
         disconnectWith(x + 1, y);
         disconnectWith(x, y - 1);

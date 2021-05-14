@@ -13,6 +13,10 @@ import static com.blacksoft.state.Config.TEXTURE_SIZE;
 
 public class Skeleton extends Creature {
 
+    public static Texture texture;
+
+    private final Animation<TextureRegion> animation;
+
     static {
         texture = new Texture("creature/Skeleton.png");
     }
@@ -48,5 +52,10 @@ public class Skeleton extends Creature {
     @Override
     public int getMaxHp() {
         return SKELETON_MAX_HP;
+    }
+
+    @Override
+    public Animation<TextureRegion> getAnimation() {
+        return this.animation;
     }
 }

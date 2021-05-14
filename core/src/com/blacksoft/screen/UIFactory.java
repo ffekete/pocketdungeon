@@ -205,6 +205,32 @@ public class UIFactory {
         GameState.uiStage.addActor(closedLockImage);
     }
 
+    public Label createFloatingLabelWithIcon(int newAmount,
+                                     TextureRegion iconTextureRegion,
+                                     int x,
+                                     int y) {
+
+        Table table = new Table();
+
+        Label label = new Label(Integer.toString(newAmount), labelStyle14);
+
+        table.setPosition(x + 2, y);
+        SequenceAction sequenceAction = new SequenceAction();
+        sequenceAction.addAction(Actions.moveTo(x + 2, y + 10, 0.5f));
+        sequenceAction.addAction(Actions.removeActor());
+
+        table.addAction(sequenceAction);
+        Image image = new Image(iconTextureRegion);
+        image.setSize(16, 16);
+        table.add(label);
+        table.add(image).size(16).pad(0, 2, 0, 0);
+        table.setColor(1, 1, 1, 0.5f);
+
+        GameState.uiStage.addActor(table);
+
+        return label;
+    }
+
     public Label createFloatingLabel(int newAmount,
                                      int x,
                                      int y) {

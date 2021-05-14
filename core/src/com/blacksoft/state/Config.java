@@ -35,9 +35,9 @@ public class Config {
 
     // spawn limits
     public static final int GRAVEYARD_SPAWN_TIME_LIMIT = 30;
-    public static final int OOZE_SPAWN_TIME_LIMIT = 5;
-    public static final int VAMPIRE_SPAWN_TIME_LIMIT = 25;
-    public static final int WARLOCK_SPAWN_TIME_LIMIT = 25;
+    public static final int OOZE_SPAWN_TIME_LIMIT = 30;
+    public static final int VAMPIRE_SPAWN_TIME_LIMIT = 40;
+    public static final int WARLOCK_SPAWN_TIME_LIMIT = 40;
 
     // salaries
     public static final int WARLOCK_SALARY_REQUEST = 200;
