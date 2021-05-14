@@ -23,6 +23,7 @@ import com.blacksoft.screen.action.MovePlaceableActorToMouseAction;
 import com.blacksoft.state.Config;
 import com.blacksoft.state.GameState;
 import com.blacksoft.state.UIState;
+import com.blacksoft.ui.AnimatedDrawable;
 import com.blacksoft.ui.AnimatedImage;
 import com.blacksoft.ui.DynamicLabel;
 import com.blacksoft.ui.IntAction;
@@ -155,27 +156,41 @@ public class UIFactory {
 
         Label progressLabel = new Label(Integer.toString(GameState.loopProgress), labelStyle14);
         UIState.progressLabel = progressLabel;
-        table.add(new Label("Progress", labelStyle14)).size(50);
-        table.add(progressLabel).size(30).left();
+        table.add(new Label("Progress", labelStyle14)).width(50);
+        table.add(progressLabel).width(30).left();
         updateLabelAmount(0, GameState.loopProgress, progressLabel, "%s", null);
 
-        table.add(new Label("Gold", labelStyle14)).size(30);
+        // create progress bar
+        ProgressBar.ProgressBarStyle progressBarStyle = new ProgressBar.ProgressBarStyle();
+        progressBarStyle.background = new TextureRegionDrawable(UIState.incomeProgressBarImage);
+
+        TextureRegion[] textureRegions = TextureRegion.split(UIState.ProgressBarKnobImage.getTexture(), 10, 10)[0];
+        Animation<TextureRegion> knobAnimation = new Animation<>(0.3f, textureRegions);
+        progressBarStyle.knob = new AnimatedDrawable(knobAnimation);
+        ProgressBar progressBar = new ProgressBar(0, Config.TIME_PERIOD, 0.05f, false, progressBarStyle);
+        UIState.timeProgressBar = progressBar;
+
+        table.add(new Image(UIState.GoldIconImage)).size(12).padRight(2);
         Label goldLabel = new Label("", labelStyle14);
         UIState.goldLabel = goldLabel;
-        table.add(goldLabel).size(60).left();
+        table.add(goldLabel).width(60).left();
+
         updateLabelAmount(0, GameState.gold, goldLabel, "%s/%s", GameState.maxGoldCapacity);
 
         Label ironLabel = new Label("", labelStyle14);
         UIState.ironLabel = ironLabel;
-        table.add(new Label("Iron", labelStyle14)).size(30);
-        table.add(ironLabel).size(60).left();
+        table.add(new Image(UIState.IronIconImage)).size(16).padRight(2);
+        table.add(ironLabel).width(60).left();
         updateLabelAmount(0, GameState.iron, ironLabel, "%s/%s", GameState.maxIronCapacity);
 
         Label gemLabel = new Label("", labelStyle14);
         UIState.gemLabel = gemLabel;
-        table.add(new Label("Gems", labelStyle14)).size(30);
-        table.add(gemLabel).size(60).left();
+        table.add(new Image(UIState.GemIconImage)).size(14).padRight(2);
+        table.add(gemLabel).width(60).left();
         updateLabelAmount(0, GameState.gems, gemLabel, "%s/%s", GameState.maxGemsCapacity);
+
+        // Add progress bar
+        table.add(progressBar).height(10).width(60).left();
 
         horizontalGroup.addActor(new Image(new Texture(Gdx.files.internal("ui/StatusBar.png"))));
         horizontalGroup.addActor(table);

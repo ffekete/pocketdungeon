@@ -28,7 +28,12 @@ public class CreatureSalaryAction extends Action {
         int old = GameState.gold;
 
         duration += delta;
-        if (duration >= 12) {
+
+        if (UIState.timeProgressBar != null) {
+            UIState.timeProgressBar.setValue(duration);
+        }
+
+        if (duration >= Config.TIME_PERIOD) {
 
             int amount = 0;
 

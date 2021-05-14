@@ -3,6 +3,7 @@ package com.blacksoft.ui;
 import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
+import com.badlogic.gdx.scenes.scene2d.utils.Drawable;
 import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
 
 public class AnimatedImage extends Image
@@ -18,7 +19,8 @@ public class AnimatedImage extends Image
     @Override
     public void act(float delta)
     {
-        ((TextureRegionDrawable)getDrawable()).setRegion(animation.getKeyFrame(stateTime+=delta, true));
+        stateTime += delta;
+        ((TextureRegionDrawable)getDrawable()).setRegion(animation.getKeyFrame(stateTime, true));
         super.act(delta);
     }
 }

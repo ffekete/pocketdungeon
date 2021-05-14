@@ -26,7 +26,6 @@ public abstract class Creature extends Actor {
     public void die() {
         GameState.creatures.remove(this);
         GameState.stage.getActors().removeIndex(GameState.stage.getActors().indexOf(this, true));
-        System.out.println();
     }
 
     public abstract float getSpeed();
