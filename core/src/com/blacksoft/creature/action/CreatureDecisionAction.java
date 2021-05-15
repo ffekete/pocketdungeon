@@ -33,9 +33,8 @@ public class CreatureDecisionAction extends Action {
 
         if (duration >= 0.5f) {
 
-
             // REST
-            if (creature.hp <= 0) {
+            if (creature.hp < creature.getMaxHp() || creature.mp < creature.getMaxMp() / 2f) {
                 // look for resting place
                 Vector2 target = TileFinder.findNearest(creature.getX() / 16, creature.getY() / 16, Tile.RestingArea);
 

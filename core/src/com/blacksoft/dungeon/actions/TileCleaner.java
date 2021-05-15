@@ -11,6 +11,7 @@ import com.blacksoft.dungeon.GroundTiledMapTile;
 import com.blacksoft.dungeon.Tile;
 import com.blacksoft.dungeon.actions.ui.CleanIndicatorUpdater;
 import com.blacksoft.dungeon.actions.ui.CleanIndicatorsAction;
+import com.blacksoft.dungeon.building.Gate;
 import com.blacksoft.screen.UIFactory;
 import com.blacksoft.state.Config;
 import com.blacksoft.state.UIState;
@@ -161,9 +162,21 @@ public class TileCleaner {
         return !dungeon.nodes[x][y].tile.isSolid();
     }
 
+    public static boolean canTraverse(Dungeon dungeon,
+                                      int x,
+                                      int y) {
+
+        if (x < 0 || y < 0 || x >= MAP_WIDTH || y >= MAP_HEIGHT) {
+            return false;
+        }
+
+        return dungeon.nodes[x][y].tile != Tile.Rock && dungeon.nodes[x][y].tile != Tile.Torch && !(
+                dungeon.nodes[x][y].tile == Tile.GateClosed && ((Gate) dungeon.nodes[x][y].building).locked);
+    }
+
     public static boolean isWall(Dungeon dungeon,
-                                  int x,
-                                  int y) {
+                                 int x,
+                                 int y) {
 
         if (x < 0 || y < 0 || x >= MAP_WIDTH || y >= MAP_HEIGHT) {
             return false;

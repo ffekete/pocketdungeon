@@ -25,7 +25,7 @@ public class Ooze extends Creature {
 
     public Ooze() {
         animation = new Animation<>(0.6f, TextureRegion.split(texture, TEXTURE_SIZE, TEXTURE_SIZE)[0]);
-        this.hp = this.getMaxHp();
+        this.hp = 1;//this.getMaxHp();
         this.mp = getMaxMp();
     }
 

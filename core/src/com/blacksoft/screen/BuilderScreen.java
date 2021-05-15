@@ -6,6 +6,7 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.InputMultiplexer;
 import com.badlogic.gdx.ScreenAdapter;
+import com.badlogic.gdx.ai.pfa.Connection;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
@@ -20,6 +21,7 @@ import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.badlogic.gdx.utils.viewport.FitViewport;
 import com.blacksoft.NewGameInitializer;
 import com.blacksoft.creature.action.CreatureSalaryAction;
+import com.blacksoft.dungeon.Node;
 import com.blacksoft.dungeon.actions.ui.CleanIndicatorUpdater;
 import com.blacksoft.dungeon.actions.ui.CleanIndicatorsAction;
 import com.blacksoft.screen.action.MoveLightToMouseAction;
@@ -56,7 +58,7 @@ public class BuilderScreen extends ScreenAdapter {
         GameState.viewport.apply(true);
         GameState.uiViewport.apply(true);
         this.shapeRenderer = new ShapeRenderer();
-        //shapeRenderer.setProjectionMatrix(GameState.orthographicCamera.combined);
+        shapeRenderer.setProjectionMatrix(GameState.orthographicCamera.combined);
 
 
         // STAGE
@@ -189,17 +191,17 @@ public class BuilderScreen extends ScreenAdapter {
         rayHandler.setCombinedMatrix(GameState.orthographicCamera);
         rayHandler.updateAndRender();
 
-//        shapeRenderer.setProjectionMatrix(GameState.orthographicCamera.combined);
-//        shapeRenderer.setAutoShapeType(true);
-//        shapeRenderer.begin(ShapeRenderer.ShapeType.Line);
-//
-//        for(Node node : GameState.dungeon.streetsMap.keys()) {
-//
-//            for(Connection<Node> connection : GameState.dungeon.streetsMap.get(node)) {
-//                shapeRenderer.line(connection.getFromNode().x * 16 + 8, connection.getFromNode().y * 16 + 8, connection.getToNode().x * 16+ 8, connection.getToNode().y * 16 + 8);
-//            }
-//        }
-//        shapeRenderer.end();
+        shapeRenderer.setProjectionMatrix(GameState.orthographicCamera.combined);
+        shapeRenderer.setAutoShapeType(true);
+        shapeRenderer.begin(ShapeRenderer.ShapeType.Line);
+
+        for(Node node : GameState.dungeon.streetsMap.keys()) {
+
+            for(Connection<Node> connection : GameState.dungeon.streetsMap.get(node)) {
+                shapeRenderer.line(connection.getFromNode().x * 16 + 8, connection.getFromNode().y * 16 + 8, connection.getToNode().x * 16+ 8, connection.getToNode().y * 16 + 8);
+            }
+        }
+        shapeRenderer.end();
 
         GameState.uiViewport.apply();
         //GameState.orthographicUICamera.update();

@@ -23,9 +23,12 @@ import com.blacksoft.screen.action.MovePlaceableActorToMouseAction;
 import com.blacksoft.state.Config;
 import com.blacksoft.state.GameState;
 import com.blacksoft.state.UIState;
-import com.blacksoft.ui.*;
-import com.blacksoft.ui.IntAction;
+import com.blacksoft.ui.AnimatedDrawable;
+import com.blacksoft.ui.AnimatedImage;
+import com.blacksoft.ui.DynamicLabel;
+import com.blacksoft.ui.DynamicProgressBar;
 import com.blacksoft.ui.action.FollowCreatureAction;
+import com.blacksoft.ui.action.IntAction;
 import com.blacksoft.user.actions.UserAction;
 
 import static com.blacksoft.state.Config.SCREEN_HEIGHT;
@@ -40,7 +43,7 @@ public class UIFactory {
     private BitmapFont bitmapFont25;
     private BitmapFont bitmapFont30;
     private Label.LabelStyle labelStyle14;
-    private Label.LabelStyle labelStyle22;
+    private Label.LabelStyle labelStyle25;
     private Label.LabelStyle labelStyle30;
 
     public UIFactory() {
@@ -55,8 +58,8 @@ public class UIFactory {
         labelStyle30.font = bitmapFont30;
 
         bitmapFont25 = getFont(generator, 22);
-        labelStyle22 = new Label.LabelStyle();
-        labelStyle22.font = bitmapFont25;
+        labelStyle25 = new Label.LabelStyle();
+        labelStyle25.font = bitmapFont25;
 
         generator.dispose(); // don't forget to dispose to avoid memory leaks!
     }
@@ -232,9 +235,9 @@ public class UIFactory {
     }
 
     public Label createFloatingLabelWithIcon(int newAmount,
-                                     TextureRegion iconTextureRegion,
-                                     int x,
-                                     int y) {
+                                             TextureRegion iconTextureRegion,
+                                             int x,
+                                             int y) {
 
         Table table = new Table();
 
@@ -259,13 +262,40 @@ public class UIFactory {
 
     public Label createFloatingLabel(int newAmount,
                                      int x,
-                                     int y) {
+                                     int y,
+                                     SequenceAction sequenceAction,
+                                     float delay) {
         Label label = new Label(Integer.toString(newAmount), labelStyle14);
 
         label.setPosition(x + 2, y);
+
+        MoveToAction moveToAction = Actions.moveTo(x + 2, y + 10, 0.5f);
+        moveToAction.setActor(label);
+
+        label.setVisible(false);
+        VisibleAction visibleAction = new VisibleAction();
+        visibleAction.setVisible(true);
+        visibleAction.setActor(label);
+        sequenceAction.addAction(Actions.delay(delay));
+        sequenceAction.addAction(visibleAction);
+        sequenceAction.addAction(moveToAction);
+
+
+        GameState.uiStage.addActor(label);
+
+        return label;
+    }
+
+    // self contained
+    public Label createFloatingLabel(int newAmount,
+                                     int x,
+                                     int y) {
         SequenceAction sequenceAction = new SequenceAction();
-        sequenceAction.addAction(Actions.moveTo(x + 2, y + 10, 0.5f));
-        sequenceAction.addAction(Actions.removeActor());
+        Label label = createFloatingLabel(newAmount, x, y, sequenceAction, 0f);
+
+        RemoveActorAction removeActorAction = Actions.removeActor();
+        removeActorAction.setActor(label);
+        sequenceAction.addAction(removeActorAction);
 
         label.addAction(sequenceAction);
 
@@ -523,7 +553,7 @@ public class UIFactory {
 
                 sequenceAction.addAction(moveAndScaleAction);
                 sequenceAction.addAction(Actions.visible(false));
-                sequenceAction.addAction(new AddActorAction(image));
+                sequenceAction.addAction(new AddActorAction(image, GameState.stage));
                 sequenceAction.addAction(Actions.scaleTo(1f, 1f));
                 sequenceAction.addAction(Actions.visible(true));
                 sequenceAction.addAction(new MovePlaceableActorToMouseAction(image));
@@ -554,7 +584,7 @@ public class UIFactory {
                                   String template,
                                   Integer other) {
         if (label != null) {
-            com.blacksoft.ui.IntAction intAction = new IntAction(old, newValue, 0.5f, label, template, other);
+            IntAction intAction = new IntAction(old, newValue, 0.5f, label, template, other);
             GameState.uiStage.addAction(intAction);
         }
     }

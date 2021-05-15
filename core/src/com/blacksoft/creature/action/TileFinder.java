@@ -3,6 +3,7 @@ package com.blacksoft.creature.action;
 import com.badlogic.gdx.math.Vector2;
 import com.blacksoft.dungeon.Node;
 import com.blacksoft.dungeon.Tile;
+import com.blacksoft.dungeon.actions.TileCleaner;
 import com.blacksoft.state.GameState;
 
 import java.util.ArrayDeque;
@@ -50,7 +51,7 @@ public class TileFinder {
                                 int y,
                                 Deque<Vector2> queue,
                                 boolean[][] visited) {
-        if(x >= 0 && x < MAP_WIDTH && y >= 0 && y < MAP_HEIGHT && !visited[x][y] && !GameState.dungeon.nodes[x][y].tile.isSolid()) {
+        if(x >= 0 && x < MAP_WIDTH && y >= 0 && y < MAP_HEIGHT && !visited[x][y] && TileCleaner.canTraverse(GameState.dungeon, x, y)) {
             queue.add(new Vector2(x,y));
         }
     }
