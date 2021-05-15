@@ -3,6 +3,7 @@ package com.blacksoft.creature.action;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.scenes.scene2d.actions.MoveToAction;
 import com.blacksoft.creature.Creature;
+import com.blacksoft.dungeon.actions.TileCleaner;
 import com.blacksoft.state.GameState;
 
 public class MoveToTileAction extends MoveToAction {
@@ -41,6 +42,12 @@ public class MoveToTileAction extends MoveToAction {
             creature.previousNode = new Vector2(creature.getX() / 16, creature.getY() / 16);
             this.previousNode = creature.previousNode;
             creature.targetNode = new Vector2(targetNode.x / 16, targetNode.y / 16);
+        }
+
+        if(!TileCleaner.canTraverse(GameState.dungeon, (int)creature.targetNode.x,(int)creature.targetNode.y)) {
+            creature.setPosition(previousNode.x * 16, previousNode.y * 16);
+            creature.addAction(new ResetCreatureActionsAction(creature));
+            return true;
         }
 
         boolean result = super.act(delta);
