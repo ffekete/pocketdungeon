@@ -36,7 +36,6 @@ public class Library implements Building {
                       int y) {
 
         GameState.loopProgress += Config.LIBRARY_PROGRESS_VALUE;
-        UIState.invasionProgressBar.setValue(GameState.loopProgress);
         GameState.warlockLimit += 1;
         this.lightSource = LightSourceFactory.getLibraryLightSource(x / 16 * 16 + 8,y / 16 * 16 + 8);
         this.x = x / 16;
@@ -46,7 +45,6 @@ public class Library implements Building {
     @Override
     public void upgrade() {
         GameState.loopProgress += Config.LIBRARY_PROGRESS_VALUE;
-        UIState.invasionProgressBar.setValue(GameState.loopProgress);
         GameState.warlockLimit += 1;
         level++;
     }

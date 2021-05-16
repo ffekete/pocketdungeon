@@ -6,6 +6,7 @@ import com.blacksoft.dungeon.actions.build.BuildingPlacer;
 import com.blacksoft.dungeon.actions.ui.CleanIndicatorUpdater;
 import com.blacksoft.dungeon.actions.ui.CleanIndicatorsAction;
 import com.blacksoft.dungeon.building.Gate;
+import com.blacksoft.dungeon.phase.GamePhase;
 import com.blacksoft.screen.UIFactory;
 import com.blacksoft.state.Config;
 import com.blacksoft.state.GameState;
@@ -21,6 +22,10 @@ public class MapClickHandler {
 
     public static boolean touchDown(int x,
                                     int y) {
+
+        if(GameState.gamePhase != GamePhase.Build) {
+            return false;
+        }
 
         int vx = x / TEXTURE_SIZE;
         int vy = y / TEXTURE_SIZE;
@@ -60,7 +65,6 @@ public class MapClickHandler {
                         CleanIndicatorUpdater.update(GameState.dungeon);
 
                         GameState.loopProgress += Config.CLEAN_PROGRESS_VALUE;
-                        UIState.invasionProgressBar.setValue(GameState.loopProgress);
                     }
                 }
             }

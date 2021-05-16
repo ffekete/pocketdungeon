@@ -1,4 +1,4 @@
-package com.blacksoft.creature;
+package com.blacksoft.hero;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Color;
@@ -6,27 +6,40 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
+import com.blacksoft.creature.Creature;
 import com.blacksoft.state.Config;
 
-import static com.blacksoft.state.Config.OOZE_SALARY_REQUEST;
 import static com.blacksoft.state.Config.TEXTURE_SIZE;
+import static com.blacksoft.state.Config.WIZARD_MAX_HP;
+import static com.blacksoft.state.Config.WIZARD_MAX_MP;
 
-public class Ooze extends Creature {
+public class Wizard extends Creature {
 
     public static Texture texture;
 
     private final Animation<TextureRegion> animation;
 
-    static {
-        texture = new Texture("creature/Ooze.png");
-    }
-
     private float duration = 0f;
 
-    public Ooze() {
-        animation = new Animation<>(0.6f, TextureRegion.split(texture, TEXTURE_SIZE, TEXTURE_SIZE)[0]);
-        this.hp = this.getMaxHp();
+    static {
+        texture = new Texture("hero/Wizard.png");
+    }
+
+
+    public Wizard() {
+        this.hp = getMaxHp();
         this.mp = getMaxMp();
+        animation = new Animation<>(0.6f, TextureRegion.split(texture, TEXTURE_SIZE, TEXTURE_SIZE)[0]);
+    }
+
+    @Override
+    public float getSpeed() {
+        return 1.5f;
+    }
+
+    @Override
+    public int getSalaryRequest() {
+        return 0;
     }
 
     @Override
@@ -41,23 +54,13 @@ public class Ooze extends Creature {
     }
 
     @Override
-    public float getSpeed() {
-        return 2f;
-    }
-
-    @Override
-    public int getSalaryRequest() {
-        return OOZE_SALARY_REQUEST;
-    }
-
-    @Override
     public int getMaxHp() {
-        return level * Config.OOZE_MAX_HP;
+        return Config.WIZARD_MAX_HP;
     }
 
     @Override
     public int getMaxMp() {
-        return level * Config.OOZE_MAX_MP;
+        return Config.WIZARD_MAX_MP;
     }
 
     @Override

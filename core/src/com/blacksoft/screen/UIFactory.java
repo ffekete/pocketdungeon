@@ -82,7 +82,7 @@ public class UIFactory {
 
         Label label = new Label(text, labelStyle30);
         label.setColor(Color.GREEN);
-        label.setPosition(-50, SCREEN_HEIGHT / 4f);
+        label.setPosition(-70, SCREEN_HEIGHT / 4f);
 
         sequenceAction.addAction(new DelayAction(0.5f));
 

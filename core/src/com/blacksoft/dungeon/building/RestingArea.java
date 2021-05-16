@@ -32,7 +32,6 @@ public class RestingArea implements Building {
     public void place(int x,
                       int y) {
         GameState.loopProgress += Config.RESTING_AREA_PROGRESS_VALUE;
-        UIState.invasionProgressBar.setValue(GameState.loopProgress);
         this.x = x / 16;
         this.y = y / 16;
     }

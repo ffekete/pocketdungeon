@@ -5,7 +5,12 @@ import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.actions.SequenceAction;
+import com.blacksoft.skill.Skill;
+import com.blacksoft.skill.Slash;
 import com.blacksoft.state.GameState;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public abstract class Creature extends Actor {
 
@@ -19,11 +24,15 @@ public abstract class Creature extends Actor {
 
     public int level = 1;
 
+    public List<Skill<?>> skills;
+
     public SequenceAction sequenceActions = new SequenceAction();
 
     public Creature() {
         addAction(sequenceActions);
         hp = getMaxHp();
+        this.skills = new ArrayList<>();
+        this.skills.add(new Slash());
     }
 
     public void die() {

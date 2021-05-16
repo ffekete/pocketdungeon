@@ -37,7 +37,6 @@ public class Gate implements Building {
                       int y) {
 
         GameState.loopProgress += Config.GATE_PROGRESS_VALUE;
-        UIState.invasionProgressBar.setValue(GameState.loopProgress);
 
         GameState.stage.addAction(new GateOpenCheckAction(this, x, y));
         this.x = x / 16;
@@ -53,7 +52,6 @@ public class Gate implements Building {
     @Override
     public void upgrade() {
         GameState.loopProgress += Config.GATE_PROGRESS_VALUE;
-        UIState.invasionProgressBar.setValue(GameState.loopProgress);
         level++;
     }
 

@@ -36,7 +36,6 @@ public class BloodPool implements Building {
     public void place(int x,
                       int y) {
         GameState.loopProgress += Config.BLOOD_POOL_PROGRESS_VALUE;
-        UIState.invasionProgressBar.setValue(GameState.loopProgress);
         GameState.vampireLimit += 1;
         this.lightSource = LightSourceFactory.getBloodPoolLightSource(x / 16 * 16 + 8,y / 16 * 16 + 8);
         this.x = x / 16;
@@ -46,7 +45,6 @@ public class BloodPool implements Building {
     @Override
     public void upgrade() {
         GameState.loopProgress += Config.BLOOD_POOL_PROGRESS_VALUE;
-        UIState.invasionProgressBar.setValue(GameState.loopProgress);
         GameState.vampireLimit += 1;
         level++;
     }

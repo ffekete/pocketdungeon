@@ -12,6 +12,7 @@ import com.blacksoft.dungeon.Dungeon;
 import com.blacksoft.dungeon.actions.AbstractAction;
 import com.blacksoft.dungeon.building.Building;
 import com.blacksoft.dungeon.pathfinder.CityGraph;
+import com.blacksoft.dungeon.phase.GamePhase;
 import com.blacksoft.ui.TileMarker;
 import com.blacksoft.ui.action.FollowCreatureAction;
 import com.blacksoft.user.actions.UserAction;
@@ -69,4 +70,6 @@ public class GameState {
     public static FollowCreatureAction followCreatureAction;
 
     public static boolean paused;
+
+    public static GamePhase gamePhase = GamePhase.Build;
 }

@@ -50,7 +50,6 @@ public class Torch implements Building {
     public void place(int x,
                       int y) {
         GameState.loopProgress += Config.TORCH_PROGRESS_VALUE;
-        UIState.invasionProgressBar.setValue(GameState.loopProgress);
 
         GameState.oozeLimit += 1;
         this.lightSource = LightSourceFactory.getTorchLightSource(x / 16 * 16 + 8, y / 16 * 16 + 8);
@@ -63,7 +62,6 @@ public class Torch implements Building {
     @Override
     public void upgrade() {
         GameState.loopProgress += Config.TORCH_PROGRESS_VALUE;
-        UIState.invasionProgressBar.setValue(GameState.loopProgress);
         GameState.oozeLimit += 1;
         level++;
 
