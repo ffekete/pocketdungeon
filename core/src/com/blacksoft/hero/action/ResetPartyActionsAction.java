@@ -1,7 +1,7 @@
 package com.blacksoft.hero.action;
 
 import com.badlogic.gdx.scenes.scene2d.Action;
-import com.blacksoft.creature.util.PartyuActionsUtil;
+import com.blacksoft.creature.util.PartyActionsUtil;
 import com.blacksoft.hero.Party;
 import com.blacksoft.state.GameState;
 
@@ -20,7 +20,7 @@ public class ResetPartyActionsAction extends Action {
             return false;
         }
 
-        PartyuActionsUtil.resetPartyActions(party);
+        PartyActionsUtil.resetPartyActions(party);
         return true;
     }
 }

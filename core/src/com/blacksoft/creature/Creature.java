@@ -6,7 +6,7 @@ import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.actions.SequenceAction;
 import com.blacksoft.skill.Skill;
-import com.blacksoft.skill.Slash;
+import com.blacksoft.skill.MeleeAttack;
 import com.blacksoft.state.GameState;
 
 import java.util.ArrayList;
@@ -32,7 +32,7 @@ public abstract class Creature extends Actor {
         addAction(sequenceActions);
         hp = getMaxHp();
         this.skills = new ArrayList<>();
-        this.skills.add(new Slash());
+        this.skills.add(new MeleeAttack());
     }
 
     public void die() {

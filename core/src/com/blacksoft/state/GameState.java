@@ -3,6 +3,7 @@ package com.blacksoft.state;
 import box2dLight.PointLight;
 import box2dLight.RayHandler;
 import com.badlogic.gdx.graphics.OrthographicCamera;
+import com.badlogic.gdx.scenes.scene2d.Action;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.ImageButton;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
@@ -13,6 +14,8 @@ import com.blacksoft.dungeon.actions.AbstractAction;
 import com.blacksoft.dungeon.building.Building;
 import com.blacksoft.dungeon.pathfinder.CityGraph;
 import com.blacksoft.dungeon.phase.GamePhase;
+import com.blacksoft.hero.Party;
+import com.blacksoft.ui.AnimatedImage;
 import com.blacksoft.ui.TileMarker;
 import com.blacksoft.ui.action.FollowCreatureAction;
 import com.blacksoft.user.actions.UserAction;
@@ -72,4 +75,12 @@ public class GameState {
     public static boolean paused;
 
     public static GamePhase gamePhase = GamePhase.Build;
+
+    // invader party stuff
+    public static Party party = null;
+
+    // Battle stuff
+    public static Action nextBattleAction = null;
+    public static Creature nextAttackTarget = null;
+    public static AnimatedImage nextAttackTargetImage = null;
 }

@@ -10,7 +10,7 @@ import com.blacksoft.state.Config;
 
 import static com.blacksoft.state.Config.TEXTURE_SIZE;
 
-public class Wizard extends Hero {
+public class Rogue extends Hero {
 
     public static Texture texture;
 
@@ -19,10 +19,10 @@ public class Wizard extends Hero {
     private float duration = 0f;
 
     static {
-        texture = new Texture("hero/Wizard.png");
+        texture = new Texture("hero/Rogue.png");
     }
 
-    public Wizard(Party party) {
+    public Rogue(Party party) {
         super(party);
         this.hp = getMaxHp();
         this.mp = getMaxMp();
@@ -31,7 +31,7 @@ public class Wizard extends Hero {
 
     @Override
     public float getSpeed() {
-        return 1.5f;
+        return 1f;
     }
 
     @Override
@@ -52,12 +52,12 @@ public class Wizard extends Hero {
 
     @Override
     public int getMaxHp() {
-        return Config.WIZARD_MAX_HP;
+        return Config.ROGUE_MAX_HP;
     }
 
     @Override
     public int getMaxMp() {
-        return Config.WIZARD_MAX_MP;
+        return Config.ROGUE_MAX_MP;
     }
 
     @Override

@@ -3,11 +3,10 @@ package com.blacksoft.hero.action;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.scenes.scene2d.Action;
 import com.blacksoft.creature.action.TileFinder;
-import com.blacksoft.dungeon.Node;
 import com.blacksoft.dungeon.Tile;
 import com.blacksoft.hero.Party;
 
-import static com.blacksoft.creature.util.PartyuActionsUtil.moveToAndExploreTargetNode;
+import static com.blacksoft.creature.util.PartyActionsUtil.moveToAndExploreTargetNode;
 
 public class ExploringAction extends Action {
 

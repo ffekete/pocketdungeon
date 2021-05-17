@@ -8,7 +8,7 @@ import com.blacksoft.hero.Party;
 import com.blacksoft.hero.action.ResetPartyActionsAction;
 import com.blacksoft.state.GameState;
 
-public class PartyuActionsUtil {
+public class PartyActionsUtil {
 
     public static void moveToAndExploreTargetNode(Party party,
                                                   Vector2 target) {

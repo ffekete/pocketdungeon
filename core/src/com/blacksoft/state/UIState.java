@@ -51,4 +51,8 @@ public class UIState {
     public static TextureRegion hpProgressBarKnobImage = new TextureRegion(new Texture(Gdx.files.internal("ui/HpProgressBarKnobBefore.png")));
     public static TextureRegion mpProgressBarKnobImage = new TextureRegion(new Texture(Gdx.files.internal("ui/MpProgressBarKnobBefore.png")));
 
+
+    // BATTLE
+    public static Group battleScreen;
+    public static TextureRegion battleScreenBackground = new TextureRegion(new Texture(Gdx.files.internal("ui/BattleScreen.png")));
 }

@@ -37,7 +37,9 @@ public class Party extends Actor {
     @Override
     public void draw(Batch batch,
                      float parentAlpha) {
-        heroes.get(0).draw(batch, parentAlpha);
+        if(!heroes.isEmpty()) {
+            heroes.get(0).draw(batch, parentAlpha);
+        }
     }
 
     public float getSpeed() {
