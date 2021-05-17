@@ -10,6 +10,7 @@ import com.blacksoft.skill.MeleeAttack;
 import com.blacksoft.skill.Skill;
 import com.blacksoft.state.GameState;
 
+import java.util.Collection;
 import java.util.List;
 import java.util.Optional;
 
@@ -29,7 +30,11 @@ public class BattleFlowAction extends Action {
 
         if (GameState.battleSelectedCreature == null) {
             GameState.battleSelectedCreature = BattleSequence.getNext();
-            GameState.battleSelectedCreature.setScale(2f);
+
+            GameState.battleSkillIcons.values().stream().flatMap(Collection::stream)
+                    .forEach(skillImage -> skillImage.setColor(1, 0, 0, 0.2f));
+
+            GameState.battleSkillIcons.get(GameState.battleSelectedCreature).forEach(skillImage -> skillImage.setColor(0, 1, 0, 1f));
 
             if (heroes.contains(GameState.battleSelectedCreature)) {
                 // choose action, attack

@@ -22,6 +22,7 @@ import com.blacksoft.state.UIState;
 import com.blacksoft.ui.AnimatedImage;
 import com.blacksoft.user.actions.UserAction;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class BattleInitializer {
@@ -48,6 +49,8 @@ public class BattleInitializer {
         GameState.uiStage.addActor(UIFactory.I.addMovingLabelShadow("BATTLE"));
 
         BattleSequence.creatures.clear();
+        GameState.battleImages.clear();
+        GameState.battleSkillIcons.clear();
 
         int index = Math.max(party.heroes.size(), creatures.size());
         index = Math.min(4, index);
@@ -136,20 +139,26 @@ public class BattleInitializer {
             // SKILLS
             int skillsIndex = 0;
             if (i < creatures.size()) {
-                skillsIndex = creatures.get(i).skills.size();
-                for (int j = 0; j < skillsIndex; j++) {
-                    AnimatedImage animatedImage = new AnimatedImage(
-                            new Animation<>(0.3f, TextureRegion.split(creatures.get(i).skills.get(j).getIcon(), 16, 16)[0]));
-                    battleScreen.add(animatedImage).size(16).pad(5);
 
-                    animatedImage.addListener(new InputListener() {
+                Creature creature = creatures.get(i);
+
+                skillsIndex = creature.skills.size();
+                for (int j = 0; j < skillsIndex; j++) {
+                    AnimatedImage skillImage = new AnimatedImage(
+                            new Animation<>(0.3f, TextureRegion.split(creature.skills.get(j).getIcon(), 16, 16)[0]));
+                    battleScreen.add(skillImage).size(16).pad(5);
+
+                    GameState.battleSkillIcons.computeIfAbsent(creature, value -> new ArrayList<>());
+                    GameState.battleSkillIcons.get(creature).add(skillImage);
+
+                    skillImage.addListener(new InputListener() {
                         @Override
                         public void enter(InputEvent event,
                                           float x,
                                           float y,
                                           int pointer,
                                           Actor fromActor) {
-                            animatedImage.setScale(1.25f);
+                            skillImage.setScale(1.25f);
                         }
 
                         @Override
@@ -158,7 +167,7 @@ public class BattleInitializer {
                                          float y,
                                          int pointer,
                                          Actor toActor) {
-                            animatedImage.setScale(1f);
+                            skillImage.setScale(1f);
                         }
 
                         @Override
@@ -186,11 +195,15 @@ public class BattleInitializer {
             battleScreen.add().size(48, 16);
 
             if (i < party.heroes.size()) {
-                skillsIndex = party.heroes.get(i).skills.size();
+                Creature hero = party.heroes.get(i);
+                skillsIndex = hero.skills.size();
                 for (int j = 0; j < skillsIndex; j++) {
-                    AnimatedImage animatedImage = new AnimatedImage(
-                            new Animation<>(0.3f, TextureRegion.split(party.heroes.get(i).skills.get(j).getIcon(), 16, 16)[0]));
-                    battleScreen.add(animatedImage).size(16).pad(5);
+                    AnimatedImage skillImage = new AnimatedImage(
+                            new Animation<>(0.3f, TextureRegion.split(hero.skills.get(j).getIcon(), 16, 16)[0]));
+                    battleScreen.add(skillImage).size(16).pad(5);
+
+                    GameState.battleSkillIcons.computeIfAbsent(hero, value -> new ArrayList<>());
+                    GameState.battleSkillIcons.get(hero).add(skillImage);
                 }
             } else {
                 skillsIndex = 0;

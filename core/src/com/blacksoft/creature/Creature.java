@@ -8,6 +8,7 @@ import com.badlogic.gdx.scenes.scene2d.actions.SequenceAction;
 import com.blacksoft.skill.Skill;
 import com.blacksoft.skill.MeleeAttack;
 import com.blacksoft.state.GameState;
+import com.blacksoft.state.UIState;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -38,6 +39,7 @@ public abstract class Creature extends Actor {
     public void die() {
         GameState.creatures.remove(this);
         GameState.stage.getActors().removeIndex(GameState.stage.getActors().indexOf(this, true));
+        UIState.creatureListTable.removeActor(GameState.creatureListEntries.get(this));
     }
 
     public abstract float getSpeed();
