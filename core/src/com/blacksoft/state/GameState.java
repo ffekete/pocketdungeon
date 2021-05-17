@@ -80,7 +80,9 @@ public class GameState {
     public static Party party = null;
 
     // Battle stuff
+    public static Creature battleSelectedCreature = null;
     public static Action nextBattleAction = null;
     public static Creature nextAttackTarget = null;
     public static AnimatedImage nextAttackTargetImage = null;
+    public static Map<Creature, AnimatedImage> battleImages = new HashMap<>();
 }

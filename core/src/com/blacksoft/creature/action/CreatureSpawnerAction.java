@@ -4,6 +4,7 @@ import com.badlogic.gdx.scenes.scene2d.*;
 import com.badlogic.gdx.scenes.scene2d.actions.Actions;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.blacksoft.creature.*;
+import com.blacksoft.dungeon.phase.GamePhase;
 import com.blacksoft.screen.UIFactory;
 import com.blacksoft.state.Config;
 import com.blacksoft.state.GameState;
@@ -21,7 +22,7 @@ public class CreatureSpawnerAction extends Action {
 
     public boolean act(float v) {
 
-        if (GameState.paused) {
+        if (GameState.paused || GameState.gamePhase != GamePhase.Build) {
             return false;
         }
 

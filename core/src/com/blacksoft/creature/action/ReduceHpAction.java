@@ -2,7 +2,6 @@ package com.blacksoft.creature.action;
 
 import com.badlogic.gdx.scenes.scene2d.Action;
 import com.blacksoft.creature.Creature;
-import com.blacksoft.ui.AnimatedImage;
 
 public class ReduceHpAction extends Action {
 

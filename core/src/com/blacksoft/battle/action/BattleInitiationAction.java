@@ -1,4 +1,4 @@
-package com.blacksoft.hero.action;
+package com.blacksoft.battle.action;
 
 import com.badlogic.gdx.scenes.scene2d.Action;
 import com.blacksoft.battle.BattleInitializer;
@@ -32,10 +32,10 @@ public class BattleInitiationAction extends Action {
             List<Creature> creatures = GameState.creatures.stream()
                     .filter(creature -> {
                         return creature.getX() / 16 == party.getX() / 16 && creature.getY() / 16 == party.getY() / 16 ||
-                                creature.getX() / 16 - 1 == party.getX() / 16 && creature.getY() / 16 == party.getY() / 16 ||
-                                creature.getX() / 16 + 1 == party.getX() / 16 && creature.getY() / 16 == party.getY() / 16 ||
-                                creature.getX() / 16 == party.getX() / 16 && creature.getY() / 16 - 1 == party.getY() / 16 ||
-                                creature.getX() / 16 == party.getX() / 16 && creature.getY() / 16 + 1 == party.getY() / 16;
+                                creature.getX() / 16 == party.getX() / 16 - 1 && creature.getY() / 16 == party.getY() / 16 ||
+                                creature.getX() / 16 == party.getX() / 16 + 1 && creature.getY() / 16 == party.getY() / 16 ||
+                                creature.getX() / 16 == party.getX() / 16 && creature.getY() / 16 == party.getY() / 16 - 1 ||
+                                creature.getX() / 16 == party.getX() / 16 && creature.getY() / 16 == party.getY() / 16 + 1;
 
                     })
                     .collect(Collectors.toList());

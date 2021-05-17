@@ -8,9 +8,9 @@ import com.blacksoft.dungeon.phase.GamePhase;
 import com.blacksoft.hero.Party;
 import com.blacksoft.hero.Rogue;
 import com.blacksoft.hero.Wizard;
-import com.blacksoft.hero.action.BattleInitiationAction;
+import com.blacksoft.battle.action.BattleInitiationAction;
 import com.blacksoft.hero.action.ExploringAction;
-import com.blacksoft.hero.action.PartyFinishedAction;
+import com.blacksoft.battle.action.BattleFinishedAction;
 import com.blacksoft.screen.UIFactory;
 import com.blacksoft.state.Config;
 import com.blacksoft.state.GameState;
@@ -33,7 +33,6 @@ public class InvasionStartAction extends Action {
         // Create new party
         Party party = new Party();
         GameState.party = party;
-        party.addAction(new PartyFinishedAction(party));
 
         Wizard wizard = new Wizard(party);
         party.heroes.add(wizard);

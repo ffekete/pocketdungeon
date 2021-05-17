@@ -5,9 +5,13 @@ import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.InputListener;
+import com.badlogic.gdx.scenes.scene2d.actions.Actions;
+import com.badlogic.gdx.scenes.scene2d.actions.SequenceAction;
 import com.badlogic.gdx.scenes.scene2d.ui.Container;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
+import com.blacksoft.battle.action.BattleFinishedAction;
+import com.blacksoft.battle.action.BattleFlowAction;
 import com.blacksoft.creature.Creature;
 import com.blacksoft.creature.action.DamageSingleTargetAction;
 import com.blacksoft.creature.action.RemoveFromBattleCheckerAction;
@@ -38,10 +42,12 @@ public class BattleInitializer {
         //battleScreen.setPosition(50, 50);
         battleScreen.setSize(300, 200);
 
+        GameState.stage.addAction(new BattleFinishedAction(party, creatures));
 
         GameState.uiStage.addActor(UIFactory.I.addMovingLabel("BATTLE"));
         GameState.uiStage.addActor(UIFactory.I.addMovingLabelShadow("BATTLE"));
-        battleScreen.debugAll();
+
+        BattleSequence.creatures.clear();
 
         int index = Math.max(party.heroes.size(), creatures.size());
         index = Math.min(4, index);
@@ -49,8 +55,14 @@ public class BattleInitializer {
         for (int i = 0; i < index; i++) {
             // CREATURE
             if (i < creatures.size()) {
-                battleScreen.add(new AnimatedImage(creatures.get(i).getAnimation())).size(48, 48).center().colspan(3);
-                creatures.get(i).setPosition(0, 0);
+                Creature creature = creatures.get(i);
+                AnimatedImage creatureImage = new AnimatedImage(creatures.get(i).getAnimation());
+
+                creatureImage.addAction(new RemoveFromBattleCheckerAction(creature, creatureImage));
+
+                battleScreen.add(creatureImage).size(48, 48).center().colspan(3);
+                GameState.battleImages.put(creature, creatureImage);
+                BattleSequence.add(creature);
             } else {
                 battleScreen.add().size(48, 48).colspan(3);
             }
@@ -65,6 +77,11 @@ public class BattleInitializer {
                 party.heroes.get(i).setPosition(0, 0);
 
                 Creature hero = party.heroes.get(i);
+                BattleSequence.add(hero);
+
+                GameState.battleImages.put(hero, heroImage);
+
+                heroImage.addAction(new RemoveFromBattleCheckerAction(hero, heroImage));
 
                 heroImage.addListener(new InputListener() {
 
@@ -98,7 +115,13 @@ public class BattleInitializer {
                         if (GameState.nextBattleAction != null) {
                             GameState.nextAttackTarget = hero;
                             GameState.nextAttackTargetImage = heroImage;
-                            heroImage.addAction(new RemoveFromBattleCheckerAction(GameState.nextAttackTarget, GameState.nextAttackTargetImage));
+
+                            // attack shift animation
+                            SequenceAction attackAnimationAction = new SequenceAction();
+                            attackAnimationAction.setActor(GameState.battleImages.get(GameState.battleSelectedCreature));
+                            attackAnimationAction.addAction(Actions.moveBy(10, 0, 0.1f));
+                            attackAnimationAction.addAction(Actions.moveBy(-10, 0, 0.1f));
+                            GameState.battleImages.get(GameState.battleSelectedCreature).addAction(attackAnimationAction);
                         }
 
                         return true;
@@ -181,6 +204,7 @@ public class BattleInitializer {
         }
 
         GameState.uiStage.addActor(container);
+        GameState.stage.addAction(new BattleFlowAction(creatures, party.heroes));
         container.toBack();
     }
 

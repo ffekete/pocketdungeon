@@ -3,6 +3,7 @@ package com.blacksoft.creature.action;
 import com.badlogic.gdx.scenes.scene2d.Action;
 import com.badlogic.gdx.scenes.scene2d.actions.Actions;
 import com.badlogic.gdx.scenes.scene2d.actions.SequenceAction;
+import com.blacksoft.battle.action.ClearSelectedCreatureAction;
 import com.blacksoft.creature.Creature;
 import com.blacksoft.screen.UIFactory;
 import com.blacksoft.state.GameState;
@@ -35,6 +36,7 @@ public class DamageSingleTargetAction extends Action {
             shakeAction.addAction(Actions.moveBy(-4, 0, 0.05f));
             shakeAction.addAction(Actions.moveBy(2, 0, 0.05f));
             shakeAction.addAction(new ReduceHpAction(this.targetCreature, damage));
+            shakeAction.addAction(new ClearSelectedCreatureAction());
 
             this.nextAttackTarget.addAction(shakeAction);
 
