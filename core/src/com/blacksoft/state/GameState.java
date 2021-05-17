@@ -16,6 +16,7 @@ import com.blacksoft.dungeon.pathfinder.CityGraph;
 import com.blacksoft.dungeon.phase.GamePhase;
 import com.blacksoft.hero.Party;
 import com.blacksoft.ui.AnimatedImage;
+import com.blacksoft.ui.DynamicProgressBar;
 import com.blacksoft.ui.TileMarker;
 import com.blacksoft.ui.action.FollowCreatureAction;
 import com.blacksoft.user.actions.UserAction;
@@ -86,5 +87,6 @@ public class GameState {
     public static AnimatedImage nextAttackTargetImage = null;
     public static Map<Creature, AnimatedImage> battleImages = new HashMap<>();
     public static Map<Creature, List<AnimatedImage>> battleSkillIcons = new HashMap<>();
+    public static Map<Creature, List<DynamicProgressBar>> battleHpAndMpProgressBars = new HashMap<>();
     public static boolean isCombatSequence = false;
 }

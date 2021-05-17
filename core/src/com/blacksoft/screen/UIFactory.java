@@ -179,7 +179,6 @@ public class UIFactory {
         ProgressBar.ProgressBarStyle incomeProgressBarStyle = new ProgressBar.ProgressBarStyle();
         incomeProgressBarStyle.background = new TextureRegionDrawable(UIState.progressBarBackgroundImage);
 
-
         incomeProgressBarStyle.knob = new TextureRegionDrawable(UIState.GoldIconImage);
         ProgressBar incomeProgressBar = new ProgressBar(0, Config.TIME_PERIOD, 0.05f, false, incomeProgressBarStyle);
         UIState.timeProgressBar = incomeProgressBar;
@@ -386,31 +385,11 @@ public class UIFactory {
         Table statsTable = new Table();
 
         // HP progress bar
-        ProgressBar.ProgressBarStyle hpProgressBarStyle = new ProgressBar.ProgressBarStyle();
-        hpProgressBarStyle.background = new TextureRegionDrawable(UIState.statsProgressBarBackgroundImage);
-        hpProgressBarStyle.knobBefore = new AnimatedDrawable(new Animation<>(0.5f, TextureRegion.split(UIState.hpProgressBarKnobImage.getTexture(), 1, 3)[0]));
-        DynamicProgressBar hpDynamicProgressBar = new DynamicProgressBar(0,
-                1,
-                1,
-                false,
-                hpProgressBarStyle,
-                () -> (float) creature.getHp(),
-                () -> (float) creature.getMaxHp());
-        hpDynamicProgressBar.setSize(16, 5);
+        DynamicProgressBar hpDynamicProgressBar = createHpProgressBar(creature);
         statsTable.add(hpDynamicProgressBar).size(16, 5).pad(1).row();
 
         // MP progress bar
-        ProgressBar.ProgressBarStyle mpProgressBarStyle = new ProgressBar.ProgressBarStyle();
-        mpProgressBarStyle.background = new TextureRegionDrawable(UIState.statsProgressBarBackgroundImage);
-        mpProgressBarStyle.knobBefore = new AnimatedDrawable(new Animation<>(0.5f, TextureRegion.split(UIState.mpProgressBarKnobImage.getTexture(), 1, 3)[0]));
-        DynamicProgressBar mpDynamicProgressBar = new DynamicProgressBar(0,
-                1,
-                1,
-                false,
-                mpProgressBarStyle,
-                () -> (float) creature.mp,
-                () -> (float) creature.getMaxMp());
-        mpDynamicProgressBar.setSize(16, 5);
+        DynamicProgressBar mpDynamicProgressBar = createMpProgressBar(creature);
         statsTable.add(mpDynamicProgressBar).size(16, 5).pad(1);
 
         table.add(statsTable);
@@ -482,6 +461,38 @@ public class UIFactory {
         });
 
         UIState.creatureListTable.row();
+    }
+
+    public DynamicProgressBar createMpProgressBar(Creature creature) {
+        ProgressBar.ProgressBarStyle mpProgressBarStyle = new ProgressBar.ProgressBarStyle();
+        mpProgressBarStyle.background = new TextureRegionDrawable(UIState.statsProgressBarBackgroundImage);
+        mpProgressBarStyle.knobBefore = new AnimatedDrawable(new Animation<>(0.5f, TextureRegion.split(UIState.mpProgressBarKnobImage.getTexture(), 1, 3)[0]));
+        DynamicProgressBar mpDynamicProgressBar = new DynamicProgressBar(0,
+                1,
+                1,
+                false,
+                mpProgressBarStyle,
+                () -> (float) creature.mp,
+                () -> (float) creature.getMaxMp());
+        mpDynamicProgressBar.setSize(16, 5);
+
+        return mpDynamicProgressBar;
+    }
+
+    public DynamicProgressBar createHpProgressBar(Creature creature) {
+        ProgressBar.ProgressBarStyle hpProgressBarStyle = new ProgressBar.ProgressBarStyle();
+        hpProgressBarStyle.background = new TextureRegionDrawable(UIState.statsProgressBarBackgroundImage);
+        hpProgressBarStyle.knobBefore = new AnimatedDrawable(new Animation<>(0.5f, TextureRegion.split(UIState.hpProgressBarKnobImage.getTexture(), 1, 3)[0]));
+        DynamicProgressBar hpDynamicProgressBar = new DynamicProgressBar(0,
+                1,
+                1,
+                false,
+                hpProgressBarStyle,
+                () -> (float) creature.getHp(),
+                () -> (float) creature.getMaxHp());
+        hpDynamicProgressBar.setSize(16, 5);
+
+        return hpDynamicProgressBar;
     }
 
     public void createSelectionMarker() {

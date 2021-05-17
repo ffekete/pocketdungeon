@@ -27,6 +27,13 @@ public class RemoveFromBattleCheckerAction extends Action {
             sequenceAction.addAction(Actions.removeActor());
             targetCreatureBattleImage.addAction(sequenceAction);
 
+            GameState.battleHpAndMpProgressBars.get(targetCreature).forEach(image -> {
+                SequenceAction removeSkillImagesAction = new SequenceAction();
+                removeSkillImagesAction.addAction(Actions.fadeOut(0.1f));
+                removeSkillImagesAction.addAction(Actions.removeActor());
+                image.addAction(removeSkillImagesAction);
+            });
+
             GameState.battleSkillIcons.get(targetCreature).forEach(image -> {
                 SequenceAction removeSkillImagesAction = new SequenceAction();
                 removeSkillImagesAction.addAction(Actions.fadeOut(0.1f));

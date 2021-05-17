@@ -1,5 +1,7 @@
 package com.blacksoft.creature.action;
 
+import com.badlogic.gdx.graphics.g2d.Animation;
+import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.scenes.scene2d.Action;
 import com.badlogic.gdx.scenes.scene2d.actions.Actions;
 import com.badlogic.gdx.scenes.scene2d.actions.SequenceAction;
@@ -7,6 +9,7 @@ import com.blacksoft.battle.action.ClearSelectedCreatureAction;
 import com.blacksoft.creature.Creature;
 import com.blacksoft.screen.UIFactory;
 import com.blacksoft.state.GameState;
+import com.blacksoft.state.UIState;
 import com.blacksoft.ui.AnimatedImage;
 
 public class DamageSingleTargetAction extends Action {
@@ -28,6 +31,18 @@ public class DamageSingleTargetAction extends Action {
             this.nextAttackTarget = GameState.nextAttackTargetImage;
 
             UIFactory.I.createFloatingLabel(damage, (int)nextAttackTarget.getX() + 90 + 16, (int)nextAttackTarget.getY() + 60 + 32);
+
+            AnimatedImage animatedImage = new AnimatedImage(
+                    new Animation<TextureRegion>(0.025f, TextureRegion.split(UIState.meleeAttackAnimationsTexture.getTexture(), 16, 16)[0]), false);
+
+            animatedImage.setPosition(this.nextAttackTarget.getX() + 70 , this.nextAttackTarget.getY() + 60);
+            animatedImage.setScale(4f);
+
+            SequenceAction playAnimationAction = new SequenceAction();
+            playAnimationAction.addAction(Actions.delay(0.2f));
+            playAnimationAction.addAction(Actions.removeActor());
+            animatedImage.addAction(playAnimationAction);
+            GameState.uiStage.addActor(animatedImage);
 
             SequenceAction shakeAction = new SequenceAction();
             shakeAction.addAction(Actions.moveBy(2, 0, 0.05f));

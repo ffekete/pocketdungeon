@@ -10,17 +10,24 @@ public class AnimatedImage extends Image
 {
     protected Animation<TextureRegion> animation = null;
     private float stateTime = 0;
+    private boolean looping = true;
 
     public AnimatedImage(Animation<TextureRegion> animation) {
         super(animation.getKeyFrame(0));
         this.animation = animation;
     }
 
+    public AnimatedImage(Animation<TextureRegion> animation, boolean looping) {
+        super(animation.getKeyFrame(0));
+        this.animation = animation;
+        this.looping = looping;
+    }
+
     @Override
     public void act(float delta)
     {
         stateTime += delta;
-        ((TextureRegionDrawable)getDrawable()).setRegion(animation.getKeyFrame(stateTime, true));
+        ((TextureRegionDrawable)getDrawable()).setRegion(animation.getKeyFrame(stateTime, this.looping));
         super.act(delta);
     }
 }

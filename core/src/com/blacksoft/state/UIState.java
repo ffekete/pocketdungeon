@@ -15,7 +15,6 @@ public class UIState {
 
     public static Group actionsGroup;
     public static Group statusBar;
-    public static Label progressLabel;
     public static Label goldLabel;
     public static Label gemLabel;
     public static Label ironLabel;
@@ -56,4 +55,5 @@ public class UIState {
     // BATTLE
     public static Group battleScreen;
     public static TextureRegion battleScreenBackground = new TextureRegion(new Texture(Gdx.files.internal("ui/BattleScreen.png")));
+    public static TextureRegion meleeAttackAnimationsTexture = new TextureRegion(new Texture(Gdx.files.internal("skill/MeleeHitEffect.png")));
 }
