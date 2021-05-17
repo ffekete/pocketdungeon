@@ -8,9 +8,16 @@ import java.util.List;
 
 public class BattleSequence {
 
-    public static List<Creature> creatures = new ArrayList<>();
+    public boolean isCombatPhase = false;
+
+    private static List<Creature> creatures = new ArrayList<>();
 
     private static int index = 0;
+
+    public static void reset() {
+        creatures.clear();
+        index = 0;
+    }
 
     public static void add(Creature creature) {
         creatures.add(creature);

@@ -3,12 +3,14 @@ package com.blacksoft.battle.action;
 import com.badlogic.gdx.scenes.scene2d.Action;
 import com.badlogic.gdx.scenes.scene2d.actions.Actions;
 import com.badlogic.gdx.scenes.scene2d.actions.SequenceAction;
+import com.badlogic.gdx.scenes.scene2d.actions.VisibleAction;
 import com.blacksoft.battle.BattleSequence;
 import com.blacksoft.creature.Creature;
 import com.blacksoft.creature.action.DamageSingleTargetAction;
 import com.blacksoft.skill.MeleeAttack;
 import com.blacksoft.skill.Skill;
 import com.blacksoft.state.GameState;
+import com.blacksoft.state.UIState;
 
 import java.util.Collection;
 import java.util.List;
@@ -28,8 +30,17 @@ public class BattleFlowAction extends Action {
     @Override
     public boolean act(float delta) {
 
-        if (GameState.battleSelectedCreature == null) {
+        if(!GameState.isCombatSequence) {
+            return true;
+        }
+
+        if (GameState.isCombatSequence && GameState.battleSelectedCreature == null) {
             GameState.battleSelectedCreature = BattleSequence.getNext();
+
+            UIState.battleSelectionCursor.setVisible(true);
+            UIState.battleSelectionCursor.setPosition( GameState.battleImages.get(GameState.battleSelectedCreature).getX() + 90, GameState.battleImages.get(GameState.battleSelectedCreature).getY() + 60);
+            UIState.battleSelectionCursor.setSize(48, 48);
+            UIState.battleSelectionCursor.toFront();
 
             GameState.battleSkillIcons.values().stream().flatMap(Collection::stream)
                     .forEach(skillImage -> skillImage.setColor(1, 0, 0, 0.2f));
@@ -58,7 +69,6 @@ public class BattleFlowAction extends Action {
                         sequenceAction.addAction(attackAnimationAction);
                         sequenceAction.addAction(new DamageSingleTargetAction(5));
                         sequenceAction.addAction(Actions.delay(2f));
-
                         GameState.uiStage.addAction(sequenceAction);
                     });
                 }

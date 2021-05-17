@@ -25,6 +25,7 @@ public class UIState {
     public static Table creatureListTable;
     public static ProgressBar timeProgressBar;
     public static ProgressBar invasionProgressBar;
+    public static AnimatedImage battleSelectionCursor;
 
     public static TextureRegionDrawable selectionBackground = new TextureRegionDrawable(new Texture(Gdx.files.internal("ui/SelectionBackground.png")));
     public static TextureRegionDrawable selectionBackgroundHighlighted = new TextureRegionDrawable(new Texture(Gdx.files.internal("ui/SelectionBackgroundHighlighted.png")));
@@ -50,7 +51,7 @@ public class UIState {
     public static TextureRegion statsProgressBarBackgroundImage = new TextureRegion(new Texture(Gdx.files.internal("ui/StatsProgressBar.png")));
     public static TextureRegion hpProgressBarKnobImage = new TextureRegion(new Texture(Gdx.files.internal("ui/HpProgressBarKnobBefore.png")));
     public static TextureRegion mpProgressBarKnobImage = new TextureRegion(new Texture(Gdx.files.internal("ui/MpProgressBarKnobBefore.png")));
-
+    public static TextureRegion battleSelectionCursorImage = new TextureRegion(new Texture(Gdx.files.internal("ui/BattleSelectionCursor.png")));
 
     // BATTLE
     public static Group battleScreen;

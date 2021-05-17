@@ -26,12 +26,23 @@ public class BattleFinishedAction extends Action {
     public boolean act(float delta) {
 
         if(creatures.stream().noneMatch(creature -> creature.hp > 0)) {
-            UIState.battleScreen.setVisible(false);
+            UIState.battleScreen.remove();
             GameState.paused = false;
+            UIState.battleSelectionCursor.setVisible(false);
+            GameState.battleSkillIcons.clear();
+            GameState.battleImages.clear();
+            GameState.battleSelectedCreature = null;
+            GameState.nextBattleAction = null;
+            GameState.isCombatSequence = false;
             return true;
         }
 
         if(this.party.heroes.isEmpty()) {
+
+            GameState.battleSkillIcons.clear();
+            GameState.battleImages.clear();
+            GameState.battleSelectedCreature = null;
+            GameState.nextBattleAction = null;
 
             GameState.uiStage.addActor(UIFactory.I.addMovingLabel("BUILD PHASE"));
             GameState.uiStage.addActor(UIFactory.I.addMovingLabelShadow("BUILD PHASE"));
@@ -39,11 +50,14 @@ public class BattleFinishedAction extends Action {
             GameState.gamePhase = GamePhase.Build;
             GameState.userAction = UserAction.Clean;
 
-            UIState.battleScreen.setVisible(false);
+            UIState.battleScreen.remove();
+            UIState.battleSelectionCursor.setVisible(false);
 
             GameState.paused = false;
 
             GameState.stage.getActors().removeValue(party, true);
+
+            GameState.isCombatSequence = false;
 
             return true;
         }

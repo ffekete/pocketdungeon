@@ -74,6 +74,7 @@ public class BuilderScreen extends ScreenAdapter {
         GameState.uiStage.addActor(UIFactory.I.getCreatureListPanel());
         UIFactory.I.createLockImages();
         UIFactory.I.createSelectionMarker();
+        UIFactory.I.createBattleSelectionCursor();
 
         // LIGHT
         world = new World(new Vector2(0, 0), true);

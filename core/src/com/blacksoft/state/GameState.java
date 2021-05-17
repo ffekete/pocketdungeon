@@ -86,4 +86,5 @@ public class GameState {
     public static AnimatedImage nextAttackTargetImage = null;
     public static Map<Creature, AnimatedImage> battleImages = new HashMap<>();
     public static Map<Creature, List<AnimatedImage>> battleSkillIcons = new HashMap<>();
+    public static boolean isCombatSequence = false;
 }

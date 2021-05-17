@@ -138,6 +138,17 @@ public class UIFactory {
         return label;
     }
 
+    public void createBattleSelectionCursor() {
+
+        Animation<TextureRegion> animation = new Animation<TextureRegion>(0.3f, TextureRegion.split(UIState.battleSelectionCursorImage.getTexture(), 16 ,16)[0]);
+        AnimatedImage animatedImage = new AnimatedImage(animation);
+        UIState.battleSelectionCursor = animatedImage;
+        GameState.uiStage.addActor(UIState.battleSelectionCursor);
+        animatedImage.setVisible(false);
+
+
+    }
+
     private MoveToAction getMoveToAction(Label label,
                                          float tx,
                                          float ty) {

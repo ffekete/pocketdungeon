@@ -40,7 +40,6 @@ public class BattleInitializer {
         UIState.battleScreen = battleScreen;
 
         battleScreen.background(new TextureRegionDrawable(UIState.battleScreenBackground));
-        //battleScreen.setPosition(50, 50);
         battleScreen.setSize(300, 200);
 
         GameState.stage.addAction(new BattleFinishedAction(party, creatures));
@@ -48,7 +47,7 @@ public class BattleInitializer {
         GameState.uiStage.addActor(UIFactory.I.addMovingLabel("BATTLE"));
         GameState.uiStage.addActor(UIFactory.I.addMovingLabelShadow("BATTLE"));
 
-        BattleSequence.creatures.clear();
+        BattleSequence.reset();
         GameState.battleImages.clear();
         GameState.battleSkillIcons.clear();
 
@@ -218,6 +217,8 @@ public class BattleInitializer {
 
         GameState.uiStage.addActor(container);
         GameState.stage.addAction(new BattleFlowAction(creatures, party.heroes));
+        GameState.isCombatSequence = true;
+        UIState.battleSelectionCursor.toFront();
         container.toBack();
     }
 
