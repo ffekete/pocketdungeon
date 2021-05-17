@@ -15,7 +15,6 @@ import com.blacksoft.battle.action.BattleFlowAction;
 import com.blacksoft.creature.Creature;
 import com.blacksoft.creature.action.DamageSingleTargetAction;
 import com.blacksoft.creature.action.RemoveFromBattleCheckerAction;
-import com.blacksoft.hero.Hero;
 import com.blacksoft.hero.Party;
 import com.blacksoft.screen.UIFactory;
 import com.blacksoft.state.GameState;
@@ -138,52 +137,68 @@ public class BattleInitializer {
             }
             battleScreen.row();
 
-            // hp and mp bars for creatures
+            //battleScreen.debugAll();
+
+            // hp bars for creatures
             if (i < creatures.size()) {
                 Creature creature = creatures.get(i);
                 GameState.battleHpAndMpProgressBars.computeIfAbsent(creature, value -> new ArrayList<>());
 
-                DynamicProgressBar hpProgressBr = UIFactory.I.createHpProgressBar(creature);
-                battleScreen.add(hpProgressBr).size(16, 5);
-
-                battleScreen.add().size(16, 5);
-
-                DynamicProgressBar mpProgressBar = UIFactory.I.createMpProgressBar(creature);
-                battleScreen.add(mpProgressBar).size(16, 5);
+                DynamicProgressBar hpProgressBr = UIFactory.I.createHpProgressBar(creature, 48, 5);
+                battleScreen.add(hpProgressBr).size(48, 5).colspan(3).pad(1);
 
                 GameState.battleHpAndMpProgressBars.get(creature).add(hpProgressBr);
-                GameState.battleHpAndMpProgressBars.get(creature).add(mpProgressBar);
             } else {
                 // empty fillers
-                battleScreen.add().size(16, 5);
-                battleScreen.add().size(16, 5);
-                battleScreen.add().size(16, 5);
+                battleScreen.add().size(48, 5).colspan(3);
             }
 
+            battleScreen.add().size(48, 5);
 
-            // separator
-            battleScreen.add().size(16, 5);
-
-            // hp and mp bars for heroes
+            // hp bars for heroes
             if (i < party.heroes.size()) {
                 Creature hero = party.heroes.get(i);
                 GameState.battleHpAndMpProgressBars.computeIfAbsent(hero, value -> new ArrayList<>());
 
-                DynamicProgressBar hpProgressBr = UIFactory.I.createHpProgressBar(hero);
-                battleScreen.add(hpProgressBr).size(16, 5);
-
-                battleScreen.add().size(16, 5);
-
-                DynamicProgressBar mpProgressBar = UIFactory.I.createMpProgressBar(hero);
-                battleScreen.add(mpProgressBar).size(16, 5);
+                DynamicProgressBar hpProgressBr = UIFactory.I.createHpProgressBar(hero, 48, 5);
+                battleScreen.add(hpProgressBr).size(48, 5).colspan(3).pad(1);
 
                 GameState.battleHpAndMpProgressBars.get(hero).add(hpProgressBr);
+            } else {
+                // empty fillers
+                battleScreen.add().size(48, 5).colspan(3);
+            }
+
+            battleScreen.row();
+
+            // mp bars for creatures
+            if (i < creatures.size()) {
+                Creature creature = creatures.get(i);
+                GameState.battleHpAndMpProgressBars.computeIfAbsent(creature, value -> new ArrayList<>());
+
+                DynamicProgressBar mpProgressBar = UIFactory.I.createMpProgressBar(creature, 48, 5);
+                battleScreen.add(mpProgressBar).size(16, 5).colspan(3).pad(1);
+
+                GameState.battleHpAndMpProgressBars.get(creature).add(mpProgressBar);
+            } else {
+                // empty fillers
+                battleScreen.add().size(48, 5).colspan(3);
+            }
+
+            battleScreen.add().size(48, 5);
+
+            // mp and mp bars for heroes
+            if (i < party.heroes.size()) {
+                Creature hero = party.heroes.get(i);
+                GameState.battleHpAndMpProgressBars.computeIfAbsent(hero, value -> new ArrayList<>());
+
+                DynamicProgressBar mpProgressBar = UIFactory.I.createMpProgressBar(hero, 48, 5);
+                battleScreen.add(mpProgressBar).size(48, 5).colspan(3).pad(1);
+
                 GameState.battleHpAndMpProgressBars.get(hero).add(mpProgressBar);
             } else {
                 // empty fillers
-                battleScreen.add().size(16, 5);
-                battleScreen.add().size(16, 5);
-                battleScreen.add().size(16, 5);
+                battleScreen.add().size(48, 5).colspan(3);
             }
 
             battleScreen.row();
@@ -230,7 +245,7 @@ public class BattleInitializer {
                                                  int button) {
 
                             GameState.userAction = UserAction.SelectSingleTarget;
-                            GameState.nextBattleAction = new DamageSingleTargetAction(2);
+                            GameState.nextBattleAction = new DamageSingleTargetAction(creature.getMeleeDamage());
                             GameState.uiStage.addAction(GameState.nextBattleAction);
 
                             return true;

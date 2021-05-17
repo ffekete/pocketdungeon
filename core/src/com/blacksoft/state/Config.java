@@ -54,7 +54,7 @@ public class Config {
 
     public static final Vector2 DUNGEON_ENTRANCE_LOCATION = new Vector2(0, MAP_HEIGHT / 2);
     public static final int WIZARD_MAX_HP = 3;
-    public static final int ROGUE_MAX_HP = 5;
+    public static final int ROGUE_MAX_HP = 3;
     public static final int WARLOCK_MAX_HP = 6;
     public static final int VAMPIRE_MAX_HP = 8;
     public static final int OOZE_MAX_HP = 2;

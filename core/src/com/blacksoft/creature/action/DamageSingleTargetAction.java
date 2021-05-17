@@ -45,12 +45,15 @@ public class DamageSingleTargetAction extends Action {
             GameState.uiStage.addActor(animatedImage);
 
             SequenceAction shakeAction = new SequenceAction();
-            shakeAction.addAction(Actions.moveBy(2, 0, 0.05f));
-            shakeAction.addAction(Actions.moveBy(-4, 0, 0.05f));
-            shakeAction.addAction(Actions.moveBy(4, 0, 0.05f));
-            shakeAction.addAction(Actions.moveBy(-4, 0, 0.05f));
-            shakeAction.addAction(Actions.moveBy(2, 0, 0.05f));
-            shakeAction.addAction(new ReduceHpAction(this.targetCreature, damage));
+            shakeAction.addAction(Actions.moveBy(4, 2, 0.05f));
+            shakeAction.addAction(Actions.moveBy(-8, -4, 0.05f));
+            shakeAction.addAction(Actions.moveBy(8, 4, 0.05f));
+            shakeAction.addAction(Actions.moveBy(-8, -4, 0.05f));
+            shakeAction.addAction(Actions.moveBy(4, 2, 0.05f));
+
+            int calculatedDamage = Math.max(1, damage - this.targetCreature.getMeleeDefence());
+
+            shakeAction.addAction(new ReduceHpAction(this.targetCreature, calculatedDamage));
             shakeAction.addAction(new ClearSelectedCreatureAction());
 
             this.nextAttackTarget.addAction(shakeAction);

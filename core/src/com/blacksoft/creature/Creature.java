@@ -76,4 +76,8 @@ public abstract class Creature extends Actor {
     public abstract int getMaxMp();
 
     public abstract Animation<TextureRegion> getAnimation();
+
+    public abstract int getMeleeDamage();
+
+    public abstract int getMeleeDefence();
 }

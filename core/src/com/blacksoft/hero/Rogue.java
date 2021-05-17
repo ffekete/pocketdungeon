@@ -64,4 +64,14 @@ public class Rogue extends Hero {
     public Animation<TextureRegion> getAnimation() {
         return this.animation;
     }
+
+    @Override
+    public int getMeleeDamage() {
+        return 3 + (level / 2);
+    }
+
+    @Override
+    public int getMeleeDefence() {
+        return 3 + (level / 2);
+    }
 }

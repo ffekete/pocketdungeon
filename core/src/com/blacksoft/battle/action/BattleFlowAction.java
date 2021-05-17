@@ -67,7 +67,7 @@ public class BattleFlowAction extends Action {
                         SequenceAction sequenceAction = new SequenceAction();
                         sequenceAction.addAction(Actions.delay(2f));
                         sequenceAction.addAction(attackAnimationAction);
-                        sequenceAction.addAction(new DamageSingleTargetAction(2));
+                        sequenceAction.addAction(new DamageSingleTargetAction(GameState.battleSelectedCreature.getMeleeDamage()));
                         sequenceAction.addAction(Actions.delay(2f));
                         GameState.uiStage.addAction(sequenceAction);
                     });

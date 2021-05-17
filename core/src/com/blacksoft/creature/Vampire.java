@@ -65,4 +65,14 @@ public class Vampire extends Creature {
     public Animation<TextureRegion> getAnimation() {
         return this.animation;
     }
+
+    @Override
+    public int getMeleeDamage() {
+        return 4 + level;
+    }
+
+    @Override
+    public int getMeleeDefence() {
+        return 1 + (level / 4);
+    }
 }

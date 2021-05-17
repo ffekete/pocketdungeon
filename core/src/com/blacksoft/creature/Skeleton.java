@@ -65,4 +65,14 @@ public class Skeleton extends Creature {
     public Animation<TextureRegion> getAnimation() {
         return this.animation;
     }
+
+    @Override
+    public int getMeleeDamage() {
+        return 3 + (level / 3);
+    }
+
+    @Override
+    public int getMeleeDefence() {
+        return 2;
+    }
 }

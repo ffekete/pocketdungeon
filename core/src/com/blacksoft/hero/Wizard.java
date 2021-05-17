@@ -64,4 +64,14 @@ public class Wizard extends Hero {
     public Animation<TextureRegion> getAnimation() {
         return this.animation;
     }
+
+    @Override
+    public int getMeleeDamage() {
+        return 1 + level / 5;
+    }
+
+    @Override
+    public int getMeleeDefence() {
+        return level / 5;
+    }
 }

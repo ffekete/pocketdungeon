@@ -2,6 +2,7 @@ package com.blacksoft.screen;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Color;
+import com.badlogic.gdx.graphics.Pixmap;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
@@ -140,7 +141,7 @@ public class UIFactory {
 
     public void createBattleSelectionCursor() {
 
-        Animation<TextureRegion> animation = new Animation<TextureRegion>(0.3f, TextureRegion.split(UIState.battleSelectionCursorImage.getTexture(), 16 ,16)[0]);
+        Animation<TextureRegion> animation = new Animation<TextureRegion>(0.3f, TextureRegion.split(UIState.battleSelectionCursorImage.getTexture(), 16, 16)[0]);
         AnimatedImage animatedImage = new AnimatedImage(animation);
         UIState.battleSelectionCursor = animatedImage;
         GameState.uiStage.addActor(UIState.battleSelectionCursor);
@@ -385,11 +386,11 @@ public class UIFactory {
         Table statsTable = new Table();
 
         // HP progress bar
-        DynamicProgressBar hpDynamicProgressBar = createHpProgressBar(creature);
+        DynamicProgressBar hpDynamicProgressBar = createHpProgressBar(creature, 16 ,5);
         statsTable.add(hpDynamicProgressBar).size(16, 5).pad(1).row();
 
         // MP progress bar
-        DynamicProgressBar mpDynamicProgressBar = createMpProgressBar(creature);
+        DynamicProgressBar mpDynamicProgressBar = createMpProgressBar(creature, 16, 5);
         statsTable.add(mpDynamicProgressBar).size(16, 5).pad(1);
 
         table.add(statsTable);
@@ -463,10 +464,42 @@ public class UIFactory {
         UIState.creatureListTable.row();
     }
 
-    public DynamicProgressBar createMpProgressBar(Creature creature) {
+    public DynamicProgressBar createMpProgressBar(Creature creature, int width, int height) {
+        Pixmap pixmap = new Pixmap(width, height, Pixmap.Format.RGBA8888);
+        pixmap.setColor(Color.BLUE);
+        pixmap.fill();
+        drawFrame(pixmap, width, height);
+
+        TextureRegionDrawable drawable = new TextureRegionDrawable(new TextureRegion(new Texture(pixmap)));
+        pixmap.dispose();
+
+
         ProgressBar.ProgressBarStyle mpProgressBarStyle = new ProgressBar.ProgressBarStyle();
-        mpProgressBarStyle.background = new TextureRegionDrawable(UIState.statsProgressBarBackgroundImage);
-        mpProgressBarStyle.knobBefore = new AnimatedDrawable(new Animation<>(0.5f, TextureRegion.split(UIState.mpProgressBarKnobImage.getTexture(), 1, 3)[0]));
+        mpProgressBarStyle.background = drawable;
+
+        pixmap = new Pixmap(0, height, Pixmap.Format.RGBA8888);
+        pixmap.setColor(Color.RED);
+        pixmap.fill();
+
+        drawFrame(pixmap, width, height);
+
+        drawable = new TextureRegionDrawable(new TextureRegion(new Texture(pixmap)));
+        pixmap.dispose();
+
+        mpProgressBarStyle.knob = drawable;
+
+        pixmap = new Pixmap(width, height, Pixmap.Format.RGBA8888);
+        pixmap.setColor(Color.BLUE);
+        pixmap.fill();
+
+        drawFrame(pixmap, width, height);
+
+        drawable = new TextureRegionDrawable(new TextureRegion(new Texture(pixmap)));
+        pixmap.dispose();
+
+        mpProgressBarStyle.knobBefore = drawable;
+
+
         DynamicProgressBar mpDynamicProgressBar = new DynamicProgressBar(0,
                 1,
                 1,
@@ -474,15 +507,43 @@ public class UIFactory {
                 mpProgressBarStyle,
                 () -> (float) creature.mp,
                 () -> (float) creature.getMaxMp());
-        mpDynamicProgressBar.setSize(16, 5);
+        mpDynamicProgressBar.setSize(width, height);
 
         return mpDynamicProgressBar;
     }
 
-    public DynamicProgressBar createHpProgressBar(Creature creature) {
+    public DynamicProgressBar createHpProgressBar(Creature creature, int widht, int height) {
+
+        Pixmap pixmap = new Pixmap(widht, height, Pixmap.Format.RGBA8888);
+        pixmap.setColor(Color.RED);
+        pixmap.fill();
+        drawFrame(pixmap, widht, height);
+
+        TextureRegionDrawable drawable = new TextureRegionDrawable(new TextureRegion(new Texture(pixmap)));
+        pixmap.dispose();
+
         ProgressBar.ProgressBarStyle hpProgressBarStyle = new ProgressBar.ProgressBarStyle();
-        hpProgressBarStyle.background = new TextureRegionDrawable(UIState.statsProgressBarBackgroundImage);
-        hpProgressBarStyle.knobBefore = new AnimatedDrawable(new Animation<>(0.5f, TextureRegion.split(UIState.hpProgressBarKnobImage.getTexture(), 1, 3)[0]));
+        hpProgressBarStyle.background = drawable;
+
+        pixmap = new Pixmap(0, height, Pixmap.Format.RGBA8888);
+        pixmap.setColor(Color.GREEN);
+        pixmap.fill();
+        drawFrame(pixmap, widht, height);
+
+        drawable = new TextureRegionDrawable(new TextureRegion(new Texture(pixmap)));
+        pixmap.dispose();
+
+        hpProgressBarStyle.knob = drawable;
+
+        pixmap = new Pixmap(widht, height, Pixmap.Format.RGBA8888);
+        pixmap.setColor(Color.GREEN);
+        pixmap.fill();
+        drawFrame(pixmap, widht, height);
+        drawable = new TextureRegionDrawable(new TextureRegion(new Texture(pixmap)));
+        pixmap.dispose();
+
+        hpProgressBarStyle.knobBefore = drawable;
+
         DynamicProgressBar hpDynamicProgressBar = new DynamicProgressBar(0,
                 1,
                 1,
@@ -490,9 +551,33 @@ public class UIFactory {
                 hpProgressBarStyle,
                 () -> (float) creature.getHp(),
                 () -> (float) creature.getMaxHp());
-        hpDynamicProgressBar.setSize(16, 5);
+        hpDynamicProgressBar.setSize(widht, height);
 
         return hpDynamicProgressBar;
+    }
+
+    private void drawFrame(Pixmap pixmap,
+                           int width,
+                           int height) {
+        pixmap.setColor(Color.BLACK);
+        for (int i = 1; i < width - 1; i++) {
+            pixmap.drawPixel(i, 0);
+            pixmap.drawPixel(i, height - 1);
+        }
+
+        for (int i = 1; i < height - 1; i++) {
+            pixmap.drawPixel(0, i);
+            pixmap.drawPixel(width - 1, i);
+        }
+
+        pixmap.setBlending(Pixmap.Blending.None); // before you start drawing pixels.
+
+        pixmap.drawPixel(0, 0, 0x00000000);
+        pixmap.drawPixel(0, height - 1, 0x00000000);
+        pixmap.drawPixel(width - 1, 0, 0x00000000);
+        pixmap.drawPixel(width - 1, height - 1, 0x00000000);
+
+        pixmap.setBlending(Pixmap.Blending.SourceOver);
     }
 
     public void createSelectionMarker() {
