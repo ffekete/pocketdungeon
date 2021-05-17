@@ -21,8 +21,8 @@ public class PartyFinishedAction extends Action {
 
         if(this.party.heroes.isEmpty()) {
 
-            UIFactory.I.addMovingLabel("BUILD PHASE");
-            UIFactory.I.addMovingLabelShadow("BUILD PHASE");
+            GameState.uiStage.addActor(UIFactory.I.addMovingLabel("BUILD PHASE"));
+            GameState.uiStage.addActor(UIFactory.I.addMovingLabelShadow("BUILD PHASE"));
 
             GameState.gamePhase = GamePhase.Build;
             GameState.userAction = UserAction.Clean;

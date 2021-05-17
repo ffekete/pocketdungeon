@@ -1,6 +1,8 @@
 package com.blacksoft.dungeon.actions;
 
 import com.badlogic.gdx.scenes.scene2d.Action;
+import com.badlogic.gdx.scenes.scene2d.actions.Actions;
+import com.badlogic.gdx.scenes.scene2d.actions.SequenceAction;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.blacksoft.dungeon.phase.GamePhase;
 import com.blacksoft.hero.Party;
@@ -44,8 +46,12 @@ public class InvasionStartAction extends Action {
 
         GameState.stage.addActor(party);
 
+        SequenceAction sequenceAction = new SequenceAction();
+
         // send them exploring
-        party.addAction(new ExploringAction(party));
+        sequenceAction.addAction(Actions.delay(5));
+        sequenceAction.addAction(new ExploringAction(party));
+        party.addAction(sequenceAction);
         party.addAction(new BattleInitiationAction(party));
 
         return true;

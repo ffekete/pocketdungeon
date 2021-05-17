@@ -36,10 +36,10 @@ public class Config {
     public static final int LIBRARY_PROGRESS_VALUE = 10;
 
     // spawn limits
-    public static final int GRAVEYARD_SPAWN_TIME_LIMIT = 10;
-    public static final int OOZE_SPAWN_TIME_LIMIT = 10;
-    public static final int VAMPIRE_SPAWN_TIME_LIMIT = 10;
-    public static final int WARLOCK_SPAWN_TIME_LIMIT = 10;
+    public static final int GRAVEYARD_SPAWN_TIME_LIMIT = 0;
+    public static final int OOZE_SPAWN_TIME_LIMIT = 0;
+    public static final int VAMPIRE_SPAWN_TIME_LIMIT = 0;
+    public static final int WARLOCK_SPAWN_TIME_LIMIT = 0;
 
     // salaries
     public static final int WARLOCK_SALARY_REQUEST = 200;

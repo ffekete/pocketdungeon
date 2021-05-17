@@ -11,7 +11,6 @@ import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
 import com.blacksoft.creature.Creature;
 import com.blacksoft.creature.action.DamageSingleTargetAction;
 import com.blacksoft.creature.action.RemoveFromBattleCheckerAction;
-import com.blacksoft.hero.Hero;
 import com.blacksoft.hero.Party;
 import com.blacksoft.screen.UIFactory;
 import com.blacksoft.state.GameState;

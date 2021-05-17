@@ -2,6 +2,7 @@ package com.blacksoft.dungeon.actions;
 
 import com.badlogic.gdx.scenes.scene2d.Action;
 import com.badlogic.gdx.scenes.scene2d.actions.Actions;
+import com.badlogic.gdx.scenes.scene2d.actions.SequenceAction;
 import com.blacksoft.state.GameState;
 import com.blacksoft.state.UIState;
 
@@ -18,8 +19,11 @@ public class InvasionUpdateAction extends Action {
 
             // starts the invasion
 
-            GameState.stage.addAction(Actions.delay(1f));
-            GameState.stage.addAction(new InvasionStartAction());
+            SequenceAction sequenceAction = new SequenceAction();
+            sequenceAction.addAction(Actions.delay(1f));
+            sequenceAction.addAction(new InvasionStartAction());
+
+            GameState.stage.addAction(sequenceAction);
         }
 
         UIState.invasionProgressBar.setValue(GameState.loopProgress);

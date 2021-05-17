@@ -55,7 +55,7 @@ public abstract class Creature extends Actor {
 
     public void reduceHp(int amount) {
         this.hp -= amount;
-        if (this.hp < 0) {
+        if (this.hp <= 0) {
             die();
         }
     }
