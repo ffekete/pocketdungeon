@@ -3,20 +3,20 @@ package com.blacksoft.screen.action;
 import com.badlogic.gdx.scenes.scene2d.Action;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.Stage;
-import com.blacksoft.state.GameState;
 
 public class AddActorAction extends Action {
 
-    private Stage stage;
+    private Stage targetStage;
+    private Actor targetActor;
 
-    public AddActorAction(Actor actor, Stage stage) {
-        this.actor = actor;
-        this.stage = stage;
+    public AddActorAction(Actor actor, Stage targetStage) {
+        this.targetActor = actor;
+        this.targetStage = targetStage;
     }
 
     @Override
     public boolean act(float delta) {
-        stage.addActor(this.actor);
+        targetStage.addActor(this.targetActor);
         return true;
     }
 }

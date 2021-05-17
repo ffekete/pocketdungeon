@@ -25,7 +25,7 @@ public abstract class Creature extends Actor {
 
     public int level = 1;
 
-    public List<Skill<?>> skills;
+    public List<Skill> skills;
 
     public SequenceAction sequenceActions = new SequenceAction();
 

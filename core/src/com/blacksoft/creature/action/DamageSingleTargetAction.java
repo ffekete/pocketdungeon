@@ -25,17 +25,19 @@ public class DamageSingleTargetAction extends Action {
     @Override
     public boolean act(float delta) {
 
-        if(GameState.nextAttackTarget != null) {
+        if (GameState.nextAttackTarget != null) {
 
             this.targetCreature = GameState.nextAttackTarget;
             this.nextAttackTarget = GameState.nextAttackTargetImage;
 
-            UIFactory.I.createFloatingLabel(damage, (int)nextAttackTarget.getX() + 90 + 16, (int)nextAttackTarget.getY() + 60 + 32);
+            int calculatedDamage = Math.max(1, damage - this.targetCreature.getMeleeDefence());
+
+            UIFactory.I.createFloatingLabel(calculatedDamage, (int) nextAttackTarget.getX() + 90 + 16, (int) nextAttackTarget.getY() + 60 + 32);
 
             AnimatedImage animatedImage = new AnimatedImage(
                     new Animation<TextureRegion>(0.025f, TextureRegion.split(UIState.meleeAttackAnimationsTexture.getTexture(), 16, 16)[0]), false);
 
-            animatedImage.setPosition(this.nextAttackTarget.getX() + 70 , this.nextAttackTarget.getY() + 60);
+            animatedImage.setPosition(this.nextAttackTarget.getX() + 70, this.nextAttackTarget.getY() + 60);
             animatedImage.setScale(4f);
 
             SequenceAction playAnimationAction = new SequenceAction();
@@ -50,8 +52,6 @@ public class DamageSingleTargetAction extends Action {
             shakeAction.addAction(Actions.moveBy(8, 4, 0.05f));
             shakeAction.addAction(Actions.moveBy(-8, -4, 0.05f));
             shakeAction.addAction(Actions.moveBy(4, 2, 0.05f));
-
-            int calculatedDamage = Math.max(1, damage - this.targetCreature.getMeleeDefence());
 
             shakeAction.addAction(new ReduceHpAction(this.targetCreature, calculatedDamage));
             shakeAction.addAction(new ClearSelectedCreatureAction());

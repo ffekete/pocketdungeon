@@ -30,7 +30,7 @@ public class BattleFlowAction extends Action {
     @Override
     public boolean act(float delta) {
 
-        if(!GameState.isCombatSequence) {
+        if (!GameState.isCombatSequence) {
             return true;
         }
 
@@ -38,7 +38,7 @@ public class BattleFlowAction extends Action {
             GameState.battleSelectedCreature = BattleSequence.getNext();
 
             UIState.battleSelectionCursor.setVisible(true);
-            UIState.battleSelectionCursor.setPosition( GameState.battleImages.get(GameState.battleSelectedCreature).getX() + 90, GameState.battleImages.get(GameState.battleSelectedCreature).getY() + 60);
+            UIState.battleSelectionCursor.setPosition(GameState.battleImages.get(GameState.battleSelectedCreature).getX() + 90, GameState.battleImages.get(GameState.battleSelectedCreature).getY() + 60);
             UIState.battleSelectionCursor.setSize(48, 48);
             UIState.battleSelectionCursor.toFront();
 
@@ -49,29 +49,9 @@ public class BattleFlowAction extends Action {
 
             if (heroes.contains(GameState.battleSelectedCreature)) {
                 // choose action, attack
-                Skill skill = GameState.battleSelectedCreature.skills.get(0);
+                Skill skill = GameState.battleSelectedCreature.skills.get(0); // todo improve skill selection
 
-                if (MeleeAttack.class.isAssignableFrom(skill.getClass())) {
-                    // select target
-                    Optional<Creature> target = creatures.stream().filter(creature -> creature.hp > 0).findFirst();
-
-                    target.ifPresent(creature -> {
-                        GameState.nextAttackTarget = creature;
-                        GameState.nextAttackTargetImage = GameState.battleImages.get(creature);
-
-                        SequenceAction attackAnimationAction = new SequenceAction();
-                        attackAnimationAction.setActor(GameState.battleImages.get(GameState.battleSelectedCreature));
-                        attackAnimationAction.addAction(Actions.moveBy(-10, 0, 0.1f));
-                        attackAnimationAction.addAction(Actions.moveBy(10, 0, 0.1f));
-
-                        SequenceAction sequenceAction = new SequenceAction();
-                        sequenceAction.addAction(Actions.delay(2f));
-                        sequenceAction.addAction(attackAnimationAction);
-                        sequenceAction.addAction(new DamageSingleTargetAction(GameState.battleSelectedCreature.getMeleeDamage()));
-                        sequenceAction.addAction(Actions.delay(2f));
-                        GameState.uiStage.addAction(sequenceAction);
-                    });
-                }
+                skill.act(creatures, heroes);
 
             } else {
                 // player turn

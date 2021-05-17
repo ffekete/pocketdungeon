@@ -1,12 +1,13 @@
 package com.blacksoft.skill;
 
 import com.badlogic.gdx.graphics.Texture;
+import com.blacksoft.creature.Creature;
 
-public interface Skill<T> {
+import java.util.List;
 
-    void select(T target);
+public interface Skill {
 
-    void act();
+    void act(List<Creature> creatures, List<Creature> heroes);
 
     Texture getIcon();
 
