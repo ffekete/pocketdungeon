@@ -2,7 +2,6 @@ package com.blacksoft.battle.action;
 
 import com.badlogic.gdx.scenes.scene2d.Action;
 import com.badlogic.gdx.scenes.scene2d.actions.Actions;
-import com.badlogic.gdx.scenes.scene2d.actions.ParallelAction;
 import com.badlogic.gdx.scenes.scene2d.actions.SequenceAction;
 import com.blacksoft.battle.BattlePhase;
 import com.blacksoft.battle.BattleSequence;
@@ -47,7 +46,7 @@ public class BattleFlowAction extends Action {
 
             SequenceAction sequenceAction = new SequenceAction();
             GameState.battleSelectedCreature.applyModifiers(sequenceAction);
-            sequenceAction.addAction(new PrepareBattlePhaseFinishedAction());
+            sequenceAction.addAction(new MoveBattleToPrepareAction());
             GameState.stage.addAction(sequenceAction);
         }
 
@@ -100,7 +99,7 @@ public class BattleFlowAction extends Action {
                 }
 
                 sequenceAction.addAction(new ClearBattleSelectedCreatureAction());
-                sequenceAction.addAction(new ProgressBattleAction());
+                sequenceAction.addAction(new MoveBattleToFinishTurnAction());
                 GameState.stage.addAction(sequenceAction);
 
             }

@@ -5,15 +5,13 @@ import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.InputListener;
-import com.badlogic.gdx.scenes.scene2d.actions.Actions;
 import com.badlogic.gdx.scenes.scene2d.actions.SequenceAction;
 import com.badlogic.gdx.scenes.scene2d.ui.Container;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
-import com.blacksoft.battle.action.BattleFinishedCheckerAction;
+import com.blacksoft.battle.action.BattleFinishedCheckingAction;
 import com.blacksoft.battle.action.BattleFlowAction;
 import com.blacksoft.creature.Creature;
-import com.blacksoft.creature.action.RemoveFromBattleCheckerAction;
 import com.blacksoft.hero.Party;
 import com.blacksoft.screen.UIFactory;
 import com.blacksoft.skill.Skill;
@@ -42,7 +40,7 @@ public class BattleInitializer {
         battleScreen.background(new TextureRegionDrawable(UIState.battleScreenBackground));
         battleScreen.setSize(300, 200);
 
-        GameState.stage.addAction(new BattleFinishedCheckerAction(party, creatures));
+        GameState.stage.addAction(new BattleFinishedCheckingAction(party, creatures));
 
         GameState.uiStage.addActor(UIFactory.I.addMovingLabel("BATTLE"));
         GameState.uiStage.addActor(UIFactory.I.addMovingLabelShadow("BATTLE"));

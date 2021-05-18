@@ -4,7 +4,7 @@ import com.badlogic.gdx.scenes.scene2d.Action;
 import com.badlogic.gdx.scenes.scene2d.actions.Actions;
 import com.badlogic.gdx.scenes.scene2d.actions.SequenceAction;
 import com.blacksoft.battle.BattlePhase;
-import com.blacksoft.battle.action.ProgressBattleAction;
+import com.blacksoft.battle.action.MoveBattleToFinishTurnAction;
 import com.blacksoft.creature.Creature;
 import com.blacksoft.creature.modifier.DefenceModifier;
 import com.blacksoft.state.GameState;
@@ -35,7 +35,7 @@ public class DefendSelfAction extends Action {
         defenceModifier.start(sequenceAction);
 
         sequenceAction.addAction(Actions.delay(1f));
-        sequenceAction.addAction(new ProgressBattleAction());
+        sequenceAction.addAction(new MoveBattleToFinishTurnAction());
         GameState.uiStage.addAction(sequenceAction);
 
         return true;

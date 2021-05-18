@@ -7,7 +7,7 @@ import com.badlogic.gdx.scenes.scene2d.actions.Actions;
 import com.badlogic.gdx.scenes.scene2d.actions.SequenceAction;
 import com.blacksoft.battle.BattlePhase;
 import com.blacksoft.battle.action.ClearSelectedCreatureModificationsAction;
-import com.blacksoft.battle.action.ProgressBattleAction;
+import com.blacksoft.battle.action.MoveBattleToFinishTurnAction;
 import com.blacksoft.creature.Creature;
 import com.blacksoft.hero.Hero;
 import com.blacksoft.screen.UIFactory;
@@ -73,7 +73,7 @@ public class DamageSingleTargetAction extends Action {
             shakeAction.addAction(new ReduceHpAction(this.targetCreature, calculatedDamage));
             shakeAction.addAction(new ClearSelectedCreatureModificationsAction());
             shakeAction.addAction(Actions.delay(1f));
-            shakeAction.addAction(new ProgressBattleAction());
+            shakeAction.addAction(new MoveBattleToFinishTurnAction());
             shakeAction.addAction(new RemoveFromBattleCheckerAction(targetCreature, nextAttackTarget));
 
             this.nextAttackTarget.addAction(shakeAction);

@@ -4,7 +4,7 @@ import com.badlogic.gdx.scenes.scene2d.Action;
 import com.blacksoft.battle.BattlePhase;
 import com.blacksoft.state.GameState;
 
-public class ProgressBattleAction extends Action {
+public class MoveBattleToFinishTurnAction extends Action {
     @Override
     public boolean act(float delta) {
 

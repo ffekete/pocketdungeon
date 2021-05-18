@@ -6,7 +6,6 @@ import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.actions.ParallelAction;
 import com.badlogic.gdx.scenes.scene2d.actions.SequenceAction;
-import com.blacksoft.battle.action.PrepareBattlePhaseFinishedAction;
 import com.blacksoft.creature.modifier.Modifier;
 import com.blacksoft.skill.MeleeAttack;
 import com.blacksoft.skill.MeleeDefense;
@@ -83,7 +82,7 @@ public abstract class Creature extends Actor {
 
     public abstract int getMeleeDefence();
 
-    public void applyModifiers(ParallelAction sequenceAction) {
+    public void applyModifiers(SequenceAction sequenceAction) {
         List<Modifier> removeThese = new ArrayList<>();
 
         // reset mod values

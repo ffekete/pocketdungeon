@@ -2,9 +2,12 @@ package com.blacksoft.creature.modifier;
 
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
+import com.badlogic.gdx.scenes.scene2d.actions.Actions;
 import com.badlogic.gdx.scenes.scene2d.actions.ParallelAction;
+import com.badlogic.gdx.scenes.scene2d.actions.SequenceAction;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.blacksoft.creature.Creature;
+import com.blacksoft.creature.action.ReduceHpAction;
 import com.blacksoft.screen.UIFactory;
 import com.blacksoft.skill.Poison;
 import com.blacksoft.state.GameState;
@@ -26,13 +29,14 @@ public class PoisonModifier implements Modifier {
     }
 
     @Override
-    public void apply(ParallelAction parallelAction) {
+    public void apply(SequenceAction sequenceAction) {
         if (duration > 0) {
             duration--;
-            target.reduceHp(amount);
 
             AnimatedImage image = GameState.battleImages.get(target);
-            Label label = UIFactory.I.createFloatingLabelWithIcon(amount, new TextureRegion(Poison.icon), (int) image.getX() + 90 + 24, (int) image.getY() + 60 + 48);
+            Label label = UIFactory.I.createFloatingLabelWithIcon(amount, new TextureRegion(Poison.icon), (int) image.getX() + 90 + 24, (int) image.getY() + 60 + 48, sequenceAction);
+            sequenceAction.addAction(Actions.delay(0.85f));
+            sequenceAction.addAction(new ReduceHpAction(target, amount));
             label.setColor(Color.GREEN);
         }
     }
@@ -43,13 +47,14 @@ public class PoisonModifier implements Modifier {
     }
 
     @Override
-    public void finish(ParallelAction parallelAction) {
+    public void finish(SequenceAction sequenceAction) {
 
     }
 
     @Override
-    public void start(ParallelAction parallelAction) {
+    public void start(SequenceAction sequenceAction) {
         AnimatedImage image = GameState.battleImages.get(target);
-        UIFactory.I.createFloatingIcon(UIState.poisonEffectTexture, (int) image.getX() + 90 + 24, (int) image.getY() + 60 + 32);
+        UIFactory.I.createFloatingIcon(UIState.poisonEffectTexture, (int) image.getX() + 90 + 24, (int) image.getY() + 60 + 32, sequenceAction);
+        sequenceAction.addAction(Actions.delay(0.5f));
     }
 }

@@ -241,7 +241,7 @@ public class UIFactory {
                                              TextureRegion iconTextureRegion,
                                              int x,
                                              int y,
-                                             ParallelAction parallelAction) {
+                                             SequenceAction sequenceAction) {
         Table table = new Table();
 
         Label label = null;
@@ -253,13 +253,15 @@ public class UIFactory {
         Image image = new Image(iconTextureRegion);
         image.setSize(16, 16);
 
-        SequenceAction sequenceAction = new SequenceAction();
-        sequenceAction.addAction(Actions.moveTo(x + 2, y + 10, 0.5f));
-        sequenceAction.addAction(Actions.removeActor());
-        table.addAction(sequenceAction);
+        SequenceAction sequenceAction1 = new SequenceAction();
+        sequenceAction1.addAction(Actions.moveTo(x + 2, y + 15, 0.8f));
+        sequenceAction1.addAction(Actions.removeActor());
+        sequenceAction1.setActor(table);
+
+        sequenceAction.addAction(sequenceAction1);
 
         table.add(image).size(16).pad(0, 2, 0, 0);
-        table.setColor(1, 1, 1, 0.5f);
+        table.setColor(1, 1, 1, 0.8f);
 
         GameState.uiStage.addActor(table);
 
@@ -270,13 +272,54 @@ public class UIFactory {
                                              TextureRegion iconTextureRegion,
                                              int x,
                                              int y) {
-        return createFloatingLabelWithIcon(newAmount, iconTextureRegion, x,y,new SequenceAction());
+        Table table = new Table();
+
+        Label label = null;
+
+        label = new Label(Integer.toString(newAmount), labelStyle14);
+        table.setPosition(x + 2, y);
+        table.add(label);
+
+        Image image = new Image(iconTextureRegion);
+        image.setSize(16, 16);
+        SequenceAction sequenceAction = new SequenceAction();
+        sequenceAction.addAction(Actions.moveTo(x + 2, y + 15, 0.8f));
+        sequenceAction.addAction(Actions.removeActor());
+        table.addAction(sequenceAction);
+
+        table.add(image).size(16).pad(0, 2, 0, 0);
+        table.setColor(1, 1, 1, 0.8f);
+
+        GameState.uiStage.addActor(table);
+
+        return label;
 
     }
 
     public void createFloatingIcon(TextureRegion iconTextureRegion,
                                    int x,
                                    int y) {
+        Table table = new Table();
+
+        table.setPosition(x + 2, y);
+
+        Image image = new Image(iconTextureRegion);
+        image.setSize(16, 16);
+        SequenceAction sequenceAction = new SequenceAction();
+        sequenceAction.addAction(Actions.moveTo(x + 2, y + 15, 0.8f));
+        sequenceAction.addAction(Actions.removeActor());
+        table.addAction(sequenceAction);
+
+        table.add(image).size(16).pad(0, 2, 0, 0);
+        table.setColor(1, 1, 1, 0.8f);
+
+        GameState.uiStage.addActor(table);
+    }
+
+    public void createFloatingIcon(TextureRegion iconTextureRegion,
+                                   int x,
+                                   int y,
+                                   SequenceAction sequenceAction) {
 
         Table table = new Table();
 
@@ -285,13 +328,15 @@ public class UIFactory {
         Image image = new Image(iconTextureRegion);
         image.setSize(16, 16);
 
-        SequenceAction sequenceAction = new SequenceAction();
-        sequenceAction.addAction(Actions.moveTo(x + 2, y + 10, 0.5f));
-        sequenceAction.addAction(Actions.removeActor());
-        table.addAction(sequenceAction);
+        SequenceAction floatingAction = new SequenceAction();
+        floatingAction.addAction(Actions.moveTo(x + 2, y + 15, 0.8f));
+        floatingAction.addAction(Actions.removeActor());
+        floatingAction.setActor(table);
+
+        sequenceAction.addAction(floatingAction);
 
         table.add(image).size(16).pad(0, 2, 0, 0);
-        table.setColor(1, 1, 1, 0.5f);
+        table.setColor(1, 1, 1, 0.8f);
 
         GameState.uiStage.addActor(table);
     }

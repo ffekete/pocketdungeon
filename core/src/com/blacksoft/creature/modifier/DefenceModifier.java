@@ -1,7 +1,9 @@
 package com.blacksoft.creature.modifier;
 
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
+import com.badlogic.gdx.scenes.scene2d.actions.Actions;
 import com.badlogic.gdx.scenes.scene2d.actions.ParallelAction;
+import com.badlogic.gdx.scenes.scene2d.actions.SequenceAction;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.blacksoft.creature.Creature;
 import com.blacksoft.screen.UIFactory;
@@ -24,12 +26,13 @@ public class DefenceModifier implements Modifier{
     }
 
     @Override
-    public void apply(ParallelAction parallelAction) {
+    public void apply(SequenceAction sequenceAction) {
         if(duration > 0) {
             duration--;
             target.tempDefenceModifier += amount;
             AnimatedImage image = GameState.battleImages.get(target);
-            Label label = UIFactory.I.createFloatingLabelWithIcon(amount, new TextureRegion(MeleeDefense.icon), (int)image.getX() + 90 + 24, (int)image.getY() + 60 + 48, parallelAction);
+            Label label = UIFactory.I.createFloatingLabelWithIcon(amount, new TextureRegion(MeleeDefense.icon), (int)image.getX() + 90 + 24, (int)image.getY() + 60 + 48, sequenceAction);
+            sequenceAction.addAction(Actions.delay(0.5f));
         }
     }
 
@@ -39,14 +42,15 @@ public class DefenceModifier implements Modifier{
     }
 
     @Override
-    public void finish(ParallelAction parallelAction) {
+    public void finish(SequenceAction sequenceAction) {
 
     }
 
     @Override
-    public void start(ParallelAction parallelAction) {
+    public void start(SequenceAction sequenceAction) {
         target.tempDefenceModifier += amount;
         AnimatedImage image = GameState.battleImages.get(target);
-        Label label = UIFactory.I.createFloatingLabelWithIcon(amount, new TextureRegion(MeleeDefense.icon), (int)image.getX() + 90 + 24, (int)image.getY() + 60 + 48, parallelAction);
+        UIFactory.I.createFloatingLabelWithIcon(amount, new TextureRegion(MeleeDefense.icon), (int)image.getX() + 90 + 24, (int)image.getY() + 60 + 48, sequenceAction);
+        sequenceAction.addAction(Actions.delay(0.5f));
     }
 }

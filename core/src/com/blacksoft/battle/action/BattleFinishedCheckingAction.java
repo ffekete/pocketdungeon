@@ -12,13 +12,13 @@ import com.blacksoft.user.actions.UserAction;
 
 import java.util.List;
 
-public class BattleFinishedCheckerAction extends Action {
+public class BattleFinishedCheckingAction extends Action {
 
     private Party party;
     private List<Creature> creatures;
 
-    public BattleFinishedCheckerAction(Party party,
-                                       List<Creature> creatures) {
+    public BattleFinishedCheckingAction(Party party,
+                                        List<Creature> creatures) {
         this.party = party;
         this.creatures = creatures;
     }
