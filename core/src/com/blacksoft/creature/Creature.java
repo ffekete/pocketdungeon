@@ -4,10 +4,13 @@ import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.scenes.scene2d.Actor;
+import com.badlogic.gdx.scenes.scene2d.actions.ParallelAction;
 import com.badlogic.gdx.scenes.scene2d.actions.SequenceAction;
+import com.blacksoft.battle.action.PrepareBattlePhaseFinishedAction;
 import com.blacksoft.creature.modifier.Modifier;
 import com.blacksoft.skill.MeleeAttack;
 import com.blacksoft.skill.MeleeDefense;
+import com.blacksoft.skill.Poison;
 import com.blacksoft.skill.Skill;
 import com.blacksoft.state.GameState;
 import com.blacksoft.state.UIState;
@@ -21,7 +24,6 @@ public abstract class Creature extends Actor {
     public Vector2 targetNode = null;
     public boolean finishedAllActions = true;
 
-    public float morale = 100f;
     public int hp;
     public int mp;
 
@@ -40,28 +42,19 @@ public abstract class Creature extends Actor {
         addAction(sequenceActions);
         hp = getMaxHp();
         this.skills = new ArrayList<>();
+        this.skills.add(new Poison());
         this.skills.add(new MeleeAttack(this));
         this.skills.add(new MeleeDefense());
     }
 
     public void die() {
+        System.out.println("Just died: " + this);
         GameState.creatures.remove(this);
         GameState.stage.getActors().removeIndex(GameState.stage.getActors().indexOf(this, true));
         UIState.creatureListTable.removeActor(GameState.creatureListEntries.get(this));
     }
 
     public abstract float getSpeed();
-
-    public abstract int getSalaryRequest();
-
-    public void reduceMorale(float amount) {
-        morale -= amount;
-
-        if (morale < -50f) {
-            // leave
-            this.die();
-        }
-    }
 
     public void reduceHp(int amount) {
         this.hp -= amount;
@@ -90,7 +83,7 @@ public abstract class Creature extends Actor {
 
     public abstract int getMeleeDefence();
 
-    public void applyModifiers() {
+    public void applyModifiers(ParallelAction sequenceAction) {
         List<Modifier> removeThese = new ArrayList<>();
 
         // reset mod values
@@ -98,9 +91,11 @@ public abstract class Creature extends Actor {
 
         // apply new ones
         for (Modifier modifier : modifiers) {
-            modifier.apply();
+
+            modifier.apply(sequenceAction);
+
             if (modifier.getDuration() <= 0) {
-                modifier.finish();
+                modifier.finish(sequenceAction);
                 removeThese.add(modifier);
             }
         }

@@ -14,8 +14,6 @@ public class Config {
 
     public static final int STARTING_DUNGEON_LENGTH = 0;
 
-    public static final float TIME_PERIOD = 12;
-
     // priorities
     public static final int GRAVEYARD_PRIORITY = 5;
     public static final int TORCH_PRIORITY = 5;
@@ -41,15 +39,6 @@ public class Config {
     public static final int VAMPIRE_SPAWN_TIME_LIMIT = 0;
     public static final int WARLOCK_SPAWN_TIME_LIMIT = 0;
 
-    // salaries
-    public static final int WARLOCK_SALARY_REQUEST = 200;
-    public static final int VAMPIRE_SALARY_REQUEST = 100;
-    public static final int SKELETON_SALARY_REQUEST = 0;
-    public static final int OOZE_SALARY_REQUEST = 0;
-
-    public static final float NO_SALARY_MORALE_PENALTY = 10f;
-
-    public static final int TREASURY_INCOME_VALUE = 100;
     public static final int CLEAN_COST_VALUE = 10;
 
     public static final Vector2 DUNGEON_ENTRANCE_LOCATION = new Vector2(0, MAP_HEIGHT / 2);

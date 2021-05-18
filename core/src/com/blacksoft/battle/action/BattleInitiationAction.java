@@ -2,6 +2,7 @@ package com.blacksoft.battle.action;
 
 import com.badlogic.gdx.scenes.scene2d.Action;
 import com.blacksoft.battle.BattleInitializer;
+import com.blacksoft.battle.BattlePhase;
 import com.blacksoft.creature.Creature;
 import com.blacksoft.hero.Party;
 import com.blacksoft.state.GameState;

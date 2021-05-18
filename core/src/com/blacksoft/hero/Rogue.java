@@ -35,11 +35,6 @@ public class Rogue extends Hero {
     }
 
     @Override
-    public int getSalaryRequest() {
-        return 0;
-    }
-
-    @Override
     public void draw(Batch batch,
                      float parentAlpha) {
         duration += Gdx.graphics.getDeltaTime();

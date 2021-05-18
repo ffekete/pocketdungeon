@@ -10,7 +10,6 @@ import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import static com.blacksoft.state.Config.TEXTURE_SIZE;
 import static com.blacksoft.state.Config.WARLOCK_MAX_HP;
 import static com.blacksoft.state.Config.WARLOCK_MAX_MP;
-import static com.blacksoft.state.Config.WARLOCK_SALARY_REQUEST;
 
 public class Warlock extends Creature {
 
@@ -44,11 +43,6 @@ public class Warlock extends Creature {
     @Override
     public float getSpeed() {
         return 1.5f;
-    }
-
-    @Override
-    public int getSalaryRequest() {
-        return WARLOCK_SALARY_REQUEST;
     }
 
     @Override

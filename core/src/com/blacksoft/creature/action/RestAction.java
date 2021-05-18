@@ -2,14 +2,11 @@ package com.blacksoft.creature.action;
 
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.scenes.scene2d.Action;
-import com.badlogic.gdx.scenes.scene2d.actions.DelayAction;
 import com.badlogic.gdx.scenes.scene2d.actions.RemoveActorAction;
 import com.badlogic.gdx.scenes.scene2d.actions.SequenceAction;
-import com.badlogic.gdx.scenes.scene2d.actions.VisibleAction;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.blacksoft.creature.Creature;
 import com.blacksoft.screen.UIFactory;
-import com.blacksoft.screen.action.AddActorAction;
 import com.blacksoft.state.GameState;
 
 public class RestAction extends Action {

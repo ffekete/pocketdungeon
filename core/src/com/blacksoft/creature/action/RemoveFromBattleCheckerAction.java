@@ -3,7 +3,6 @@ package com.blacksoft.creature.action;
 import com.badlogic.gdx.scenes.scene2d.Action;
 import com.badlogic.gdx.scenes.scene2d.actions.Actions;
 import com.badlogic.gdx.scenes.scene2d.actions.SequenceAction;
-import com.blacksoft.battle.BattlePhase;
 import com.blacksoft.creature.Creature;
 import com.blacksoft.state.GameState;
 import com.blacksoft.ui.AnimatedImage;

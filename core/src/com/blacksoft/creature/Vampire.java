@@ -10,7 +10,6 @@ import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import static com.blacksoft.state.Config.TEXTURE_SIZE;
 import static com.blacksoft.state.Config.VAMPIRE_MAX_HP;
 import static com.blacksoft.state.Config.VAMPIRE_MAX_MP;
-import static com.blacksoft.state.Config.VAMPIRE_SALARY_REQUEST;
 
 public class Vampire extends Creature {
 
@@ -44,11 +43,6 @@ public class Vampire extends Creature {
     @Override
     public float getSpeed() {
         return 1f;
-    }
-
-    @Override
-    public int getSalaryRequest() {
-        return VAMPIRE_SALARY_REQUEST;
     }
 
     @Override

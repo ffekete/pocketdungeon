@@ -240,27 +240,60 @@ public class UIFactory {
     public Label createFloatingLabelWithIcon(int newAmount,
                                              TextureRegion iconTextureRegion,
                                              int x,
-                                             int y) {
-
+                                             int y,
+                                             ParallelAction parallelAction) {
         Table table = new Table();
 
-        Label label = new Label(Integer.toString(newAmount), labelStyle14);
+        Label label = null;
 
+        label = new Label(Integer.toString(newAmount), labelStyle14);
         table.setPosition(x + 2, y);
+        table.add(label);
+
+        Image image = new Image(iconTextureRegion);
+        image.setSize(16, 16);
+
         SequenceAction sequenceAction = new SequenceAction();
         sequenceAction.addAction(Actions.moveTo(x + 2, y + 10, 0.5f));
         sequenceAction.addAction(Actions.removeActor());
-
         table.addAction(sequenceAction);
-        Image image = new Image(iconTextureRegion);
-        image.setSize(16, 16);
-        table.add(label);
+
         table.add(image).size(16).pad(0, 2, 0, 0);
         table.setColor(1, 1, 1, 0.5f);
 
         GameState.uiStage.addActor(table);
 
         return label;
+    }
+
+    public Label createFloatingLabelWithIcon(int newAmount,
+                                             TextureRegion iconTextureRegion,
+                                             int x,
+                                             int y) {
+        return createFloatingLabelWithIcon(newAmount, iconTextureRegion, x,y,new SequenceAction());
+
+    }
+
+    public void createFloatingIcon(TextureRegion iconTextureRegion,
+                                   int x,
+                                   int y) {
+
+        Table table = new Table();
+
+        table.setPosition(x + 2, y);
+
+        Image image = new Image(iconTextureRegion);
+        image.setSize(16, 16);
+
+        SequenceAction sequenceAction = new SequenceAction();
+        sequenceAction.addAction(Actions.moveTo(x + 2, y + 10, 0.5f));
+        sequenceAction.addAction(Actions.removeActor());
+        table.addAction(sequenceAction);
+
+        table.add(image).size(16).pad(0, 2, 0, 0);
+        table.setColor(1, 1, 1, 0.5f);
+
+        GameState.uiStage.addActor(table);
     }
 
     public Label createFloatingLabel(int newAmount,
@@ -380,7 +413,7 @@ public class UIFactory {
         Table statsTable = new Table();
 
         // HP progress bar
-        DynamicProgressBar hpDynamicProgressBar = createHpProgressBar(creature, 16 ,5);
+        DynamicProgressBar hpDynamicProgressBar = createHpProgressBar(creature, 16, 5);
         statsTable.add(hpDynamicProgressBar).size(16, 5).pad(1).row();
 
         // MP progress bar
@@ -458,7 +491,9 @@ public class UIFactory {
         UIState.creatureListTable.row();
     }
 
-    public DynamicProgressBar createMpProgressBar(Creature creature, int width, int height) {
+    public DynamicProgressBar createMpProgressBar(Creature creature,
+                                                  int width,
+                                                  int height) {
         Pixmap pixmap = new Pixmap(width, height, Pixmap.Format.RGBA8888);
         pixmap.setColor(Color.BLUE);
         pixmap.fill();
@@ -506,7 +541,9 @@ public class UIFactory {
         return mpDynamicProgressBar;
     }
 
-    public DynamicProgressBar createHpProgressBar(Creature creature, int widht, int height) {
+    public DynamicProgressBar createHpProgressBar(Creature creature,
+                                                  int widht,
+                                                  int height) {
 
         Pixmap pixmap = new Pixmap(widht, height, Pixmap.Format.RGBA8888);
         pixmap.setColor(Color.RED);

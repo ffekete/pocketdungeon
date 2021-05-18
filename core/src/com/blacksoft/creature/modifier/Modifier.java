@@ -1,15 +1,15 @@
 package com.blacksoft.creature.modifier;
 
-import com.blacksoft.creature.Creature;
+import com.badlogic.gdx.scenes.scene2d.actions.ParallelAction;
 
 public interface Modifier {
 
-    void apply();
+    void apply(ParallelAction sequenceAction);
 
     int getDuration();
 
-    void finish();
+    void finish(ParallelAction parallelAction);
 
-    void start();
+    void start(ParallelAction parallelAction);
 
 }

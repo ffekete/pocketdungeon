@@ -8,7 +8,6 @@ import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.blacksoft.state.Config;
 
-import static com.blacksoft.state.Config.OOZE_SALARY_REQUEST;
 import static com.blacksoft.state.Config.TEXTURE_SIZE;
 
 public class Ooze extends Creature {
@@ -43,11 +42,6 @@ public class Ooze extends Creature {
     @Override
     public float getSpeed() {
         return 2f;
-    }
-
-    @Override
-    public int getSalaryRequest() {
-        return OOZE_SALARY_REQUEST;
     }
 
     @Override

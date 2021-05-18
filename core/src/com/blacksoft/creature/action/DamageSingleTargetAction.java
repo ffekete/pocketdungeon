@@ -6,7 +6,7 @@ import com.badlogic.gdx.scenes.scene2d.Action;
 import com.badlogic.gdx.scenes.scene2d.actions.Actions;
 import com.badlogic.gdx.scenes.scene2d.actions.SequenceAction;
 import com.blacksoft.battle.BattlePhase;
-import com.blacksoft.battle.action.ClearSelectedCreatureAction;
+import com.blacksoft.battle.action.ClearSelectedCreatureModificationsAction;
 import com.blacksoft.battle.action.ProgressBattleAction;
 import com.blacksoft.creature.Creature;
 import com.blacksoft.hero.Hero;
@@ -40,7 +40,7 @@ public class DamageSingleTargetAction extends Action {
             UIFactory.I.createFloatingLabel(calculatedDamage, (int) nextAttackTarget.getX() + 90 + 16, (int) nextAttackTarget.getY() + 60 + 32);
 
             AnimatedImage animatedImage = new AnimatedImage(
-                    new Animation<TextureRegion>(0.025f, TextureRegion.split(UIState.meleeAttackAnimationsTexture.getTexture(), 16, 16)[0]), false);
+                    new Animation<>(0.025f, TextureRegion.split(UIState.meleeAttackAnimationsTexture.getTexture(), 16, 16)[0]), false);
 
             animatedImage.setPosition(this.nextAttackTarget.getX() + 70, this.nextAttackTarget.getY() + 60);
             animatedImage.setScale(4f);
@@ -71,7 +71,7 @@ public class DamageSingleTargetAction extends Action {
             shakeAction.addAction(Actions.moveBy(4, 2, 0.05f));
 
             shakeAction.addAction(new ReduceHpAction(this.targetCreature, calculatedDamage));
-            shakeAction.addAction(new ClearSelectedCreatureAction());
+            shakeAction.addAction(new ClearSelectedCreatureModificationsAction());
             shakeAction.addAction(Actions.delay(1f));
             shakeAction.addAction(new ProgressBattleAction());
             shakeAction.addAction(new RemoveFromBattleCheckerAction(targetCreature, nextAttackTarget));

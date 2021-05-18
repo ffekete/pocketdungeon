@@ -8,7 +8,6 @@ import com.blacksoft.battle.action.ProgressBattleAction;
 import com.blacksoft.creature.Creature;
 import com.blacksoft.creature.modifier.DefenceModifier;
 import com.blacksoft.state.GameState;
-import com.blacksoft.ui.AnimatedImage;
 
 public class DefendSelfAction extends Action {
 
@@ -31,7 +30,10 @@ public class DefendSelfAction extends Action {
 
         SequenceAction sequenceAction = new SequenceAction();
         sequenceAction.addAction(defenseAnimationAction);
-        GameState.battleSelectedCreature.modifiers.add(new DefenceModifier(0, GameState.battleSelectedCreature, 1));
+        DefenceModifier defenceModifier = new DefenceModifier(0, GameState.battleSelectedCreature, 1);
+        GameState.battleSelectedCreature.modifiers.add(defenceModifier);
+        defenceModifier.start(sequenceAction);
+
         sequenceAction.addAction(Actions.delay(1f));
         sequenceAction.addAction(new ProgressBattleAction());
         GameState.uiStage.addAction(sequenceAction);
