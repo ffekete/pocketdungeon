@@ -43,7 +43,6 @@ public class GameState {
 
     public static int loopProgress = -20;
     public static int gold = 100;
-    public static int maxGoldCapacity = 500;
     public static int iron = 10;
     public static int maxIronCapacity = 20;
     public static int gems = 20;

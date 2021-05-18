@@ -177,13 +177,6 @@ public class UIFactory {
 //        updateLabelAmount(0, GameState.loopProgress, progressLabel, "%s", null);
 
         // create progress bar
-        ProgressBar.ProgressBarStyle incomeProgressBarStyle = new ProgressBar.ProgressBarStyle();
-        incomeProgressBarStyle.background = new TextureRegionDrawable(UIState.progressBarBackgroundImage);
-
-        incomeProgressBarStyle.knob = new TextureRegionDrawable(UIState.GoldIconImage);
-        ProgressBar incomeProgressBar = new ProgressBar(0, Config.TIME_PERIOD, 0.05f, false, incomeProgressBarStyle);
-        UIState.timeProgressBar = incomeProgressBar;
-
         ProgressBar.ProgressBarStyle invasionProgressBarStyle = new ProgressBar.ProgressBarStyle();
         invasionProgressBarStyle.background = new TextureRegionDrawable(UIState.progressBarBackgroundImage);
         TextureRegion[] textureRegions = TextureRegion.split(UIState.incomeProgressBarKnobImage.getTexture(), 10, 10)[0];
@@ -198,7 +191,7 @@ public class UIFactory {
         UIState.goldLabel = goldLabel;
         table.add(goldLabel).width(60).left();
 
-        updateLabelAmount(0, GameState.gold, goldLabel, "%s/%s", GameState.maxGoldCapacity);
+        updateLabelAmount(0, GameState.gold, goldLabel, "%s", null);
 
         Label ironLabel = new Label("", labelStyle14);
         ironLabel.setColor(Color.LIGHT_GRAY);
@@ -215,7 +208,6 @@ public class UIFactory {
         updateLabelAmount(0, GameState.gems, gemLabel, "%s/%s", GameState.maxGemsCapacity);
 
         // Add progress bars
-        table.add(incomeProgressBar).height(10).width(60).left();
         table.add(invasionProgressBar).height(10).width(60).left();
 
         horizontalGroup.addActor(new Image(new Texture(Gdx.files.internal("ui/StatusBar.png"))));

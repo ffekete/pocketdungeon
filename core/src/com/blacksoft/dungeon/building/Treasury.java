@@ -37,8 +37,9 @@ public class Treasury implements Building {
 
         GameState.loopProgress += Config.TREASURY_PROGRESS_VALUE;
         this.lightSource = LightSourceFactory.getGraveyardLightSource(x / 16 * 16 + 8,y / 16 * 16 + 8);
-        GameState.maxGoldCapacity += 500;
-        UIFactory.I.updateLabelAmount(GameState.gold-1, GameState.gold, UIState.goldLabel, "%s/%s", GameState.maxGoldCapacity);
+        int old = GameState.gold;
+        GameState.gold += 500;
+        UIFactory.I.updateLabelAmount(old, GameState.gold, UIState.goldLabel, "%s", null);
         this.x = x / 16;
         this.y = y / 16;
     }
@@ -46,14 +47,13 @@ public class Treasury implements Building {
     @Override
     public void upgrade() {
         GameState.loopProgress += Config.TREASURY_PROGRESS_VALUE;
-        GameState.maxGoldCapacity += 500;
+        GameState.gold += 500;
         level++;
     }
 
     @Override
     public void destroy() {
         lightSource.dispose();
-        GameState.maxGoldCapacity -= 500 * level;
     }
 
     @Override

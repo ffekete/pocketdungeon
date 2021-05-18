@@ -20,7 +20,6 @@ import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.badlogic.gdx.utils.viewport.FitViewport;
 import com.blacksoft.NewGameInitializer;
-import com.blacksoft.creature.action.CreatureSalaryAction;
 import com.blacksoft.dungeon.Node;
 import com.blacksoft.dungeon.actions.InvasionUpdateAction;
 import com.blacksoft.dungeon.actions.ui.CleanIndicatorUpdater;
@@ -167,7 +166,6 @@ public class BuilderScreen extends ScreenAdapter {
 
         // ACTIONS
         GameState.stage.addAction(new MoveLightToMouseAction());
-        GameState.stage.addAction(new CreatureSalaryAction());
         GameState.stage.addAction(new InvasionUpdateAction());
 
         // UI, 2nd part

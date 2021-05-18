@@ -59,7 +59,7 @@ public class MapClickHandler {
                         int old = GameState.gold;
                         GameState.gold -= CLEAN_COST_VALUE;
 
-                        UIFactory.I.updateLabelAmount(old, GameState.gold, UIState.goldLabel, "%s/%s", GameState.maxGoldCapacity);
+                        UIFactory.I.updateLabelAmount(old, GameState.gold, UIState.goldLabel, "%s", null);
 
                         CleanIndicatorsAction.cleanAll(GameState.dungeon);
                         CleanIndicatorUpdater.update(GameState.dungeon);
