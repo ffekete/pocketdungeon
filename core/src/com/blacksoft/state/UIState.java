@@ -40,7 +40,6 @@ public class UIState {
 
     // ICONS
     public static TextureRegion GoldIconImage = new TextureRegion(new Texture(Gdx.files.internal("ui/icon/GoldIcon.png")));
-    public static TextureRegion MoraleIconImage = new TextureRegion(new Texture(Gdx.files.internal("ui/icon/MoraleIcon.png")));
     public static TextureRegion IronIconImage = new TextureRegion(new Texture(Gdx.files.internal("ui/icon/IronIcon.png")));
     public static TextureRegion GemIconImage = new TextureRegion(new Texture(Gdx.files.internal("ui/icon/GemIcon.png")));
 

@@ -47,6 +47,7 @@ public class DamageSingleTargetAction extends Action {
             GameState.uiStage.addActor(animatedImage);
 
             SequenceAction shakeAction = new SequenceAction();
+            shakeAction.addAction(Actions.delay(0.1f));
             shakeAction.addAction(Actions.moveBy(4, 2, 0.05f));
             shakeAction.addAction(Actions.moveBy(-8, -4, 0.05f));
             shakeAction.addAction(Actions.moveBy(8, 4, 0.05f));
