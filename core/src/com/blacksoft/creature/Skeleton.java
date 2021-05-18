@@ -73,6 +73,6 @@ public class Skeleton extends Creature {
 
     @Override
     public int getMeleeDefence() {
-        return 2;
+        return 2 + tempDefenceModifier;
     }
 }

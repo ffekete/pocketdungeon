@@ -73,6 +73,6 @@ public class Warlock extends Creature {
 
     @Override
     public int getMeleeDefence() {
-        return level / 5;
+        return level / 5 + tempDefenceModifier;
     }
 }

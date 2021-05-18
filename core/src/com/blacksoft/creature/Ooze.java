@@ -72,6 +72,6 @@ public class Ooze extends Creature {
 
     @Override
     public int getMeleeDefence() {
-        return (level / 2);
+        return (level / 2) + tempDefenceModifier;
     }
 }

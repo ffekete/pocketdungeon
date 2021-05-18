@@ -6,6 +6,7 @@ import com.badlogic.gdx.scenes.scene2d.actions.SequenceAction;
 import com.blacksoft.battle.BattlePhase;
 import com.blacksoft.battle.action.ProgressBattleAction;
 import com.blacksoft.creature.Creature;
+import com.blacksoft.creature.modifier.DefenceModifier;
 import com.blacksoft.state.GameState;
 import com.blacksoft.ui.AnimatedImage;
 
@@ -30,12 +31,10 @@ public class DefendSelfAction extends Action {
 
         SequenceAction sequenceAction = new SequenceAction();
         sequenceAction.addAction(defenseAnimationAction);
-        sequenceAction.addAction(new DefendSelfAction(targetCreature));
+        GameState.battleSelectedCreature.modifiers.add(new DefenceModifier(0, GameState.battleSelectedCreature, 1));
         sequenceAction.addAction(Actions.delay(1f));
         sequenceAction.addAction(new ProgressBattleAction());
         GameState.uiStage.addAction(sequenceAction);
-
-
 
         return true;
     }

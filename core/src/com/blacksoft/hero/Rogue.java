@@ -72,6 +72,6 @@ public class Rogue extends Hero {
 
     @Override
     public int getMeleeDefence() {
-        return 3 + (level / 2);
+        return 3 + (level / 2) + tempDefenceModifier;
     }
 }

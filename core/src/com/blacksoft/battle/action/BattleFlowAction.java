@@ -39,6 +39,8 @@ public class BattleFlowAction extends Action {
         if (GameState.isCombatSequence && GameState.battleSelectedCreature == null) {
             GameState.battleSelectedCreature = BattleSequence.getNext();
 
+            GameState.battleSelectedCreature.applyModifiers();
+
             GameState.battlePhase = BattlePhase.StartTurn; // new turn
 
             UIState.battleSelectionCursor.setVisible(true);

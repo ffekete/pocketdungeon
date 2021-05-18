@@ -9,6 +9,7 @@ import com.blacksoft.battle.BattlePhase;
 import com.blacksoft.battle.action.ClearSelectedCreatureAction;
 import com.blacksoft.battle.action.ProgressBattleAction;
 import com.blacksoft.creature.Creature;
+import com.blacksoft.hero.Hero;
 import com.blacksoft.screen.UIFactory;
 import com.blacksoft.state.GameState;
 import com.blacksoft.state.UIState;
@@ -52,8 +53,13 @@ public class DamageSingleTargetAction extends Action {
 
             SequenceAction attackAnimationAction = new SequenceAction();
             attackAnimationAction.setActor(GameState.battleImages.get(GameState.battleSelectedCreature));
-            attackAnimationAction.addAction(Actions.moveBy(10, 0, 0.1f));
-            attackAnimationAction.addAction(Actions.moveBy(-10, 0, 0.1f));
+            if(Hero.class.isAssignableFrom(GameState.battleSelectedCreature.getClass())) {
+                attackAnimationAction.addAction(Actions.moveBy(-10, 0, 0.1f));
+                attackAnimationAction.addAction(Actions.moveBy(10, 0, 0.1f));
+            } else {
+                attackAnimationAction.addAction(Actions.moveBy(10, 0, 0.1f));
+                attackAnimationAction.addAction(Actions.moveBy(-10, 0, 0.1f));
+            }
             GameState.battleImages.get(GameState.battleSelectedCreature).addAction(attackAnimationAction);
 
             SequenceAction shakeAction = new SequenceAction();

@@ -11,7 +11,7 @@ import java.util.List;
 
 public class MeleeAttack implements Skill {
 
-    private static final Texture icon;
+    public static final Texture icon;
 
     static {
         icon = new Texture(Gdx.files.internal("skill/AttackIcon.png"));

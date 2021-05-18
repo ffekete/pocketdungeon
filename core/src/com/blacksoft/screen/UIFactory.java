@@ -302,6 +302,8 @@ public class UIFactory {
 
         label.addAction(sequenceAction);
 
+        label.toFront();
+
         GameState.uiStage.addActor(label);
 
         return label;

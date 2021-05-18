@@ -73,6 +73,6 @@ public class Vampire extends Creature {
 
     @Override
     public int getMeleeDefence() {
-        return 1 + (level / 4);
+        return 1 + (level / 4) + tempDefenceModifier;
     }
 }

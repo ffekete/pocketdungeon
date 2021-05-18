@@ -72,6 +72,6 @@ public class Wizard extends Hero {
 
     @Override
     public int getMeleeDefence() {
-        return level / 5;
+        return level / 5 + tempDefenceModifier;
     }
 }

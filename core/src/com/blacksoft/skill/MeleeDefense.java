@@ -14,7 +14,7 @@ import java.util.List;
 
 public class MeleeDefense implements Skill {
 
-    private static final Texture icon;
+    public static final Texture icon;
 
     static {
         icon = new Texture(Gdx.files.internal("skill/DefenseIcon.png"));
@@ -22,7 +22,7 @@ public class MeleeDefense implements Skill {
 
     @Override
     public TriFunction<Creature, List<Creature>, List<Creature>, Action> getAction() {
-        return ((creature, allies, enemies) -> new DefendSelfAction(creature)) ;
+        return ((creature, allies, enemies) -> new DefendSelfAction(creature));
     }
 
     @Override
