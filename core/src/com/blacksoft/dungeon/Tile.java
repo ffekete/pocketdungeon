@@ -19,16 +19,16 @@ public enum Tile {
 
     static {
         Rock.canMergeWith = Arrays.asList(Torch, Rock);
-        Empty.canMergeWith = Arrays.asList(Empty, DungeonEntrance, Treasury, RestingArea, GateOpened, GateClosed);
+        Empty.canMergeWith = Arrays.asList(Empty, BloodPool, DungeonEntrance, Treasury, RestingArea, GateOpened, GateClosed);
         Library.canMergeWith = Arrays.asList(Library);
-        GraveYard.canMergeWith = Arrays.asList(GraveYard, GateClosed, GateOpened);
+        GraveYard.canMergeWith = Arrays.asList(GraveYard);
         Torch.canMergeWith = Arrays.asList(Rock, Torch);
-        BloodPool.canMergeWith = Arrays.asList(BloodPool, GateClosed, GateOpened);
-        Treasury.canMergeWith = Arrays.asList(Treasury, Empty, GateClosed, GateOpened);
+        BloodPool.canMergeWith = BloodPool.canMergeWith = Arrays.asList(BloodPool);
+        Treasury.canMergeWith = Empty.canMergeWith;
         DungeonEntrance.canMergeWith = Empty.canMergeWith;
         RestingArea.canMergeWith = Empty.canMergeWith;
-        GateOpened.canMergeWith = Arrays.asList(Empty, GateOpened, GateClosed);
-        GateClosed.canMergeWith = Arrays.asList(Empty, GateOpened, GateClosed);
+        GateOpened.canMergeWith = Empty.canMergeWith;
+        GateClosed.canMergeWith = Empty.canMergeWith;
     }
 
     private boolean solid;
