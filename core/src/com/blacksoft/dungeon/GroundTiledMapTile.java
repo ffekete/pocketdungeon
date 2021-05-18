@@ -108,7 +108,6 @@ public class GroundTiledMapTile implements TiledMapTile {
         if(v == 14) currentTextureRegion.setRegion(0, 16, 16 ,16);
         if(v == 15) currentTextureRegion.setRegion(16, 16, 16 ,16);
 
-
         return currentTextureRegion;
     }
 
