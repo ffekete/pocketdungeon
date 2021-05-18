@@ -10,18 +10,17 @@ import com.badlogic.gdx.scenes.scene2d.actions.SequenceAction;
 import com.badlogic.gdx.scenes.scene2d.ui.Container;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
-import com.blacksoft.battle.action.BattleFinishedAction;
+import com.blacksoft.battle.action.BattleFinishedCheckerAction;
 import com.blacksoft.battle.action.BattleFlowAction;
 import com.blacksoft.creature.Creature;
-import com.blacksoft.creature.action.DamageSingleTargetAction;
 import com.blacksoft.creature.action.RemoveFromBattleCheckerAction;
 import com.blacksoft.hero.Party;
 import com.blacksoft.screen.UIFactory;
+import com.blacksoft.skill.Skill;
 import com.blacksoft.state.GameState;
 import com.blacksoft.state.UIState;
 import com.blacksoft.ui.AnimatedImage;
 import com.blacksoft.ui.DynamicProgressBar;
-import com.blacksoft.user.actions.UserAction;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -43,7 +42,7 @@ public class BattleInitializer {
         battleScreen.background(new TextureRegionDrawable(UIState.battleScreenBackground));
         battleScreen.setSize(300, 200);
 
-        GameState.stage.addAction(new BattleFinishedAction(party, creatures));
+        GameState.stage.addAction(new BattleFinishedCheckerAction(party, creatures));
 
         GameState.uiStage.addActor(UIFactory.I.addMovingLabel("BATTLE"));
         GameState.uiStage.addActor(UIFactory.I.addMovingLabelShadow("BATTLE"));
@@ -61,8 +60,6 @@ public class BattleInitializer {
             if (i < creatures.size()) {
                 Creature creature = creatures.get(i);
                 AnimatedImage creatureImage = new AnimatedImage(creatures.get(i).getAnimation());
-
-                creatureImage.addAction(new RemoveFromBattleCheckerAction(creature, creatureImage));
 
                 battleScreen.add(creatureImage).size(48, 48).center().colspan(3);
                 GameState.battleImages.put(creature, creatureImage);
@@ -84,8 +81,6 @@ public class BattleInitializer {
                 BattleSequence.add(hero);
 
                 GameState.battleImages.put(hero, heroImage);
-
-                heroImage.addAction(new RemoveFromBattleCheckerAction(hero, heroImage));
 
                 heroImage.addListener(new InputListener() {
 
@@ -122,10 +117,7 @@ public class BattleInitializer {
 
                             // attack shift animation
                             SequenceAction attackAnimationAction = new SequenceAction();
-                            attackAnimationAction.setActor(GameState.battleImages.get(GameState.battleSelectedCreature));
-                            attackAnimationAction.addAction(Actions.moveBy(10, 0, 0.1f));
-                            attackAnimationAction.addAction(Actions.moveBy(-10, 0, 0.1f));
-                            GameState.battleImages.get(GameState.battleSelectedCreature).addAction(attackAnimationAction);
+
                         }
 
                         return true;
@@ -211,6 +203,9 @@ public class BattleInitializer {
 
                 skillsIndex = creature.skills.size();
                 for (int j = 0; j < skillsIndex; j++) {
+
+                    Skill skill = creature.skills.get(j);
+
                     AnimatedImage skillImage = new AnimatedImage(
                             new Animation<>(0.3f, TextureRegion.split(creature.skills.get(j).getIcon(), 16, 16)[0]));
                     battleScreen.add(skillImage).size(16).pad(5);
@@ -244,8 +239,8 @@ public class BattleInitializer {
                                                  int pointer,
                                                  int button) {
 
-                            GameState.userAction = UserAction.SelectSingleTarget;
-                            GameState.nextBattleAction = new DamageSingleTargetAction(creature.getMeleeDamage());
+                            GameState.userAction = skill.getUserAction();
+                            GameState.nextBattleAction = skill.getAction().apply(creature, creatures, party.heroes);
                             GameState.uiStage.addAction(GameState.nextBattleAction);
 
                             return true;
@@ -265,12 +260,16 @@ public class BattleInitializer {
                 Creature hero = party.heroes.get(i);
                 skillsIndex = hero.skills.size();
                 for (int j = 0; j < skillsIndex; j++) {
+
+                    Skill skill = hero.skills.get(j);
+
                     AnimatedImage skillImage = new AnimatedImage(
                             new Animation<>(0.3f, TextureRegion.split(hero.skills.get(j).getIcon(), 16, 16)[0]));
                     battleScreen.add(skillImage).size(16).pad(5);
-
                     GameState.battleSkillIcons.computeIfAbsent(hero, value -> new ArrayList<>());
                     GameState.battleSkillIcons.get(hero).add(skillImage);
+
+                    GameState.nextBattleAction = skill.getAction().apply(hero, party.heroes, creatures);
                 }
             } else {
                 skillsIndex = 0;

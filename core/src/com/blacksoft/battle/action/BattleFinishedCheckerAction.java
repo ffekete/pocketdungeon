@@ -1,6 +1,7 @@
 package com.blacksoft.battle.action;
 
 import com.badlogic.gdx.scenes.scene2d.Action;
+import com.blacksoft.battle.BattlePhase;
 import com.blacksoft.creature.Creature;
 import com.blacksoft.dungeon.phase.GamePhase;
 import com.blacksoft.hero.Party;
@@ -11,19 +12,23 @@ import com.blacksoft.user.actions.UserAction;
 
 import java.util.List;
 
-public class BattleFinishedAction extends Action {
+public class BattleFinishedCheckerAction extends Action {
 
     private Party party;
     private List<Creature> creatures;
 
-    public BattleFinishedAction(Party party,
-                                List<Creature> creatures) {
+    public BattleFinishedCheckerAction(Party party,
+                                       List<Creature> creatures) {
         this.party = party;
         this.creatures = creatures;
     }
 
     @Override
     public boolean act(float delta) {
+
+        if(GameState.battlePhase != BattlePhase.FinishTurn) {
+            return false;
+        }
 
         if(creatures.stream().noneMatch(creature -> creature.hp > 0)) {
             UIState.battleScreen.remove();
@@ -34,6 +39,12 @@ public class BattleFinishedAction extends Action {
             GameState.battleSelectedCreature = null;
             GameState.nextBattleAction = null;
             GameState.isCombatSequence = false;
+
+            GameState.nextAttackTarget = null;
+            GameState.nextAttackTargetImage = null;
+
+            GameState.battlePhase = BattlePhase.FinishTurn; // just for sure
+
             return true;
         }
 
@@ -58,6 +69,11 @@ public class BattleFinishedAction extends Action {
             GameState.stage.getActors().removeValue(party, true);
 
             GameState.isCombatSequence = false;
+
+            GameState.nextAttackTarget = null;
+            GameState.nextAttackTargetImage = null;
+
+            GameState.battlePhase = BattlePhase.FinishTurn; // just for sure
 
             return true;
         }

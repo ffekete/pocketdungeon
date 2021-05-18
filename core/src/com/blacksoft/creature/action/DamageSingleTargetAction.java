@@ -5,7 +5,9 @@ import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.scenes.scene2d.Action;
 import com.badlogic.gdx.scenes.scene2d.actions.Actions;
 import com.badlogic.gdx.scenes.scene2d.actions.SequenceAction;
+import com.blacksoft.battle.BattlePhase;
 import com.blacksoft.battle.action.ClearSelectedCreatureAction;
+import com.blacksoft.battle.action.ProgressBattleAction;
 import com.blacksoft.creature.Creature;
 import com.blacksoft.screen.UIFactory;
 import com.blacksoft.state.GameState;
@@ -27,6 +29,8 @@ public class DamageSingleTargetAction extends Action {
 
         if (GameState.nextAttackTarget != null) {
 
+            GameState.battlePhase = BattlePhase.Act;
+
             this.targetCreature = GameState.nextAttackTarget;
             this.nextAttackTarget = GameState.nextAttackTargetImage;
 
@@ -46,6 +50,12 @@ public class DamageSingleTargetAction extends Action {
             animatedImage.addAction(playAnimationAction);
             GameState.uiStage.addActor(animatedImage);
 
+            SequenceAction attackAnimationAction = new SequenceAction();
+            attackAnimationAction.setActor(GameState.battleImages.get(GameState.battleSelectedCreature));
+            attackAnimationAction.addAction(Actions.moveBy(10, 0, 0.1f));
+            attackAnimationAction.addAction(Actions.moveBy(-10, 0, 0.1f));
+            GameState.battleImages.get(GameState.battleSelectedCreature).addAction(attackAnimationAction);
+
             SequenceAction shakeAction = new SequenceAction();
             shakeAction.addAction(Actions.delay(0.1f));
             shakeAction.addAction(Actions.moveBy(4, 2, 0.05f));
@@ -56,12 +66,11 @@ public class DamageSingleTargetAction extends Action {
 
             shakeAction.addAction(new ReduceHpAction(this.targetCreature, calculatedDamage));
             shakeAction.addAction(new ClearSelectedCreatureAction());
+            shakeAction.addAction(Actions.delay(1f));
+            shakeAction.addAction(new ProgressBattleAction());
+            shakeAction.addAction(new RemoveFromBattleCheckerAction(targetCreature, nextAttackTarget));
 
             this.nextAttackTarget.addAction(shakeAction);
-
-            GameState.nextBattleAction = null;
-            GameState.nextAttackTarget = null;
-            GameState.nextAttackTargetImage = null;
 
             return true;
         }

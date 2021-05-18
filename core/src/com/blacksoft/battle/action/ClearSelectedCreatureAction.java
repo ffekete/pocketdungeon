@@ -8,8 +8,6 @@ public class ClearSelectedCreatureAction extends Action {
     @Override
     public boolean act(float delta) {
         GameState.battleSelectedCreature.setScale(1f);
-        GameState.battleSelectedCreature = null;
-
         return true;
     }
 }

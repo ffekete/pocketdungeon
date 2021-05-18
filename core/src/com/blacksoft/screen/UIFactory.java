@@ -179,7 +179,7 @@ public class UIFactory {
         // create progress bar
         ProgressBar.ProgressBarStyle invasionProgressBarStyle = new ProgressBar.ProgressBarStyle();
         invasionProgressBarStyle.background = new TextureRegionDrawable(UIState.progressBarBackgroundImage);
-        TextureRegion[] textureRegions = TextureRegion.split(UIState.incomeProgressBarKnobImage.getTexture(), 10, 10)[0];
+        TextureRegion[] textureRegions = TextureRegion.split(UIState.invasionProgressBarKnobImage.getTexture(), 10, 10)[0];
         Animation<TextureRegion> timeKnobAnimation = new Animation<>(0.3f, textureRegions);
         invasionProgressBarStyle.knob = new AnimatedDrawable(timeKnobAnimation);
         ProgressBar invasionProgressBar = new ProgressBar(0, 100, 1f, false, invasionProgressBarStyle);

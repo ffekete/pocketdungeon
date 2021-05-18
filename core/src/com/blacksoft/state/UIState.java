@@ -45,7 +45,7 @@ public class UIState {
 
     // UI elements
     public static TextureRegion progressBarBackgroundImage = new TextureRegion(new Texture(Gdx.files.internal("ui/InvasionProgressBar.png")));
-    public static TextureRegion incomeProgressBarKnobImage = new TextureRegion(new Texture(Gdx.files.internal("ui/ProgressBarKnob.png")));
+    public static TextureRegion invasionProgressBarKnobImage = new TextureRegion(new Texture(Gdx.files.internal("ui/ProgressBarKnob.png")));
     public static TextureRegion battleSelectionCursorImage = new TextureRegion(new Texture(Gdx.files.internal("ui/BattleSelectionCursor.png")));
 
     // BATTLE

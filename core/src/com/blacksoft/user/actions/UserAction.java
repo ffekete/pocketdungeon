@@ -4,6 +4,7 @@ public enum UserAction {
 
     Clean,
     Place,
-    SelectSingleTarget;
+    SelectSingleTarget,
+    NoAction;
 
 }
