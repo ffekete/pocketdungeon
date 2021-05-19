@@ -5,6 +5,7 @@ import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.scenes.scene2d.Action;
 import com.badlogic.gdx.scenes.scene2d.actions.Actions;
 import com.badlogic.gdx.scenes.scene2d.actions.SequenceAction;
+import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.blacksoft.battle.BattlePhase;
 import com.blacksoft.battle.action.BattleFinishedCheckingAction;
 import com.blacksoft.battle.action.ClearSelectedCreatureModificationsAction;
@@ -57,8 +58,12 @@ public class DamageSingleTargetAction extends Action {
             animatedImage.addAction(playAttackEffectAnimationAction);
             GameState.uiStage.addActor(animatedImage);
 
+
+            System.out.println("Selected creature is attacking: " + GameState.battleSelectedCreature);
+            Image creatureImage = GameState.battleImages.get(GameState.battleSelectedCreature);
+
             SequenceAction attackAnimationAction = new SequenceAction();
-            attackAnimationAction.setActor(GameState.battleImages.get(GameState.battleSelectedCreature));
+            attackAnimationAction.setActor(creatureImage);
             if(Hero.class.isAssignableFrom(GameState.battleSelectedCreature.getClass())) {
                 attackAnimationAction.addAction(Actions.moveBy(-10, 0, 0.1f));
                 attackAnimationAction.addAction(Actions.moveBy(10, 0, 0.1f));
@@ -66,27 +71,35 @@ public class DamageSingleTargetAction extends Action {
                 attackAnimationAction.addAction(Actions.moveBy(10, 0, 0.1f));
                 attackAnimationAction.addAction(Actions.moveBy(-10, 0, 0.1f));
             }
-            GameState.battleImages.get(GameState.battleSelectedCreature).addAction(attackAnimationAction);
+            creatureImage.addAction(attackAnimationAction);
 
-            SequenceAction battleSequenceAction = new SequenceAction();
-            battleSequenceAction.addAction(Actions.delay(0.1f));
-            battleSequenceAction.addAction(Actions.moveBy(4, 2, 0.05f));
-            battleSequenceAction.addAction(Actions.moveBy(-8, -4, 0.05f));
-            battleSequenceAction.addAction(Actions.moveBy(8, 4, 0.05f));
-            battleSequenceAction.addAction(Actions.moveBy(-8, -4, 0.05f));
-            battleSequenceAction.addAction(Actions.moveBy(4, 2, 0.05f));
+            SequenceAction creatureSequenceAction = new SequenceAction();
+            SequenceAction genericBattleActionSequence = new SequenceAction();
 
-            battleSequenceAction.addAction(new ReduceHpAction(this.targetCreature, calculatedDamage));
-            battleSequenceAction.addAction(new ClearSelectedCreatureModificationsAction());
-            battleSequenceAction.addAction(Actions.delay(0.5f));
-            battleSequenceAction.addAction(new MoveBattleToFinishTurnAction());
-            battleSequenceAction.addAction(new RemoveFromBattleCheckerAction(targetCreature));
-            battleSequenceAction.addAction(new RemoveTargetSelectionAction());
-            battleSequenceAction.addAction(Actions.delay(0.5f));
-            battleSequenceAction.addAction(new SetUserAction(UserAction.Idle));
-            battleSequenceAction.addAction(new BattleFinishedCheckingAction());
+            creatureSequenceAction.addAction(Actions.delay(0.1f));
+            creatureSequenceAction.addAction(Actions.moveBy(4, 2, 0.05f));
+            creatureSequenceAction.addAction(Actions.moveBy(-8, -4, 0.05f));
+            creatureSequenceAction.addAction(Actions.moveBy(8, 4, 0.05f));
+            creatureSequenceAction.addAction(Actions.moveBy(-8, -4, 0.05f));
+            creatureSequenceAction.addAction(Actions.moveBy(4, 2, 0.05f));
 
-            this.nextAttackTarget.addAction(battleSequenceAction);
+            creatureSequenceAction.addAction(new ReduceHpAction(this.targetCreature, calculatedDamage));
+            creatureSequenceAction.addAction(new ClearSelectedCreatureModificationsAction());
+            creatureSequenceAction.addAction(Actions.delay(0.5f));
+            creatureSequenceAction.addAction(new RemoveFromBattleCheckerAction(targetCreature));
+            creatureSequenceAction.addAction(new RemoveTargetSelectionAction());
+            creatureSequenceAction.setActor(GameState.nextAttackTargetImage);
+
+            genericBattleActionSequence.addAction(Actions.delay(0.5f));
+            genericBattleActionSequence.addAction(new SetUserAction(UserAction.Idle));
+            genericBattleActionSequence.addAction(new BattleFinishedCheckingAction());
+            genericBattleActionSequence.addAction(new MoveBattleToFinishTurnAction());
+
+            SequenceAction sequenceAction = new SequenceAction();
+            sequenceAction.addAction(creatureSequenceAction);
+            sequenceAction.addAction(genericBattleActionSequence);
+
+            GameState.stage.addAction(sequenceAction);
 
             return true;
         }

@@ -40,7 +40,6 @@ public abstract class Creature extends Actor {
         addAction(sequenceActions);
         hp = getMaxHp();
         this.skills = new ArrayList<>();
-        this.skills.add(new Poison());
         this.skills.add(new MeleeAttack(this));
         this.skills.add(new MeleeDefense());
     }

@@ -2,6 +2,7 @@ package com.blacksoft.battle;
 
 public enum BattlePhase {
 
+    NotStartedYet,
     StartTurn,
     Prepare,
     Prepare_stg_2,

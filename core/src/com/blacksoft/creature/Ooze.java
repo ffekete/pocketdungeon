@@ -6,6 +6,7 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
+import com.blacksoft.skill.Poison;
 import com.blacksoft.state.Config;
 
 import static com.blacksoft.state.Config.TEXTURE_SIZE;

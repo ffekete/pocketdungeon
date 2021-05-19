@@ -41,7 +41,7 @@ public class BattleFlowAction extends Action {
             return false;
         }
 
-        if (GameState.isCombatSequence && GameState.battleSelectedCreature == null) {
+        if (GameState.isCombatSequence && GameState.battleSelectedCreature == null && GameState.battlePhase == BattlePhase.FinishTurn) {
             GameState.battleSelectedCreature = BattleSequence.getNext();
 
             GameState.battlePhase = BattlePhase.StartTurn; // new turn

@@ -57,4 +57,7 @@ public class Config {
     public static final int SKELETON_MAX_MP = 0;
 
     public static final float FLOATING_ITEMS_DURATION = 0.8f;
+
+    // battle screen layout
+    public static int MAX_SKILLS_SIZE = 4;
 }
