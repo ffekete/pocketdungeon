@@ -40,8 +40,8 @@ public class BattleInitializer {
         battleScreen.background(new TextureRegionDrawable(UIState.battleScreenBackground));
         battleScreen.setSize(300, 200);
 
-        GameState.uiStage.addActor(UIFactory.I.addMovingLabel("BATTLE"));
         GameState.uiStage.addActor(UIFactory.I.addMovingLabelShadow("BATTLE"));
+        GameState.uiStage.addActor(UIFactory.I.addMovingLabel("BATTLE"));
 
         GameState.userAction = UserAction.Idle;
 

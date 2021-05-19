@@ -27,8 +27,8 @@ public class InvasionStartAction extends Action {
         // let the fun begin
         GameState.gamePhase = GamePhase.Invasion;
 
-        Label intrudersLabel = UIFactory.I.addMovingLabel("INVASION");
         Label intrudersShadowLabel = UIFactory.I.addMovingLabelShadow("INVASION");
+        Label intrudersLabel = UIFactory.I.addMovingLabel("INVASION");
         GameState.uiStage.addActor(intrudersLabel);
         GameState.uiStage.addActor(intrudersShadowLabel);
         intrudersShadowLabel.toFront();
