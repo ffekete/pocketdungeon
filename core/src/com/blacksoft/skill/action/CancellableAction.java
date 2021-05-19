@@ -1,7 +1,9 @@
 package com.blacksoft.skill.action;
 
+import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.scenes.scene2d.Action;
 import com.blacksoft.state.GameState;
+import com.blacksoft.state.UIState;
 import com.blacksoft.user.actions.UserAction;
 
 public class CancellableAction extends Action {
@@ -18,6 +20,7 @@ public class CancellableAction extends Action {
 
         if(GameState.userAction == UserAction.CancelLast) {
             GameState.userAction = UserAction.Idle;
+            Gdx.graphics.setCursor(UIState.defaultCursor);
             return true;
         }
 

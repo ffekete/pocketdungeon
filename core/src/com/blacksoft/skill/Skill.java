@@ -1,5 +1,6 @@
 package com.blacksoft.skill;
 
+import com.badlogic.gdx.graphics.Cursor;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.scenes.scene2d.Action;
 import com.blacksoft.creature.Creature;
@@ -15,4 +16,5 @@ public interface Skill {
 
     Texture getIcon();
 
+    Cursor getCursor();
 }

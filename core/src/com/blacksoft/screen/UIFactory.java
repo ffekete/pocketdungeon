@@ -2,6 +2,7 @@ package com.blacksoft.screen;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Color;
+import com.badlogic.gdx.graphics.Cursor;
 import com.badlogic.gdx.graphics.Pixmap;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Animation;
@@ -32,6 +33,7 @@ import com.blacksoft.ui.action.FollowCreatureAction;
 import com.blacksoft.ui.action.IntAction;
 import com.blacksoft.user.actions.UserAction;
 
+import static com.blacksoft.state.Config.FLOATING_ITEMS_DURATION;
 import static com.blacksoft.state.Config.SCREEN_HEIGHT;
 import static com.blacksoft.state.Config.SCREEN_WIDTH;
 import static com.blacksoft.state.Config.TEXTURE_SIZE;
@@ -255,7 +257,7 @@ public class UIFactory {
         image.setSize(16, 16);
 
         SequenceAction sequenceAction1 = new SequenceAction();
-        sequenceAction1.addAction(Actions.moveTo(x + 2, y + 15, 0.5f));
+        sequenceAction1.addAction(Actions.moveTo(x + 2, y + 15, FLOATING_ITEMS_DURATION));
         sequenceAction1.addAction(Actions.removeActor());
         sequenceAction1.setActor(table);
 
@@ -264,6 +266,43 @@ public class UIFactory {
         table.add(image).size(16).pad(0, 2, 0, 2);
 
         table.add(new Label(suffix, labelStyle14));
+        table.setColor(1, 1, 1, 0.8f);
+
+        GameState.uiStage.addActor(table);
+
+        return label;
+    }
+
+    public Label createTwoFloatingLabelsWithTwoIconFromString(String prefix,
+                                                       String suffix,
+                                                       TextureRegion prefixIconTextureRegion,
+                                                       TextureRegion suffixIconTextureRegion,
+                                                       int x,
+                                                       int y,
+                                                       SequenceAction sequenceAction) {
+        Table table = new Table();
+
+        Label label = null;
+
+        label = new Label(prefix, labelStyle14);
+        table.setPosition(x + 2, y);
+        table.add(label);
+
+        Image prefixImage = new Image(prefixIconTextureRegion);
+        prefixImage.setSize(16, 16);
+
+        table.add(prefixImage).size(16).pad(0, 2, 0, 2);
+        table.add(new Label(suffix, labelStyle14));
+
+        Image suffixImage = new Image(suffixIconTextureRegion);
+        suffixImage.setSize(16, 16);
+        table.add(suffixImage).size(16).pad(0, 2, 0, 2);
+
+        SequenceAction sequenceAction1 = new SequenceAction();
+        sequenceAction.addAction(sequenceAction1);
+        sequenceAction1.addAction(Actions.moveTo(x + 2, y + 15, FLOATING_ITEMS_DURATION));
+        sequenceAction1.addAction(Actions.removeActor());
+        sequenceAction1.setActor(table);
         table.setColor(1, 1, 1, 0.8f);
 
         GameState.uiStage.addActor(table);
@@ -288,7 +327,7 @@ public class UIFactory {
         image.setSize(16, 16);
 
         SequenceAction sequenceAction1 = new SequenceAction();
-        sequenceAction1.addAction(Actions.moveTo(x + 2, y + 15, 0.5f));
+        sequenceAction1.addAction(Actions.moveTo(x + 2, y + 15, FLOATING_ITEMS_DURATION));
         sequenceAction1.addAction(Actions.removeActor());
         sequenceAction1.setActor(table);
 
@@ -317,7 +356,7 @@ public class UIFactory {
         Image image = new Image(iconTextureRegion);
         image.setSize(16, 16);
         SequenceAction sequenceAction = new SequenceAction();
-        sequenceAction.addAction(Actions.moveTo(x + 2, y + 15, 0.5f));
+        sequenceAction.addAction(Actions.moveTo(x + 2, y + 15, FLOATING_ITEMS_DURATION));
         sequenceAction.addAction(Actions.removeActor());
         table.addAction(sequenceAction);
 
@@ -340,7 +379,7 @@ public class UIFactory {
         Image image = new Image(iconTextureRegion);
         image.setSize(16, 16);
         SequenceAction sequenceAction = new SequenceAction();
-        sequenceAction.addAction(Actions.moveTo(x + 2, y + 15, 0.5f));
+        sequenceAction.addAction(Actions.moveTo(x + 2, y + 15, FLOATING_ITEMS_DURATION));
         sequenceAction.addAction(Actions.removeActor());
         table.addAction(sequenceAction);
 
@@ -363,7 +402,7 @@ public class UIFactory {
         image.setSize(16, 16);
 
         SequenceAction floatingAction = new SequenceAction();
-        floatingAction.addAction(Actions.moveTo(x + 2, y + 15, 0.5f));
+        floatingAction.addAction(Actions.moveTo(x + 2, y + 15, FLOATING_ITEMS_DURATION));
         floatingAction.addAction(Actions.removeActor());
         floatingAction.setActor(table);
 
@@ -384,7 +423,7 @@ public class UIFactory {
 
         label.setPosition(x + 2, y);
 
-        MoveToAction moveToAction = Actions.moveTo(x + 2, y + 10, 0.5f);
+        MoveToAction moveToAction = Actions.moveTo(x + 2, y + 10, FLOATING_ITEMS_DURATION);
         moveToAction.setActor(label);
 
         label.setVisible(false);
@@ -812,6 +851,13 @@ public class UIFactory {
 
     public void enableSkill(Image image) {
         image.setColor(1, 1, 1, 1f);
+    }
+
+    public Cursor createCursor(String imagePath) {
+        Pixmap pm = new Pixmap(Gdx.files.internal(imagePath));
+        Cursor cursor = Gdx.graphics.newCursor(pm, 0, 0);
+        pm.dispose();
+        return cursor;
     }
 
 }

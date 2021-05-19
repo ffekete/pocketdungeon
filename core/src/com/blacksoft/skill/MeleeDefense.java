@@ -1,6 +1,7 @@
 package com.blacksoft.skill;
 
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.graphics.Cursor;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.scenes.scene2d.Action;
 import com.badlogic.gdx.scenes.scene2d.actions.Actions;
@@ -8,6 +9,7 @@ import com.badlogic.gdx.scenes.scene2d.actions.SequenceAction;
 import com.blacksoft.creature.Creature;
 import com.blacksoft.creature.action.DefendSelfAction;
 import com.blacksoft.state.GameState;
+import com.blacksoft.state.UIState;
 import com.blacksoft.user.actions.UserAction;
 
 import java.util.List;
@@ -33,5 +35,10 @@ public class MeleeDefense implements Skill {
     @Override
     public UserAction getUserAction() {
         return UserAction.Disabled;
+    }
+
+    @Override
+    public Cursor getCursor() {
+        return UIState.defaultCursor;
     }
 }

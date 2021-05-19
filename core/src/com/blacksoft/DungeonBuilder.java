@@ -7,7 +7,9 @@ import com.badlogic.gdx.graphics.Pixmap;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.utils.ScreenUtils;
 import com.blacksoft.screen.BuilderScreen;
+import com.blacksoft.screen.UIFactory;
 import com.blacksoft.state.GameState;
+import com.blacksoft.state.UIState;
 
 public class DungeonBuilder extends ApplicationAdapter {
     SpriteBatch batch;
@@ -19,9 +21,7 @@ public class DungeonBuilder extends ApplicationAdapter {
         batch = new SpriteBatch();
         builderScreen = new BuilderScreen(batch);
 
-        Pixmap pm = new Pixmap(Gdx.files.internal("ui/Cursor.png"));
-        Gdx.graphics.setCursor(Gdx.graphics.newCursor(pm, 0, 0));
-        pm.dispose();
+        Gdx.graphics.setCursor(UIState.defaultCursor);
 
         builderScreen.show();
     }

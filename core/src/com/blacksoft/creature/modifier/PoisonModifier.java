@@ -36,7 +36,7 @@ public class PoisonModifier implements Modifier {
             duration--;
 
             AnimatedImage image = GameState.battleImages.get(target);
-            Label label = UIFactory.I.createFloatingLabelWithIconFromString(Integer.toString(amount), String.format("(%s)", duration), new TextureRegion(Poison.icon), (int) image.getX() + 90 + 24, (int) image.getY() + 60 + 48, sequenceAction);
+            Label label = UIFactory.I.createTwoFloatingLabelsWithTwoIconFromString(Integer.toString(amount), String.format("%s", duration), new TextureRegion(Poison.icon),new TextureRegion(UIState.hourglassIconImage), (int) image.getX() + 90 + 24, (int) image.getY() + 60 + 48, sequenceAction);
             sequenceAction.addAction(Actions.delay(0.8f));
             sequenceAction.addAction(new ReduceHpAction(target, amount));
             sequenceAction.addAction(new BattleFinishedCheckingAction());

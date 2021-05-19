@@ -55,4 +55,6 @@ public class Config {
     public static final int VAMPIRE_MAX_MP = 3;
     public static final int OOZE_MAX_MP = 0;
     public static final int SKELETON_MAX_MP = 0;
+
+    public static final float FLOATING_ITEMS_DURATION = 0.8f;
 }

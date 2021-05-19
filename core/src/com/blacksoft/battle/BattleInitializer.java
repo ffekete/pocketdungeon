@@ -1,5 +1,6 @@
 package com.blacksoft.battle;
 
+import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.scenes.scene2d.Actor;
@@ -111,6 +112,7 @@ public class BattleInitializer {
                         if (GameState.nextBattleAction != null) {
                             GameState.nextAttackTarget = hero;
                             GameState.nextAttackTargetImage = heroImage;
+                            Gdx.graphics.setCursor(UIState.defaultCursor);
                         }
 
                         return true;
@@ -231,6 +233,7 @@ public class BattleInitializer {
                                                  int button) {
 
                             if(GameState.userAction == UserAction.Idle) {
+                                Gdx.graphics.setCursor(skill.getCursor());
                                 GameState.userAction = skill.getUserAction();
                                 GameState.nextBattleAction = skill.getAction().apply(creature, creatures, party.heroes);
                                 GameState.uiStage.addAction(GameState.nextBattleAction);

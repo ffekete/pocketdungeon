@@ -93,19 +93,7 @@ public class BuilderScreen extends ScreenAdapter {
 
         // INPUT
         GameState.stage.addListener(new ClickListener(Input.Buttons.RIGHT) {
-            @Override
-            public void clicked(InputEvent event,
-                                float x,
-                                float y) {
-                if(GameState.selectedAction != null) {
-                    UIFactory.I.addAction(UIState.actionsGroup, GameState.selectedAction);
-                    GameState.selectedAction = null;
-                    GameState.selectedActionImage.setVisible(false);
-                    GameState.selectedActionImage = null;
-                    GameState.userAction = UserAction.Clean;
-                    CleanIndicatorUpdater.update(GameState.dungeon);
-                }
-            }
+
         });
 
         GameState.stage.addListener(new InputListener() {
@@ -156,6 +144,16 @@ public class BuilderScreen extends ScreenAdapter {
                                 float x,
                                 float y) {
 
+                // clears actions if selected
+                if(GameState.selectedAction != null) {
+                    UIFactory.I.addAction(UIState.actionsGroup, GameState.selectedAction);
+                    GameState.selectedAction = null;
+                    GameState.selectedActionImage.setVisible(false);
+                    GameState.selectedActionImage = null;
+                    GameState.userAction = UserAction.Clean;
+                    CleanIndicatorUpdater.update(GameState.dungeon);
+                }
+
                 if(GameState.isCombatSequence) {
                     if(GameState.userAction == UserAction.SelectSingleTarget) {
                         GameState.userAction = UserAction.CancelLast;
@@ -165,7 +163,6 @@ public class BuilderScreen extends ScreenAdapter {
                         GameState.battleSkillIcons.get(GameState.battleSelectedCreature).forEach(UIFactory.I::enableSkill);
                     }
                 }
-
             }
         });
 

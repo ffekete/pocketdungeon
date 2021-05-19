@@ -1,6 +1,7 @@
 package com.blacksoft.state;
 
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.graphics.Cursor;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.scenes.scene2d.Group;
@@ -9,6 +10,7 @@ import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.ui.ProgressBar;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
+import com.blacksoft.screen.UIFactory;
 import com.blacksoft.ui.AnimatedImage;
 
 public class UIState {
@@ -38,10 +40,15 @@ public class UIState {
     public static TextureRegionDrawable RestingAreaCardImage = new TextureRegionDrawable(new Texture(Gdx.files.internal("card/RestingAreaCard.png")));
     public static TextureRegionDrawable BloodPoolCardImage = new TextureRegionDrawable(new Texture(Gdx.files.internal("card/BloodPoolCard.png")));
 
+    // CURSORS
+    public static Cursor defaultCursor = UIFactory.I.createCursor("ui/cursor/Cursor.png");
+    public static Cursor attackCursor = UIFactory.I.createCursor("ui/cursor/AttackCursor.png");
+
     // ICONS
     public static TextureRegion GoldIconImage = new TextureRegion(new Texture(Gdx.files.internal("ui/icon/GoldIcon.png")));
     public static TextureRegion IronIconImage = new TextureRegion(new Texture(Gdx.files.internal("ui/icon/IronIcon.png")));
     public static TextureRegion GemIconImage = new TextureRegion(new Texture(Gdx.files.internal("ui/icon/GemIcon.png")));
+    public static TextureRegion hourglassIconImage = new TextureRegion(new Texture(Gdx.files.internal("ui/icon/HourglassIcon.png")));
 
     // UI elements
     public static TextureRegion progressBarBackgroundImage = new TextureRegion(new Texture(Gdx.files.internal("ui/InvasionProgressBar.png")));

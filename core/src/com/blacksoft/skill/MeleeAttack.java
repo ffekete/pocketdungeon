@@ -1,11 +1,13 @@
 package com.blacksoft.skill;
 
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.graphics.Cursor;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.scenes.scene2d.Action;
 import com.blacksoft.creature.Creature;
 import com.blacksoft.skill.action.CancellableAction;
 import com.blacksoft.skill.action.DamageSingleTargetAction;
+import com.blacksoft.state.UIState;
 import com.blacksoft.user.actions.UserAction;
 
 import java.util.List;
@@ -37,5 +39,10 @@ public class MeleeAttack implements Skill {
     @Override
     public Texture getIcon() {
         return icon;
+    }
+
+    @Override
+    public Cursor getCursor() {
+        return UIState.attackCursor;
     }
 }
