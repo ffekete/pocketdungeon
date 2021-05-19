@@ -23,7 +23,7 @@ public class Graveyard implements Building {
     private static TextureRegion textureRegion;
 
     static {
-        textureRegion = new TextureRegion(new Texture(Gdx.files.internal("tile/Graveyard.png")));
+        textureRegion = new TextureRegion(new Texture(Gdx.files.internal("tile/Grave.png")));
     }
 
     @Override

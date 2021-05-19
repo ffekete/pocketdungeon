@@ -4,8 +4,8 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.scenes.scene2d.Action;
 import com.blacksoft.creature.Creature;
-import com.blacksoft.creature.action.DefendSelfAction;
-import com.blacksoft.creature.action.PoisonTargetAction;
+import com.blacksoft.skill.action.CancellableAction;
+import com.blacksoft.skill.action.PoisonTargetAction;
 import com.blacksoft.user.actions.UserAction;
 
 import java.util.List;
@@ -20,7 +20,7 @@ public class Poison implements Skill {
 
     @Override
     public TriFunction<Creature, List<Creature>, List<Creature>, Action> getAction() {
-        return ((creature, allies, enemies) -> new PoisonTargetAction());
+        return ((creature, allies, enemies) -> CancellableAction.of(new PoisonTargetAction()));
     }
 
     @Override

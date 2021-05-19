@@ -4,6 +4,9 @@ public enum UserAction {
 
     Clean,
     Place,
+    Idle,
+    CancelLast,
+    Disabled,
     SelectSingleTarget,
     NoAction;
 

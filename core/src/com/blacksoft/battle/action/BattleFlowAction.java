@@ -9,9 +9,11 @@ import com.blacksoft.creature.Creature;
 import com.blacksoft.creature.action.RemoveFromBattleCheckerAction;
 import com.blacksoft.hero.Hero;
 import com.blacksoft.hero.action.RemoveFromPartyAction;
+import com.blacksoft.screen.UIFactory;
 import com.blacksoft.skill.Skill;
 import com.blacksoft.state.GameState;
 import com.blacksoft.state.UIState;
+import com.blacksoft.user.actions.UserAction;
 
 import java.util.Collection;
 import java.util.List;
@@ -43,6 +45,12 @@ public class BattleFlowAction extends Action {
             GameState.battleSelectedCreature = BattleSequence.getNext();
 
             GameState.battlePhase = BattlePhase.StartTurn; // new turn
+            GameState.userAction = UserAction.Disabled; // let's disable uer action until a user controlled creature is selected
+
+            UIState.battleSelectionCursor.setVisible(true);
+            UIState.battleSelectionCursor.setPosition(GameState.battleImages.get(GameState.battleSelectedCreature).getX() + 90, GameState.battleImages.get(GameState.battleSelectedCreature).getY() + 60);
+            UIState.battleSelectionCursor.setSize(48, 48);
+            UIState.battleSelectionCursor.toFront();
 
             SequenceAction sequenceAction = new SequenceAction();
             GameState.battleSelectedCreature.applyModifiers(sequenceAction);
@@ -57,15 +65,10 @@ public class BattleFlowAction extends Action {
 
                 GameState.battlePhase =  BattlePhase.Prepare_stg_2;
 
-                UIState.battleSelectionCursor.setVisible(true);
-                UIState.battleSelectionCursor.setPosition(GameState.battleImages.get(GameState.battleSelectedCreature).getX() + 90, GameState.battleImages.get(GameState.battleSelectedCreature).getY() + 60);
-                UIState.battleSelectionCursor.setSize(48, 48);
-                UIState.battleSelectionCursor.toFront();
-
                 GameState.battleSkillIcons.values().stream().flatMap(Collection::stream)
-                        .forEach(skillImage -> skillImage.setColor(1, 0, 0, 0.2f));
+                        .forEach(UIFactory.I::disableSkill);
 
-                GameState.battleSkillIcons.get(GameState.battleSelectedCreature).forEach(skillImage -> skillImage.setColor(1, 1, 1, 1f));
+                GameState.battleSkillIcons.get(GameState.battleSelectedCreature).forEach(UIFactory.I::enableSkill);
 
                 if (heroes.contains(GameState.battleSelectedCreature)) {
                     // choose action, attack
@@ -79,11 +82,16 @@ public class BattleFlowAction extends Action {
                         GameState.nextAttackTargetImage = GameState.battleImages.get(creature);
 
                         SequenceAction sequenceAction = new SequenceAction();
-                        sequenceAction.addAction(Actions.delay(1f));
+                        sequenceAction.addAction(Actions.delay(0.6f));
+                        sequenceAction.addAction(new SelectTargetAction(creature));
+                        sequenceAction.addAction(Actions.delay(0.4f));
                         sequenceAction.addAction(skill.getAction().apply(GameState.battleSelectedCreature, creatures, heroes));
-
+                        sequenceAction.addAction(new RemoveTargetSelectionAction());
                         GameState.stage.addAction(sequenceAction);
                     });
+                } else {
+                    // monster
+                    GameState.userAction = UserAction.Idle;
                 }
             } else {
                 // selected creature is dead, pick the next one

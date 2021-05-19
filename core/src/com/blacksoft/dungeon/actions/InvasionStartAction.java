@@ -48,7 +48,7 @@ public class InvasionStartAction extends Action {
         SequenceAction sequenceAction = new SequenceAction();
 
         // send them exploring
-        sequenceAction.addAction(Actions.delay(5));
+        sequenceAction.addAction(Actions.delay(2.5f));
         sequenceAction.addAction(addPartyToStageAction);
         sequenceAction.addAction(new ExploringAction(party));
         sequenceAction.setActor(party);

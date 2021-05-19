@@ -42,6 +42,11 @@ public class DefenceModifier implements Modifier{
     }
 
     @Override
+    public int getAmount() {
+        return this.amount;
+    }
+
+    @Override
     public void finish(SequenceAction sequenceAction) {
 
     }
@@ -52,5 +57,15 @@ public class DefenceModifier implements Modifier{
         AnimatedImage image = GameState.battleImages.get(target);
         UIFactory.I.createFloatingLabelWithIcon(amount, new TextureRegion(MeleeDefense.icon), (int)image.getX() + 90 + 24, (int)image.getY() + 60 + 48, sequenceAction);
         sequenceAction.addAction(Actions.delay(0.5f));
+    }
+
+    @Override
+    public Modifier merge(Modifier modifier) {
+        if(modifier.getClass().isAssignableFrom(this.getClass())) {
+            this.amount += modifier.getAmount();
+            return null;
+        }
+
+        return modifier;
     }
 }

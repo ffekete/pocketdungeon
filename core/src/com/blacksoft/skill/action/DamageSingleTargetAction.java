@@ -1,4 +1,4 @@
-package com.blacksoft.creature.action;
+package com.blacksoft.skill.action;
 
 import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
@@ -6,14 +6,19 @@ import com.badlogic.gdx.scenes.scene2d.Action;
 import com.badlogic.gdx.scenes.scene2d.actions.Actions;
 import com.badlogic.gdx.scenes.scene2d.actions.SequenceAction;
 import com.blacksoft.battle.BattlePhase;
+import com.blacksoft.battle.action.BattleFinishedCheckingAction;
 import com.blacksoft.battle.action.ClearSelectedCreatureModificationsAction;
 import com.blacksoft.battle.action.MoveBattleToFinishTurnAction;
 import com.blacksoft.creature.Creature;
+import com.blacksoft.creature.action.ReduceHpAction;
+import com.blacksoft.creature.action.RemoveFromBattleCheckerAction;
 import com.blacksoft.hero.Hero;
 import com.blacksoft.screen.UIFactory;
 import com.blacksoft.state.GameState;
 import com.blacksoft.state.UIState;
 import com.blacksoft.ui.AnimatedImage;
+import com.blacksoft.user.actions.SetUserAction;
+import com.blacksoft.user.actions.UserAction;
 
 public class DamageSingleTargetAction extends Action {
 
@@ -45,10 +50,10 @@ public class DamageSingleTargetAction extends Action {
             animatedImage.setPosition(this.nextAttackTarget.getX() + 70, this.nextAttackTarget.getY() + 60);
             animatedImage.setScale(4f);
 
-            SequenceAction playAnimationAction = new SequenceAction();
-            playAnimationAction.addAction(Actions.delay(0.2f));
-            playAnimationAction.addAction(Actions.removeActor());
-            animatedImage.addAction(playAnimationAction);
+            SequenceAction playAttackEffectAnimationAction = new SequenceAction();
+            playAttackEffectAnimationAction.addAction(Actions.delay(0.2f));
+            playAttackEffectAnimationAction.addAction(Actions.removeActor());
+            animatedImage.addAction(playAttackEffectAnimationAction);
             GameState.uiStage.addActor(animatedImage);
 
             SequenceAction attackAnimationAction = new SequenceAction();
@@ -72,9 +77,11 @@ public class DamageSingleTargetAction extends Action {
 
             shakeAction.addAction(new ReduceHpAction(this.targetCreature, calculatedDamage));
             shakeAction.addAction(new ClearSelectedCreatureModificationsAction());
-            shakeAction.addAction(Actions.delay(1f));
+            shakeAction.addAction(Actions.delay(0.5f));
             shakeAction.addAction(new MoveBattleToFinishTurnAction());
             shakeAction.addAction(new RemoveFromBattleCheckerAction(targetCreature, nextAttackTarget));
+            shakeAction.addAction(new SetUserAction(UserAction.Idle));
+            shakeAction.addAction(new BattleFinishedCheckingAction());
 
             this.nextAttackTarget.addAction(shakeAction);
 

@@ -14,23 +14,10 @@ import java.util.List;
 
 public class BattleFinishedCheckingAction extends Action {
 
-    private Party party;
-    private List<Creature> creatures;
-
-    public BattleFinishedCheckingAction(Party party,
-                                        List<Creature> creatures) {
-        this.party = party;
-        this.creatures = creatures;
-    }
-
     @Override
     public boolean act(float delta) {
 
-        if(GameState.battlePhase != BattlePhase.FinishTurn) {
-            return false;
-        }
-
-        if(creatures.stream().noneMatch(creature -> creature.hp > 0)) {
+        if(GameState.creaturesInvolvedInBattle.stream().noneMatch(creature -> creature.hp > 0)) {
             UIState.battleScreen.remove();
             GameState.paused = false;
             UIState.battleSelectionCursor.setVisible(false);
@@ -48,7 +35,7 @@ public class BattleFinishedCheckingAction extends Action {
             return true;
         }
 
-        if(this.party.heroes.isEmpty()) {
+        if(GameState.party.heroes.isEmpty()) {
 
             GameState.battleSkillIcons.clear();
             GameState.battleImages.clear();
@@ -66,7 +53,7 @@ public class BattleFinishedCheckingAction extends Action {
 
             GameState.paused = false;
 
-            GameState.stage.getActors().removeValue(party, true);
+            GameState.stage.getActors().removeValue(GameState.party, true);
 
             GameState.isCombatSequence = false;
 
@@ -78,6 +65,6 @@ public class BattleFinishedCheckingAction extends Action {
             return true;
         }
 
-        return false;
+        return true;
     }
 }

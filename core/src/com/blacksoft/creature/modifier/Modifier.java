@@ -8,8 +8,12 @@ public interface Modifier {
 
     int getDuration();
 
+    int getAmount();
+
     void finish(SequenceAction parallelAction);
 
     void start(SequenceAction parallelAction);
 
+
+    Modifier merge(Modifier modifier);
 }

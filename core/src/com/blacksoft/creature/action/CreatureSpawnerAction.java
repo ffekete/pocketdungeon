@@ -40,7 +40,7 @@ public class CreatureSpawnerAction extends Action {
             skeleton.addAction(new CreatureDecisionAction());
             skeleton.addAction(Actions.fadeOut(0.1f));
             skeleton.addAction(Actions.fadeIn(10));
-            UIFactory.I.addCreatureListEntry(skeleton);
+            UIFactory.I.addCreatureListEntryToSidePanel(skeleton);
 
             addHighlightAction(skeleton);
 
@@ -59,7 +59,7 @@ public class CreatureSpawnerAction extends Action {
             ooze.addAction(new CreatureDecisionAction());
             ooze.addAction(Actions.fadeOut(0.1f));
             ooze.addAction(Actions.fadeIn(10));
-            UIFactory.I.addCreatureListEntry(ooze);
+            UIFactory.I.addCreatureListEntryToSidePanel(ooze);
 
             addHighlightAction(ooze);
 
@@ -75,7 +75,7 @@ public class CreatureSpawnerAction extends Action {
             GameState.creatures.add(vampire);
             vampire.setPosition((int) DUNGEON_ENTRANCE_LOCATION.x * TEXTURE_SIZE, (int) DUNGEON_ENTRANCE_LOCATION.y * TEXTURE_SIZE);
             vampire.addAction(new CreatureDecisionAction());
-            UIFactory.I.addCreatureListEntry(vampire);
+            UIFactory.I.addCreatureListEntryToSidePanel(vampire);
             addHighlightAction(vampire);
 
             vampireSpawnDuration = 0;
@@ -90,7 +90,7 @@ public class CreatureSpawnerAction extends Action {
             GameState.creatures.add(warlock);
             warlock.setPosition((int) DUNGEON_ENTRANCE_LOCATION.x * TEXTURE_SIZE, (int) DUNGEON_ENTRANCE_LOCATION.y * TEXTURE_SIZE);
             warlock.addAction(new CreatureDecisionAction());
-            UIFactory.I.addCreatureListEntry(warlock);
+            UIFactory.I.addCreatureListEntryToSidePanel(warlock);
             addHighlightAction(warlock);
 
             warlockSpawnDuration = 0;
@@ -115,7 +115,7 @@ public class CreatureSpawnerAction extends Action {
                               float y,
                               int pointer,
                               Actor fromActor) {
-                Table table = GameState.creatureListEntries.get(creature);
+                Table table = GameState.creatureListEntriesOnSidePanel.get(creature);
                 table.getChild(0).setScale(1.5f);
                 table.setBackground(UIState.selectionBackgroundHighlighted);
                 table.setPosition(table.getX() - 1, table.getY());
@@ -129,7 +129,7 @@ public class CreatureSpawnerAction extends Action {
                              int pointer,
                              Actor toActor) {
                 UIState.selectionMarker.setVisible(false);
-                Table table = GameState.creatureListEntries.get(creature);
+                Table table = GameState.creatureListEntriesOnSidePanel.get(creature);
                 table.getChild(0).setScale(1f);
                 table.setBackground(UIState.selectionBackground);
                 table.setPosition(table.getX() + 1, table.getY());

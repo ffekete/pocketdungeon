@@ -43,12 +43,12 @@ public class PlaceGraveyardAction extends AbstractAction {
 
     @Override
     public String getTitle() {
-        return "Graveyard";
+        return "Grave of a fallen soldier";
     }
 
     @Override
     public String getDescription() {
-        return "Places a graveyard on the map \nor upgrades an existing one.\n Spawns a skeleton if placed on\n empty tile.";
+        return "\nPlaces a grave on the map.\n Spawns a skeleton.";
     }
 
     @Override

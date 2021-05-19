@@ -31,7 +31,7 @@ public class DefendSelfAction extends Action {
         SequenceAction sequenceAction = new SequenceAction();
         sequenceAction.addAction(defenseAnimationAction);
         DefenceModifier defenceModifier = new DefenceModifier(0, GameState.battleSelectedCreature, 1);
-        GameState.battleSelectedCreature.modifiers.add(defenceModifier);
+        GameState.battleSelectedCreature.addModifier(defenceModifier);
         defenceModifier.start(sequenceAction);
 
         sequenceAction.addAction(Actions.delay(1f));

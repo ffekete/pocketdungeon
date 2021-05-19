@@ -43,6 +43,7 @@ public class BattleInitiationAction extends Action {
 
             if (!creatures.isEmpty()) {
                 GameState.paused = true;
+                GameState.creaturesInvolvedInBattle = creatures;
                 BattleInitializer.init(creatures, party);
             }
 

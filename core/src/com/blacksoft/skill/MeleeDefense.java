@@ -32,6 +32,6 @@ public class MeleeDefense implements Skill {
 
     @Override
     public UserAction getUserAction() {
-        return UserAction.NoAction;
+        return UserAction.Disabled;
     }
 }

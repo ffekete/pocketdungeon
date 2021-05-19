@@ -38,7 +38,7 @@ public class GameState {
     public static Stage stage;
     public static Stage uiStage;
     public static TileMarker tileMarker;
-    public static UserAction userAction;
+    public static UserAction userAction = UserAction.Idle;
 
     public static RayHandler rayHandler;
     public static PointLight mouseLightSource;
@@ -70,7 +70,7 @@ public class GameState {
 
     public static CityGraph cityGraph;
 
-    public static Map<Creature, Table> creatureListEntries = new HashMap<>();
+    public static Map<Creature, Table> creatureListEntriesOnSidePanel = new HashMap<>();
 
     public static FollowCreatureAction followCreatureAction;
 
@@ -80,6 +80,7 @@ public class GameState {
 
     // invader party stuff
     public static Party party = null;
+    public static List<Creature> creaturesInvolvedInBattle = null;
 
     // Battle stuff
     public static Creature battleSelectedCreature = null;

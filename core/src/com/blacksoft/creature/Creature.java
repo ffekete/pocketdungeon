@@ -4,7 +4,6 @@ import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.scenes.scene2d.Actor;
-import com.badlogic.gdx.scenes.scene2d.actions.ParallelAction;
 import com.badlogic.gdx.scenes.scene2d.actions.SequenceAction;
 import com.blacksoft.creature.modifier.Modifier;
 import com.blacksoft.skill.MeleeAttack;
@@ -27,7 +26,7 @@ public abstract class Creature extends Actor {
     public int mp;
 
     // modifiers
-    public List<Modifier> modifiers = new ArrayList<>();
+    private List<Modifier> modifiers = new ArrayList<>();
     public int tempDefenceModifier = 0;
     // modifiers end
 
@@ -47,18 +46,25 @@ public abstract class Creature extends Actor {
     }
 
     public void die() {
-        System.out.println("Just died: " + this);
         GameState.creatures.remove(this);
         GameState.stage.getActors().removeIndex(GameState.stage.getActors().indexOf(this, true));
-        UIState.creatureListTable.removeActor(GameState.creatureListEntries.get(this));
+        UIState.creatureListTable.removeActor(GameState.creatureListEntriesOnSidePanel.get(this));
     }
 
     public abstract float getSpeed();
 
+    public void increaseHp(int amount) {
+        if (this.hp > 0) {
+            this.hp += amount;
+        }
+    }
+
     public void reduceHp(int amount) {
-        this.hp -= amount;
-        if (this.hp <= 0) {
-            die();
+        if (this.hp > 0) {
+            this.hp -= amount;
+            if (this.hp <= 0) {
+                die();
+            }
         }
     }
 
@@ -100,5 +106,15 @@ public abstract class Creature extends Actor {
         }
 
         modifiers.removeAll(removeThese);
+    }
+
+    public void addModifier(Modifier modifier) {
+
+        for (Modifier aModifier : modifiers) {
+            if (aModifier.merge(modifier) == null) {
+                return;
+            }
+        }
+        modifiers.add(modifier);
     }
 }

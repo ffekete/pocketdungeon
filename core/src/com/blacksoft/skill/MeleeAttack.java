@@ -4,7 +4,8 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.scenes.scene2d.Action;
 import com.blacksoft.creature.Creature;
-import com.blacksoft.creature.action.DamageSingleTargetAction;
+import com.blacksoft.skill.action.CancellableAction;
+import com.blacksoft.skill.action.DamageSingleTargetAction;
 import com.blacksoft.user.actions.UserAction;
 
 import java.util.List;
@@ -25,7 +26,7 @@ public class MeleeAttack implements Skill {
 
     @Override
     public TriFunction<Creature, List<Creature>, List<Creature>, Action> getAction() {
-        return (initiator, creatures, heroes) -> new DamageSingleTargetAction(initiator.getMeleeDamage());
+        return (initiator, creatures, heroes) -> CancellableAction.of(new DamageSingleTargetAction(initiator.getMeleeDamage()));
     }
 
     @Override

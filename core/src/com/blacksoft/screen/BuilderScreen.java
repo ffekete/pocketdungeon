@@ -150,6 +150,25 @@ public class BuilderScreen extends ScreenAdapter {
             }
         });
 
+        GameState.uiStage.addListener(new ClickListener(Input.Buttons.RIGHT) {
+            @Override
+            public void clicked(InputEvent event,
+                                float x,
+                                float y) {
+
+                if(GameState.isCombatSequence) {
+                    if(GameState.userAction == UserAction.SelectSingleTarget) {
+                        GameState.userAction = UserAction.CancelLast;
+                        GameState.nextBattleAction = null;
+
+                        // disable other skills
+                        GameState.battleSkillIcons.get(GameState.battleSelectedCreature).forEach(UIFactory.I::enableSkill);
+                    }
+                }
+
+            }
+        });
+
         InputMultiplexer inputMultiplexer = new InputMultiplexer();
         inputMultiplexer.addProcessor(GameState.uiStage);
         inputMultiplexer.addProcessor(GameState.stage);
@@ -193,17 +212,17 @@ public class BuilderScreen extends ScreenAdapter {
         rayHandler.setCombinedMatrix(GameState.orthographicCamera);
         rayHandler.updateAndRender();
 
-        shapeRenderer.setProjectionMatrix(GameState.orthographicCamera.combined);
-        shapeRenderer.setAutoShapeType(true);
-        shapeRenderer.begin(ShapeRenderer.ShapeType.Line);
-
-        for(Node node : GameState.dungeon.streetsMap.keys()) {
-
-            for(Connection<Node> connection : GameState.dungeon.streetsMap.get(node)) {
-                shapeRenderer.line(connection.getFromNode().x * 16 + 8, connection.getFromNode().y * 16 + 8, connection.getToNode().x * 16+ 8, connection.getToNode().y * 16 + 8);
-            }
-        }
-        shapeRenderer.end();
+//        shapeRenderer.setProjectionMatrix(GameState.orthographicCamera.combined);
+//        shapeRenderer.setAutoShapeType(true);
+//        shapeRenderer.begin(ShapeRenderer.ShapeType.Line);
+//
+//        for(Node node : GameState.dungeon.streetsMap.keys()) {
+//
+//            for(Connection<Node> connection : GameState.dungeon.streetsMap.get(node)) {
+//                shapeRenderer.line(connection.getFromNode().x * 16 + 8, connection.getFromNode().y * 16 + 8, connection.getToNode().x * 16+ 8, connection.getToNode().y * 16 + 8);
+//            }
+//        }
+//        shapeRenderer.end();
 
         GameState.uiViewport.apply();
         //GameState.orthographicUICamera.update();

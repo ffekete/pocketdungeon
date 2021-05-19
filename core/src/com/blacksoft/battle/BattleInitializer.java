@@ -5,11 +5,9 @@ import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.InputListener;
-import com.badlogic.gdx.scenes.scene2d.actions.SequenceAction;
 import com.badlogic.gdx.scenes.scene2d.ui.Container;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
-import com.blacksoft.battle.action.BattleFinishedCheckingAction;
 import com.blacksoft.battle.action.BattleFlowAction;
 import com.blacksoft.creature.Creature;
 import com.blacksoft.hero.Party;
@@ -19,6 +17,7 @@ import com.blacksoft.state.GameState;
 import com.blacksoft.state.UIState;
 import com.blacksoft.ui.AnimatedImage;
 import com.blacksoft.ui.DynamicProgressBar;
+import com.blacksoft.user.actions.UserAction;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -40,10 +39,10 @@ public class BattleInitializer {
         battleScreen.background(new TextureRegionDrawable(UIState.battleScreenBackground));
         battleScreen.setSize(300, 200);
 
-        GameState.stage.addAction(new BattleFinishedCheckingAction(party, creatures));
-
         GameState.uiStage.addActor(UIFactory.I.addMovingLabel("BATTLE"));
         GameState.uiStage.addActor(UIFactory.I.addMovingLabelShadow("BATTLE"));
+
+        GameState.userAction = UserAction.Idle;
 
         BattleSequence.reset();
         GameState.battleImages.clear();
@@ -112,10 +111,6 @@ public class BattleInitializer {
                         if (GameState.nextBattleAction != null) {
                             GameState.nextAttackTarget = hero;
                             GameState.nextAttackTargetImage = heroImage;
-
-                            // attack shift animation
-                            SequenceAction attackAnimationAction = new SequenceAction();
-
                         }
 
                         return true;
@@ -126,8 +121,6 @@ public class BattleInitializer {
                 battleScreen.add().size(48, 48).colspan(3);
             }
             battleScreen.row();
-
-            //battleScreen.debugAll();
 
             // hp bars for creatures
             if (i < creatures.size()) {
@@ -218,7 +211,7 @@ public class BattleInitializer {
                                           float y,
                                           int pointer,
                                           Actor fromActor) {
-                            skillImage.setScale(1.25f);
+                            skillImage.setScale(1.1f);
                         }
 
                         @Override
@@ -237,9 +230,14 @@ public class BattleInitializer {
                                                  int pointer,
                                                  int button) {
 
-                            GameState.userAction = skill.getUserAction();
-                            GameState.nextBattleAction = skill.getAction().apply(creature, creatures, party.heroes);
-                            GameState.uiStage.addAction(GameState.nextBattleAction);
+                            if(GameState.userAction == UserAction.Idle) {
+                                GameState.userAction = skill.getUserAction();
+                                GameState.nextBattleAction = skill.getAction().apply(creature, creatures, party.heroes);
+                                GameState.uiStage.addAction(GameState.nextBattleAction);
+
+                                // disable other skills
+                                GameState.battleSkillIcons.get(creature).forEach(UIFactory.I::disableSkill);
+                            }
 
                             return true;
                         }

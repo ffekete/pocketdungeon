@@ -22,6 +22,9 @@ public class RemoveFromBattleCheckerAction extends Action {
     public boolean act(float delta) {
 
         if (targetCreature.hp <= 0) {
+
+            targetCreatureBattleImage.clearListeners();
+
             SequenceAction sequenceAction = new SequenceAction();
             sequenceAction.addAction(Actions.fadeOut(0.5f));
             sequenceAction.addAction(Actions.removeActor());

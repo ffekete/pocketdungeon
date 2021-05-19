@@ -237,6 +237,40 @@ public class UIFactory {
         GameState.uiStage.addActor(closedLockImage);
     }
 
+    public Label createFloatingLabelWithIconFromString(String prefix,
+                                             String suffix,
+                                             TextureRegion iconTextureRegion,
+                                             int x,
+                                             int y,
+                                             SequenceAction sequenceAction) {
+        Table table = new Table();
+
+        Label label = null;
+
+        label = new Label(prefix, labelStyle14);
+        table.setPosition(x + 2, y);
+        table.add(label);
+
+        Image image = new Image(iconTextureRegion);
+        image.setSize(16, 16);
+
+        SequenceAction sequenceAction1 = new SequenceAction();
+        sequenceAction1.addAction(Actions.moveTo(x + 2, y + 15, 0.5f));
+        sequenceAction1.addAction(Actions.removeActor());
+        sequenceAction1.setActor(table);
+
+        sequenceAction.addAction(sequenceAction1);
+
+        table.add(image).size(16).pad(0, 2, 0, 2);
+
+        table.add(new Label(suffix, labelStyle14));
+        table.setColor(1, 1, 1, 0.8f);
+
+        GameState.uiStage.addActor(table);
+
+        return label;
+    }
+
     public Label createFloatingLabelWithIcon(int newAmount,
                                              TextureRegion iconTextureRegion,
                                              int x,
@@ -254,7 +288,7 @@ public class UIFactory {
         image.setSize(16, 16);
 
         SequenceAction sequenceAction1 = new SequenceAction();
-        sequenceAction1.addAction(Actions.moveTo(x + 2, y + 15, 0.8f));
+        sequenceAction1.addAction(Actions.moveTo(x + 2, y + 15, 0.5f));
         sequenceAction1.addAction(Actions.removeActor());
         sequenceAction1.setActor(table);
 
@@ -283,7 +317,7 @@ public class UIFactory {
         Image image = new Image(iconTextureRegion);
         image.setSize(16, 16);
         SequenceAction sequenceAction = new SequenceAction();
-        sequenceAction.addAction(Actions.moveTo(x + 2, y + 15, 0.8f));
+        sequenceAction.addAction(Actions.moveTo(x + 2, y + 15, 0.5f));
         sequenceAction.addAction(Actions.removeActor());
         table.addAction(sequenceAction);
 
@@ -306,7 +340,7 @@ public class UIFactory {
         Image image = new Image(iconTextureRegion);
         image.setSize(16, 16);
         SequenceAction sequenceAction = new SequenceAction();
-        sequenceAction.addAction(Actions.moveTo(x + 2, y + 15, 0.8f));
+        sequenceAction.addAction(Actions.moveTo(x + 2, y + 15, 0.5f));
         sequenceAction.addAction(Actions.removeActor());
         table.addAction(sequenceAction);
 
@@ -329,7 +363,7 @@ public class UIFactory {
         image.setSize(16, 16);
 
         SequenceAction floatingAction = new SequenceAction();
-        floatingAction.addAction(Actions.moveTo(x + 2, y + 15, 0.8f));
+        floatingAction.addAction(Actions.moveTo(x + 2, y + 15, 0.5f));
         floatingAction.addAction(Actions.removeActor());
         floatingAction.setActor(table);
 
@@ -449,7 +483,7 @@ public class UIFactory {
         return group;
     }
 
-    public void addCreatureListEntry(Creature creature) {
+    public void addCreatureListEntryToSidePanel(Creature creature) {
 
         Table table = new Table();
         AnimatedImage animatedImage = new AnimatedImage(creature.getAnimation());
@@ -477,7 +511,7 @@ public class UIFactory {
 
         UIState.creatureListTable.add(table).fillX().expandX();
 
-        GameState.creatureListEntries.put(creature, table);
+        GameState.creatureListEntriesOnSidePanel.put(creature, table);
 
         FollowCreatureAction followCreatureAction = new FollowCreatureAction(creature, () -> null);
 
@@ -496,9 +530,9 @@ public class UIFactory {
 
                 table.getChild(0).setScale(1.5f);
                 table.setBackground(UIState.selectionBackgroundHighlighted);
-                table.setPosition(table.getX() - 1, table.getY());
+                //table.setPosition(table.getX() - 1, table.getY());
 
-                GameState.creatureListEntries.entrySet().stream()
+                GameState.creatureListEntriesOnSidePanel.entrySet().stream()
                         .filter(entry -> entry.getValue() == table)
                         .map(entry -> entry.getKey())
                         .findFirst()
@@ -521,9 +555,9 @@ public class UIFactory {
 
                 table.getChild(0).setScale(1f);
                 table.setBackground(UIState.selectionBackground);
-                table.setPosition(table.getX() + 1, table.getY());
+                //table.setPosition(table.getX() + 1, table.getY());
 
-                GameState.creatureListEntries.entrySet().stream()
+                GameState.creatureListEntriesOnSidePanel.entrySet().stream()
                         .filter(entry -> entry.getValue() == table)
                         .map(entry -> entry.getKey())
                         .findFirst()
@@ -770,6 +804,14 @@ public class UIFactory {
             IntAction intAction = new IntAction(old, newValue, 0.5f, label, template, other);
             GameState.uiStage.addAction(intAction);
         }
+    }
+
+    public void disableSkill(Image image) {
+        image.setColor(1, 0, 0, 0.2f);
+    }
+
+    public void enableSkill(Image image) {
+        image.setColor(1, 1, 1, 1f);
     }
 
 }
