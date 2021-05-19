@@ -253,7 +253,9 @@ public class UIFactory {
         table.setPosition(x + 2, y);
         table.add(label);
 
-        Image image = new Image(iconTextureRegion);
+        int width = iconTextureRegion.getTexture().getHeight(); // the image is always NxN
+        Image image = new AnimatedImage(new Animation<>(0.3f, TextureRegion.split(iconTextureRegion.getTexture(), width, width)[0]));
+
         image.setSize(16, 16);
 
         SequenceAction sequenceAction1 = new SequenceAction();
@@ -266,7 +268,7 @@ public class UIFactory {
         table.add(image).size(16).pad(0, 2, 0, 2);
 
         table.add(new Label(suffix, labelStyle14));
-        table.setColor(1, 1, 1, 0.8f);
+        table.setColor(1, 1, 1, 1f);
 
         GameState.uiStage.addActor(table);
 
@@ -288,13 +290,17 @@ public class UIFactory {
         table.setPosition(x + 2, y);
         table.add(label);
 
-        Image prefixImage = new Image(prefixIconTextureRegion);
+        int width = prefixIconTextureRegion.getTexture().getHeight(); // the image is always NxN
+        Image prefixImage = new AnimatedImage(new Animation<>(0.3f, TextureRegion.split(prefixIconTextureRegion.getTexture(), width, width)[0]));
+
         prefixImage.setSize(16, 16);
 
         table.add(prefixImage).size(16).pad(0, 2, 0, 2);
         table.add(new Label(suffix, labelStyle14));
 
-        Image suffixImage = new Image(suffixIconTextureRegion);
+        int suffixWidth = suffixIconTextureRegion.getTexture().getHeight(); // the image is always NxN
+        Image suffixImage = new AnimatedImage(new Animation<>(0.3f, TextureRegion.split(suffixIconTextureRegion.getTexture(), suffixWidth, suffixWidth)[0]));
+
         suffixImage.setSize(16, 16);
         table.add(suffixImage).size(16).pad(0, 2, 0, 2);
 
@@ -303,7 +309,7 @@ public class UIFactory {
         sequenceAction1.addAction(Actions.moveTo(x + 2, y + 15, FLOATING_ITEMS_DURATION));
         sequenceAction1.addAction(Actions.removeActor());
         sequenceAction1.setActor(table);
-        table.setColor(1, 1, 1, 0.8f);
+        table.setColor(1, 1, 1, 1f);
 
         GameState.uiStage.addActor(table);
 
@@ -323,7 +329,9 @@ public class UIFactory {
         table.setPosition(x + 2, y);
         table.add(label);
 
-        Image image = new Image(iconTextureRegion);
+        int width = iconTextureRegion.getTexture().getHeight(); // the image is always NxN
+        Image image = new AnimatedImage(new Animation<>(0.3f, TextureRegion.split(iconTextureRegion.getTexture(), width, width)[0]));
+
         image.setSize(16, 16);
 
         SequenceAction sequenceAction1 = new SequenceAction();
@@ -334,7 +342,7 @@ public class UIFactory {
         sequenceAction.addAction(sequenceAction1);
 
         table.add(image).size(16).pad(0, 2, 0, 0);
-        table.setColor(1, 1, 1, 0.8f);
+        table.setColor(1, 1, 1, 1f);
 
         GameState.uiStage.addActor(table);
 
@@ -353,7 +361,9 @@ public class UIFactory {
         table.setPosition(x + 2, y);
         table.add(label);
 
-        Image image = new Image(iconTextureRegion);
+        int width = iconTextureRegion.getTexture().getHeight(); // the image is always NxN
+        Image image = new AnimatedImage(new Animation<>(0.3f, TextureRegion.split(iconTextureRegion.getTexture(), width, width)[0]));
+
         image.setSize(16, 16);
         SequenceAction sequenceAction = new SequenceAction();
         sequenceAction.addAction(Actions.moveTo(x + 2, y + 15, FLOATING_ITEMS_DURATION));
@@ -361,7 +371,7 @@ public class UIFactory {
         table.addAction(sequenceAction);
 
         table.add(image).size(16).pad(0, 2, 0, 0);
-        table.setColor(1, 1, 1, 0.8f);
+        table.setColor(1, 1, 1, 1f);
 
         GameState.uiStage.addActor(table);
 
@@ -376,7 +386,9 @@ public class UIFactory {
 
         table.setPosition(x + 2, y);
 
-        Image image = new Image(iconTextureRegion);
+        int width = iconTextureRegion.getTexture().getHeight(); // the image is always NxN
+        Image image = new AnimatedImage(new Animation<>(0.3f, TextureRegion.split(iconTextureRegion.getTexture(), width, width)[0]));
+
         image.setSize(16, 16);
         SequenceAction sequenceAction = new SequenceAction();
         sequenceAction.addAction(Actions.moveTo(x + 2, y + 15, FLOATING_ITEMS_DURATION));
@@ -384,7 +396,7 @@ public class UIFactory {
         table.addAction(sequenceAction);
 
         table.add(image).size(16).pad(0, 2, 0, 0);
-        table.setColor(1, 1, 1, 0.8f);
+        table.setColor(1, 1, 1, 1f);
 
         GameState.uiStage.addActor(table);
     }
@@ -398,7 +410,9 @@ public class UIFactory {
 
         table.setPosition(x + 2, y);
 
-        Image image = new Image(iconTextureRegion);
+        int width = iconTextureRegion.getTexture().getHeight(); // the image is always NxN
+        Image image = new AnimatedImage(new Animation<>(0.3f, TextureRegion.split(iconTextureRegion.getTexture(), width, width)[0]));
+
         image.setSize(16, 16);
 
         SequenceAction floatingAction = new SequenceAction();
@@ -409,7 +423,7 @@ public class UIFactory {
         sequenceAction.addAction(floatingAction);
 
         table.add(image).size(16).pad(0, 2, 0, 0);
-        table.setColor(1, 1, 1, 0.8f);
+        table.setColor(1, 1, 1, 1f);
 
         GameState.uiStage.addActor(table);
     }
@@ -694,7 +708,7 @@ public class UIFactory {
         hpProgressBarStyle.knobBefore = drawable;
 
         DynamicProgressBar hpDynamicProgressBar = new DynamicProgressBar(0,
-                1,
+                10,
                 1,
                 false,
                 hpProgressBarStyle,

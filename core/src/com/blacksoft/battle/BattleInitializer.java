@@ -162,7 +162,7 @@ public class BattleInitializer {
                 GameState.battleHpAndMpProgressBars.computeIfAbsent(creature, value -> new ArrayList<>());
 
                 DynamicProgressBar mpProgressBar = UIFactory.I.createMpProgressBar(creature, 48, 5);
-                battleScreen.add(mpProgressBar).size(16, 5).colspan(3).pad(1);
+                battleScreen.add(mpProgressBar).size(48, 5).colspan(3).pad(1);
 
                 GameState.battleHpAndMpProgressBars.get(creature).add(mpProgressBar);
             } else {
@@ -232,7 +232,7 @@ public class BattleInitializer {
                                                  int pointer,
                                                  int button) {
 
-                            if(GameState.userAction == UserAction.Idle) {
+                            if (GameState.userAction == UserAction.Idle) {
                                 Gdx.graphics.setCursor(skill.getCursor());
                                 GameState.userAction = skill.getUserAction();
                                 GameState.nextBattleAction = skill.getAction().apply(creature, creatures, party.heroes);

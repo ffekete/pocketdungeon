@@ -8,6 +8,7 @@ import com.blacksoft.dungeon.Dungeon;
 import com.blacksoft.dungeon.GroundTiledMapTile;
 import com.blacksoft.dungeon.Tile;
 import com.blacksoft.dungeon.actions.TileCleaner;
+import com.blacksoft.state.Config;
 import com.blacksoft.state.GameState;
 import com.blacksoft.user.actions.UserAction;
 
@@ -18,7 +19,7 @@ public class CleanIndicatorUpdater {
 
     public static void update(Dungeon dungeon) {
 
-        if (GameState.userAction != UserAction.Clean) {
+        if (GameState.userAction != UserAction.Clean || GameState.gold < Config.CLEAN_COST_VALUE) {
             return;
         }
 

@@ -1,6 +1,7 @@
 package com.blacksoft.dungeon;
 
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 
 public enum Tile {
@@ -19,16 +20,16 @@ public enum Tile {
 
     static {
         Rock.canMergeWith = Arrays.asList(Torch, Rock);
-        Empty.canMergeWith = Arrays.asList(Empty, DungeonEntrance, Treasury, GateOpened, GateClosed, Library);
-        Library.canMergeWith = Empty.canMergeWith;
+        Empty.canMergeWith = Arrays.asList(Empty, DungeonEntrance, Treasury, GateOpened, GateClosed, Library, BloodPool);
+        Library.canMergeWith = Arrays.asList(Empty, DungeonEntrance, Treasury, Library, BloodPool);
         GraveYard.canMergeWith = Arrays.asList(GraveYard);
         Torch.canMergeWith = Arrays.asList(Rock, Torch);
-        BloodPool.canMergeWith = Arrays.asList(BloodPool);
-        Treasury.canMergeWith = Empty.canMergeWith;
-        DungeonEntrance.canMergeWith = Empty.canMergeWith;
+        BloodPool.canMergeWith = Library.canMergeWith;
+        Treasury.canMergeWith = Library.canMergeWith;
+        DungeonEntrance.canMergeWith = Library.canMergeWith;
         RestingArea.canMergeWith = Arrays.asList(RestingArea);
-        GateOpened.canMergeWith = Empty.canMergeWith;
-        GateClosed.canMergeWith = Empty.canMergeWith;
+        GateOpened.canMergeWith = Arrays.asList(Empty);
+        GateClosed.canMergeWith = Arrays.asList(Empty);
     }
 
     private boolean solid;

@@ -31,7 +31,7 @@ public class BuildingPlacer {
 
             if (GameState.userAction == UserAction.Place) {
 
-                if(clazz == Gate.class) {
+                if (clazz == Gate.class) {
                     return TileCleaner.isEmptyCorridor(GameState.dungeon, vx, vy) || canUpgradeTile(vx, vy);
                 }
 
@@ -91,7 +91,7 @@ public class BuildingPlacer {
             }
 
             sequenceAction.addAction(Actions.scaleTo(1f, 1f, 0.2f));
-            UIFactory.I.createFloatingLabel(GameState.selectedAction.getProgressAmount(), x / TEXTURE_SIZE * TEXTURE_SIZE, y / TEXTURE_SIZE * TEXTURE_SIZE);
+            UIFactory.I.createFloatingLabelWithIcon(GameState.selectedAction.getProgressAmount(), UIState.invasionProgressBarKnobImage, x / TEXTURE_SIZE * TEXTURE_SIZE, y / TEXTURE_SIZE * TEXTURE_SIZE);
             sequenceAction.addAction(Actions.removeActor());
             GameState.selectedActionImage.addAction(sequenceAction);
 
