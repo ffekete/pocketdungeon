@@ -9,6 +9,7 @@ import com.blacksoft.battle.BattlePhase;
 import com.blacksoft.battle.action.BattleFinishedCheckingAction;
 import com.blacksoft.battle.action.ClearSelectedCreatureModificationsAction;
 import com.blacksoft.battle.action.MoveBattleToFinishTurnAction;
+import com.blacksoft.battle.action.RemoveTargetSelectionAction;
 import com.blacksoft.creature.Creature;
 import com.blacksoft.creature.action.ReduceHpAction;
 import com.blacksoft.creature.action.RemoveFromBattleCheckerAction;
@@ -67,23 +68,25 @@ public class DamageSingleTargetAction extends Action {
             }
             GameState.battleImages.get(GameState.battleSelectedCreature).addAction(attackAnimationAction);
 
-            SequenceAction shakeAction = new SequenceAction();
-            shakeAction.addAction(Actions.delay(0.1f));
-            shakeAction.addAction(Actions.moveBy(4, 2, 0.05f));
-            shakeAction.addAction(Actions.moveBy(-8, -4, 0.05f));
-            shakeAction.addAction(Actions.moveBy(8, 4, 0.05f));
-            shakeAction.addAction(Actions.moveBy(-8, -4, 0.05f));
-            shakeAction.addAction(Actions.moveBy(4, 2, 0.05f));
+            SequenceAction battleSequenceAction = new SequenceAction();
+            battleSequenceAction.addAction(Actions.delay(0.1f));
+            battleSequenceAction.addAction(Actions.moveBy(4, 2, 0.05f));
+            battleSequenceAction.addAction(Actions.moveBy(-8, -4, 0.05f));
+            battleSequenceAction.addAction(Actions.moveBy(8, 4, 0.05f));
+            battleSequenceAction.addAction(Actions.moveBy(-8, -4, 0.05f));
+            battleSequenceAction.addAction(Actions.moveBy(4, 2, 0.05f));
 
-            shakeAction.addAction(new ReduceHpAction(this.targetCreature, calculatedDamage));
-            shakeAction.addAction(new ClearSelectedCreatureModificationsAction());
-            shakeAction.addAction(Actions.delay(0.5f));
-            shakeAction.addAction(new MoveBattleToFinishTurnAction());
-            shakeAction.addAction(new RemoveFromBattleCheckerAction(targetCreature, nextAttackTarget));
-            shakeAction.addAction(new SetUserAction(UserAction.Idle));
-            shakeAction.addAction(new BattleFinishedCheckingAction());
+            battleSequenceAction.addAction(new ReduceHpAction(this.targetCreature, calculatedDamage));
+            battleSequenceAction.addAction(new ClearSelectedCreatureModificationsAction());
+            battleSequenceAction.addAction(Actions.delay(0.5f));
+            battleSequenceAction.addAction(new MoveBattleToFinishTurnAction());
+            battleSequenceAction.addAction(new RemoveFromBattleCheckerAction(targetCreature));
+            battleSequenceAction.addAction(new RemoveTargetSelectionAction());
+            battleSequenceAction.addAction(Actions.delay(0.5f));
+            battleSequenceAction.addAction(new SetUserAction(UserAction.Idle));
+            battleSequenceAction.addAction(new BattleFinishedCheckingAction());
 
-            this.nextAttackTarget.addAction(shakeAction);
+            this.nextAttackTarget.addAction(battleSequenceAction);
 
             return true;
         }

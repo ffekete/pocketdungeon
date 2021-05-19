@@ -100,7 +100,7 @@ public class BattleFlowAction extends Action {
 
                 SequenceAction sequenceAction = new SequenceAction();
                 sequenceAction.addAction(Actions.delay(1.5f));
-                sequenceAction.addAction(new RemoveFromBattleCheckerAction(GameState.battleSelectedCreature, GameState.battleImages.get(GameState.battleSelectedCreature)));
+                sequenceAction.addAction(new RemoveFromBattleCheckerAction(GameState.battleSelectedCreature));
 
                 if (Hero.class.isAssignableFrom(GameState.battleSelectedCreature.getClass())) {
                     sequenceAction.addAction(new RemoveFromPartyAction(GameState.battleSelectedCreature));

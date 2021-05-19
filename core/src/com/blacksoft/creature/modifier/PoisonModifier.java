@@ -7,8 +7,10 @@ import com.badlogic.gdx.scenes.scene2d.actions.ParallelAction;
 import com.badlogic.gdx.scenes.scene2d.actions.SequenceAction;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.blacksoft.battle.action.BattleFinishedCheckingAction;
+import com.blacksoft.battle.action.RemoveTargetSelectionAction;
 import com.blacksoft.creature.Creature;
 import com.blacksoft.creature.action.ReduceHpAction;
+import com.blacksoft.creature.action.RemoveFromBattleCheckerAction;
 import com.blacksoft.screen.UIFactory;
 import com.blacksoft.skill.Poison;
 import com.blacksoft.state.GameState;
@@ -39,6 +41,9 @@ public class PoisonModifier implements Modifier {
             Label label = UIFactory.I.createTwoFloatingLabelsWithTwoIconFromString(Integer.toString(amount), String.format("%s", duration), new TextureRegion(Poison.icon),new TextureRegion(UIState.hourglassIconImage), (int) image.getX() + 90 + 24, (int) image.getY() + 60 + 48, sequenceAction);
             sequenceAction.addAction(Actions.delay(0.8f));
             sequenceAction.addAction(new ReduceHpAction(target, amount));
+            sequenceAction.addAction(new RemoveFromBattleCheckerAction(target));
+            sequenceAction.addAction(new RemoveTargetSelectionAction());
+            sequenceAction.addAction(Actions.delay(0.5f));
             sequenceAction.addAction(new BattleFinishedCheckingAction());
             label.setColor(Color.GREEN);
         }

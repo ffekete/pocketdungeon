@@ -3,6 +3,7 @@ package com.blacksoft.creature.action;
 import com.badlogic.gdx.scenes.scene2d.Action;
 import com.badlogic.gdx.scenes.scene2d.actions.Actions;
 import com.badlogic.gdx.scenes.scene2d.actions.SequenceAction;
+import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.blacksoft.creature.Creature;
 import com.blacksoft.state.GameState;
 import com.blacksoft.ui.AnimatedImage;
@@ -10,18 +11,17 @@ import com.blacksoft.ui.AnimatedImage;
 public class RemoveFromBattleCheckerAction extends Action {
 
     private Creature targetCreature;
-    private AnimatedImage targetCreatureBattleImage;
 
-    public RemoveFromBattleCheckerAction(Creature targetCreature,
-                                         AnimatedImage targetCreatureBattleImage) {
+    public RemoveFromBattleCheckerAction(Creature targetCreature) {
         this.targetCreature = targetCreature;
-        this.targetCreatureBattleImage = targetCreatureBattleImage;
     }
 
     @Override
     public boolean act(float delta) {
 
         if (targetCreature.hp <= 0) {
+
+            Image targetCreatureBattleImage = GameState.battleImages.get(targetCreature);
 
             targetCreatureBattleImage.clearListeners();
 

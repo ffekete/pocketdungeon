@@ -6,6 +6,8 @@ import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.InputListener;
+import com.badlogic.gdx.scenes.scene2d.actions.Actions;
+import com.badlogic.gdx.scenes.scene2d.actions.SequenceAction;
 import com.badlogic.gdx.scenes.scene2d.ui.Container;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
@@ -282,7 +284,13 @@ public class BattleInitializer {
         }
 
         GameState.uiStage.addActor(container);
-        GameState.stage.addAction(new BattleFlowAction(creatures, party.heroes));
+
+        SequenceAction startBattleAction = new SequenceAction();
+
+        startBattleAction.addAction(Actions.delay(4f));
+        startBattleAction.addAction(new BattleFlowAction(creatures, party.heroes));
+
+        GameState.stage.addAction(startBattleAction);
         GameState.isCombatSequence = true;
         UIState.battleSelectionCursor.toFront();
         container.toBack();
