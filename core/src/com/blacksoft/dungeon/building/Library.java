@@ -27,11 +27,6 @@ public class Library implements Building {
     }
 
     @Override
-    public boolean canUpgradeBy(AbstractAction action) {
-        return level <= 4 && PlaceLibraryAction.class.isAssignableFrom(action.getClass());
-    }
-
-    @Override
     public void place(int x,
                       int y) {
 
@@ -43,13 +38,6 @@ public class Library implements Building {
     }
 
     @Override
-    public void upgrade() {
-        GameState.loopProgress += Config.LIBRARY_PROGRESS_VALUE;
-        GameState.warlockLimit += 1;
-        level++;
-    }
-
-    @Override
     public void destroy() {
         GameState.warlockLimit -= level;
         lightSource.dispose();
@@ -58,11 +46,6 @@ public class Library implements Building {
     @Override
     public Tile getTile() {
         return Tile.Library;
-    }
-
-    @Override
-    public int getUpgradeLevel() {
-        return level;
     }
 
     @Override

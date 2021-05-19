@@ -28,11 +28,6 @@ public class Gate implements Building {
     }
 
     @Override
-    public boolean canUpgradeBy(AbstractAction action) {
-        return level <= 4 && PlaceTreasuryAction.class.isAssignableFrom(action.getClass());
-    }
-
-    @Override
     public void place(int x,
                       int y) {
 
@@ -50,23 +45,12 @@ public class Gate implements Building {
     }
 
     @Override
-    public void upgrade() {
-        GameState.loopProgress += Config.GATE_PROGRESS_VALUE;
-        level++;
-    }
-
-    @Override
     public void destroy() {
     }
 
     @Override
     public Tile getTile() {
         return opened ? Tile.GateClosed : Tile.GateOpened;
-    }
-
-    @Override
-    public int getUpgradeLevel() {
-        return level;
     }
 
     @Override

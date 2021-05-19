@@ -27,11 +27,6 @@ public class Treasury implements Building {
     private Light lightSource;
 
     @Override
-    public boolean canUpgradeBy(AbstractAction action) {
-        return level <= 4 && PlaceTreasuryAction.class.isAssignableFrom(action.getClass());
-    }
-
-    @Override
     public void place(int x,
                       int y) {
 
@@ -45,13 +40,6 @@ public class Treasury implements Building {
     }
 
     @Override
-    public void upgrade() {
-        GameState.loopProgress += Config.TREASURY_PROGRESS_VALUE;
-        GameState.gold += 500;
-        level++;
-    }
-
-    @Override
     public void destroy() {
         lightSource.dispose();
     }
@@ -59,11 +47,6 @@ public class Treasury implements Building {
     @Override
     public Tile getTile() {
         return Tile.Treasury;
-    }
-
-    @Override
-    public int getUpgradeLevel() {
-        return level;
     }
 
     @Override

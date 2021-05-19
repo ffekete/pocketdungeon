@@ -38,11 +38,6 @@ public class Torch implements Building {
     private FlickeringLightAction flickeringLightAction;
 
     @Override
-    public boolean canUpgradeBy(AbstractAction action) {
-        return level < 5 && PlaceTorchAction.class.isAssignableFrom(action.getClass());
-    }
-
-    @Override
     public void place(int x,
                       int y) {
         GameState.loopProgress += Config.TORCH_PROGRESS_VALUE;
@@ -56,15 +51,6 @@ public class Torch implements Building {
     }
 
     @Override
-    public void upgrade() {
-        GameState.loopProgress += Config.TORCH_PROGRESS_VALUE;
-        GameState.oozeLimit += 1;
-        level++;
-
-        flickeringLightAction.setOriginalDistance(lightSource.getDistance() + level * 5);
-    }
-
-    @Override
     public void destroy() {
         GameState.oozeLimit -= level;
         lightSource.setActive(false);
@@ -74,11 +60,6 @@ public class Torch implements Building {
     @Override
     public Tile getTile() {
         return Tile.Torch;
-    }
-
-    @Override
-    public int getUpgradeLevel() {
-        return level;
     }
 
     @Override

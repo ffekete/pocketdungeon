@@ -19,7 +19,6 @@ import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
 import com.blacksoft.creature.Creature;
 import com.blacksoft.dungeon.actions.AbstractAction;
 import com.blacksoft.dungeon.actions.ui.CleanIndicatorsAction;
-import com.blacksoft.dungeon.actions.ui.UpgradeIndicatorUpdater;
 import com.blacksoft.screen.action.AddActorAction;
 import com.blacksoft.screen.action.MovePlaceableActorToMouseAction;
 import com.blacksoft.state.Config;
@@ -808,8 +807,6 @@ public class UIFactory {
                 CleanIndicatorsAction.cleanAll(GameState.dungeon);
 
                 GameState.selectedAction = action;
-
-                UpgradeIndicatorUpdater.update(GameState.dungeon);
 
                 ParallelAction moveAndScaleAction = new ParallelAction();
 

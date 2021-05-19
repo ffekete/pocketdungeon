@@ -24,21 +24,11 @@ public class RestingArea implements Building {
     public int level = 1;
 
     @Override
-    public boolean canUpgradeBy(AbstractAction action) {
-        return false;
-    }
-
-    @Override
     public void place(int x,
                       int y) {
         GameState.loopProgress += Config.RESTING_AREA_PROGRESS_VALUE;
         this.x = x / 16;
         this.y = y / 16;
-    }
-
-    @Override
-    public void upgrade() {
-
     }
 
     @Override
@@ -49,11 +39,6 @@ public class RestingArea implements Building {
     @Override
     public Tile getTile() {
         return Tile.RestingArea;
-    }
-
-    @Override
-    public int getUpgradeLevel() {
-        return level;
     }
 
     @Override

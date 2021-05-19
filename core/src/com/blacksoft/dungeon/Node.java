@@ -19,10 +19,6 @@ public class Node {
 
     public int index = 0;
 
-    public boolean canUpgradeBy(AbstractAction action) {
-        return building != null && building.canUpgradeBy(action);
-    }
-
     public void disconnectFromNeighbours() {
         disconnectWith(x - 1, y);
         disconnectWith(x + 1, y);

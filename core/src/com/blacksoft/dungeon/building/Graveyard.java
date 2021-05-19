@@ -27,11 +27,6 @@ public class Graveyard implements Building {
     }
 
     @Override
-    public boolean canUpgradeBy(AbstractAction action) {
-        return level <= 4 && PlaceGraveyardAction.class.isAssignableFrom(action.getClass());
-    }
-
-    @Override
     public void place(int x,
                       int y) {
         GameState.loopProgress += Config.GRAVEYARD_PROGRESS_VALUE;
@@ -39,13 +34,6 @@ public class Graveyard implements Building {
         this.lightSource = LightSourceFactory.getGraveyardLightSource(x / 16 * 16 + 8,y / 16 * 16 + 8);
         this.x = x / 16;
         this.y = y / 16;
-    }
-
-    @Override
-    public void upgrade() {
-        GameState.loopProgress += Config.GRAVEYARD_PROGRESS_VALUE;
-        GameState.skeletonLimit += 1;
-        level++;
     }
 
     @Override
@@ -57,11 +45,6 @@ public class Graveyard implements Building {
     @Override
     public Tile getTile() {
         return Tile.GraveYard;
-    }
-
-    @Override
-    public int getUpgradeLevel() {
-        return level;
     }
 
     @Override

@@ -21,21 +21,11 @@ public class DungeonEntrance implements Building {
     }
 
     @Override
-    public boolean canUpgradeBy(AbstractAction action) {
-        return false;
-    }
-
-    @Override
     public void place(int x,
                       int y) {
         this.lightSource = LightSourceFactory.getDungeonEntranceLightSource(x / 16 * 16 + 8,y / 16 * 16 + 8);
         this.x = x / 16;
         this.y = y / 16;
-    }
-
-    @Override
-    public void upgrade() {
-
     }
 
     @Override
@@ -46,11 +36,6 @@ public class DungeonEntrance implements Building {
     @Override
     public Tile getTile() {
         return Tile.GraveYard;
-    }
-
-    @Override
-    public int getUpgradeLevel() {
-        return level;
     }
 
     @Override

@@ -32,7 +32,7 @@ public class BuildingPlacer {
             if (GameState.userAction == UserAction.Place) {
 
                 if (clazz == Gate.class) {
-                    return TileCleaner.isEmptyCorridor(GameState.dungeon, vx, vy) || canUpgradeTile(vx, vy);
+                    return TileCleaner.isEmptyCorridor(GameState.dungeon, vx, vy);
                 }
 
                 if (clazz == Graveyard.class ||
@@ -40,29 +40,15 @@ public class BuildingPlacer {
                         clazz == Treasury.class ||
                         clazz == Library.class ||
                         clazz == RestingArea.class) {
-                    if (TileCleaner.isClean(GameState.dungeon, vx, vy) || canUpgradeTile(vx, vy)) {
+                    if (TileCleaner.isClean(GameState.dungeon, vx, vy)) {
                         return true;
                     }
                 }
 
                 if (clazz == Torch.class) {
-                    if (TileCleaner.isRockWithCorner(GameState.dungeon, vx, vy) || canUpgradeTile(vx, vy)) {
+                    if (TileCleaner.isRockWithCorner(GameState.dungeon, vx, vy)) {
                         return true;
                     }
-                }
-            }
-        }
-        return false;
-    }
-
-    public static boolean canUpgradeTile(int x,
-                                         int y) {
-
-        if (x >= 0 && x < MAP_WIDTH && y >= 0 && y < MAP_HEIGHT) {
-
-            if (GameState.userAction == UserAction.Place) {
-                if (GameState.dungeon.nodes[x][y].canUpgradeBy(GameState.selectedAction)) {
-                    return true;
                 }
             }
         }
@@ -86,8 +72,7 @@ public class BuildingPlacer {
                 GameState.dungeon.replaceTileToBuilding(vx, vy, GameState.currentBuilding.getTile());
                 GameState.dungeon.nodes[vx][vy].building.place(x, y);
             } else {
-                // upgrade building
-                GameState.dungeon.nodes[vx][vy].building.upgrade();
+                throw new IllegalStateException("Building should be null, but it is " + GameState.dungeon.nodes[vx][vy].building);
             }
 
             sequenceAction.addAction(Actions.scaleTo(1f, 1f, 0.2f));

@@ -28,11 +28,6 @@ public class BloodPool implements Building {
     private Light lightSource;
 
     @Override
-    public boolean canUpgradeBy(AbstractAction action) {
-        return level <= 4 && PlaceBloodPoolAction.class.isAssignableFrom(action.getClass());
-    }
-
-    @Override
     public void place(int x,
                       int y) {
         GameState.loopProgress += Config.BLOOD_POOL_PROGRESS_VALUE;
@@ -40,13 +35,6 @@ public class BloodPool implements Building {
         this.lightSource = LightSourceFactory.getBloodPoolLightSource(x / 16 * 16 + 8,y / 16 * 16 + 8);
         this.x = x / 16;
         this.y = y / 16;
-    }
-
-    @Override
-    public void upgrade() {
-        GameState.loopProgress += Config.BLOOD_POOL_PROGRESS_VALUE;
-        GameState.vampireLimit += 1;
-        level++;
     }
 
     @Override
@@ -58,11 +46,6 @@ public class BloodPool implements Building {
     @Override
     public Tile getTile() {
         return Tile.BloodPool;
-    }
-
-    @Override
-    public int getUpgradeLevel() {
-        return level;
     }
 
     @Override
