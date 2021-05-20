@@ -24,7 +24,7 @@ public class Config {
     public static final int LIBRARY_PRIORITY = 2;
 
     // progress values
-    public static final int CLEAN_PROGRESS_VALUE = 5;
+    public static final int CLEAN_PROGRESS_VALUE = 1;
     public static final int GRAVEYARD_PROGRESS_VALUE = 10;
     public static final int TORCH_PROGRESS_VALUE = 10;
     public static final int BLOOD_POOL_PROGRESS_VALUE = 20;
@@ -39,7 +39,7 @@ public class Config {
     public static final int VAMPIRE_SPAWN_TIME_LIMIT = 0;
     public static final int WARLOCK_SPAWN_TIME_LIMIT = 0;
 
-    public static final int CLEAN_COST_VALUE = 10;
+    public static final int CLEAN_COST_VALUE = 0;
 
     public static final Vector2 DUNGEON_ENTRANCE_LOCATION = new Vector2(0, MAP_HEIGHT / 2);
     public static final int WIZARD_MAX_HP = 3;
@@ -60,4 +60,6 @@ public class Config {
 
     // battle screen layout
     public static int MAX_SKILLS_SIZE = 4;
+
+    public static boolean CLEAN_INDICATOR_ENABLED = false;
 }

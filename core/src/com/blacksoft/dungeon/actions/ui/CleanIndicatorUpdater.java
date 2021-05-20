@@ -12,6 +12,7 @@ import com.blacksoft.state.Config;
 import com.blacksoft.state.GameState;
 import com.blacksoft.user.actions.UserAction;
 
+import static com.blacksoft.state.Config.CLEAN_INDICATOR_ENABLED;
 import static com.blacksoft.state.Config.MAP_HEIGHT;
 import static com.blacksoft.state.Config.MAP_WIDTH;
 
@@ -19,7 +20,7 @@ public class CleanIndicatorUpdater {
 
     public static void update(Dungeon dungeon) {
 
-        if (GameState.userAction != UserAction.Clean || GameState.gold < Config.CLEAN_COST_VALUE) {
+        if (!CLEAN_INDICATOR_ENABLED || GameState.userAction != UserAction.Clean || GameState.gold < Config.CLEAN_COST_VALUE) {
             return;
         }
 

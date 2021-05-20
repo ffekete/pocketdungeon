@@ -553,10 +553,6 @@ public class UIFactory {
 
         table.add(statsTable);
 
-        DynamicLabel mpLabel = new DynamicLabel(labelStyle14, () -> String.valueOf(creature.mp));
-        table.add(new Label("mp:", labelStyle14));
-        table.add(mpLabel).size(16);
-
         DynamicLabel levelLabel = new DynamicLabel(labelStyle14, () -> String.valueOf(creature.level));
         table.add(new Label("lv:", labelStyle14));
         table.add(levelLabel).expandX().fillX();
