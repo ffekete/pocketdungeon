@@ -1,7 +1,5 @@
 package com.blacksoft.dungeon;
 
-import com.blacksoft.state.Config;
-
 import java.util.Arrays;
 import java.util.List;
 
@@ -9,25 +7,25 @@ import static com.blacksoft.state.Config.TEXTURE_SIZE;
 
 public enum Tile {
 
-    Rock(true, true, TEXTURE_SIZE,  TEXTURE_SIZE),
-    Empty(false, true,  TEXTURE_SIZE,  TEXTURE_SIZE),
-    GraveYard(false, true,  TEXTURE_SIZE,  TEXTURE_SIZE),
-    Torch(true, true,  TEXTURE_SIZE,  TEXTURE_SIZE),
-    VampireCoffin(false, true,  TEXTURE_SIZE,  TEXTURE_SIZE),
-    Treasury(false, true,  TEXTURE_SIZE,  TEXTURE_SIZE),
-    DungeonEntrance(false, false,  TEXTURE_SIZE,  TEXTURE_SIZE),
-    RestingArea(false, true,  TEXTURE_SIZE,  TEXTURE_SIZE),
-    GateClosed(true, true,  TEXTURE_SIZE,  TEXTURE_SIZE * 2),
-    GateOpened(false, true,  TEXTURE_SIZE * 2,  TEXTURE_SIZE * 2),
-    Library(false, true,  TEXTURE_SIZE,  TEXTURE_SIZE);
+    Rock(true, true, TEXTURE_SIZE, TEXTURE_SIZE),
+    Empty(false, true, TEXTURE_SIZE, TEXTURE_SIZE),
+    Grave(false, false, TEXTURE_SIZE, TEXTURE_SIZE * 2),
+    Torch(true, true, TEXTURE_SIZE, TEXTURE_SIZE),
+    MysteriousCoffin(false, false, TEXTURE_SIZE, TEXTURE_SIZE),
+    Treasury(false, false, TEXTURE_SIZE, TEXTURE_SIZE),
+    DungeonEntrance(false, false, TEXTURE_SIZE, TEXTURE_SIZE * 2),
+    RestingArea(false, true, TEXTURE_SIZE, TEXTURE_SIZE),
+    GateClosed(true, true, TEXTURE_SIZE, TEXTURE_SIZE * 2),
+    GateOpened(false, true, TEXTURE_SIZE * 2, TEXTURE_SIZE * 2),
+    Library(false, false, TEXTURE_SIZE, TEXTURE_SIZE * 2);
 
     static {
         Rock.canMergeWith = Arrays.asList(Torch, Rock);
         Empty.canMergeWith = Arrays.asList(Empty, DungeonEntrance, Treasury, GateOpened, GateClosed, Library);
         Library.canMergeWith = Arrays.asList(Empty, DungeonEntrance, Treasury, Library);
-        GraveYard.canMergeWith = Arrays.asList(GraveYard);
+        Grave.canMergeWith = Arrays.asList(Grave);
         Torch.canMergeWith = Arrays.asList(Rock, Torch);
-        VampireCoffin.canMergeWith = Empty.canMergeWith;
+        MysteriousCoffin.canMergeWith = Empty.canMergeWith;
         Treasury.canMergeWith = Library.canMergeWith;
         DungeonEntrance.canMergeWith = Library.canMergeWith;
         RestingArea.canMergeWith = Arrays.asList(RestingArea);

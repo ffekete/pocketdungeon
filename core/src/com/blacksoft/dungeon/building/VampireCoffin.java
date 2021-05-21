@@ -41,7 +41,7 @@ public class VampireCoffin implements Building {
 
     @Override
     public Tile getTile() {
-        return Tile.VampireCoffin;
+        return Tile.MysteriousCoffin;
     }
 
     @Override

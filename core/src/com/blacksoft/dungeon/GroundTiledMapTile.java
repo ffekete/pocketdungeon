@@ -292,8 +292,7 @@ public class GroundTiledMapTile implements TiledMapTile {
         else if (v == 238) currentTextureRegion.setRegion(48, 16, textureRegionWidth,  textureRegionHeight);
         else if (v == 254) currentTextureRegion.setRegion(0, 16, textureRegionWidth,  textureRegionHeight);
 
-
-
+        
             //128+64+16+8+4+2+1
         else {
             System.out.println(String.format("Found the culprit: %s %s %s", v, x, y));

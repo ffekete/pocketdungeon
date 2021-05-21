@@ -5,7 +5,6 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.blacksoft.dungeon.Tile;
-import com.blacksoft.dungeon.actions.AbstractAction;
 import com.blacksoft.dungeon.lighting.LightSourceFactory;
 
 public class DungeonEntrance implements Building {
@@ -35,7 +34,7 @@ public class DungeonEntrance implements Building {
 
     @Override
     public Tile getTile() {
-        return Tile.GraveYard;
+        return Tile.Grave;
     }
 
     @Override
