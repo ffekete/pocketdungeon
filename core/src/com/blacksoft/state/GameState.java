@@ -28,6 +28,9 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import static com.blacksoft.state.Config.MAP_HEIGHT;
+import static com.blacksoft.state.Config.MAP_WIDTH;
+
 public class GameState {
 
     public static OrthographicCamera orthographicCamera;
@@ -92,4 +95,6 @@ public class GameState {
     public static Map<Creature, List<DynamicProgressBar>> battleHpAndMpProgressBars = new HashMap<>();
     public static boolean isCombatSequence = false;
     public static BattlePhase battlePhase = BattlePhase.FinishTurn;
+
+    public static int[][] tileCache = new int[MAP_WIDTH][MAP_HEIGHT];
 }

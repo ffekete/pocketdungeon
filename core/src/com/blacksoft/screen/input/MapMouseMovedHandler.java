@@ -37,6 +37,7 @@ public class MapMouseMovedHandler {
                 UIState.closedLockImage.setVisible(false);
                 UIState.openLockImage.setVisible(false);
             }
+            System.out.println(GameState.tileCache[vx][vy]);
         } else {
             GameState.tileMarker.setVisible(false);
             UIState.closedLockImage.setVisible(false);
