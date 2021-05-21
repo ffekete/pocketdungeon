@@ -278,6 +278,7 @@ public class GroundTiledMapTile implements TiledMapTile {
         else if (v == 17) currentTextureRegion.setRegion(16, 48, textureRegionWidth,  textureRegionHeight);
         else if (v == 21) currentTextureRegion.setRegion(16, 0, textureRegionWidth,  textureRegionHeight);
         else if (v == 26) currentTextureRegion.setRegion(0, 32, textureRegionWidth,  textureRegionHeight);
+        else if (v == 55) currentTextureRegion.setRegion(16, 32, textureRegionWidth,  textureRegionHeight);
         else if (v == 68) currentTextureRegion.setRegion(48, 16, textureRegionWidth,  textureRegionHeight);
         else if (v == 81) currentTextureRegion.setRegion(16, 32, textureRegionWidth,  textureRegionHeight);
         else if (v == 85) currentTextureRegion.setRegion(16, 16, textureRegionWidth,  textureRegionHeight);
@@ -288,7 +289,7 @@ public class GroundTiledMapTile implements TiledMapTile {
         else if (v == 223) currentTextureRegion.setRegion(32, 16, textureRegionWidth,  textureRegionHeight);
         else if (v == 226) currentTextureRegion.setRegion(48, 0, textureRegionWidth,  textureRegionHeight);
         else if (v == 236) currentTextureRegion.setRegion(0, 16, textureRegionWidth,  textureRegionHeight);
-        else if (v == 238) currentTextureRegion.setRegion(0, 16, textureRegionWidth,  textureRegionHeight);
+        else if (v == 238) currentTextureRegion.setRegion(48, 16, textureRegionWidth,  textureRegionHeight);
         else if (v == 254) currentTextureRegion.setRegion(0, 16, textureRegionWidth,  textureRegionHeight);
 
 

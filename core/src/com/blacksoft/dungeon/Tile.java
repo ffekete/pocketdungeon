@@ -17,8 +17,8 @@ public enum Tile {
     Treasury(false, true,  TEXTURE_SIZE,  TEXTURE_SIZE),
     DungeonEntrance(false, false,  TEXTURE_SIZE,  TEXTURE_SIZE),
     RestingArea(false, true,  TEXTURE_SIZE,  TEXTURE_SIZE),
-    GateClosed(true, true,  TEXTURE_SIZE,  TEXTURE_SIZE),
-    GateOpened(false, true,  TEXTURE_SIZE,  TEXTURE_SIZE),
+    GateClosed(true, true,  TEXTURE_SIZE,  TEXTURE_SIZE * 2),
+    GateOpened(false, true,  TEXTURE_SIZE * 2,  TEXTURE_SIZE * 2),
     Library(false, true,  TEXTURE_SIZE,  TEXTURE_SIZE);
 
     static {
