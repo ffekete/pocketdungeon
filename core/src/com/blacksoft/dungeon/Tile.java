@@ -1,21 +1,25 @@
 package com.blacksoft.dungeon;
 
+import com.blacksoft.state.Config;
+
 import java.util.Arrays;
 import java.util.List;
 
+import static com.blacksoft.state.Config.TEXTURE_SIZE;
+
 public enum Tile {
 
-    Rock(true, true),
-    Empty(false, true),
-    GraveYard(false, true),
-    Torch(true, true),
-    VampireCoffin(false, true),
-    Treasury(false, true),
-    DungeonEntrance(false, false),
-    RestingArea(false, true),
-    GateClosed(true, true),
-    GateOpened(false, true),
-    Library(false, true);
+    Rock(true, true, TEXTURE_SIZE,  TEXTURE_SIZE),
+    Empty(false, true,  TEXTURE_SIZE,  TEXTURE_SIZE),
+    GraveYard(false, true,  TEXTURE_SIZE,  TEXTURE_SIZE),
+    Torch(true, true,  TEXTURE_SIZE,  TEXTURE_SIZE),
+    VampireCoffin(false, true,  TEXTURE_SIZE,  TEXTURE_SIZE),
+    Treasury(false, true,  TEXTURE_SIZE,  TEXTURE_SIZE),
+    DungeonEntrance(false, false,  TEXTURE_SIZE,  TEXTURE_SIZE),
+    RestingArea(false, true,  TEXTURE_SIZE,  TEXTURE_SIZE),
+    GateClosed(true, true,  TEXTURE_SIZE,  TEXTURE_SIZE),
+    GateOpened(false, true,  TEXTURE_SIZE,  TEXTURE_SIZE),
+    Library(false, true,  TEXTURE_SIZE,  TEXTURE_SIZE);
 
     static {
         Rock.canMergeWith = Arrays.asList(Torch, Rock);
@@ -34,12 +38,19 @@ public enum Tile {
     private boolean solid;
     private boolean tiled;
 
+    public int textureWidth;
+    public int textureHeight;
+
     private List<Tile> canMergeWith;
 
     Tile(boolean solid,
-         boolean tiled) {
+         boolean tiled,
+         int textureWidth,
+         int textureHeight) {
         this.solid = solid;
         this.tiled = tiled;
+        this.textureWidth = textureWidth;
+        this.textureHeight = textureHeight;
     }
 
     public boolean isSolid() {

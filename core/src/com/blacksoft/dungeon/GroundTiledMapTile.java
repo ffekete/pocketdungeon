@@ -18,6 +18,9 @@ public class GroundTiledMapTile implements TiledMapTile {
     public Tile tile;
     int x;
     int y;
+    
+    private int textureRegionWidth;
+    private int  textureRegionHeight;
 
     private int id;
 
@@ -117,176 +120,176 @@ public class GroundTiledMapTile implements TiledMapTile {
         // 128 64  32
 
         // two missing (x-x)
-        if (v == 1 + 2 + 4 + 8 + 16 + 32) currentTextureRegion.setRegion(16, 32, TEXTURE_SIZE, TEXTURE_SIZE);
-        else if (v == 13) currentTextureRegion.setRegion(32, 32, TEXTURE_SIZE, TEXTURE_SIZE);
-        else if (v == 14) currentTextureRegion.setRegion(48, 32, TEXTURE_SIZE, TEXTURE_SIZE);
-        else if (v == 22) currentTextureRegion.setRegion(0, 32, TEXTURE_SIZE, TEXTURE_SIZE);
-        else if (v == 29) currentTextureRegion.setRegion(16, 32, TEXTURE_SIZE, TEXTURE_SIZE);
-        else if (v == 46) currentTextureRegion.setRegion(48, 32, TEXTURE_SIZE, TEXTURE_SIZE);
-        else if (v == 52) currentTextureRegion.setRegion(0, 32, TEXTURE_SIZE, TEXTURE_SIZE);
-        else if (v == 69) currentTextureRegion.setRegion(32, 16, TEXTURE_SIZE, TEXTURE_SIZE);
-        else if (v == 84) currentTextureRegion.setRegion(0, 16, TEXTURE_SIZE, TEXTURE_SIZE);
-        else if (v == 87) currentTextureRegion.setRegion(16, 16, TEXTURE_SIZE, TEXTURE_SIZE);
-        else if (v == 89) currentTextureRegion.setRegion(0, 0, TEXTURE_SIZE, TEXTURE_SIZE);
-        else if (v == 93) currentTextureRegion.setRegion(16, 0, TEXTURE_SIZE, TEXTURE_SIZE);
-        else if (v == 97) currentTextureRegion.setRegion(48, 0, TEXTURE_SIZE, TEXTURE_SIZE);
-        else if (v == 128) currentTextureRegion.setRegion(48, 48, TEXTURE_SIZE, TEXTURE_SIZE);
-        else if (v == 139) currentTextureRegion.setRegion(48, 48, TEXTURE_SIZE, TEXTURE_SIZE);
-        else if (v == 155) currentTextureRegion.setRegion(16, 48, TEXTURE_SIZE, TEXTURE_SIZE);
-        else if (v == 157) currentTextureRegion.setRegion(16, 32, TEXTURE_SIZE, TEXTURE_SIZE);
-        else if (v == 181) currentTextureRegion.setRegion(16, 32, TEXTURE_SIZE, TEXTURE_SIZE);
-        else if (v == 185) currentTextureRegion.setRegion(16, 48, TEXTURE_SIZE, TEXTURE_SIZE);
-        else if (v == 194) currentTextureRegion.setRegion(48, 0, TEXTURE_SIZE, TEXTURE_SIZE);
-        else if (v == 216) currentTextureRegion.setRegion(0, 0, TEXTURE_SIZE, TEXTURE_SIZE);
-        else if (v == 218) currentTextureRegion.setRegion(0, 0, TEXTURE_SIZE, TEXTURE_SIZE);
-        else if (v == 1 + 2 + 4 + 8 + 16 + 128) currentTextureRegion.setRegion(16, 32, TEXTURE_SIZE, TEXTURE_SIZE);
-        else if (v == 1 + 2 + 4 + 8 + 64 + 128) currentTextureRegion.setRegion(32, 16, TEXTURE_SIZE, TEXTURE_SIZE);
-        else if (v == 1 + 2 + 4 + 32 + 64 + 128) currentTextureRegion.setRegion(32, 16, TEXTURE_SIZE, TEXTURE_SIZE);
-        else if (v == 1 + 2 + 16 + 32 + 64 + 128) currentTextureRegion.setRegion(16, 0, TEXTURE_SIZE, TEXTURE_SIZE);
-        else if (v == 1 + 8 + 16 + 32 + 64 + 128) currentTextureRegion.setRegion(16, 0, TEXTURE_SIZE, TEXTURE_SIZE);
-        else if (v == 4 + 8 + 16 + 32 + 64 + 128) currentTextureRegion.setRegion(0, 16, TEXTURE_SIZE, TEXTURE_SIZE);
-        else if (v == 2 + 4 + 8 + 16 + 32 + 64) currentTextureRegion.setRegion(0, 16, TEXTURE_SIZE, TEXTURE_SIZE);
+        if (v == 1 + 2 + 4 + 8 + 16 + 32) currentTextureRegion.setRegion(16, 32, textureRegionWidth,  textureRegionHeight);
+        else if (v == 13) currentTextureRegion.setRegion(32, 32, textureRegionWidth,  textureRegionHeight);
+        else if (v == 14) currentTextureRegion.setRegion(48, 32, textureRegionWidth,  textureRegionHeight);
+        else if (v == 22) currentTextureRegion.setRegion(0, 32, textureRegionWidth,  textureRegionHeight);
+        else if (v == 29) currentTextureRegion.setRegion(16, 32, textureRegionWidth,  textureRegionHeight);
+        else if (v == 46) currentTextureRegion.setRegion(48, 32, textureRegionWidth,  textureRegionHeight);
+        else if (v == 52) currentTextureRegion.setRegion(0, 32, textureRegionWidth,  textureRegionHeight);
+        else if (v == 69) currentTextureRegion.setRegion(32, 16, textureRegionWidth,  textureRegionHeight);
+        else if (v == 84) currentTextureRegion.setRegion(0, 16, textureRegionWidth,  textureRegionHeight);
+        else if (v == 87) currentTextureRegion.setRegion(16, 16, textureRegionWidth,  textureRegionHeight);
+        else if (v == 89) currentTextureRegion.setRegion(0, 0, textureRegionWidth,  textureRegionHeight);
+        else if (v == 93) currentTextureRegion.setRegion(16, 0, textureRegionWidth,  textureRegionHeight);
+        else if (v == 97) currentTextureRegion.setRegion(48, 0, textureRegionWidth,  textureRegionHeight);
+        else if (v == 128) currentTextureRegion.setRegion(48, 48, textureRegionWidth,  textureRegionHeight);
+        else if (v == 139) currentTextureRegion.setRegion(48, 48, textureRegionWidth,  textureRegionHeight);
+        else if (v == 155) currentTextureRegion.setRegion(16, 48, textureRegionWidth,  textureRegionHeight);
+        else if (v == 157) currentTextureRegion.setRegion(16, 32, textureRegionWidth,  textureRegionHeight);
+        else if (v == 181) currentTextureRegion.setRegion(16, 32, textureRegionWidth,  textureRegionHeight);
+        else if (v == 185) currentTextureRegion.setRegion(16, 48, textureRegionWidth,  textureRegionHeight);
+        else if (v == 194) currentTextureRegion.setRegion(48, 0, textureRegionWidth,  textureRegionHeight);
+        else if (v == 216) currentTextureRegion.setRegion(0, 0, textureRegionWidth,  textureRegionHeight);
+        else if (v == 218) currentTextureRegion.setRegion(0, 0, textureRegionWidth,  textureRegionHeight);
+        else if (v == 1 + 2 + 4 + 8 + 16 + 128) currentTextureRegion.setRegion(16, 32, textureRegionWidth,  textureRegionHeight);
+        else if (v == 1 + 2 + 4 + 8 + 64 + 128) currentTextureRegion.setRegion(32, 16, textureRegionWidth,  textureRegionHeight);
+        else if (v == 1 + 2 + 4 + 32 + 64 + 128) currentTextureRegion.setRegion(32, 16, textureRegionWidth,  textureRegionHeight);
+        else if (v == 1 + 2 + 16 + 32 + 64 + 128) currentTextureRegion.setRegion(16, 0, textureRegionWidth,  textureRegionHeight);
+        else if (v == 1 + 8 + 16 + 32 + 64 + 128) currentTextureRegion.setRegion(16, 0, textureRegionWidth,  textureRegionHeight);
+        else if (v == 4 + 8 + 16 + 32 + 64 + 128) currentTextureRegion.setRegion(0, 16, textureRegionWidth,  textureRegionHeight);
+        else if (v == 2 + 4 + 8 + 16 + 32 + 64) currentTextureRegion.setRegion(0, 16, textureRegionWidth,  textureRegionHeight);
             // three missing
-        else if (v == 8 + 16 + 32 + 64 + 128) currentTextureRegion.setRegion(0, 0, TEXTURE_SIZE, TEXTURE_SIZE);
-        else if (v == 1 + 16 + 32 + 64 + 128) currentTextureRegion.setRegion(16, 0, TEXTURE_SIZE, TEXTURE_SIZE);
-        else if (v == 1 + 2 + 32 + 64 + 128) currentTextureRegion.setRegion(32, 0, TEXTURE_SIZE, TEXTURE_SIZE);
-        else if (v == 1 + 2 + 4 + 64 + 128) currentTextureRegion.setRegion(32, 16, TEXTURE_SIZE, TEXTURE_SIZE);
-        else if (v == 1 + 2 + 4 + 8 + 128) currentTextureRegion.setRegion(32, 32, TEXTURE_SIZE, TEXTURE_SIZE);
-        else if (v == 1 + 2 + 4 + 8 + 16) currentTextureRegion.setRegion(16, 32, TEXTURE_SIZE, TEXTURE_SIZE);
-        else if (v == 2 + 4 + 8 + 16 + 32) currentTextureRegion.setRegion(0, 32, TEXTURE_SIZE, TEXTURE_SIZE);
-        else if (v == 4 + 8 + 16 + 32 + 64) currentTextureRegion.setRegion(0, 16, TEXTURE_SIZE, TEXTURE_SIZE);
+        else if (v == 8 + 16 + 32 + 64 + 128) currentTextureRegion.setRegion(0, 0, textureRegionWidth,  textureRegionHeight);
+        else if (v == 1 + 16 + 32 + 64 + 128) currentTextureRegion.setRegion(16, 0, textureRegionWidth,  textureRegionHeight);
+        else if (v == 1 + 2 + 32 + 64 + 128) currentTextureRegion.setRegion(32, 0, textureRegionWidth,  textureRegionHeight);
+        else if (v == 1 + 2 + 4 + 64 + 128) currentTextureRegion.setRegion(32, 16, textureRegionWidth,  textureRegionHeight);
+        else if (v == 1 + 2 + 4 + 8 + 128) currentTextureRegion.setRegion(32, 32, textureRegionWidth,  textureRegionHeight);
+        else if (v == 1 + 2 + 4 + 8 + 16) currentTextureRegion.setRegion(16, 32, textureRegionWidth,  textureRegionHeight);
+        else if (v == 2 + 4 + 8 + 16 + 32) currentTextureRegion.setRegion(0, 32, textureRegionWidth,  textureRegionHeight);
+        else if (v == 4 + 8 + 16 + 32 + 64) currentTextureRegion.setRegion(0, 16, textureRegionWidth,  textureRegionHeight);
             // three missing - not neighbours
-        else if (v == 1 + 4 + 8 + 16 + 32) currentTextureRegion.setRegion(16, 32, TEXTURE_SIZE, TEXTURE_SIZE);
+        else if (v == 1 + 4 + 8 + 16 + 32) currentTextureRegion.setRegion(16, 32, textureRegionWidth,  textureRegionHeight);
             // four missing
-        else if (v == 16 + 32 + 64 + 128) currentTextureRegion.setRegion(0, 0, TEXTURE_SIZE, TEXTURE_SIZE);
-        else if (v == 1 + 32 + 64 + 128) currentTextureRegion.setRegion(32, 0, TEXTURE_SIZE, TEXTURE_SIZE);
-        else if (v == 1 + 2 + 64 + 128) currentTextureRegion.setRegion(32, 0, TEXTURE_SIZE, TEXTURE_SIZE);
-        else if (v == 1 + 2 + 4 + 128) currentTextureRegion.setRegion(16, 32, TEXTURE_SIZE, TEXTURE_SIZE);
-        else if (v == 1 + 2 + 4 + 8) currentTextureRegion.setRegion(32, 32, TEXTURE_SIZE, TEXTURE_SIZE);
-        else if (v == 2 + 4 + 8 + 16) currentTextureRegion.setRegion(0, 32, TEXTURE_SIZE, TEXTURE_SIZE);
-        else if (v == 4 + 8 + 16 + 32) currentTextureRegion.setRegion(0, 32, TEXTURE_SIZE, TEXTURE_SIZE);
-        else if (v == 8 + 16 + 32 + 64) currentTextureRegion.setRegion(0, 0, TEXTURE_SIZE, TEXTURE_SIZE);
+        else if (v == 16 + 32 + 64 + 128) currentTextureRegion.setRegion(0, 0, textureRegionWidth,  textureRegionHeight);
+        else if (v == 1 + 32 + 64 + 128) currentTextureRegion.setRegion(32, 0, textureRegionWidth,  textureRegionHeight);
+        else if (v == 1 + 2 + 64 + 128) currentTextureRegion.setRegion(32, 0, textureRegionWidth,  textureRegionHeight);
+        else if (v == 1 + 2 + 4 + 128) currentTextureRegion.setRegion(16, 32, textureRegionWidth,  textureRegionHeight);
+        else if (v == 1 + 2 + 4 + 8) currentTextureRegion.setRegion(32, 32, textureRegionWidth,  textureRegionHeight);
+        else if (v == 2 + 4 + 8 + 16) currentTextureRegion.setRegion(0, 32, textureRegionWidth,  textureRegionHeight);
+        else if (v == 4 + 8 + 16 + 32) currentTextureRegion.setRegion(0, 32, textureRegionWidth,  textureRegionHeight);
+        else if (v == 8 + 16 + 32 + 64) currentTextureRegion.setRegion(0, 0, textureRegionWidth,  textureRegionHeight);
             // four missing - not neighbours
-        else if (v == 1 + 2 + 16 + 128) currentTextureRegion.setRegion(16, 48, TEXTURE_SIZE, TEXTURE_SIZE);
-        else if (v == 1 + 8 + 16 + 32) currentTextureRegion.setRegion(16, 48, TEXTURE_SIZE, TEXTURE_SIZE);
-        else if (v == 2 + 4 + 8 + 64) currentTextureRegion.setRegion(48, 16, TEXTURE_SIZE, TEXTURE_SIZE);
-        else if (v == 4 + 32 + 64 + 128) currentTextureRegion.setRegion(48, 16, TEXTURE_SIZE, TEXTURE_SIZE);
+        else if (v == 1 + 2 + 16 + 128) currentTextureRegion.setRegion(16, 48, textureRegionWidth,  textureRegionHeight);
+        else if (v == 1 + 8 + 16 + 32) currentTextureRegion.setRegion(16, 48, textureRegionWidth,  textureRegionHeight);
+        else if (v == 2 + 4 + 8 + 64) currentTextureRegion.setRegion(48, 16, textureRegionWidth,  textureRegionHeight);
+        else if (v == 4 + 32 + 64 + 128) currentTextureRegion.setRegion(48, 16, textureRegionWidth,  textureRegionHeight);
             // five missing - Half circle
-        else if (v == 32 + 64 + 128) currentTextureRegion.setRegion(48, 0, TEXTURE_SIZE, TEXTURE_SIZE);
-        else if (v == 1 + 64 + 128) currentTextureRegion.setRegion(32, 0, TEXTURE_SIZE, TEXTURE_SIZE);
-        else if (v == 1 + 2 + 4) currentTextureRegion.setRegion(32, 32, TEXTURE_SIZE, TEXTURE_SIZE);
-        else if (v == 4 + 8 + 16) currentTextureRegion.setRegion(0, 32, TEXTURE_SIZE, TEXTURE_SIZE);
-        else if (v == 8 + 16 + 32) currentTextureRegion.setRegion(0, 48, TEXTURE_SIZE, TEXTURE_SIZE);
-        else if (v == 16 + 32 + 64) currentTextureRegion.setRegion(0, 0, TEXTURE_SIZE, TEXTURE_SIZE);
+        else if (v == 32 + 64 + 128) currentTextureRegion.setRegion(48, 0, textureRegionWidth,  textureRegionHeight);
+        else if (v == 1 + 64 + 128) currentTextureRegion.setRegion(32, 0, textureRegionWidth,  textureRegionHeight);
+        else if (v == 1 + 2 + 4) currentTextureRegion.setRegion(32, 32, textureRegionWidth,  textureRegionHeight);
+        else if (v == 4 + 8 + 16) currentTextureRegion.setRegion(0, 32, textureRegionWidth,  textureRegionHeight);
+        else if (v == 8 + 16 + 32) currentTextureRegion.setRegion(0, 48, textureRegionWidth,  textureRegionHeight);
+        else if (v == 16 + 32 + 64) currentTextureRegion.setRegion(0, 0, textureRegionWidth,  textureRegionHeight);
             // five missing - not neighbours
-        else if (v == 1 + 16 + 128) currentTextureRegion.setRegion(16, 48, TEXTURE_SIZE, TEXTURE_SIZE);
-        else if (v == 1 + 2 + 16) currentTextureRegion.setRegion(16, 48, TEXTURE_SIZE, TEXTURE_SIZE);
-        else if (v == 1 + 8 + 16) currentTextureRegion.setRegion(16, 48, TEXTURE_SIZE, TEXTURE_SIZE);
-        else if (v == 1 + 16 + 32) currentTextureRegion.setRegion(16, 48, TEXTURE_SIZE, TEXTURE_SIZE);
-        else if (v == 2 + 4 + 64) currentTextureRegion.setRegion(48, 16, TEXTURE_SIZE, TEXTURE_SIZE);
-        else if (v == 4 + 8 + 64) currentTextureRegion.setRegion(48, 16, TEXTURE_SIZE, TEXTURE_SIZE);
-        else if (v == 4 + 32 + 64) currentTextureRegion.setRegion(48, 16, TEXTURE_SIZE, TEXTURE_SIZE);
-        else if (v == 4 + 64 + 128) currentTextureRegion.setRegion(48, 16, TEXTURE_SIZE, TEXTURE_SIZE);
+        else if (v == 1 + 16 + 128) currentTextureRegion.setRegion(16, 48, textureRegionWidth,  textureRegionHeight);
+        else if (v == 1 + 2 + 16) currentTextureRegion.setRegion(16, 48, textureRegionWidth,  textureRegionHeight);
+        else if (v == 1 + 8 + 16) currentTextureRegion.setRegion(16, 48, textureRegionWidth,  textureRegionHeight);
+        else if (v == 1 + 16 + 32) currentTextureRegion.setRegion(16, 48, textureRegionWidth,  textureRegionHeight);
+        else if (v == 2 + 4 + 64) currentTextureRegion.setRegion(48, 16, textureRegionWidth,  textureRegionHeight);
+        else if (v == 4 + 8 + 64) currentTextureRegion.setRegion(48, 16, textureRegionWidth,  textureRegionHeight);
+        else if (v == 4 + 32 + 64) currentTextureRegion.setRegion(48, 16, textureRegionWidth,  textureRegionHeight);
+        else if (v == 4 + 64 + 128) currentTextureRegion.setRegion(48, 16, textureRegionWidth,  textureRegionHeight);
             // six missing
-        else if (v == 128 + 1) currentTextureRegion.setRegion(32, 48, TEXTURE_SIZE, TEXTURE_SIZE);
-        else if (v == 1 + 2) currentTextureRegion.setRegion(32, 48, TEXTURE_SIZE, TEXTURE_SIZE);
-        else if (v == 2 + 4) currentTextureRegion.setRegion(48, 32, TEXTURE_SIZE, TEXTURE_SIZE);
-        else if (v == 4 + 8) currentTextureRegion.setRegion(48, 32, TEXTURE_SIZE, TEXTURE_SIZE);
-        else if (v == 8 + 16) currentTextureRegion.setRegion(0, 48, TEXTURE_SIZE, TEXTURE_SIZE);
-        else if (v == 16 + 32) currentTextureRegion.setRegion(0, 48, TEXTURE_SIZE, TEXTURE_SIZE);
-        else if (v == 32 + 64) currentTextureRegion.setRegion(48, 0, TEXTURE_SIZE, TEXTURE_SIZE);
-        else if (v == 64 + 128) currentTextureRegion.setRegion(48, 0, TEXTURE_SIZE, TEXTURE_SIZE);
+        else if (v == 128 + 1) currentTextureRegion.setRegion(32, 48, textureRegionWidth,  textureRegionHeight);
+        else if (v == 1 + 2) currentTextureRegion.setRegion(32, 48, textureRegionWidth,  textureRegionHeight);
+        else if (v == 2 + 4) currentTextureRegion.setRegion(48, 32, textureRegionWidth,  textureRegionHeight);
+        else if (v == 4 + 8) currentTextureRegion.setRegion(48, 32, textureRegionWidth,  textureRegionHeight);
+        else if (v == 8 + 16) currentTextureRegion.setRegion(0, 48, textureRegionWidth,  textureRegionHeight);
+        else if (v == 16 + 32) currentTextureRegion.setRegion(0, 48, textureRegionWidth,  textureRegionHeight);
+        else if (v == 32 + 64) currentTextureRegion.setRegion(48, 0, textureRegionWidth,  textureRegionHeight);
+        else if (v == 64 + 128) currentTextureRegion.setRegion(48, 0, textureRegionWidth,  textureRegionHeight);
 
             // vertical
-        else if (v == 0) currentTextureRegion.setRegion(48, 48, TEXTURE_SIZE, TEXTURE_SIZE);
-        else if (v == 1) currentTextureRegion.setRegion(32, 48, TEXTURE_SIZE, TEXTURE_SIZE);
-        else if (v == 4) currentTextureRegion.setRegion(48, 32, TEXTURE_SIZE, TEXTURE_SIZE);
-        else if (v == 16) currentTextureRegion.setRegion(0, 48, TEXTURE_SIZE, TEXTURE_SIZE);
-        else if (v == 64) currentTextureRegion.setRegion(48, 0, TEXTURE_SIZE, TEXTURE_SIZE);
+        else if (v == 0) currentTextureRegion.setRegion(48, 48, textureRegionWidth,  textureRegionHeight);
+        else if (v == 1) currentTextureRegion.setRegion(32, 48, textureRegionWidth,  textureRegionHeight);
+        else if (v == 4) currentTextureRegion.setRegion(48, 32, textureRegionWidth,  textureRegionHeight);
+        else if (v == 16) currentTextureRegion.setRegion(0, 48, textureRegionWidth,  textureRegionHeight);
+        else if (v == 64) currentTextureRegion.setRegion(48, 0, textureRegionWidth,  textureRegionHeight);
             // "L" shape
-        else if (v == 1 + 4) currentTextureRegion.setRegion(32, 32, TEXTURE_SIZE, TEXTURE_SIZE);
-        else if (v == 4 + 16) currentTextureRegion.setRegion(0, 32, TEXTURE_SIZE, TEXTURE_SIZE);
-        else if (v == 16 + 64) currentTextureRegion.setRegion(48, 0, TEXTURE_SIZE, TEXTURE_SIZE);
-        else if (v == 64 + 1) currentTextureRegion.setRegion(32, 0, TEXTURE_SIZE, TEXTURE_SIZE);
+        else if (v == 1 + 4) currentTextureRegion.setRegion(32, 32, textureRegionWidth,  textureRegionHeight);
+        else if (v == 4 + 16) currentTextureRegion.setRegion(0, 32, textureRegionWidth,  textureRegionHeight);
+        else if (v == 16 + 64) currentTextureRegion.setRegion(48, 0, textureRegionWidth,  textureRegionHeight);
+        else if (v == 64 + 1) currentTextureRegion.setRegion(32, 0, textureRegionWidth,  textureRegionHeight);
             // all around except one
         else if (v == 1 + 4 + 8 + 16 + 32 + 64 + 128)
-            currentTextureRegion.setRegion(80, 16, TEXTURE_SIZE, TEXTURE_SIZE);
-        else if (v == 1 + 2 + 8 + 16 + 32 + 64 + 128) currentTextureRegion.setRegion(16, 0, TEXTURE_SIZE, TEXTURE_SIZE);
-        else if (v == 1 + 2 + 4 + 16 + 32 + 64 + 128) currentTextureRegion.setRegion(80, 0, TEXTURE_SIZE, TEXTURE_SIZE);
-        else if (v == 1 + 2 + 4 + 8 + 32 + 64 + 128) currentTextureRegion.setRegion(32, 16, TEXTURE_SIZE, TEXTURE_SIZE);
-        else if (v == 1 + 2 + 4 + 8 + 16 + 32 + 128) currentTextureRegion.setRegion(16, 32, TEXTURE_SIZE, TEXTURE_SIZE);
+            currentTextureRegion.setRegion(80, 16, textureRegionWidth,  textureRegionHeight);
+        else if (v == 1 + 2 + 8 + 16 + 32 + 64 + 128) currentTextureRegion.setRegion(16, 0, textureRegionWidth,  textureRegionHeight);
+        else if (v == 1 + 2 + 4 + 16 + 32 + 64 + 128) currentTextureRegion.setRegion(80, 0, textureRegionWidth,  textureRegionHeight);
+        else if (v == 1 + 2 + 4 + 8 + 32 + 64 + 128) currentTextureRegion.setRegion(32, 16, textureRegionWidth,  textureRegionHeight);
+        else if (v == 1 + 2 + 4 + 8 + 16 + 32 + 128) currentTextureRegion.setRegion(16, 32, textureRegionWidth,  textureRegionHeight);
             // all around
         else if (v == 1 + 2 + 4 + 8 + 16 + 32 + 64 + 128)
-            currentTextureRegion.setRegion(16, 16, TEXTURE_SIZE, TEXTURE_SIZE);
+            currentTextureRegion.setRegion(16, 16, textureRegionWidth,  textureRegionHeight);
             // diagonal missing
-        else if (v == 1 + 2 + 4 + 8 + 16 + 32 + 64) currentTextureRegion.setRegion(0, 16, TEXTURE_SIZE, TEXTURE_SIZE);
-        else if (v == 4 + 8 + 16 + 64) currentTextureRegion.setRegion(48, 16, TEXTURE_SIZE, TEXTURE_SIZE);
-        else if (v == 4 + 16 + 32 + 64) currentTextureRegion.setRegion(64, 0, TEXTURE_SIZE, TEXTURE_SIZE);
-        else if (v == 1 + 2 + 4 + 16) currentTextureRegion.setRegion(16, 48, TEXTURE_SIZE, TEXTURE_SIZE);
-        else if (v == 1 + 16 + 64 + 128) currentTextureRegion.setRegion(32, 0, TEXTURE_SIZE, TEXTURE_SIZE);
-        else if (v == 2 + 4 + 8 + 64 + 128) currentTextureRegion.setRegion(48, 16, TEXTURE_SIZE, TEXTURE_SIZE);
-        else if (v == 2 + 4 + 8 + 32 + 64) currentTextureRegion.setRegion(48, 16, TEXTURE_SIZE, TEXTURE_SIZE);
-        else if (v == 4 + 8 + 32 + 64) currentTextureRegion.setRegion(48, 16, TEXTURE_SIZE, TEXTURE_SIZE);
-        else if (v == 4 + 8 + 32 + 128) currentTextureRegion.setRegion(48, 16, TEXTURE_SIZE, TEXTURE_SIZE);
-        else if (v == 1 + 2 + 4 + 8 + 16 + 64) currentTextureRegion.setRegion(48, 16, TEXTURE_SIZE, TEXTURE_SIZE);
-        else if (v == 1 + 2 + 128) currentTextureRegion.setRegion(32, 48, TEXTURE_SIZE, TEXTURE_SIZE);
-        else if (v == 1 + 2 + 16 + 32) currentTextureRegion.setRegion(16, 48, TEXTURE_SIZE, TEXTURE_SIZE);
-        else if (v == 1 + 2 + 8 + 16) currentTextureRegion.setRegion(16, 48, TEXTURE_SIZE, TEXTURE_SIZE);
-        else if (v == 1 + 8 + 16 + 128) currentTextureRegion.setRegion(16, 48, TEXTURE_SIZE, TEXTURE_SIZE);
-        else if (v == 1 + 16 + 32 + 128) currentTextureRegion.setRegion(16, 48, TEXTURE_SIZE, TEXTURE_SIZE);
-        else if (v == 1 + 2 + 16 + 64 + 128) currentTextureRegion.setRegion(32, 0, TEXTURE_SIZE, TEXTURE_SIZE);
-        else if (v == 1 + 8 + 16 + 32 + 64) currentTextureRegion.setRegion(0, 0, TEXTURE_SIZE, TEXTURE_SIZE);
-        else if (v == 1 + 4 + 32 + 64 + 128) currentTextureRegion.setRegion(64, 16, TEXTURE_SIZE, TEXTURE_SIZE);
-        else if (v == 4 + 16 + 32 + 64 + 128) currentTextureRegion.setRegion(64, 0, TEXTURE_SIZE, TEXTURE_SIZE);
-        else if (v == 4 + 16 + 64 + 128) currentTextureRegion.setRegion(48, 16, TEXTURE_SIZE, TEXTURE_SIZE);
-        else if (v == 1 + 4 + 128) currentTextureRegion.setRegion(96, 0, TEXTURE_SIZE, TEXTURE_SIZE);
-        else if (v == 1 + 16 + 32 + 64) currentTextureRegion.setRegion(0, 0, TEXTURE_SIZE, TEXTURE_SIZE);
-        else if (v == 1 + 4 + 8 + 16 + 32 + 64) currentTextureRegion.setRegion(0, 16, TEXTURE_SIZE, TEXTURE_SIZE);
-        else if (v == 4 + 8 + 16 + 64 + 128) currentTextureRegion.setRegion(48, 16, TEXTURE_SIZE, TEXTURE_SIZE);
-        else if (v == 2 + 4 + 8 + 16 + 64) currentTextureRegion.setRegion(48, 16, TEXTURE_SIZE, TEXTURE_SIZE);
-        else if (v == 1 + 2 + 16 + 64) currentTextureRegion.setRegion(48, 0, TEXTURE_SIZE, TEXTURE_SIZE);
-        else if (v == 1 + 64) currentTextureRegion.setRegion(48, 0, TEXTURE_SIZE, TEXTURE_SIZE);
-        else if (v == 2 + 4 + 64 + 128) currentTextureRegion.setRegion(48, 16, TEXTURE_SIZE, TEXTURE_SIZE);
-        else if (v == 2 + 4 + 32 + 64) currentTextureRegion.setRegion(48, 16, TEXTURE_SIZE, TEXTURE_SIZE);
-        else if (v == 1 + 2 + 4 + 16 + 64 + 128) currentTextureRegion.setRegion(32, 16, TEXTURE_SIZE, TEXTURE_SIZE);
-        else if (v == 2 + 4 + 32 + 64 + 128) currentTextureRegion.setRegion(48, 16, TEXTURE_SIZE, TEXTURE_SIZE);
-        else if (v == 1 + 4 + 64 + 128) currentTextureRegion.setRegion(64, 16, TEXTURE_SIZE, TEXTURE_SIZE);
-        else if (v == 1 + 2 + 4 + 64) currentTextureRegion.setRegion(48, 16, TEXTURE_SIZE, TEXTURE_SIZE);
-        else if (v == 1 + 2 + 32 + 64) currentTextureRegion.setRegion(48, 16, TEXTURE_SIZE, TEXTURE_SIZE);
-        else if (v == 1 + 2 + 8 + 64) currentTextureRegion.setRegion(48, 16, TEXTURE_SIZE, TEXTURE_SIZE);
-        else if (v == 1 + 2 + 4 + 16 + 128) currentTextureRegion.setRegion(16, 0, TEXTURE_SIZE, TEXTURE_SIZE);
-        else if (v == 1 + 2 + 4 + 32 + 64) currentTextureRegion.setRegion(48, 16, TEXTURE_SIZE, TEXTURE_SIZE);
-        else if (v == 2 + 4 + 16 + 32 + 64 + 128) currentTextureRegion.setRegion(64, 0, TEXTURE_SIZE, TEXTURE_SIZE);
-        else if (v == 1 + 2 + 4 + 8 + 64) currentTextureRegion.setRegion(48, 16, TEXTURE_SIZE, TEXTURE_SIZE);
-        else if (v == 1 + 2 + 16 + 32 + 64) currentTextureRegion.setRegion(0, 0, TEXTURE_SIZE, TEXTURE_SIZE);
-        else if (v == 1 + 2 + 64) currentTextureRegion.setRegion(48, 0, TEXTURE_SIZE, TEXTURE_SIZE);
-        else if (v == 1 + 4 + 16 + 32 + 64 + 128) currentTextureRegion.setRegion(96, 64, TEXTURE_SIZE, TEXTURE_SIZE);
-        else if (v == 1 + 8 + 16 + 64 + 128) currentTextureRegion.setRegion(96, 64, TEXTURE_SIZE, TEXTURE_SIZE);
-        else if (v == 1 + 4 + 8 + 16 + 64 + 128) currentTextureRegion.setRegion(32, 0, TEXTURE_SIZE, TEXTURE_SIZE);
-        else if (v == 2 + 16 + 32 + 64) currentTextureRegion.setRegion(0, 0, TEXTURE_SIZE, TEXTURE_SIZE);
-        else if (v == 1 + 4 + 8 + 64 + 128) currentTextureRegion.setRegion(64, 16, TEXTURE_SIZE, TEXTURE_SIZE);
-        else if (v == 8 + 16 + 64) currentTextureRegion.setRegion(48, 0, TEXTURE_SIZE, TEXTURE_SIZE);
-        else if (v == 1 + 2 + 4 + 8 + 32 + 128) currentTextureRegion.setRegion(32, 0, TEXTURE_SIZE, TEXTURE_SIZE);
+        else if (v == 1 + 2 + 4 + 8 + 16 + 32 + 64) currentTextureRegion.setRegion(0, 16, textureRegionWidth,  textureRegionHeight);
+        else if (v == 4 + 8 + 16 + 64) currentTextureRegion.setRegion(48, 16, textureRegionWidth,  textureRegionHeight);
+        else if (v == 4 + 16 + 32 + 64) currentTextureRegion.setRegion(64, 0, textureRegionWidth,  textureRegionHeight);
+        else if (v == 1 + 2 + 4 + 16) currentTextureRegion.setRegion(16, 48, textureRegionWidth,  textureRegionHeight);
+        else if (v == 1 + 16 + 64 + 128) currentTextureRegion.setRegion(32, 0, textureRegionWidth,  textureRegionHeight);
+        else if (v == 2 + 4 + 8 + 64 + 128) currentTextureRegion.setRegion(48, 16, textureRegionWidth,  textureRegionHeight);
+        else if (v == 2 + 4 + 8 + 32 + 64) currentTextureRegion.setRegion(48, 16, textureRegionWidth,  textureRegionHeight);
+        else if (v == 4 + 8 + 32 + 64) currentTextureRegion.setRegion(48, 16, textureRegionWidth,  textureRegionHeight);
+        else if (v == 4 + 8 + 32 + 128) currentTextureRegion.setRegion(48, 16, textureRegionWidth,  textureRegionHeight);
+        else if (v == 1 + 2 + 4 + 8 + 16 + 64) currentTextureRegion.setRegion(48, 16, textureRegionWidth,  textureRegionHeight);
+        else if (v == 1 + 2 + 128) currentTextureRegion.setRegion(32, 48, textureRegionWidth,  textureRegionHeight);
+        else if (v == 1 + 2 + 16 + 32) currentTextureRegion.setRegion(16, 48, textureRegionWidth,  textureRegionHeight);
+        else if (v == 1 + 2 + 8 + 16) currentTextureRegion.setRegion(16, 48, textureRegionWidth,  textureRegionHeight);
+        else if (v == 1 + 8 + 16 + 128) currentTextureRegion.setRegion(16, 48, textureRegionWidth,  textureRegionHeight);
+        else if (v == 1 + 16 + 32 + 128) currentTextureRegion.setRegion(16, 48, textureRegionWidth,  textureRegionHeight);
+        else if (v == 1 + 2 + 16 + 64 + 128) currentTextureRegion.setRegion(32, 0, textureRegionWidth,  textureRegionHeight);
+        else if (v == 1 + 8 + 16 + 32 + 64) currentTextureRegion.setRegion(0, 0, textureRegionWidth,  textureRegionHeight);
+        else if (v == 1 + 4 + 32 + 64 + 128) currentTextureRegion.setRegion(64, 16, textureRegionWidth,  textureRegionHeight);
+        else if (v == 4 + 16 + 32 + 64 + 128) currentTextureRegion.setRegion(64, 0, textureRegionWidth,  textureRegionHeight);
+        else if (v == 4 + 16 + 64 + 128) currentTextureRegion.setRegion(48, 16, textureRegionWidth,  textureRegionHeight);
+        else if (v == 1 + 4 + 128) currentTextureRegion.setRegion(96, 0, textureRegionWidth,  textureRegionHeight);
+        else if (v == 1 + 16 + 32 + 64) currentTextureRegion.setRegion(0, 0, textureRegionWidth,  textureRegionHeight);
+        else if (v == 1 + 4 + 8 + 16 + 32 + 64) currentTextureRegion.setRegion(0, 16, textureRegionWidth,  textureRegionHeight);
+        else if (v == 4 + 8 + 16 + 64 + 128) currentTextureRegion.setRegion(48, 16, textureRegionWidth,  textureRegionHeight);
+        else if (v == 2 + 4 + 8 + 16 + 64) currentTextureRegion.setRegion(48, 16, textureRegionWidth,  textureRegionHeight);
+        else if (v == 1 + 2 + 16 + 64) currentTextureRegion.setRegion(48, 0, textureRegionWidth,  textureRegionHeight);
+        else if (v == 1 + 64) currentTextureRegion.setRegion(48, 0, textureRegionWidth,  textureRegionHeight);
+        else if (v == 2 + 4 + 64 + 128) currentTextureRegion.setRegion(48, 16, textureRegionWidth,  textureRegionHeight);
+        else if (v == 2 + 4 + 32 + 64) currentTextureRegion.setRegion(48, 16, textureRegionWidth,  textureRegionHeight);
+        else if (v == 1 + 2 + 4 + 16 + 64 + 128) currentTextureRegion.setRegion(32, 16, textureRegionWidth,  textureRegionHeight);
+        else if (v == 2 + 4 + 32 + 64 + 128) currentTextureRegion.setRegion(48, 16, textureRegionWidth,  textureRegionHeight);
+        else if (v == 1 + 4 + 64 + 128) currentTextureRegion.setRegion(64, 16, textureRegionWidth,  textureRegionHeight);
+        else if (v == 1 + 2 + 4 + 64) currentTextureRegion.setRegion(48, 16, textureRegionWidth,  textureRegionHeight);
+        else if (v == 1 + 2 + 32 + 64) currentTextureRegion.setRegion(48, 16, textureRegionWidth,  textureRegionHeight);
+        else if (v == 1 + 2 + 8 + 64) currentTextureRegion.setRegion(48, 16, textureRegionWidth,  textureRegionHeight);
+        else if (v == 1 + 2 + 4 + 16 + 128) currentTextureRegion.setRegion(16, 0, textureRegionWidth,  textureRegionHeight);
+        else if (v == 1 + 2 + 4 + 32 + 64) currentTextureRegion.setRegion(48, 16, textureRegionWidth,  textureRegionHeight);
+        else if (v == 2 + 4 + 16 + 32 + 64 + 128) currentTextureRegion.setRegion(64, 0, textureRegionWidth,  textureRegionHeight);
+        else if (v == 1 + 2 + 4 + 8 + 64) currentTextureRegion.setRegion(48, 16, textureRegionWidth,  textureRegionHeight);
+        else if (v == 1 + 2 + 16 + 32 + 64) currentTextureRegion.setRegion(0, 0, textureRegionWidth,  textureRegionHeight);
+        else if (v == 1 + 2 + 64) currentTextureRegion.setRegion(48, 0, textureRegionWidth,  textureRegionHeight);
+        else if (v == 1 + 4 + 16 + 32 + 64 + 128) currentTextureRegion.setRegion(96, 64, textureRegionWidth,  textureRegionHeight);
+        else if (v == 1 + 8 + 16 + 64 + 128) currentTextureRegion.setRegion(96, 64, textureRegionWidth,  textureRegionHeight);
+        else if (v == 1 + 4 + 8 + 16 + 64 + 128) currentTextureRegion.setRegion(32, 0, textureRegionWidth,  textureRegionHeight);
+        else if (v == 2 + 16 + 32 + 64) currentTextureRegion.setRegion(0, 0, textureRegionWidth,  textureRegionHeight);
+        else if (v == 1 + 4 + 8 + 64 + 128) currentTextureRegion.setRegion(64, 16, textureRegionWidth,  textureRegionHeight);
+        else if (v == 8 + 16 + 64) currentTextureRegion.setRegion(48, 0, textureRegionWidth,  textureRegionHeight);
+        else if (v == 1 + 2 + 4 + 8 + 32 + 128) currentTextureRegion.setRegion(32, 0, textureRegionWidth,  textureRegionHeight);
 
             // 2   4   8
             // 1   X   16
             // 128 64  32
 
-        else if (v == 17) currentTextureRegion.setRegion(16, 48, TEXTURE_SIZE, TEXTURE_SIZE);
-        else if (v == 21) currentTextureRegion.setRegion(16, 0, TEXTURE_SIZE, TEXTURE_SIZE);
-        else if (v == 26) currentTextureRegion.setRegion(0, 32, TEXTURE_SIZE, TEXTURE_SIZE);
-        else if (v == 68) currentTextureRegion.setRegion(48, 16, TEXTURE_SIZE, TEXTURE_SIZE);
-        else if (v == 81) currentTextureRegion.setRegion(16, 32, TEXTURE_SIZE, TEXTURE_SIZE);
-        else if (v == 85) currentTextureRegion.setRegion(16, 16, TEXTURE_SIZE, TEXTURE_SIZE);
-        else if (v == 134) currentTextureRegion.setRegion(48, 32, TEXTURE_SIZE, TEXTURE_SIZE);
-        else if (v == 161) currentTextureRegion.setRegion(32, 48, TEXTURE_SIZE, TEXTURE_SIZE);
-        else if (v == 200) currentTextureRegion.setRegion(48, 0, TEXTURE_SIZE, TEXTURE_SIZE);
-        else if (v == 222) currentTextureRegion.setRegion(0, 16, TEXTURE_SIZE, TEXTURE_SIZE);
-        else if (v == 223) currentTextureRegion.setRegion(32, 16, TEXTURE_SIZE, TEXTURE_SIZE);
-        else if (v == 226) currentTextureRegion.setRegion(48, 0, TEXTURE_SIZE, TEXTURE_SIZE);
-        else if (v == 236) currentTextureRegion.setRegion(0, 16, TEXTURE_SIZE, TEXTURE_SIZE);
-        else if (v == 238) currentTextureRegion.setRegion(0, 16, TEXTURE_SIZE, TEXTURE_SIZE);
-        else if (v == 254) currentTextureRegion.setRegion(0, 16, TEXTURE_SIZE, TEXTURE_SIZE);
+        else if (v == 17) currentTextureRegion.setRegion(16, 48, textureRegionWidth,  textureRegionHeight);
+        else if (v == 21) currentTextureRegion.setRegion(16, 0, textureRegionWidth,  textureRegionHeight);
+        else if (v == 26) currentTextureRegion.setRegion(0, 32, textureRegionWidth,  textureRegionHeight);
+        else if (v == 68) currentTextureRegion.setRegion(48, 16, textureRegionWidth,  textureRegionHeight);
+        else if (v == 81) currentTextureRegion.setRegion(16, 32, textureRegionWidth,  textureRegionHeight);
+        else if (v == 85) currentTextureRegion.setRegion(16, 16, textureRegionWidth,  textureRegionHeight);
+        else if (v == 134) currentTextureRegion.setRegion(48, 32, textureRegionWidth,  textureRegionHeight);
+        else if (v == 161) currentTextureRegion.setRegion(32, 48, textureRegionWidth,  textureRegionHeight);
+        else if (v == 200) currentTextureRegion.setRegion(48, 0, textureRegionWidth,  textureRegionHeight);
+        else if (v == 222) currentTextureRegion.setRegion(0, 16, textureRegionWidth,  textureRegionHeight);
+        else if (v == 223) currentTextureRegion.setRegion(32, 16, textureRegionWidth,  textureRegionHeight);
+        else if (v == 226) currentTextureRegion.setRegion(48, 0, textureRegionWidth,  textureRegionHeight);
+        else if (v == 236) currentTextureRegion.setRegion(0, 16, textureRegionWidth,  textureRegionHeight);
+        else if (v == 238) currentTextureRegion.setRegion(0, 16, textureRegionWidth,  textureRegionHeight);
+        else if (v == 254) currentTextureRegion.setRegion(0, 16, textureRegionWidth,  textureRegionHeight);
 
 
 
@@ -332,6 +335,8 @@ public class GroundTiledMapTile implements TiledMapTile {
         this.x = x;
         this.y = y;
         this.tile = tile;
+        this.textureRegionWidth = tile.textureWidth;
+        this. textureRegionHeight =  tile.textureHeight;
     }
 
     public GroundTiledMapTile(TextureRegion textureRegion,
@@ -342,5 +347,7 @@ public class GroundTiledMapTile implements TiledMapTile {
         this.x = x;
         this.y = y;
         this.tile = tile;
+        this.textureRegionWidth = tile.textureWidth;
+        this. textureRegionHeight =  tile.textureHeight;
     }
 }
