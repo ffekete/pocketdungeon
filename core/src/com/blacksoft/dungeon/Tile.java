@@ -1,7 +1,6 @@
 package com.blacksoft.dungeon;
 
 import java.util.Arrays;
-import java.util.Collections;
 import java.util.List;
 
 public enum Tile {
@@ -10,7 +9,7 @@ public enum Tile {
     Empty(false, true),
     GraveYard(false, true),
     Torch(true, true),
-    BloodPool(false, true),
+    VampireCoffin(false, true),
     Treasury(false, true),
     DungeonEntrance(false, false),
     RestingArea(false, true),
@@ -24,7 +23,7 @@ public enum Tile {
         Library.canMergeWith = Arrays.asList(Empty, DungeonEntrance, Treasury, Library);
         GraveYard.canMergeWith = Arrays.asList(GraveYard);
         Torch.canMergeWith = Arrays.asList(Rock, Torch);
-        BloodPool.canMergeWith = Arrays.asList(BloodPool);
+        VampireCoffin.canMergeWith = Empty.canMergeWith;
         Treasury.canMergeWith = Library.canMergeWith;
         DungeonEntrance.canMergeWith = Library.canMergeWith;
         RestingArea.canMergeWith = Arrays.asList(RestingArea);

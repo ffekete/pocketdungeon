@@ -5,15 +5,11 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.blacksoft.dungeon.Tile;
-import com.blacksoft.dungeon.actions.AbstractAction;
-import com.blacksoft.dungeon.actions.build.PlaceBloodPoolAction;
 import com.blacksoft.dungeon.lighting.LightSourceFactory;
-import com.blacksoft.screen.UIFactory;
 import com.blacksoft.state.Config;
 import com.blacksoft.state.GameState;
-import com.blacksoft.state.UIState;
 
-public class BloodPool implements Building {
+public class VampireCoffin implements Building {
 
 
     private static TextureRegion textureRegion;
@@ -21,7 +17,7 @@ public class BloodPool implements Building {
     public int x,y;
 
     static {
-        textureRegion = new TextureRegion(new Texture(Gdx.files.internal("tile/BloodPool.png")));
+        textureRegion = new TextureRegion(new Texture(Gdx.files.internal("tile/MysteriousCoffin.png")));
     }
 
     public int level = 1;
@@ -45,7 +41,7 @@ public class BloodPool implements Building {
 
     @Override
     public Tile getTile() {
-        return Tile.BloodPool;
+        return Tile.VampireCoffin;
     }
 
     @Override

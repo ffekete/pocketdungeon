@@ -36,7 +36,7 @@ public class BuildingPlacer {
                 }
 
                 if (clazz == Graveyard.class ||
-                        clazz == BloodPool.class ||
+                        clazz == VampireCoffin.class ||
                         clazz == Treasury.class ||
                         clazz == Library.class ||
                         clazz == RestingArea.class) {

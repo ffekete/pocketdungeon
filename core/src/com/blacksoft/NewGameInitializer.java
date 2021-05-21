@@ -19,7 +19,7 @@ public class NewGameInitializer {
 
         GameState.unlockedActions = Arrays.asList(PlaceGraveyardAction.I,
                 PlaceTorchAction.I,
-                PlaceBloodPoolAction.I,
+                PlaceVampireCoffinAction.I,
                 PlaceTreasuryAction.I,
                 PlaceRestingAreaAction.I,
                 PlaceGateAction.I,

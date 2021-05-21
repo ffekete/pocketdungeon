@@ -38,7 +38,7 @@ public class UIState {
     public static TextureRegionDrawable TorchCardImage = new TextureRegionDrawable(new Texture(Gdx.files.internal("card/TorchCard.png")));
     public static TextureRegionDrawable TreasuryCardImage = new TextureRegionDrawable(new Texture(Gdx.files.internal("card/TreasuryCard.png")));
     public static TextureRegionDrawable RestingAreaCardImage = new TextureRegionDrawable(new Texture(Gdx.files.internal("card/RestingAreaCard.png")));
-    public static TextureRegionDrawable BloodPoolCardImage = new TextureRegionDrawable(new Texture(Gdx.files.internal("card/BloodPoolCard.png")));
+    public static TextureRegionDrawable MysteriousCoffinCardImage = new TextureRegionDrawable(new Texture(Gdx.files.internal("card/MysteriousCoffinCard.png")));
 
     // CURSORS
     public static Cursor defaultCursor = UIFactory.I.createCursor("ui/cursor/Cursor.png");
