@@ -21,9 +21,12 @@ public abstract class Creature extends Actor {
     public Vector2 previousNode = null;
     public Vector2 targetNode = null;
     public boolean finishedAllActions = true;
+    public Direction direction;
 
     public int hp;
     public int mp;
+
+    public State state = State.Idle;
 
     // modifiers
     private List<Modifier> modifiers = new ArrayList<>();

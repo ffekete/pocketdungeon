@@ -13,18 +13,22 @@ import static com.blacksoft.state.Config.TEXTURE_SIZE;
 
 public class Skeleton extends Creature {
 
-    public static Texture texture;
+    public static Texture walkAnimationTexture;
+    public static Texture idleAnimationTexture;
 
-    private final Animation<TextureRegion> animation;
+    private final Animation<TextureRegion> walkAnimation;
+    private final Animation<TextureRegion> idleAnimation;
 
     static {
-        texture = new Texture("creature/Skeleton.png");
+        walkAnimationTexture = new Texture("creature/SkeletonWalk.png");
+        idleAnimationTexture = new Texture("creature/SkeletonIdle.png");
     }
 
     private float duration = 0f;
 
     public Skeleton() {
-        this.animation = new Animation<>(0.4f, TextureRegion.split(texture, TEXTURE_SIZE, TEXTURE_SIZE)[0]);
+        this.walkAnimation = new Animation<>(0.1f, TextureRegion.split(walkAnimationTexture, TEXTURE_SIZE, TEXTURE_SIZE)[0]);
+        this.idleAnimation = new Animation<>(0.5f, TextureRegion.split(idleAnimationTexture, TEXTURE_SIZE, TEXTURE_SIZE)[0]);
         this.hp = this.getMaxHp();
         this.mp = getMaxMp();
     }
@@ -32,11 +36,25 @@ public class Skeleton extends Creature {
     @Override
     public void draw(Batch batch,
                      float parentAlpha) {
+
         duration += Gdx.graphics.getDeltaTime();
         Color color = getColor();
         batch.setColor(color.r, color.g, color.b, color.a * parentAlpha);
 
-        batch.draw(animation.getKeyFrame(duration, true), getX(), getY());
+        TextureRegion textureRegion;
+        if(state == State.Idle) {
+            textureRegion = idleAnimation.getKeyFrame(duration, true);
+        } else {
+            textureRegion = walkAnimation.getKeyFrame(duration, true);
+        }
+
+        if(direction == Direction.Left && !textureRegion.isFlipX()) {
+            textureRegion.flip(true, false);
+        } else if (direction == Direction.Right && textureRegion.isFlipX()){
+            textureRegion.flip(true, false);
+        }
+
+        batch.draw(textureRegion, getX(), getY());
         batch.setColor(color);
     }
 
@@ -57,7 +75,7 @@ public class Skeleton extends Creature {
 
     @Override
     public Animation<TextureRegion> getAnimation() {
-        return this.animation;
+        return this.walkAnimation;
     }
 
     @Override
