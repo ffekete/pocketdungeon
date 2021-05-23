@@ -9,28 +9,17 @@ import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.graphics.g2d.freetype.FreeTypeFontGenerator;
-import com.badlogic.gdx.scenes.scene2d.Actor;
-import com.badlogic.gdx.scenes.scene2d.Group;
-import com.badlogic.gdx.scenes.scene2d.InputEvent;
-import com.badlogic.gdx.scenes.scene2d.InputListener;
 import com.badlogic.gdx.scenes.scene2d.actions.*;
 import com.badlogic.gdx.scenes.scene2d.ui.*;
 import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
 import com.blacksoft.creature.Creature;
-import com.blacksoft.dungeon.actions.AbstractAction;
-import com.blacksoft.dungeon.actions.ui.CleanIndicatorsAction;
-import com.blacksoft.screen.action.AddActorAction;
-import com.blacksoft.screen.action.MovePlaceableActorToMouseAction;
 import com.blacksoft.state.Config;
 import com.blacksoft.state.GameState;
 import com.blacksoft.state.UIState;
-import com.blacksoft.ui.AnimatedDrawable;
 import com.blacksoft.ui.AnimatedImage;
 import com.blacksoft.ui.DynamicLabel;
 import com.blacksoft.ui.DynamicProgressBar;
-import com.blacksoft.ui.action.FollowCreatureAction;
 import com.blacksoft.ui.action.IntAction;
-import com.blacksoft.user.actions.UserAction;
 
 import static com.blacksoft.state.Config.FLOATING_ITEMS_DURATION;
 import static com.blacksoft.state.Config.SCREEN_HEIGHT;
@@ -147,8 +136,6 @@ public class UIFactory {
         UIState.battleSelectionCursor = animatedImage;
         GameState.uiStage.addActor(UIState.battleSelectionCursor);
         animatedImage.setVisible(false);
-
-
     }
 
     private MoveToAction getMoveToAction(Label label,
@@ -158,84 +145,6 @@ public class UIFactory {
         moveToAction.setTarget(label);
         moveToAction.setPosition(tx, ty);
         return moveToAction;
-    }
-
-    public Group getStatusBar() {
-
-        Group horizontalGroup = new Group();
-
-        UIState.statusBar = horizontalGroup;
-
-        Table table = new Table();
-
-//        Label progressLabel = new Label(Integer.toString(GameState.loopProgress), labelStyle14);
-//        UIState.progressLabel = progressLabel;
-//        progressLabel.setColor(Color.valueOf("e3a858"));
-//        Label progressTextLabel = new Label("Progress", labelStyle14);
-//        progressTextLabel.setColor(Color.LIGHT_GRAY);
-//        table.add(progressTextLabel).width(50);
-//        table.add(progressLabel).width(30).left();
-//        updateLabelAmount(0, GameState.loopProgress, progressLabel, "%s", null);
-
-        // create progress bar
-        ProgressBar.ProgressBarStyle invasionProgressBarStyle = new ProgressBar.ProgressBarStyle();
-        invasionProgressBarStyle.background = new TextureRegionDrawable(UIState.progressBarBackgroundImage);
-        TextureRegion[] textureRegions = TextureRegion.split(UIState.invasionProgressBarKnobImage.getTexture(), 10, 10)[0];
-        Animation<TextureRegion> timeKnobAnimation = new Animation<>(0.3f, textureRegions);
-        invasionProgressBarStyle.knob = new AnimatedDrawable(timeKnobAnimation);
-        ProgressBar invasionProgressBar = new ProgressBar(0, 100, 1f, false, invasionProgressBarStyle);
-        UIState.invasionProgressBar = invasionProgressBar;
-
-        table.add(new Image(UIState.GoldIconImage)).size(12).padRight(2);
-        Label goldLabel = new Label("", labelStyle14);
-        goldLabel.setColor(Color.valueOf("e3a858"));
-        UIState.goldLabel = goldLabel;
-        table.add(goldLabel).width(60).left();
-
-        updateLabelAmount(0, GameState.gold, goldLabel, "%s", null);
-
-        Label ironLabel = new Label("", labelStyle14);
-        ironLabel.setColor(Color.LIGHT_GRAY);
-        UIState.ironLabel = ironLabel;
-        table.add(new Image(UIState.IronIconImage)).size(16).padRight(2);
-        table.add(ironLabel).width(60).left();
-        updateLabelAmount(0, GameState.iron, ironLabel, "%s/%s", GameState.maxIronCapacity);
-
-        Label gemLabel = new Label("", labelStyle14);
-        UIState.gemLabel = gemLabel;
-        gemLabel.setColor(Color.valueOf("50C878"));
-        table.add(new Image(UIState.GemIconImage)).size(14).padRight(2);
-        table.add(gemLabel).width(60).left();
-        updateLabelAmount(0, GameState.gems, gemLabel, "%s/%s", GameState.maxGemsCapacity);
-
-        // Add progress bars
-        table.add(invasionProgressBar).height(10).width(60).left();
-
-        horizontalGroup.addActor(new Image(new Texture(Gdx.files.internal("ui/StatusBar.png"))));
-        horizontalGroup.addActor(table);
-
-        table.setFillParent(true);
-        horizontalGroup.setPosition(0, SCREEN_HEIGHT / 2 - 60);
-        horizontalGroup.setSize(480, 32);
-
-        return horizontalGroup;
-    }
-
-    public void createLockImages() {
-        Image openLockImage = new Image(new Texture(Gdx.files.internal("ui/OpenLock.png")));
-        Image closedLockImage = new Image(new Texture(Gdx.files.internal("ui/ClosedLock.png")));
-
-        openLockImage.setVisible(false);
-        closedLockImage.setVisible(false);
-
-        openLockImage.setColor(1, 1, 1, 0.5f);
-        closedLockImage.setColor(1, 1, 1, 0.5f);
-
-        UIState.openLockImage = openLockImage;
-        UIState.closedLockImage = closedLockImage;
-
-        GameState.uiStage.addActor(openLockImage);
-        GameState.uiStage.addActor(closedLockImage);
     }
 
     public Label createFloatingLabelWithIconFromString(String prefix,
@@ -479,145 +388,6 @@ public class UIFactory {
         return fpsIndicator;
     }
 
-    public Group getActionsGroup() {
-
-        Group group = new Group();
-        group.setDebug(true);
-
-        group.addActor(new Image(new Texture(Gdx.files.internal("ui/ActionPanel.png"))));
-
-        HorizontalGroup horizontalGroup = new HorizontalGroup();
-        UIState.actionsGroup = horizontalGroup;
-
-        for (AbstractAction action : GameState.actions) {
-            addAction(horizontalGroup, action);
-        }
-
-        group.setPosition(482, 0);
-        horizontalGroup.setPosition(6, 128);
-        horizontalGroup.setScale(2f);
-
-        group.addActor(horizontalGroup);
-
-        Container<DynamicLabel> descriptionGroup = new Container<>();
-        descriptionGroup.setPosition(10, 100);
-        descriptionGroup.setFillParent(true);
-        descriptionGroup.top().left();
-
-        group.addActor(descriptionGroup);
-
-        DynamicLabel descriptionLabel = new DynamicLabel(labelStyle14, () -> GameState.highlightedAction != null ? getDescription() : "");
-        descriptionGroup.setActor(descriptionLabel);
-
-        return group;
-    }
-
-    public Group getCreatureListPanel() {
-
-        Group group = new Group();
-
-        group.addActor(new Image(new Texture(Gdx.files.internal("ui/CreatureListPanel.png"))));
-
-        group.setPosition(482, 156);
-        group.setSize(180, 200);
-
-        Table table = new Table();
-        table.pad(15, 15, 15, 15);
-        table.setFillParent(true);
-        table.top().left();
-
-        ScrollPane scrollPane = new ScrollPane(table);
-        group.addActor(scrollPane);
-        scrollPane.setFillParent(true);
-
-        UIState.creatureListTable = table;
-
-        return group;
-    }
-
-    public void addCreatureListEntryToSidePanel(Creature creature) {
-
-        Table table = new Table();
-        AnimatedImage animatedImage = new AnimatedImage(creature.getAnimation());
-        table.add(animatedImage).size(16).left().pad(3, 5, 3, 7);
-
-        Table statsTable = new Table();
-
-        // HP progress bar
-        DynamicProgressBar hpDynamicProgressBar = createHpProgressBar(creature, 16, 5);
-        statsTable.add(hpDynamicProgressBar).size(16, 5).pad(1).row();
-
-        // MP progress bar
-        DynamicProgressBar mpDynamicProgressBar = createMpProgressBar(creature, 16, 5);
-        statsTable.add(mpDynamicProgressBar).size(16, 5).pad(1);
-
-        table.add(statsTable);
-
-        DynamicLabel levelLabel = new DynamicLabel(labelStyle14, () -> String.valueOf(creature.level));
-        table.add(new Label("lv:", labelStyle14));
-        table.add(levelLabel).expandX().fillX();
-
-        UIState.creatureListTable.add(table).fillX().expandX();
-
-        GameState.creatureListEntriesOnSidePanel.put(creature, table);
-
-        FollowCreatureAction followCreatureAction = new FollowCreatureAction(creature, () -> null);
-
-        GameState.followCreatureAction = followCreatureAction;
-
-        table.setBackground(UIState.selectionBackground);
-
-        table.addListener(new InputListener() {
-
-            @Override
-            public void enter(InputEvent event,
-                              float x,
-                              float y,
-                              int pointer,
-                              Actor fromActor) {
-
-                table.getChild(0).setScale(1.5f);
-                table.setBackground(UIState.selectionBackgroundHighlighted);
-                //table.setPosition(table.getX() - 1, table.getY());
-
-                GameState.creatureListEntriesOnSidePanel.entrySet().stream()
-                        .filter(entry -> entry.getValue() == table)
-                        .map(entry -> entry.getKey())
-                        .findFirst()
-                        .ifPresent(creature2 -> {
-                            UIState.selectionMarker.setPosition(creature2.getX(), creature2.getY());
-                            UIState.selectionMarker.setVisible(true);
-                            followCreatureAction.setCreature(creature2);
-                            followCreatureAction.setTarget(() -> UIState.selectionMarker);
-                            creature2.addAction(followCreatureAction);
-                        });
-            }
-
-            @Override
-            public void exit(InputEvent event,
-                             float x,
-                             float y,
-                             int pointer,
-                             Actor toActor) {
-                UIState.selectionMarker.setVisible(false);
-
-                table.getChild(0).setScale(1f);
-                table.setBackground(UIState.selectionBackground);
-                //table.setPosition(table.getX() + 1, table.getY());
-
-                GameState.creatureListEntriesOnSidePanel.entrySet().stream()
-                        .filter(entry -> entry.getValue() == table)
-                        .map(entry -> entry.getKey())
-                        .findFirst()
-                        .ifPresent(creature2 -> {
-                            creature2.removeAction(followCreatureAction);
-                        });
-            }
-        });
-
-        UIState.creatureListTable.row();
-    }
-
     public DynamicProgressBar createMpProgressBar(Creature creature,
                                                   int width,
                                                   int height) {
@@ -750,108 +520,6 @@ public class UIFactory {
         GameState.uiStage.addActor(animatedImage);
     }
 
-    public void addAction(Group horizontalGroup,
-                          AbstractAction action) {
-        ImageButton.ImageButtonStyle imageButtonStyle = new ImageButton.ImageButtonStyle();
-        imageButtonStyle.imageUp = new TextureRegionDrawable(action.getTexture());
-        imageButtonStyle.imageDown = new TextureRegionDrawable(action.getTexture());
-        ImageButton image = new ImageButton(imageButtonStyle);
-        image.pad(0.5f);
-
-        image.addListener(new InputListener() {
-            @Override
-            public void enter(InputEvent event,
-                              float x,
-                              float y,
-                              int pointer,
-                              Actor fromActor) {
-                if (GameState.userAction != UserAction.Place) {
-                    image.setY(image.getY() + 2);
-                    GameState.highlightedAction = action;
-                    GameState.highlightedActionImage = image;
-                }
-            }
-
-            @Override
-            public void exit(InputEvent event,
-                             float x,
-                             float y,
-                             int pointer,
-                             Actor toActor) {
-                if (GameState.userAction != UserAction.Place) {
-                    image.setY(image.getY() - 2);
-                    GameState.highlightedAction = null;
-                    GameState.highlightedActionImage = null;
-                }
-            }
-
-            @Override
-            public boolean touchDown(InputEvent event,
-                                     float x,
-                                     float y,
-                                     int pointer,
-                                     int button) {
-
-                if (GameState.userAction == UserAction.Place) {
-                    // already placing, cannot place until the current item is placed
-                    return true;
-                }
-
-                GameState.selectedActionImage = image;
-
-                GameState.userAction = UserAction.Place;
-                CleanIndicatorsAction.cleanAll(GameState.dungeon);
-
-                GameState.selectedAction = action;
-
-                ParallelAction moveAndScaleAction = new ParallelAction();
-
-                RemoveActorAction removeActorAction = new RemoveActorAction();
-                image.setTransform(true);
-                removeActorAction.setTarget(image);
-
-                SequenceAction sequenceAction = new SequenceAction();
-                moveAndScaleAction.addAction(Actions.scaleTo(2f, 2f, 0.2f));
-                moveAndScaleAction.addAction(Actions.moveTo(image.getX(), image.getY() + 40, 0.2f));
-
-                sequenceAction.addAction(moveAndScaleAction);
-                sequenceAction.addAction(Actions.visible(false));
-                sequenceAction.addAction(new AddActorAction(image, GameState.stage));
-                sequenceAction.addAction(Actions.scaleTo(1f, 1f));
-                sequenceAction.addAction(Actions.visible(true));
-                sequenceAction.addAction(new MovePlaceableActorToMouseAction(image));
-
-                image.addAction(sequenceAction);
-
-                return true;
-            }
-        });
-
-        image.setTransform(true);
-        SequenceAction sequenceAction = new SequenceAction();
-        sequenceAction.addAction(Actions.scaleTo(2f, 2f));
-        sequenceAction.addAction(Actions.scaleTo(1f, 1f, 0.1f));
-
-        image.addAction(sequenceAction);
-
-        horizontalGroup.addActor(image);
-    }
-
-    private String getDescription() {
-        return String.format("%s\n%s", GameState.highlightedAction.getTitle(), GameState.highlightedAction.getDescription());
-    }
-
-    public void updateLabelAmount(int old,
-                                  int newValue,
-                                  Label label,
-                                  String template,
-                                  Integer other) {
-        if (label != null) {
-            IntAction intAction = new IntAction(old, newValue, 0.5f, label, template, other);
-            GameState.uiStage.addAction(intAction);
-        }
-    }
-
     public void disableSkill(Image image) {
         image.setColor(1, 0, 0, 0.2f);
     }
@@ -865,6 +533,17 @@ public class UIFactory {
         Cursor cursor = Gdx.graphics.newCursor(pm, 0, 0);
         pm.dispose();
         return cursor;
+    }
+
+    public void updateLabelAmount(int old,
+                                  int newValue,
+                                  Label label,
+                                  String template,
+                                  Integer other) {
+        if (label != null) {
+            IntAction intAction = new IntAction(old, newValue, 0.5f, label, template, other);
+            GameState.uiStage.addAction(intAction);
+        }
     }
 
 }

@@ -5,13 +5,9 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.blacksoft.dungeon.Tile;
-import com.blacksoft.dungeon.actions.AbstractAction;
-import com.blacksoft.dungeon.actions.build.PlaceLibraryAction;
 import com.blacksoft.dungeon.lighting.LightSourceFactory;
-import com.blacksoft.screen.UIFactory;
 import com.blacksoft.state.Config;
 import com.blacksoft.state.GameState;
-import com.blacksoft.state.UIState;
 
 public class Library implements Building {
 

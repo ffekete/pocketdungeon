@@ -6,7 +6,6 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.InputMultiplexer;
 import com.badlogic.gdx.ScreenAdapter;
-import com.badlogic.gdx.ai.pfa.Connection;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
@@ -20,16 +19,11 @@ import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.badlogic.gdx.utils.viewport.FitViewport;
 import com.blacksoft.NewGameInitializer;
-import com.blacksoft.dungeon.Node;
-import com.blacksoft.dungeon.actions.InvasionUpdateAction;
 import com.blacksoft.dungeon.actions.ui.CleanIndicatorUpdater;
 import com.blacksoft.dungeon.actions.ui.CleanIndicatorsAction;
 import com.blacksoft.screen.action.MoveLightToMouseAction;
-import com.blacksoft.screen.input.MapClickHandler;
-import com.blacksoft.screen.input.MapMouseMovedHandler;
 import com.blacksoft.screen.render.OrthogonalTiledMapRenderer;
 import com.blacksoft.state.GameState;
-import com.blacksoft.state.UIState;
 import com.blacksoft.ui.TileMarker;
 import com.blacksoft.user.actions.UserAction;
 
@@ -66,12 +60,7 @@ public class BuilderScreen extends ScreenAdapter {
         GameState.uiStage = new Stage(GameState.uiViewport);
 
         // UI
-        GameState.uiStage.addActor(UIFactory.I.getStatusBar());
         GameState.uiStage.addActor(UIFactory.I.getFpsIndicator());
-        GameState.uiStage.addActor(UIFactory.I.addMovingLabelShadow("BUILD PHASE"));
-        GameState.uiStage.addActor(UIFactory.I.addMovingLabel("BUILD PHASE"));
-        GameState.uiStage.addActor(UIFactory.I.getCreatureListPanel());
-        UIFactory.I.createLockImages();
         UIFactory.I.createSelectionMarker();
         UIFactory.I.createBattleSelectionCursor();
 
@@ -97,24 +86,6 @@ public class BuilderScreen extends ScreenAdapter {
         });
 
         GameState.stage.addListener(new InputListener() {
-            @Override
-            public boolean touchDown(InputEvent event,
-                                     float x,
-                                     float y,
-                                     int pointer,
-                                     int button) {
-
-                MapClickHandler.touchDown((int) x, (int) y);
-
-                return false;
-            }
-
-            @Override
-            public boolean mouseMoved(InputEvent event,
-                                      float x,
-                                      float y) {
-                return MapMouseMovedHandler.mouseMoved(event, x, y);
-            }
 
             @Override
             public boolean keyDown(InputEvent event,
@@ -144,16 +115,6 @@ public class BuilderScreen extends ScreenAdapter {
                                 float x,
                                 float y) {
 
-                // clears actions if selected
-                if(GameState.selectedAction != null) {
-                    UIFactory.I.addAction(UIState.actionsGroup, GameState.selectedAction);
-                    GameState.selectedAction = null;
-                    GameState.selectedActionImage.setVisible(false);
-                    GameState.selectedActionImage = null;
-                    GameState.userAction = UserAction.Clean;
-                    CleanIndicatorUpdater.update(GameState.dungeon);
-                }
-
                 if(GameState.isCombatSequence) {
                     if(GameState.userAction == UserAction.SelectSingleTarget) {
                         GameState.userAction = UserAction.CancelLast;
@@ -182,13 +143,6 @@ public class BuilderScreen extends ScreenAdapter {
 
         // ACTIONS
         GameState.stage.addAction(new MoveLightToMouseAction());
-        GameState.stage.addAction(new InvasionUpdateAction());
-
-        // UI, 2nd part
-        GameState.uiStage.addActor(UIFactory.I.getActionsGroup());
-
-        // OTHER ACTORS
-        GameState.stage.addActor(GameState.tileMarker);
     }
 
     @Override

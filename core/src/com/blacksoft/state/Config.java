@@ -62,4 +62,6 @@ public class Config {
     public static int MAX_SKILLS_SIZE = 4;
 
     public static boolean CLEAN_INDICATOR_ENABLED = false;
+
+    public static int SECTOR_SIZE = 5;
 }
