@@ -1,35 +1,31 @@
 package com.blacksoft.dungeon.init;
 
-import com.badlogic.gdx.math.Vector2;
+import com.badlogic.gdx.scenes.scene2d.actions.SequenceAction;
 import com.blacksoft.dungeon.Dungeon;
-import com.blacksoft.dungeon.actions.TileCleaner;
+import com.blacksoft.dungeon.SectorPlacer;
+import com.blacksoft.dungeon.templates.Entrance;
+import com.blacksoft.dungeon.templates.FourWayCorridor;
+import com.blacksoft.dungeon.templates.TwoWayCorridor;
 import com.blacksoft.state.Config;
-
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Random;
-
-import static com.blacksoft.state.Config.MAP_HEIGHT;
-import static com.blacksoft.state.Config.MAP_WIDTH;
+import com.blacksoft.state.GameState;
 
 public class DungeonInitializer {
 
     public static void init(Dungeon dungeon) {
-        for (int k = 0; k < Config.STARTING_DUNGEON_LENGTH; k++) {
 
-            List<Vector2> vectors = new ArrayList<>();
+        SequenceAction sectorPlacementAction = new SequenceAction();
 
-            for (int i = 0; i < MAP_WIDTH; i++) {
-                for (int j = 0; j < MAP_HEIGHT; j++) {
-                    if (TileCleaner.canClean(dungeon, i, j)) {
-                        vectors.add(new Vector2(i, j));
-                    }
+        for (int i = 0; i < Config.MAP_WIDTH / Config.SECTOR_SIZE; i++) {
+            for (int j = 0; j < Config.MAP_HEIGHT / Config.SECTOR_SIZE; j++) {
+                if(i == 0 && j == 2) {
+                    SectorPlacer.place(new Entrance(), 0, 2, dungeon, sectorPlacementAction);
+                } else {
+                    SectorPlacer.place(new TwoWayCorridor(), i, j, dungeon, sectorPlacementAction);
                 }
             }
-
-            Vector2 vector2 = vectors.get(new Random().nextInt(vectors.size()));
-
-            TileCleaner.clean(dungeon, (int) vector2.x, (int) vector2.y);
         }
+
+        GameState.stage.addAction(sectorPlacementAction);
+
     }
 }

@@ -70,7 +70,7 @@ public class BuilderScreen extends ScreenAdapter {
         rayHandler.setBlur(true);
         RayHandler.useDiffuseLight(true);
         rayHandler.setBlurNum(3);
-        rayHandler.setAmbientLight(0.1f, 0.1f, 0.1f, 1f);
+        rayHandler.setAmbientLight(1f, 1f, 1f, 1f);
         rayHandler.setShadows(true);
         GameState.rayHandler = rayHandler;
         GameState.mouseLightSource = new PointLight(rayHandler, 15, new Color(1, 1f, 1f, 1f), 128, 0, 0);

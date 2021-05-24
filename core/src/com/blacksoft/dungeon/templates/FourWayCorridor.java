@@ -1,11 +1,11 @@
 package com.blacksoft.dungeon.templates;
 
-public class Entrance extends SectorTemplate {
+public class FourWayCorridor extends SectorTemplate {
 
     private Character[][] sectorMap = new Character[][]{
             {'W', 'W', '.', 'W', 'W'},
             {'W', 'W', '.', 'W', 'W'},
-            {'E', '.', '.', '.', '.'},
+            {'.', '.', '.', '.', '.'},
             {'W', 'W', '.', 'W', 'W'},
             {'W', 'W', '.', 'W', 'W'}
     };
@@ -17,6 +17,6 @@ public class Entrance extends SectorTemplate {
 
     @Override
     public int getCompatibility() {
-        return 14;
+        return 15;
     }
 }

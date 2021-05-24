@@ -34,9 +34,9 @@ public class Gate implements Building {
         this.y = y / 16;
 
         if (opened) {
-            GameState.dungeon.replaceTileToBuilding(this.x, this.y, Tile.GateOpened);
+            GameState.dungeon.replaceTileToNewTile(this.x, this.y, Tile.GateOpened);
         } else {
-            GameState.dungeon.replaceTileToBuilding(this.x, this.y, Tile.GateClosed);
+            GameState.dungeon.replaceTileToNewTile(this.x, this.y, Tile.GateClosed);
         }
     }
 
@@ -63,9 +63,9 @@ public class Gate implements Building {
 
         opened = !opened;
         if (opened) {
-            GameState.dungeon.replaceTileToBuilding(x, y, Tile.GateOpened, false);
+            GameState.dungeon.replaceTileToNewTile(x, y, Tile.GateOpened, false);
         } else {
-            GameState.dungeon.replaceTileToBuilding(x, y, Tile.GateClosed, false);
+            GameState.dungeon.replaceTileToNewTile(x, y, Tile.GateClosed, false);
         }
     }
 

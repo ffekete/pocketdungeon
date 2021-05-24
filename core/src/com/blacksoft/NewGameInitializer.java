@@ -10,6 +10,8 @@ public class NewGameInitializer {
         Dungeon dungeon = new Dungeon();
         GameState.dungeon = dungeon;
         DungeonInitializer.init(dungeon);
+
+
     }
 
 

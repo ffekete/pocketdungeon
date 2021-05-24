@@ -3,7 +3,6 @@ package com.blacksoft.dungeon.templates;
 import com.blacksoft.dungeon.Node;
 import com.blacksoft.dungeon.Tile;
 import com.blacksoft.dungeon.building.DungeonEntrance;
-import com.blacksoft.state.GameState;
 
 import static com.blacksoft.state.Config.SECTOR_SIZE;
 
@@ -18,7 +17,7 @@ public abstract class SectorTemplate {
         for (int i = 0; i < SECTOR_SIZE; i++) {
             for (int j = 0; j < SECTOR_SIZE; j++) {
 
-                nodeMap[j][i] = mapToNode(getStringTemplate()[j][i]);
+                nodeMap[j][i] = mapToNode(getStringTemplate()[SECTOR_SIZE - i - 1][j]);
 
             }
         }
@@ -33,7 +32,6 @@ public abstract class SectorTemplate {
 
         switch (c) {
             case 'W':
-
                 node.tile = Tile.Rock;
                 break;
             case 'E':
@@ -47,5 +45,7 @@ public abstract class SectorTemplate {
 
         return node;
     }
+
+    public abstract int getCompatibility();
 
 }
