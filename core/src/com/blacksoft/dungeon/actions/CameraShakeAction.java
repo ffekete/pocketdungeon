@@ -11,8 +11,7 @@ public class CameraShakeAction extends TemporalAction {
 
     Vector3 cameraPosition;
     private float offsetX = 2f;
-    private float offsetY = 1f;
-
+    private float offsetY = 0.5f;
     private float duration = 0f;
 
     public CameraShakeAction(float duration) {
@@ -32,7 +31,6 @@ public class CameraShakeAction extends TemporalAction {
         super.end();
         GameState.orthographicCamera.position.x = cameraPosition.x;
         GameState.orthographicCamera.position.y = cameraPosition.y;
-        System.out.println("finished");
         GameState.orthographicCamera.update();
     }
 

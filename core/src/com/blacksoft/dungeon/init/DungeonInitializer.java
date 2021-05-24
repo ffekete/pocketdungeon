@@ -1,6 +1,7 @@
 package com.blacksoft.dungeon.init;
 
 import com.badlogic.gdx.scenes.scene2d.actions.DelayAction;
+import com.badlogic.gdx.scenes.scene2d.actions.ParallelAction;
 import com.badlogic.gdx.scenes.scene2d.actions.SequenceAction;
 import com.blacksoft.dungeon.Dungeon;
 import com.blacksoft.dungeon.SectorPlacer;
@@ -15,17 +16,19 @@ public class DungeonInitializer {
 
     public static void init(Dungeon dungeon) {
 
-        SequenceAction sectorPlacementAction = new SequenceAction();
+        ParallelAction sectorPlacementAction = new ParallelAction();
 
-        for (int i = 0; i < Config.MAP_WIDTH / Config.SECTOR_SIZE; i++) {
-            for (int j = 0; j < Config.MAP_HEIGHT / Config.SECTOR_SIZE; j++) {
-                if(i == 0 && j == 2) {
-                    SectorPlacer.place(new Entrance(), 0, 2, dungeon, sectorPlacementAction);
+        float delay = 0.15f;
+
+        for (int i = 0; i < Config.MAP_HEIGHT / Config.SECTOR_SIZE; i++) {
+            for (int j = 0; j < Config.MAP_WIDTH / Config.SECTOR_SIZE; j++) {
+                if(j == 0 && i == 2) {
+                    SectorPlacer.place(new Entrance(), 0, 2, dungeon, sectorPlacementAction, delay);
                 } else {
-                    SectorPlacer.place(new TwoWayCorridor(), i, j, dungeon, sectorPlacementAction);
+                    SectorPlacer.place(new TwoWayCorridor(), j, i, dungeon, sectorPlacementAction, delay);
                 }
-                sectorPlacementAction.addAction(new CameraShakeAction(0.05f));
-                sectorPlacementAction.addAction(new DelayAction(0.1f));
+                delay += 0.15f;
+                //sectorPlacementAction.addAction(new DelayAction(0.1f));
             }
         }
 

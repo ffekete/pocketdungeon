@@ -1,7 +1,9 @@
 package com.blacksoft.dungeon;
 
+import com.badlogic.gdx.scenes.scene2d.actions.DelayAction;
 import com.badlogic.gdx.scenes.scene2d.actions.ParallelAction;
 import com.badlogic.gdx.scenes.scene2d.actions.SequenceAction;
+import com.blacksoft.dungeon.actions.CameraShakeAction;
 import com.blacksoft.dungeon.actions.MoveNodeToCoordAction;
 import com.blacksoft.dungeon.templates.SectorTemplate;
 import com.blacksoft.state.GameState;
@@ -10,10 +12,12 @@ import static com.blacksoft.state.Config.SECTOR_SIZE;
 
 public class SectorPlacer {
 
-    public static void place(SectorTemplate sectorTemplate, int sx, int sy, Dungeon dungeon, SequenceAction sequenceAction) {
+    public static void place(SectorTemplate sectorTemplate, int sx, int sy, Dungeon dungeon, ParallelAction mainPlacementActon, float delay) {
 
         Node[][] nodes = sectorTemplate.toNodeMap();
 
+        SequenceAction fullSequence = new SequenceAction();
+        fullSequence.addAction(new DelayAction(delay));
         ParallelAction parallelAction = new ParallelAction();
 
         for (int i = 0; i < SECTOR_SIZE; i++) {
@@ -28,7 +32,9 @@ public class SectorPlacer {
             }
         }
 
-        sequenceAction.addAction(parallelAction);
+        fullSequence.addAction(parallelAction);
+        fullSequence.addAction(new CameraShakeAction(0.1f));
+        mainPlacementActon.addAction(fullSequence);
 
     }
 

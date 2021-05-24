@@ -1,6 +1,7 @@
 package com.blacksoft.dungeon.actions;
 
 import com.badlogic.gdx.maps.tiled.TiledMapTileLayer;
+import com.badlogic.gdx.math.Interpolation;
 import com.badlogic.gdx.scenes.scene2d.actions.MoveByAction;
 import com.blacksoft.dungeon.Node;
 import com.blacksoft.state.GameState;
@@ -18,7 +19,8 @@ public class MoveNodeToCoordAction extends MoveByAction {
         TiledMapTileLayer layer = (TiledMapTileLayer) GameState.dungeon.tiledMap.getLayers().get(DUNGEON_LAYER);
         this.cell = layer.getCell((int) node.x, (int) node.y);
         cell.getTile().setOffsetY(ty);
-        this.setDuration(0.1f);
+        this.setDuration(0.5f);
+        this.setInterpolation(Interpolation.bounce);
         this.ty = ty;
     }
 
