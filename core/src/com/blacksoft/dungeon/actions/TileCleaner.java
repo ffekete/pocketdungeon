@@ -22,96 +22,6 @@ import static com.blacksoft.state.Config.TEXTURE_SIZE;
 
 public class TileCleaner {
 
-    public static void clean(Dungeon dungeon,
-                             int x,
-                             int y) {
-        TiledMapTileLayer tiledMapTileLayer = (TiledMapTileLayer) dungeon.tiledMap.getLayers().get("dungeon");
-
-        GroundTiledMapTile tile = new GroundTiledMapTile(new TextureRegion(new Texture(Gdx.files.internal("tile/Empty.png"))), x, y, Tile.Empty);
-
-        TiledMapTileLayer.Cell cell = new TiledMapTileLayer.Cell();
-        cell.setTile(tile);
-        tiledMapTileLayer.setCell(x, y, cell);
-        dungeon.nodes[x][y].tile = Tile.Empty;
-        dungeon.nodes[x][y].connectWithNeighbours();
-        if (dungeon.nodes[x][y].building != null) {
-            dungeon.nodes[x][y].building.destroy();
-            dungeon.nodes[x][y].building = null;
-        }
-
-        CleanIndicatorsAction.cleanAll(dungeon);
-        CleanIndicatorUpdater.update(dungeon);
-        Label label = UIFactory.I.createFloatingLabelWithIcon(-Config.CLEAN_COST_VALUE, UIState.GoldIconImage, x * TEXTURE_SIZE, y * TEXTURE_SIZE);
-        label.setColor(Color.valueOf("FFD700"));
-    }
-
-    public static boolean cleanConditionally(Dungeon dungeon,
-                                             int x,
-                                             int y) {
-        if (!canClean(dungeon, x, y)) {
-            return false;
-        }
-        clean(dungeon, x, y);
-        return true;
-    }
-
-    public static boolean isEmptyCorridor(Dungeon dungeon,
-                                          int x,
-                                          int y) {
-
-        if (x < 0 || y < 0 || x >= MAP_WIDTH || y >= MAP_HEIGHT) {
-            return false;
-        }
-
-        int adjacent = 0;
-        if (isWall(dungeon, x - 1, y)) {
-            adjacent += 1;
-        }
-
-        if (isWall(dungeon, x, y + 1)) {
-            adjacent += 2;
-        }
-
-        if (isWall(dungeon, x + 1, y)) {
-            adjacent += 4;
-        }
-
-        if (isWall(dungeon, x, y - 1)) {
-            adjacent += 8;
-        }
-
-        return (adjacent == 5 || adjacent == 10) && dungeon.nodes[x][y].tile == Tile.Empty;
-    }
-
-
-    public static boolean isRockWithCorner(Dungeon dungeon,
-                                           int x,
-                                           int y) {
-
-        if (x < 0 || y < 0 || x >= MAP_WIDTH || y >= MAP_HEIGHT) {
-            return false;
-        }
-
-        int adjacent = 0;
-        if (isNotSolid(dungeon, x - 1, y)) {
-            adjacent += 1;
-        }
-
-        if (isNotSolid(dungeon, x, y + 1)) {
-            adjacent += 2;
-        }
-
-        if (isNotSolid(dungeon, x + 1, y)) {
-            adjacent += 4;
-        }
-
-        if (isNotSolid(dungeon, x, y - 1)) {
-            adjacent += 8;
-        }
-
-        return (adjacent > 0) && dungeon.nodes[x][y].tile == Tile.Rock;
-    }
-
     public static boolean canClean(Dungeon dungeon,
                                    int x,
                                    int y) {
@@ -151,16 +61,6 @@ public class TileCleaner {
         return dungeon.nodes[x][y].tile != Tile.GateClosed && dungeon.nodes[x][y].tile != Tile.GateOpened;
     }
 
-    public static boolean isNotSolid(Dungeon dungeon,
-                                     int x,
-                                     int y) {
-
-        if (x < 0 || y < 0 || x >= MAP_WIDTH || y >= MAP_HEIGHT) {
-            return false;
-        }
-
-        return !dungeon.nodes[x][y].tile.isSolid();
-    }
 
     public static boolean canTraverse(Dungeon dungeon,
                                       int x,
@@ -184,28 +84,4 @@ public class TileCleaner {
 
         return dungeon.nodes[x][y].tile == Tile.Rock || dungeon.nodes[x][y].tile == Tile.Torch;
     }
-
-    public static boolean isClean(Dungeon dungeon,
-                                  int x,
-                                  int y) {
-
-        if (x < 0 || y < 0 || x >= MAP_WIDTH || y >= MAP_HEIGHT) {
-            return false;
-        }
-
-        return dungeon.nodes[x][y].tile == Tile.Empty;
-    }
-
-    public static boolean is(Dungeon dungeon,
-                             int x,
-                             int y,
-                             Tile tile) {
-
-        if (x < 0 || y < 0 || x >= MAP_WIDTH || y >= MAP_HEIGHT) {
-            return false;
-        }
-
-        return dungeon.nodes[x][y].tile == tile;
-    }
-
 }

@@ -11,6 +11,7 @@ public class AnimatedImage extends Image
     protected Animation<TextureRegion> animation = null;
     private float stateTime = 0;
     private boolean looping = true;
+    private boolean flip = false;
 
     public AnimatedImage(Animation<TextureRegion> animation) {
         super(animation.getKeyFrame(0));
@@ -21,6 +22,15 @@ public class AnimatedImage extends Image
         super(animation.getKeyFrame(0));
         this.animation = animation;
         this.looping = looping;
+    }
+
+    public AnimatedImage(Animation<TextureRegion> animation, boolean looping, boolean flip) {
+        super(animation.getKeyFrame(0));
+        this.animation = animation;
+        this.looping = looping;
+        for (TextureRegion keyFrame : this.animation.getKeyFrames()) {
+            keyFrame.flip(flip, false);
+        }
     }
 
     @Override

@@ -11,7 +11,7 @@ public class CameraShakeAction extends TemporalAction {
 
     Vector3 cameraPosition;
     private float offsetX = 2f;
-    private float offsetY = 0.5f;
+    private float offsetY = 2f;
     private float duration = 0f;
 
     public CameraShakeAction(float duration) {
