@@ -1,8 +1,10 @@
 package com.blacksoft.dungeon.init;
 
+import com.badlogic.gdx.scenes.scene2d.actions.DelayAction;
 import com.badlogic.gdx.scenes.scene2d.actions.SequenceAction;
 import com.blacksoft.dungeon.Dungeon;
 import com.blacksoft.dungeon.SectorPlacer;
+import com.blacksoft.dungeon.actions.CameraShakeAction;
 import com.blacksoft.dungeon.templates.Entrance;
 import com.blacksoft.dungeon.templates.FourWayCorridor;
 import com.blacksoft.dungeon.templates.TwoWayCorridor;
@@ -22,10 +24,13 @@ public class DungeonInitializer {
                 } else {
                     SectorPlacer.place(new TwoWayCorridor(), i, j, dungeon, sectorPlacementAction);
                 }
+                sectorPlacementAction.addAction(new CameraShakeAction(0.05f));
+                sectorPlacementAction.addAction(new DelayAction(0.1f));
             }
         }
 
         GameState.stage.addAction(sectorPlacementAction);
+
 
     }
 }
