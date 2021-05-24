@@ -10,6 +10,7 @@ import com.badlogic.gdx.scenes.scene2d.actions.RemoveActorAction;
 import com.badlogic.gdx.scenes.scene2d.actions.SequenceAction;
 import com.blacksoft.dungeon.actions.CameraShakeAction;
 import com.blacksoft.dungeon.actions.MoveNodeToCoordAction;
+import com.blacksoft.dungeon.effect.Dust;
 import com.blacksoft.dungeon.templates.SectorTemplate;
 import com.blacksoft.screen.action.AddActorAction;
 import com.blacksoft.state.GameState;
@@ -44,19 +45,21 @@ public class SectorPlacer {
 
         fullSequence.addAction(tileMovementAction);
         fullSequence.addAction(dustAction);
+
+        dustAction.addAction(new CameraShakeAction(0.1f));
+
         // add dust animation
         RemoveActorAction removeActorAction = addDustAnimation(sx * SECTOR_SIZE * 16 - 16, sy * SECTOR_SIZE * 16, dustAction, false);
         dustAction.addAction(removeActorAction);
 
         RemoveActorAction removeActorAction2 = addDustAnimation(sx * SECTOR_SIZE * 16 + SECTOR_SIZE * 16, sy * SECTOR_SIZE * 16, dustAction, true);
         dustAction.addAction(removeActorAction2);
-        fullSequence.addAction(new CameraShakeAction(0.1f));
         mainPlacementActon.addAction(fullSequence);
 
     }
 
     private static RemoveActorAction addDustAnimation(int sx, int sy, ParallelAction fullSequence, boolean flip) {
-        Animation<TextureRegion> dustAnimation = new Animation<>(0.05f, TextureRegion.split(new Texture(Gdx.files.internal("effect/DustSideways.png")), TEXTURE_SIZE, TEXTURE_SIZE)[0]);
+        Animation<TextureRegion> dustAnimation = new Animation<>(0.05f, TextureRegion.split(Dust.texture, TEXTURE_SIZE, TEXTURE_SIZE)[0]);
 
         AnimatedImage animatedImage = new AnimatedImage(dustAnimation, false, flip);
         animatedImage.setPosition(sx, sy);
