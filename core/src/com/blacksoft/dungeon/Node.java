@@ -6,6 +6,9 @@ import com.blacksoft.dungeon.actions.AbstractAction;
 import com.blacksoft.dungeon.building.Building;
 import com.blacksoft.state.GameState;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import static com.blacksoft.state.Config.MAP_HEIGHT;
 import static com.blacksoft.state.Config.MAP_WIDTH;
 
@@ -18,6 +21,8 @@ public class Node {
     public float y;
 
     public int index = 0;
+
+    public List<Integer> compatibility = new ArrayList<>();
 
     public void disconnectFromNeighbours() {
         disconnectWith(x - 1, y);

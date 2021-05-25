@@ -1,4 +1,7 @@
-package com.blacksoft.dungeon.templates;
+package com.blacksoft.dungeon.sector.templates;
+
+import java.util.Arrays;
+import java.util.List;
 
 public class FourWayCorridor extends SectorTemplate {
 
@@ -16,7 +19,7 @@ public class FourWayCorridor extends SectorTemplate {
     }
 
     @Override
-    public int getCompatibility() {
-        return 15;
+    public List<Integer> getCompatibility() {
+        return Arrays.asList(1, 2, 4, 8);
     }
 }

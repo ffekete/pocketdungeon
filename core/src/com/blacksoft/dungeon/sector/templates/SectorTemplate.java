@@ -1,8 +1,10 @@
-package com.blacksoft.dungeon.templates;
+package com.blacksoft.dungeon.sector.templates;
 
 import com.blacksoft.dungeon.Node;
 import com.blacksoft.dungeon.Tile;
 import com.blacksoft.dungeon.building.DungeonEntrance;
+
+import java.util.List;
 
 import static com.blacksoft.state.Config.SECTOR_SIZE;
 
@@ -46,6 +48,6 @@ public abstract class SectorTemplate {
         return node;
     }
 
-    public abstract int getCompatibility();
+    public abstract List<Integer> getCompatibility();
 
 }

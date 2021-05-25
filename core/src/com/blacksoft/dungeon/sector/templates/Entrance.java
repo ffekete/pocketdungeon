@@ -1,4 +1,7 @@
-package com.blacksoft.dungeon.templates;
+package com.blacksoft.dungeon.sector.templates;
+
+import java.util.Arrays;
+import java.util.List;
 
 public class Entrance extends SectorTemplate {
 
@@ -16,7 +19,7 @@ public class Entrance extends SectorTemplate {
     }
 
     @Override
-    public int getCompatibility() {
-        return 14;
+    public List<Integer> getCompatibility() {
+        return Arrays.asList(2, 4, 8);
     }
 }

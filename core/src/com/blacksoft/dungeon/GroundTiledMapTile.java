@@ -257,7 +257,7 @@ public class GroundTiledMapTile implements TiledMapTile {
         else if (v == 1 + 2 + 4 + 64) currentTextureRegion.setRegion(48, 16, textureRegionWidth,  textureRegionHeight);
         else if (v == 1 + 2 + 32 + 64) currentTextureRegion.setRegion(48, 16, textureRegionWidth,  textureRegionHeight);
         else if (v == 1 + 2 + 8 + 64) currentTextureRegion.setRegion(48, 16, textureRegionWidth,  textureRegionHeight);
-        else if (v == 1 + 2 + 4 + 16 + 128) currentTextureRegion.setRegion(16, 0, textureRegionWidth,  textureRegionHeight);
+        else if (v == 1 + 2 + 4 + 16 + 128) currentTextureRegion.setRegion(16, 48, textureRegionWidth,  textureRegionHeight);
         else if (v == 1 + 2 + 4 + 32 + 64) currentTextureRegion.setRegion(48, 16, textureRegionWidth,  textureRegionHeight);
         else if (v == 2 + 4 + 16 + 32 + 64 + 128) currentTextureRegion.setRegion(64, 0, textureRegionWidth,  textureRegionHeight);
         else if (v == 1 + 2 + 4 + 8 + 64) currentTextureRegion.setRegion(48, 16, textureRegionWidth,  textureRegionHeight);
@@ -284,6 +284,7 @@ public class GroundTiledMapTile implements TiledMapTile {
         else if (v == 85) currentTextureRegion.setRegion(16, 16, textureRegionWidth,  textureRegionHeight);
         else if (v == 134) currentTextureRegion.setRegion(48, 32, textureRegionWidth,  textureRegionHeight);
         else if (v == 161) currentTextureRegion.setRegion(32, 48, textureRegionWidth,  textureRegionHeight);
+        else if (v == 187) currentTextureRegion.setRegion(16, 48, textureRegionWidth,  textureRegionHeight);
         else if (v == 200) currentTextureRegion.setRegion(48, 0, textureRegionWidth,  textureRegionHeight);
         else if (v == 222) currentTextureRegion.setRegion(0, 16, textureRegionWidth,  textureRegionHeight);
         else if (v == 223) currentTextureRegion.setRegion(32, 16, textureRegionWidth,  textureRegionHeight);
@@ -293,11 +294,10 @@ public class GroundTiledMapTile implements TiledMapTile {
         else if (v == 254) currentTextureRegion.setRegion(0, 16, textureRegionWidth,  textureRegionHeight);
 
         
-            //128+64+16+8+4+2+1
+            //128+32+16+8+2+1
         else {
             System.out.println(String.format("Found the culprit: %s %s %s", v, x, y));
         }
-        // todo 232, 181, 217, 81, (26?)
 
         GameState.tileCache[x][y] = v;
 
