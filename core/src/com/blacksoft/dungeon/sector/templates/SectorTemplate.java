@@ -59,7 +59,7 @@ public abstract class SectorTemplate {
                 break;
             case 'T':
                 if(placeWallObjects) {
-                    node.object = new Torch();
+                    node.object = WallObjects.I.pickOneRandom();
                 }
                 node.tile = GameState.baseWallTile;
                 break;
