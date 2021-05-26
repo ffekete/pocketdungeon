@@ -33,11 +33,6 @@ public class DungeonEntrance extends AbstractMapObject {
     }
 
     @Override
-    public Tile getTile() {
-        return Tile.Grave;
-    }
-
-    @Override
     public boolean getState() {
         return false;
     }

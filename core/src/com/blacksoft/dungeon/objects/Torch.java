@@ -29,16 +29,12 @@ public class Torch extends AbstractMapObject {
     public int x, y;
     private float animationStateTime = 0f;
 
-    public int level = 1;
     private Light lightSource;
     private FlickeringLightAction flickeringLightAction;
 
     @Override
     public void place(int x,
                       int y) {
-        GameState.loopProgress += Config.TORCH_PROGRESS_VALUE;
-
-        GameState.oozeLimit += 1;
         this.lightSource = LightSourceFactory.getTorchLightSource(x / 16 * 16 + 8, y / 16 * 16 + 8);
         this.flickeringLightAction = new FlickeringLightAction(this.lightSource);
         GameState.stage.addAction(flickeringLightAction);
@@ -48,14 +44,8 @@ public class Torch extends AbstractMapObject {
 
     @Override
     public void destroy() {
-        GameState.oozeLimit -= level;
         lightSource.setActive(false);
         lightSource.remove();
-    }
-
-    @Override
-    public Tile getTile() {
-        return Tile.Torch;
     }
 
     @Override

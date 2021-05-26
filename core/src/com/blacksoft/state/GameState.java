@@ -13,7 +13,7 @@ import com.blacksoft.creature.Creature;
 import com.blacksoft.dungeon.Dungeon;
 import com.blacksoft.dungeon.Tile;
 import com.blacksoft.dungeon.actions.AbstractAction;
-import com.blacksoft.dungeon.objects.Building;
+import com.blacksoft.dungeon.objects.GameObject;
 import com.blacksoft.dungeon.pathfinder.CityGraph;
 import com.blacksoft.dungeon.phase.GamePhase;
 import com.blacksoft.hero.Party;
@@ -49,36 +49,13 @@ public class GameState {
     public static RayHandler rayHandler;
     public static PointLight mouseLightSource;
 
-    public static int loopProgress = -20;
-    public static int gold = 100;
-    public static int iron = 10;
-    public static int maxIronCapacity = 20;
-    public static int gems = 20;
-    public static int maxGemsCapacity = 20;
-
-    public static List<AbstractAction> unlockedActions = new ArrayList<>();
-    public static List<AbstractAction> unlockedActionsPrioritized = new ArrayList<>();
     public static List<AbstractAction> actions = new ArrayList<>();
 
-    public static AbstractAction highlightedAction = null;
-    public static AbstractAction selectedAction = null;
-    public static ImageButton highlightedActionImage = null;
-    public static ImageButton selectedActionImage = null;
-
-    public static Building currentBuilding = null;
-
     public static List<Creature> creatures = new ArrayList<>();
-
-    public static int skeletonLimit = 0;
-    public static int warlockLimit = 0;
-    public static int oozeLimit = 0;
-    public static int vampireLimit = 0;
 
     public static CityGraph cityGraph;
 
     public static Map<Creature, Table> creatureListEntriesOnSidePanel = new HashMap<>();
-
-    public static FollowCreatureAction followCreatureAction;
 
     public static boolean paused;
 

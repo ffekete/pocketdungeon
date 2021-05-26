@@ -18,17 +18,17 @@ public enum Tile {
     RestingArea(false, true, TEXTURE_SIZE, TEXTURE_SIZE),
     DoorClosed(true, true, TEXTURE_SIZE, TEXTURE_SIZE * 2),
     DoorOpened(false, true, TEXTURE_SIZE * 2, TEXTURE_SIZE * 2),
-    Library(false, false, TEXTURE_SIZE, TEXTURE_SIZE * 2);
+    BookShelf(false, false, TEXTURE_SIZE, TEXTURE_SIZE * 2);
 
     static {
         Rock.canMergeWith = Arrays.asList(Torch, Rock);
-        Empty.canMergeWith = Arrays.asList(Empty, DungeonEntrance, Treasury, DoorOpened, DoorClosed, Library);
-        Library.canMergeWith = Arrays.asList(Empty, DungeonEntrance, Treasury, Library);
+        Empty.canMergeWith = Arrays.asList(Empty, DungeonEntrance, Treasury, DoorOpened, DoorClosed, BookShelf);
+        BookShelf.canMergeWith = Arrays.asList(Empty, DungeonEntrance, Treasury, BookShelf);
         Grave.canMergeWith = Arrays.asList(Grave);
         Torch.canMergeWith = Arrays.asList(Rock, Torch);
         MysteriousCoffin.canMergeWith = Empty.canMergeWith;
-        Treasury.canMergeWith = Library.canMergeWith;
-        DungeonEntrance.canMergeWith = Library.canMergeWith;
+        Treasury.canMergeWith = BookShelf.canMergeWith;
+        DungeonEntrance.canMergeWith = BookShelf.canMergeWith;
         RestingArea.canMergeWith = Arrays.asList(RestingArea);
         DoorOpened.canMergeWith = Arrays.asList(Empty);
         DoorClosed.canMergeWith = Arrays.asList(Empty);

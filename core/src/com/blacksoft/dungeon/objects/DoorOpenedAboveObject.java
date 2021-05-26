@@ -7,10 +7,8 @@ import com.blacksoft.dungeon.Tile;
 
 public class DoorOpenedAboveObject extends AbstractMapObject {
 
-    public int level = 1;
     private boolean opened = false;
     public int x, y;
-    public boolean locked = false;
 
     private static TextureRegion openedTextureRegion;
     private static TextureRegion closedTextureRegion;
@@ -28,11 +26,6 @@ public class DoorOpenedAboveObject extends AbstractMapObject {
 
     @Override
     public void destroy() {
-    }
-
-    @Override
-    public Tile getTile() {
-        return opened ? Tile.DoorClosed : Tile.DoorOpened;
     }
 
     @Override

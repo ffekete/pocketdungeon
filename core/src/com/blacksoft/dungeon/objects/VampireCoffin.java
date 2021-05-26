@@ -25,8 +25,6 @@ public class VampireCoffin extends AbstractMapObject {
     @Override
     public void place(int x,
                       int y) {
-        GameState.loopProgress += Config.BLOOD_POOL_PROGRESS_VALUE;
-        GameState.vampireLimit += 1;
         this.lightSource = LightSourceFactory.getBloodPoolLightSource(x / 16 * 16 + 8, y / 16 * 16 + 8);
         this.x = x / 16;
         this.y = y / 16;
@@ -34,13 +32,7 @@ public class VampireCoffin extends AbstractMapObject {
 
     @Override
     public void destroy() {
-        GameState.vampireLimit -= level;
         lightSource.dispose();
-    }
-
-    @Override
-    public Tile getTile() {
-        return Tile.MysteriousCoffin;
     }
 
     @Override

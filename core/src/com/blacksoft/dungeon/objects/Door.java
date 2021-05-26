@@ -10,7 +10,6 @@ import com.blacksoft.state.GameState;
 
 public class Door extends AbstractMapObject {
 
-    public int level = 1;
     private boolean opened = false;
     public int x, y;
     public boolean locked = false;
@@ -31,11 +30,6 @@ public class Door extends AbstractMapObject {
 
     @Override
     public void destroy() {
-    }
-
-    @Override
-    public Tile getTile() {
-        return opened ? Tile.DoorClosed : Tile.DoorOpened;
     }
 
     @Override

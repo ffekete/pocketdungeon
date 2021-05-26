@@ -9,10 +9,7 @@ import com.blacksoft.dungeon.lighting.LightSourceFactory;
 import com.blacksoft.state.Config;
 import com.blacksoft.state.GameState;
 
-public class Library extends AbstractMapObject {
-
-    public int level = 1;
-    private Light lightSource;
+public class BookShelf extends AbstractMapObject {
 
     public int x,y;
 
@@ -26,22 +23,13 @@ public class Library extends AbstractMapObject {
     public void place(int x,
                       int y) {
 
-        GameState.loopProgress += Config.LIBRARY_PROGRESS_VALUE;
-        GameState.warlockLimit += 1;
-        this.lightSource = LightSourceFactory.getLibraryLightSource(x / 16 * 16 + 8,y / 16 * 16 + 8);
         this.x = x / 16;
         this.y = y / 16;
     }
 
     @Override
     public void destroy() {
-        GameState.warlockLimit -= level;
-        lightSource.dispose();
-    }
 
-    @Override
-    public Tile getTile() {
-        return Tile.Library;
     }
 
     @Override
