@@ -2,7 +2,6 @@ package com.blacksoft.battle.action;
 
 import com.badlogic.gdx.scenes.scene2d.Action;
 import com.blacksoft.battle.BattlePhase;
-import com.blacksoft.dungeon.actions.ui.CleanIndicatorUpdater;
 import com.blacksoft.dungeon.phase.GamePhase;
 import com.blacksoft.screen.UIFactory;
 import com.blacksoft.state.GameState;
@@ -44,7 +43,6 @@ public class BattleFinishedCheckingAction extends Action {
 
             GameState.gamePhase = GamePhase.Build;
             GameState.userAction = UserAction.Clean;
-            CleanIndicatorUpdater.update(GameState.dungeon);
 
             UIState.battleScreen.remove();
             UIState.battleSelectionCursor.setVisible(false);

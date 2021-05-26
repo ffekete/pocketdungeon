@@ -1,4 +1,4 @@
-package com.blacksoft.dungeon.building;
+package com.blacksoft.dungeon.objects;
 
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.blacksoft.dungeon.Tile;
@@ -17,8 +17,4 @@ public interface Building {
     void toggleState();
 
     TextureRegion getTextureRegion();
-
-    int getX();
-
-    int getY();
 }

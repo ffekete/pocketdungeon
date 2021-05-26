@@ -1,4 +1,4 @@
-package com.blacksoft.dungeon.building;
+package com.blacksoft.dungeon.objects;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Texture;
@@ -8,7 +8,7 @@ import com.blacksoft.dungeon.actions.GateOpenCheckAction;
 import com.blacksoft.state.Config;
 import com.blacksoft.state.GameState;
 
-public class Gate implements Building {
+public class Gate  extends AbstractMapObject {
 
     public int level = 1;
     private boolean opened = true;
@@ -75,12 +75,12 @@ public class Gate implements Building {
     }
 
     @Override
-    public int getX() {
+    public float getX() {
         return x;
     }
 
     @Override
-    public int getY() {
+    public float getY() {
         return y;
     }
 }

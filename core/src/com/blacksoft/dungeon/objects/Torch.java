@@ -1,4 +1,4 @@
-package com.blacksoft.dungeon.building;
+package com.blacksoft.dungeon.objects;
 
 import box2dLight.Light;
 import com.badlogic.gdx.Gdx;
@@ -12,7 +12,7 @@ import com.blacksoft.dungeon.lighting.LightSourceFactory;
 import com.blacksoft.state.Config;
 import com.blacksoft.state.GameState;
 
-public class Torch implements Building {
+public class Torch extends AbstractMapObject {
 
     private static TextureRegion textureRegion;
     private static TextureRegion textureRegion2;
@@ -26,7 +26,7 @@ public class Torch implements Building {
         animation = new Animation<>(0.25f, regions);
     }
 
-    public int x,y;
+    public int x, y;
     private float animationStateTime = 0f;
 
     public int level = 1;
@@ -75,12 +75,12 @@ public class Torch implements Building {
     }
 
     @Override
-    public int getX() {
+    public float getX() {
         return x;
     }
 
     @Override
-    public int getY() {
+    public float getY() {
         return y;
     }
 }

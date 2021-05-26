@@ -1,44 +1,50 @@
-package com.blacksoft.dungeon.building;
+package com.blacksoft.dungeon.objects;
 
+import box2dLight.Light;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.blacksoft.dungeon.Tile;
-import com.blacksoft.dungeon.actions.AbstractAction;
+import com.blacksoft.dungeon.lighting.LightSourceFactory;
 import com.blacksoft.screen.UIFactory;
 import com.blacksoft.state.Config;
 import com.blacksoft.state.GameState;
 import com.blacksoft.state.UIState;
 
-public class RestingArea implements Building {
+public class Treasury extends AbstractMapObject {
 
 
     private static TextureRegion textureRegion;
 
-    public int x,y;
-
     static {
-        textureRegion = new TextureRegion(new Texture(Gdx.files.internal("tile/RestingArea.png")));
+        textureRegion = new TextureRegion(new Texture(Gdx.files.internal("tile/Treasury.png")));
     }
 
+    public int x, y;
     public int level = 1;
+    private Light lightSource;
 
     @Override
     public void place(int x,
                       int y) {
-        GameState.loopProgress += Config.RESTING_AREA_PROGRESS_VALUE;
+
+        GameState.loopProgress += Config.TREASURY_PROGRESS_VALUE;
+        this.lightSource = LightSourceFactory.getGraveyardLightSource(x / 16 * 16 + 8, y / 16 * 16 + 8);
+        int old = GameState.gold;
+        GameState.gold += 500;
+        UIFactory.I.updateLabelAmount(old, GameState.gold, UIState.goldLabel, "%s", null);
         this.x = x / 16;
         this.y = y / 16;
     }
 
     @Override
     public void destroy() {
-
+        lightSource.dispose();
     }
 
     @Override
     public Tile getTile() {
-        return Tile.RestingArea;
+        return Tile.Treasury;
     }
 
     @Override
@@ -57,12 +63,12 @@ public class RestingArea implements Building {
     }
 
     @Override
-    public int getX() {
+    public float getX() {
         return x;
     }
 
     @Override
-    public int getY() {
+    public float getY() {
         return y;
     }
 }

@@ -1,4 +1,4 @@
-package com.blacksoft.dungeon.building;
+package com.blacksoft.dungeon.objects;
 
 import box2dLight.Light;
 import com.badlogic.gdx.Gdx;
@@ -9,7 +9,7 @@ import com.blacksoft.dungeon.lighting.LightSourceFactory;
 import com.blacksoft.state.Config;
 import com.blacksoft.state.GameState;
 
-public class Graveyard implements Building {
+public class Library extends AbstractMapObject {
 
     public int level = 1;
     private Light lightSource;
@@ -19,28 +19,29 @@ public class Graveyard implements Building {
     private static TextureRegion textureRegion;
 
     static {
-        textureRegion = new TextureRegion(new Texture(Gdx.files.internal("tile/Grave.png")));
+        textureRegion = new TextureRegion(new Texture(Gdx.files.internal("tile/Library.png")));
     }
 
     @Override
     public void place(int x,
                       int y) {
-        GameState.loopProgress += Config.GRAVEYARD_PROGRESS_VALUE;
-        GameState.skeletonLimit += 1;
-        this.lightSource = LightSourceFactory.getGraveyardLightSource(x / 16 * 16 + 8,y / 16 * 16 + 8);
+
+        GameState.loopProgress += Config.LIBRARY_PROGRESS_VALUE;
+        GameState.warlockLimit += 1;
+        this.lightSource = LightSourceFactory.getLibraryLightSource(x / 16 * 16 + 8,y / 16 * 16 + 8);
         this.x = x / 16;
         this.y = y / 16;
     }
 
     @Override
     public void destroy() {
-        GameState.skeletonLimit -= level;
+        GameState.warlockLimit -= level;
         lightSource.dispose();
     }
 
     @Override
     public Tile getTile() {
-        return Tile.Grave;
+        return Tile.Library;
     }
 
     @Override
@@ -59,12 +60,12 @@ public class Graveyard implements Building {
     }
 
     @Override
-    public int getX() {
+    public float getX() {
         return x;
     }
 
     @Override
-    public int getY() {
+    public float getY() {
         return y;
     }
 }

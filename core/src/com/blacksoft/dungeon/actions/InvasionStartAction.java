@@ -5,8 +5,6 @@ import com.badlogic.gdx.scenes.scene2d.actions.Actions;
 import com.badlogic.gdx.scenes.scene2d.actions.SequenceAction;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.blacksoft.battle.action.BattleInitiationAction;
-import com.blacksoft.dungeon.actions.ui.CleanIndicatorUpdater;
-import com.blacksoft.dungeon.actions.ui.CleanIndicatorsAction;
 import com.blacksoft.dungeon.phase.GamePhase;
 import com.blacksoft.hero.Party;
 import com.blacksoft.hero.Rogue;
@@ -21,8 +19,6 @@ public class InvasionStartAction extends Action {
 
     @Override
     public boolean act(float delta) {
-
-        CleanIndicatorsAction.cleanAll(GameState.dungeon);
 
         // let the fun begin
         GameState.gamePhase = GamePhase.Invasion;

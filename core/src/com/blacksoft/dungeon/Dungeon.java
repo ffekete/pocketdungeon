@@ -4,13 +4,15 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.ai.pfa.Connection;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
+import com.badlogic.gdx.maps.MapObject;
+import com.badlogic.gdx.maps.objects.TextureMapObject;
 import com.badlogic.gdx.maps.tiled.TiledMap;
 import com.badlogic.gdx.maps.tiled.TiledMapTile;
 import com.badlogic.gdx.maps.tiled.TiledMapTileLayer;
 import com.badlogic.gdx.maps.tiled.tiles.StaticTiledMapTile;
 import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.ObjectMap;
-import com.blacksoft.dungeon.building.Building;
+import com.blacksoft.dungeon.objects.AbstractMapObject;
 import com.blacksoft.dungeon.pathfinder.CityGraph;
 import com.blacksoft.state.GameState;
 
@@ -23,7 +25,6 @@ import static com.blacksoft.state.Config.TEXTURE_SIZE;
 
 public class Dungeon {
 
-    public static final String BUILD_INDICATORS_LAYER = "buildIndicators";
     public static final String DUNGEON_LAYER = "dungeon";
 
     private static final Tile DEFAULT_TILE = Tile.Rock;
@@ -42,7 +43,6 @@ public class Dungeon {
         tiledMap = new TiledMap();
 
         TiledMapTileLayer layer = addLayer(DUNGEON_LAYER);
-        TiledMapTileLayer buildIndicatorLayer = addLayer(BUILD_INDICATORS_LAYER);
 
         for (int i = 0; i < MAP_WIDTH; i++) {
             for (int j = 0; j < MAP_HEIGHT; j++) {
@@ -65,6 +65,11 @@ public class Dungeon {
         GameState.cityGraph = new CityGraph();
     }
 
+    public void addObject(int x, int y, TextureMapObject object) {
+        TiledMapTileLayer layer = (TiledMapTileLayer) tiledMap.getLayers().get(DUNGEON_LAYER);
+        layer.getCell(x,y).getTile().getObjects().add(object);
+    }
+
     private TiledMapTileLayer addLayer(String name) {
         TiledMapTileLayer layer = new TiledMapTileLayer(MAP_WIDTH, MAP_HEIGHT, TEXTURE_SIZE, TEXTURE_SIZE);
         layer.setName(name);
@@ -83,7 +88,7 @@ public class Dungeon {
                                      Tile target, boolean reConnectNeighbours) {
         TiledMapTileLayer layer = (TiledMapTileLayer) tiledMap.getLayers().get(DUNGEON_LAYER);
         nodes[x][y].tile = target;
-        nodes[x][y].building = null;
+        nodes[x][y].object = null;
 
         if(reConnectNeighbours) {
             if (target.isSolid()) {
@@ -106,12 +111,12 @@ public class Dungeon {
 
     public void placeBuilding(int x,
                               int y,
-                              Building building,
+                              AbstractMapObject mapObject,
                               Tile tile) {
         replaceTileToNewTile(x, y, tile);
-        nodes[x][y].building = building;
-        if(building != null) {
-            building.place(x * 16, y * 16);
+        nodes[x][y].object = mapObject;
+        if(mapObject != null) {
+            mapObject.place(x * 16, y * 16);
         }
     }
 

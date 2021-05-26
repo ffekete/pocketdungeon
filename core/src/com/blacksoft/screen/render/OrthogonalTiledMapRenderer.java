@@ -19,6 +19,7 @@ package com.blacksoft.screen.render;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
+import com.badlogic.gdx.maps.objects.TextureMapObject;
 import com.badlogic.gdx.maps.tiled.TiledMap;
 import com.badlogic.gdx.maps.tiled.TiledMapTile;
 import com.badlogic.gdx.maps.tiled.TiledMapTileLayer;
@@ -53,11 +54,6 @@ public class OrthogonalTiledMapRenderer extends BatchTiledMapRenderer {
     @Override
     public void renderTileLayer(TiledMapTileLayer layer) {
         Color batchColor = batch.getColor();
-
-        if(layer.getName().equals(Dungeon.BUILD_INDICATORS_LAYER)) {
-            batchColor = Color.valueOf("70b222");
-            layer.setOpacity(0.5f);
-        }
 
         final float color = Color.toFloatBits(batchColor.r, batchColor.g, batchColor.b, batchColor.a * layer.getOpacity());
 
@@ -198,6 +194,14 @@ public class OrthogonalTiledMapRenderer extends BatchTiledMapRenderer {
                         }
                     }
                     batch.draw(region.getTexture(), vertices, 0, NUM_VERTICES);
+
+
+                    cell.getTile().getObjects().forEach((o) -> {
+                                TextureMapObject textureMapObject = (TextureMapObject)o;
+                                batch.draw(textureMapObject.getTextureRegion().getTexture(), x1, y1);
+                            }
+                    );
+
                 }
                 x += layerTileWidth;
             }

@@ -11,12 +11,12 @@ import com.badlogic.gdx.utils.viewport.Viewport;
 import com.blacksoft.battle.BattlePhase;
 import com.blacksoft.creature.Creature;
 import com.blacksoft.dungeon.Dungeon;
+import com.blacksoft.dungeon.Tile;
 import com.blacksoft.dungeon.actions.AbstractAction;
-import com.blacksoft.dungeon.building.Building;
+import com.blacksoft.dungeon.objects.Building;
 import com.blacksoft.dungeon.pathfinder.CityGraph;
 import com.blacksoft.dungeon.phase.GamePhase;
 import com.blacksoft.hero.Party;
-import com.blacksoft.skill.Skill;
 import com.blacksoft.ui.AnimatedImage;
 import com.blacksoft.ui.DynamicProgressBar;
 import com.blacksoft.ui.TileMarker;
@@ -32,6 +32,9 @@ import static com.blacksoft.state.Config.MAP_HEIGHT;
 import static com.blacksoft.state.Config.MAP_WIDTH;
 
 public class GameState {
+
+    public static Tile baseEmptyTile = Tile.Empty;
+    public static Tile baseWallTile = Tile.Rock;
 
     public static OrthographicCamera orthographicCamera;
     public static OrthographicCamera orthographicUICamera;

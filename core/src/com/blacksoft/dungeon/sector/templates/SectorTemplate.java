@@ -1,8 +1,8 @@
 package com.blacksoft.dungeon.sector.templates;
 
 import com.blacksoft.dungeon.Node;
-import com.blacksoft.dungeon.Tile;
-import com.blacksoft.dungeon.building.DungeonEntrance;
+import com.blacksoft.dungeon.objects.DungeonEntrance;
+import com.blacksoft.state.GameState;
 
 import java.util.List;
 
@@ -30,18 +30,18 @@ public abstract class SectorTemplate {
     private Node mapToNode(Character c) {
 
         Node node = new Node();
-        node.building = null;
+        node.object = null;
 
         switch (c) {
             case 'W':
-                node.tile = Tile.Rock;
+                node.tile = GameState.baseWallTile;
                 break;
             case 'E':
-                node.building = new DungeonEntrance();
-                node.tile = Tile.DungeonEntrance;
+                node.object = new DungeonEntrance();
+                node.tile = GameState.baseEmptyTile;
                 break;
             case '.':
-                node.tile = Tile.Empty;
+                node.tile = GameState.baseEmptyTile;
                 break;
         }
 

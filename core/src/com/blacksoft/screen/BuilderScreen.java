@@ -19,8 +19,6 @@ import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.badlogic.gdx.utils.viewport.FitViewport;
 import com.blacksoft.NewGameInitializer;
-import com.blacksoft.dungeon.actions.ui.CleanIndicatorUpdater;
-import com.blacksoft.dungeon.actions.ui.CleanIndicatorsAction;
 import com.blacksoft.screen.action.MoveLightToMouseAction;
 import com.blacksoft.screen.render.OrthogonalTiledMapRenderer;
 import com.blacksoft.state.GameState;
@@ -133,13 +131,10 @@ public class BuilderScreen extends ScreenAdapter {
 
         Gdx.input.setInputProcessor(inputMultiplexer);
 
-        GameState.orthographicCamera.translate(-20, -20);
+        GameState.orthographicCamera.translate(-30, -30);
 
         NewGameInitializer.init();
         this.tiledMapRenderer = new OrthogonalTiledMapRenderer(GameState.dungeon.tiledMap, spriteBatch);
-
-        CleanIndicatorsAction.cleanAll(GameState.dungeon);
-        CleanIndicatorUpdater.update(GameState.dungeon);
 
         // ACTIONS
         GameState.stage.addAction(new MoveLightToMouseAction());

@@ -23,10 +23,8 @@ import com.blacksoft.dungeon.sector.templates.twoways.room.threeway.ThreeWayRoom
 import com.blacksoft.dungeon.sector.templates.twoways.room.twoway.*;
 import com.blacksoft.state.GameState;
 
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.List;
-import java.util.Random;
+import java.lang.reflect.Array;
+import java.util.*;
 import java.util.stream.Collectors;
 
 import static com.blacksoft.state.Config.*;
@@ -123,13 +121,25 @@ public class SectorSelector {
         }
 
         if(needed.size() == 1) {
-            needed.add(1);
-            needed.add(2);
-            needed.add(4);
-            needed.add(8);
+
+            List<Integer> toAdd = new ArrayList<>();
+            toAdd.add(1);
+            toAdd.add(2);
+            toAdd.add(4);
+            toAdd.add(8);
+
+            toAdd.removeAll(excluded);
+            int random = new Random().nextInt(toAdd.size() + 1);
+
+            if(random == 0) {
+                needed.addAll(toAdd);
+            } else {
+                for (int i = 1; i < toAdd.size(); i++) {
+                    needed.add(toAdd.get(i));
+                }
+            }
         }
 
-        needed.removeAll(excluded);
 
         List<SectorTemplate> templates = sectors.stream()
                 .filter(sectorTemplate -> sectorTemplate.getCompatibility().containsAll(needed))

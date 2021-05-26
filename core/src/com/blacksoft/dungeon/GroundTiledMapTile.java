@@ -8,7 +8,6 @@ import com.blacksoft.state.GameState;
 
 import static com.blacksoft.state.Config.MAP_HEIGHT;
 import static com.blacksoft.state.Config.MAP_WIDTH;
-import static com.blacksoft.state.Config.TEXTURE_SIZE;
 
 /**
  * @brief Represents a non changing {@link TiledMapTile} (can be cached)
@@ -76,7 +75,7 @@ public class GroundTiledMapTile implements TiledMapTile {
     public TextureRegion getTextureRegion() {
         TextureRegion currentTextureRegion;
         if (this.textureRegion == null) {
-            currentTextureRegion = GameState.dungeon.nodes[x][y].building.getTextureRegion();
+            currentTextureRegion = GameState.dungeon.nodes[x][y].object.getTextureRegion();
         } else {
             currentTextureRegion = this.textureRegion;
         }

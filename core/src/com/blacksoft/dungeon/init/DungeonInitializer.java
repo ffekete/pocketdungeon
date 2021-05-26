@@ -6,7 +6,6 @@ import com.blacksoft.dungeon.NodeTraverser;
 import com.blacksoft.dungeon.sector.SectorPlacer;
 import com.blacksoft.dungeon.sector.SectorSelector;
 import com.blacksoft.dungeon.sector.templates.Entrance;
-import com.blacksoft.dungeon.sector.templates.FourWayCorridor;
 import com.blacksoft.dungeon.sector.templates.SectorTemplate;
 import com.blacksoft.state.Config;
 import com.blacksoft.state.GameState;
@@ -38,7 +37,7 @@ public class DungeonInitializer {
                     //sectorPlacementAction.addAction(new DelayAction(0.1f));
                 }
             }
-            System.out.println("overall elapsed: " + (System.currentTimeMillis() - s));
+            System.out.println("overall elapsed time during dungeon creation: " + (System.currentTimeMillis() - s));
         } while (NodeTraverser.countRooms() > 1);
 
 

@@ -32,10 +32,10 @@ public class SectorPlacer {
         for (int i = 0; i < SECTOR_SIZE; i++) {
             for (int j = 0; j < SECTOR_SIZE; j++) {
 
-                if(nodes[i][j].building != null) {
-                    dungeon.placeBuilding(sx * SECTOR_SIZE + i, sy * SECTOR_SIZE + j, nodes[i][j].building, nodes[i][j].tile);
-                } else {
-                    dungeon.replaceTileToNewTile(sx * SECTOR_SIZE + i, sy * SECTOR_SIZE + j, nodes[i][j].tile);
+                dungeon.replaceTileToNewTile(sx * SECTOR_SIZE + i, sy * SECTOR_SIZE + j, nodes[i][j].tile);
+
+                if (nodes[i][j].object != null) {
+                    dungeon.addObject(sx * SECTOR_SIZE + i, sy * SECTOR_SIZE + j, nodes[i][j].object);
                 }
 
                 dungeon.nodes[sx * SECTOR_SIZE + i][sy * SECTOR_SIZE + j].compatibility = sectorTemplate.getCompatibility();

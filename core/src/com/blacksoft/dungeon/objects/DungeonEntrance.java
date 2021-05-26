@@ -1,4 +1,4 @@
-package com.blacksoft.dungeon.building;
+package com.blacksoft.dungeon.objects;
 
 import box2dLight.Light;
 import com.badlogic.gdx.Gdx;
@@ -6,42 +6,35 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.blacksoft.dungeon.Tile;
 import com.blacksoft.dungeon.lighting.LightSourceFactory;
-import com.blacksoft.state.Config;
-import com.blacksoft.state.GameState;
 
-public class VampireCoffin implements Building {
+public class DungeonEntrance extends AbstractMapObject {
 
+    public int x,y;
+    public int level = 1;
+    private Light lightSource;
 
     private static TextureRegion textureRegion;
 
-    public int x,y;
-
     static {
-        textureRegion = new TextureRegion(new Texture(Gdx.files.internal("tile/MysteriousCoffin.png")));
+        textureRegion = new TextureRegion(new Texture(Gdx.files.internal("tile/DungeonEntrance.png")));
     }
-
-    public int level = 1;
-    private Light lightSource;
 
     @Override
     public void place(int x,
                       int y) {
-        GameState.loopProgress += Config.BLOOD_POOL_PROGRESS_VALUE;
-        GameState.vampireLimit += 1;
-        this.lightSource = LightSourceFactory.getBloodPoolLightSource(x / 16 * 16 + 8,y / 16 * 16 + 8);
+        this.lightSource = LightSourceFactory.getDungeonEntranceLightSource(x / 16 * 16 + 8,y / 16 * 16 + 8);
         this.x = x / 16;
         this.y = y / 16;
     }
 
     @Override
     public void destroy() {
-        GameState.vampireLimit -= level;
-        lightSource.dispose();
+
     }
 
     @Override
     public Tile getTile() {
-        return Tile.MysteriousCoffin;
+        return Tile.Grave;
     }
 
     @Override
@@ -60,12 +53,12 @@ public class VampireCoffin implements Building {
     }
 
     @Override
-    public int getX() {
+    public float getX() {
         return x;
     }
 
     @Override
-    public int getY() {
+    public float getY() {
         return y;
     }
 }

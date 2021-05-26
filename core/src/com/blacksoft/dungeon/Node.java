@@ -2,8 +2,7 @@ package com.blacksoft.dungeon;
 
 import com.badlogic.gdx.ai.pfa.Connection;
 import com.badlogic.gdx.utils.Array;
-import com.blacksoft.dungeon.actions.AbstractAction;
-import com.blacksoft.dungeon.building.Building;
+import com.blacksoft.dungeon.objects.AbstractMapObject;
 import com.blacksoft.state.GameState;
 
 import java.util.ArrayList;
@@ -15,7 +14,7 @@ import static com.blacksoft.state.Config.MAP_WIDTH;
 public class Node {
 
     public Tile tile;
-    public Building building;
+    public AbstractMapObject object;
 
     public float x;
     public float y;

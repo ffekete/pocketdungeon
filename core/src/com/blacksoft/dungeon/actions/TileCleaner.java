@@ -1,24 +1,11 @@
 package com.blacksoft.dungeon.actions;
 
-import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.graphics.Color;
-import com.badlogic.gdx.graphics.Texture;
-import com.badlogic.gdx.graphics.g2d.TextureRegion;
-import com.badlogic.gdx.maps.tiled.TiledMapTileLayer;
-import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.blacksoft.dungeon.Dungeon;
-import com.blacksoft.dungeon.GroundTiledMapTile;
 import com.blacksoft.dungeon.Tile;
-import com.blacksoft.dungeon.actions.ui.CleanIndicatorUpdater;
-import com.blacksoft.dungeon.actions.ui.CleanIndicatorsAction;
-import com.blacksoft.dungeon.building.Gate;
-import com.blacksoft.screen.UIFactory;
-import com.blacksoft.state.Config;
-import com.blacksoft.state.UIState;
+import com.blacksoft.dungeon.objects.Gate;
 
 import static com.blacksoft.state.Config.MAP_HEIGHT;
 import static com.blacksoft.state.Config.MAP_WIDTH;
-import static com.blacksoft.state.Config.TEXTURE_SIZE;
 
 public class TileCleaner {
 
@@ -71,7 +58,7 @@ public class TileCleaner {
         }
 
         return dungeon.nodes[x][y].tile != Tile.Rock && dungeon.nodes[x][y].tile != Tile.Torch && !(
-                dungeon.nodes[x][y].tile == Tile.GateClosed && ((Gate) dungeon.nodes[x][y].building).locked);
+                dungeon.nodes[x][y].tile == Tile.GateClosed && ((Gate) dungeon.nodes[x][y].object).locked);
     }
 
     public static boolean isWall(Dungeon dungeon,
