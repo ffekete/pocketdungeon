@@ -10,7 +10,7 @@ public class TwoWayCorridorC extends SectorTemplate {
     private Character[][] sectorMap = new Character[][]{
             {'W', 'W', '.', 'W', 'W'},
             {'W', 'W', '.', 'W', 'W'},
-            {'W', 'W', '.', 'W', 'W'},
+            {'W', 'W', 'D', 'W', 'W'},
             {'W', 'W', '.', 'W', 'W'},
             {'W', 'W', '.', 'W', 'W'}
     };

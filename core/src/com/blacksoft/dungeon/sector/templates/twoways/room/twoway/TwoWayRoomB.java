@@ -8,7 +8,7 @@ import java.util.List;
 public class TwoWayRoomB extends SectorTemplate {
 
     private Character[][] sectorMap = new Character[][]{
-            {'W', 'W', '.', 'W', 'W'},
+            {'W', 'T', 'D', 'T', 'W'},
             {'W', '.', '.', '.', 'W'},
             {'W', '.', '.', '.', '.'},
             {'W', '.', '.', '.', 'W'},

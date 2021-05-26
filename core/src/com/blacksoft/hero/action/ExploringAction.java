@@ -27,7 +27,7 @@ public class ExploringAction extends Action {
             if (targetArea == null) {
                 // nothing to explore, find doors that are not broken yet
 
-                targetArea = TileFinder.findNearest(party.getX() / 16, party.getY() / 16, Tile.GateClosed);
+                targetArea = TileFinder.findNearest(party.getX() / 16, party.getY() / 16, Tile.DoorClosed);
 
                 if (targetArea == null) {
                     // nothing to do, returning home, end of game

@@ -1,10 +1,11 @@
 package com.blacksoft.dungeon.sector.templates;
 
 import com.blacksoft.dungeon.Node;
-import com.blacksoft.dungeon.objects.DungeonEntrance;
+import com.blacksoft.dungeon.objects.*;
 import com.blacksoft.state.GameState;
 
 import java.util.List;
+import java.util.Random;
 
 import static com.blacksoft.state.Config.SECTOR_SIZE;
 
@@ -32,6 +33,9 @@ public abstract class SectorTemplate {
         Node node = new Node();
         node.object = null;
 
+        boolean placeWallObjects = new Random().nextBoolean();
+        boolean placeDoor = new Random().nextInt(5) == 0;
+
         switch (c) {
             case 'W':
                 node.tile = GameState.baseWallTile;
@@ -39,6 +43,18 @@ public abstract class SectorTemplate {
             case 'E':
                 node.object = new DungeonEntrance();
                 node.tile = GameState.baseEmptyTile;
+                break;
+            case 'D':
+                if(placeDoor) {
+                    node.object = new Door();
+                }
+                node.tile = GameState.baseEmptyTile;
+                break;
+            case 'T':
+                if(placeWallObjects) {
+                    node.object = new Torch();
+                }
+                node.tile = GameState.baseWallTile;
                 break;
             case '.':
                 node.tile = GameState.baseEmptyTile;

@@ -7,6 +7,7 @@ import static com.blacksoft.state.Config.TEXTURE_SIZE;
 
 public enum Tile {
 
+    Transparent(true, true, TEXTURE_SIZE, TEXTURE_SIZE),
     Rock(true, true, TEXTURE_SIZE, TEXTURE_SIZE),
     Empty(false, true, TEXTURE_SIZE, TEXTURE_SIZE),
     Grave(false, false, TEXTURE_SIZE, TEXTURE_SIZE * 2),
@@ -15,13 +16,13 @@ public enum Tile {
     Treasury(false, false, TEXTURE_SIZE, TEXTURE_SIZE),
     DungeonEntrance(false, false, TEXTURE_SIZE, TEXTURE_SIZE * 2),
     RestingArea(false, true, TEXTURE_SIZE, TEXTURE_SIZE),
-    GateClosed(true, true, TEXTURE_SIZE, TEXTURE_SIZE * 2),
-    GateOpened(false, true, TEXTURE_SIZE * 2, TEXTURE_SIZE * 2),
+    DoorClosed(true, true, TEXTURE_SIZE, TEXTURE_SIZE * 2),
+    DoorOpened(false, true, TEXTURE_SIZE * 2, TEXTURE_SIZE * 2),
     Library(false, false, TEXTURE_SIZE, TEXTURE_SIZE * 2);
 
     static {
         Rock.canMergeWith = Arrays.asList(Torch, Rock);
-        Empty.canMergeWith = Arrays.asList(Empty, DungeonEntrance, Treasury, GateOpened, GateClosed, Library);
+        Empty.canMergeWith = Arrays.asList(Empty, DungeonEntrance, Treasury, DoorOpened, DoorClosed, Library);
         Library.canMergeWith = Arrays.asList(Empty, DungeonEntrance, Treasury, Library);
         Grave.canMergeWith = Arrays.asList(Grave);
         Torch.canMergeWith = Arrays.asList(Rock, Torch);
@@ -29,8 +30,8 @@ public enum Tile {
         Treasury.canMergeWith = Library.canMergeWith;
         DungeonEntrance.canMergeWith = Library.canMergeWith;
         RestingArea.canMergeWith = Arrays.asList(RestingArea);
-        GateOpened.canMergeWith = Arrays.asList(Empty);
-        GateClosed.canMergeWith = Arrays.asList(Empty);
+        DoorOpened.canMergeWith = Arrays.asList(Empty);
+        DoorClosed.canMergeWith = Arrays.asList(Empty);
     }
 
     private boolean solid;

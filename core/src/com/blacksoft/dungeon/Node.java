@@ -15,6 +15,7 @@ public class Node {
 
     public Tile tile;
     public AbstractMapObject object;
+    public AbstractMapObject aboveObject;
 
     public float x;
     public float y;

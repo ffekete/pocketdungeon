@@ -9,10 +9,10 @@ public class ThreeWayCorridorD extends SectorTemplate {
 
     private Character[][] sectorMap = new Character[][]{
             {'W', 'W', '.', 'W', 'W'},
-            {'W', 'W', '.', 'W', 'W'},
+            {'W', 'W', 'D', 'T', 'W'},
             {'W', 'W', '.', '.', '.'},
             {'W', 'W', '.', 'W', 'W'},
-            {'W', 'W', '.', 'W', 'W'}
+            {'W', 'W', 'D', 'W', 'W'}
     };
 
     @Override

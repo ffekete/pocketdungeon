@@ -29,35 +29,37 @@ import com.blacksoft.dungeon.Dungeon;
 
 import static com.badlogic.gdx.graphics.g2d.Batch.*;
 
-public class OrthogonalTiledMapRenderer extends BatchTiledMapRenderer {
+public class OrthogonalAboveTilesTiledMapRenderer extends BatchTiledMapRenderer {
 
-    public OrthogonalTiledMapRenderer(TiledMap map) {
+    public OrthogonalAboveTilesTiledMapRenderer(TiledMap map) {
         super(map);
     }
 
-    public OrthogonalTiledMapRenderer(TiledMap map,
-                                      Batch batch) {
+    public OrthogonalAboveTilesTiledMapRenderer(TiledMap map,
+                                                Batch batch) {
         super(map, batch);
     }
 
-    public OrthogonalTiledMapRenderer(TiledMap map,
-                                      float unitScale) {
+    public OrthogonalAboveTilesTiledMapRenderer(TiledMap map,
+                                                float unitScale) {
         super(map, unitScale);
     }
 
-    public OrthogonalTiledMapRenderer(TiledMap map,
-                                      float unitScale,
-                                      Batch batch) {
+    public OrthogonalAboveTilesTiledMapRenderer(TiledMap map,
+                                                float unitScale,
+                                                Batch batch) {
         super(map, unitScale, batch);
     }
 
     @Override
     public void renderTileLayer(TiledMapTileLayer layer) {
-        if (layer.getName().equals(Dungeon.DUNGEON_LAYER)) {
+        if (layer.getName().equals(Dungeon.ABOVE_LAYER)) {
+
+            layer.setOpacity(0.1f);
 
             Color batchColor = batch.getColor();
 
-            final float color = Color.toFloatBits(batchColor.r, batchColor.g, batchColor.b, batchColor.a * layer.getOpacity());
+            final float color = Color.toFloatBits(batchColor.r, batchColor.g, batchColor.b, batchColor.a * 0.1f);
 
             final int layerWidth = layer.getWidth();
             final int layerHeight = layer.getHeight();
@@ -84,7 +86,7 @@ public class OrthogonalTiledMapRenderer extends BatchTiledMapRenderer {
             for (int row = row2; row >= row1; row--) {
                 float x = xStart;
                 for (int col = col1; col < col2; col++) {
-                    final TiledMapTileLayer.Cell cell = layer.getCell(col, row);
+                    final Cell cell = layer.getCell(col, row);
                     if (cell == null) {
                         x += layerTileWidth;
                         continue;
@@ -198,11 +200,13 @@ public class OrthogonalTiledMapRenderer extends BatchTiledMapRenderer {
                         batch.draw(region.getTexture(), vertices, 0, NUM_VERTICES);
 
 
+                        batch.setColor(Color.valueOf("ffffffFF"));
                         cell.getTile().getObjects().forEach((o) -> {
                                     TextureMapObject textureMapObject = (TextureMapObject) o;
                                     batch.draw(textureMapObject.getTextureRegion().getTexture(), x1, y1);
                                 }
                         );
+                        batch.setColor(Color.valueOf("ffffffFF"));
 
                     }
                     x += layerTileWidth;

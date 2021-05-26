@@ -8,7 +8,7 @@ import java.util.List;
 public class OneWayRoomB extends SectorTemplate {
 
     private Character[][] sectorMap = new Character[][]{
-            {'W', 'W', 'W', 'W', 'W'},
+            {'W', 'T', 'W', 'T', 'W'},
             {'W', '.', '.', '.', 'W'},
             {'.', '.', '.', '.', 'W'},
             {'W', '.', '.', '.', 'W'},

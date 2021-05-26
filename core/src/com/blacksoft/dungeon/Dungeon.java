@@ -26,6 +26,7 @@ import static com.blacksoft.state.Config.TEXTURE_SIZE;
 public class Dungeon {
 
     public static final String DUNGEON_LAYER = "dungeon";
+    public static final String ABOVE_LAYER = "dungeonAbove";
 
     private static final Tile DEFAULT_TILE = Tile.Rock;
 
@@ -43,6 +44,7 @@ public class Dungeon {
         tiledMap = new TiledMap();
 
         TiledMapTileLayer layer = addLayer(DUNGEON_LAYER);
+        TiledMapTileLayer aboveLayer = addLayer(ABOVE_LAYER);
 
         for (int i = 0; i < MAP_WIDTH; i++) {
             for (int j = 0; j < MAP_HEIGHT; j++) {
@@ -65,9 +67,18 @@ public class Dungeon {
         GameState.cityGraph = new CityGraph();
     }
 
-    public void addObject(int x, int y, TextureMapObject object) {
+    public void addAboveObject(int x, int y, AbstractMapObject object) {
+        TiledMapTileLayer layer = (TiledMapTileLayer) tiledMap.getLayers().get(ABOVE_LAYER);
+        layer.setCell(x,y, new TiledMapTileLayer.Cell());
+        layer.getCell(x,y).setTile(new StaticTiledMapTile(new TextureRegion(new Texture(Gdx.files.internal("tile/Transparent.png")))));
+        layer.getCell(x,y).getTile().getObjects().add(object);
+        nodes[x][y].aboveObject = object;
+    }
+
+    public void addObject(int x, int y, AbstractMapObject object) {
         TiledMapTileLayer layer = (TiledMapTileLayer) tiledMap.getLayers().get(DUNGEON_LAYER);
         layer.getCell(x,y).getTile().getObjects().add(object);
+        nodes[x][y].object = object;
     }
 
     private TiledMapTileLayer addLayer(String name) {

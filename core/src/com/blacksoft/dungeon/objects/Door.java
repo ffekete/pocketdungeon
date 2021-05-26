@@ -8,10 +8,10 @@ import com.blacksoft.dungeon.actions.GateOpenCheckAction;
 import com.blacksoft.state.Config;
 import com.blacksoft.state.GameState;
 
-public class Gate  extends AbstractMapObject {
+public class Door extends AbstractMapObject {
 
     public int level = 1;
-    private boolean opened = true;
+    private boolean opened = false;
     public int x, y;
     public boolean locked = false;
 
@@ -19,25 +19,14 @@ public class Gate  extends AbstractMapObject {
     private static TextureRegion closedTextureRegion;
 
     static {
-        openedTextureRegion = new TextureRegion(new Texture(Gdx.files.internal("tile/GateOpened.png")));
-        closedTextureRegion = new TextureRegion(new Texture(Gdx.files.internal("tile/GateClosed.png")));
+        openedTextureRegion = new TextureRegion(new Texture(Gdx.files.internal("tile/DoorClosed.png")));
+        closedTextureRegion = new TextureRegion(new Texture(Gdx.files.internal("tile/DoorClosed.png")));
     }
 
     @Override
     public void place(int x,
                       int y) {
 
-        GameState.loopProgress += Config.GATE_PROGRESS_VALUE;
-
-        GameState.stage.addAction(new GateOpenCheckAction(this, x, y));
-        this.x = x / 16;
-        this.y = y / 16;
-
-        if (opened) {
-            GameState.dungeon.replaceTileToNewTile(this.x, this.y, Tile.GateOpened);
-        } else {
-            GameState.dungeon.replaceTileToNewTile(this.x, this.y, Tile.GateClosed);
-        }
     }
 
     @Override
@@ -46,7 +35,7 @@ public class Gate  extends AbstractMapObject {
 
     @Override
     public Tile getTile() {
-        return opened ? Tile.GateClosed : Tile.GateOpened;
+        return opened ? Tile.DoorClosed : Tile.DoorOpened;
     }
 
     @Override
@@ -57,16 +46,6 @@ public class Gate  extends AbstractMapObject {
     @Override
     public void toggleState() {
 
-        if(locked) {
-            return;
-        }
-
-        opened = !opened;
-        if (opened) {
-            GameState.dungeon.replaceTileToNewTile(x, y, Tile.GateOpened, false);
-        } else {
-            GameState.dungeon.replaceTileToNewTile(x, y, Tile.GateClosed, false);
-        }
     }
 
     @Override

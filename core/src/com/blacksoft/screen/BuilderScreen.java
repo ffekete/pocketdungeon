@@ -20,6 +20,7 @@ import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.badlogic.gdx.utils.viewport.FitViewport;
 import com.blacksoft.NewGameInitializer;
 import com.blacksoft.screen.action.MoveLightToMouseAction;
+import com.blacksoft.screen.render.OrthogonalAboveTilesTiledMapRenderer;
 import com.blacksoft.screen.render.OrthogonalTiledMapRenderer;
 import com.blacksoft.state.GameState;
 import com.blacksoft.ui.TileMarker;
@@ -32,6 +33,7 @@ public class BuilderScreen extends ScreenAdapter {
 
     private SpriteBatch spriteBatch;
     private TiledMapRenderer tiledMapRenderer;
+    private TiledMapRenderer aboveLayerMapRenderer;
     private RayHandler rayHandler;
     private World world;
     private ShapeRenderer shapeRenderer;
@@ -68,7 +70,7 @@ public class BuilderScreen extends ScreenAdapter {
         rayHandler.setBlur(true);
         RayHandler.useDiffuseLight(true);
         rayHandler.setBlurNum(3);
-        rayHandler.setAmbientLight(1f, 1f, 1f, 1f);
+        rayHandler.setAmbientLight(.3f, .3f, .3f, 1f);
         rayHandler.setShadows(true);
         GameState.rayHandler = rayHandler;
         GameState.mouseLightSource = new PointLight(rayHandler, 15, new Color(1, 1f, 1f, 1f), 128, 0, 0);
@@ -135,6 +137,7 @@ public class BuilderScreen extends ScreenAdapter {
 
         NewGameInitializer.init();
         this.tiledMapRenderer = new OrthogonalTiledMapRenderer(GameState.dungeon.tiledMap, spriteBatch);
+        this.aboveLayerMapRenderer = new OrthogonalAboveTilesTiledMapRenderer(GameState.dungeon.tiledMap, spriteBatch);
 
         // ACTIONS
         GameState.stage.addAction(new MoveLightToMouseAction());
@@ -154,6 +157,9 @@ public class BuilderScreen extends ScreenAdapter {
         tiledMapRenderer.render();
 
         GameState.stage.draw();
+
+        aboveLayerMapRenderer.setView(GameState.orthographicCamera);
+        aboveLayerMapRenderer.render();
 
         rayHandler.setCombinedMatrix(GameState.orthographicCamera);
         rayHandler.updateAndRender();

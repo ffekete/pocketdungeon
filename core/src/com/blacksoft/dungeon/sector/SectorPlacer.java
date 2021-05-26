@@ -11,6 +11,7 @@ import com.blacksoft.dungeon.Node;
 import com.blacksoft.dungeon.actions.CameraShakeAction;
 import com.blacksoft.dungeon.actions.MoveNodeToCoordAction;
 import com.blacksoft.dungeon.effect.Dust;
+import com.blacksoft.dungeon.objects.action.PlaceObjectsAction;
 import com.blacksoft.dungeon.sector.templates.SectorTemplate;
 import com.blacksoft.screen.action.AddActorAction;
 import com.blacksoft.state.GameState;
@@ -29,6 +30,8 @@ public class SectorPlacer {
         fullSequence.addAction(new DelayAction(delay));
         ParallelAction tileMovementAction = new ParallelAction();
 
+        SequenceAction buildingPlacementAction = new SequenceAction();
+
         for (int i = 0; i < SECTOR_SIZE; i++) {
             for (int j = 0; j < SECTOR_SIZE; j++) {
 
@@ -36,6 +39,11 @@ public class SectorPlacer {
 
                 if (nodes[i][j].object != null) {
                     dungeon.addObject(sx * SECTOR_SIZE + i, sy * SECTOR_SIZE + j, nodes[i][j].object);
+                    buildingPlacementAction.addAction(new PlaceObjectsAction(sx * SECTOR_SIZE + i, sy * SECTOR_SIZE + j));
+                }
+
+                if (nodes[i][j].aboveObject != null) {
+                    dungeon.addAboveObject(sx * SECTOR_SIZE + i, sy * SECTOR_SIZE + j, nodes[i][j].aboveObject);
                 }
 
                 dungeon.nodes[sx * SECTOR_SIZE + i][sy * SECTOR_SIZE + j].compatibility = sectorTemplate.getCompatibility();
@@ -44,20 +52,21 @@ public class SectorPlacer {
             }
         }
 
-        ParallelAction dustAction = new ParallelAction();
+        fullSequence.addAction(buildingPlacementAction);
 
+        // add dust animation
+        ParallelAction dustAction = new ParallelAction();
         fullSequence.addAction(tileMovementAction);
         fullSequence.addAction(dustAction);
 
         dustAction.addAction(new CameraShakeAction(0.1f));
-
-        // add dust animation
 
         RemoveActorAction removeActorAction = addDustAnimation(sx * SECTOR_SIZE * 16 - 16, sy * SECTOR_SIZE * 16, dustAction, false);
         dustAction.addAction(removeActorAction);
 
         RemoveActorAction removeActorAction2 = addDustAnimation(sx * SECTOR_SIZE * 16 + SECTOR_SIZE * 16, sy * SECTOR_SIZE * 16, dustAction, true);
         dustAction.addAction(removeActorAction2);
+
         mainPlacementActon.addAction(fullSequence);
 
     }

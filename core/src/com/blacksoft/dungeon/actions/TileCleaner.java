@@ -2,7 +2,7 @@ package com.blacksoft.dungeon.actions;
 
 import com.blacksoft.dungeon.Dungeon;
 import com.blacksoft.dungeon.Tile;
-import com.blacksoft.dungeon.objects.Gate;
+import com.blacksoft.dungeon.objects.Door;
 
 import static com.blacksoft.state.Config.MAP_HEIGHT;
 import static com.blacksoft.state.Config.MAP_WIDTH;
@@ -45,7 +45,7 @@ public class TileCleaner {
             return false;
         }
 
-        return dungeon.nodes[x][y].tile != Tile.GateClosed && dungeon.nodes[x][y].tile != Tile.GateOpened;
+        return dungeon.nodes[x][y].tile != Tile.DoorClosed && dungeon.nodes[x][y].tile != Tile.DoorOpened;
     }
 
 
@@ -58,7 +58,7 @@ public class TileCleaner {
         }
 
         return dungeon.nodes[x][y].tile != Tile.Rock && dungeon.nodes[x][y].tile != Tile.Torch && !(
-                dungeon.nodes[x][y].tile == Tile.GateClosed && ((Gate) dungeon.nodes[x][y].object).locked);
+                dungeon.nodes[x][y].tile == Tile.DoorClosed && ((Door) dungeon.nodes[x][y].object).locked);
     }
 
     public static boolean isWall(Dungeon dungeon,

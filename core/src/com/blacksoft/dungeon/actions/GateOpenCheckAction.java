@@ -2,20 +2,20 @@ package com.blacksoft.dungeon.actions;
 
 
 import com.badlogic.gdx.scenes.scene2d.Action;
-import com.blacksoft.dungeon.objects.Gate;
+import com.blacksoft.dungeon.objects.Door;
 import com.blacksoft.state.GameState;
 
 public class GateOpenCheckAction extends Action {
 
-    private Gate gate;
+    private Door door;
     private int x;
     private int y;
 
 
-    public GateOpenCheckAction(Gate gate,
+    public GateOpenCheckAction(Door door,
                                int x,
                                int y) {
-        this.gate = gate;
+        this.door = door;
         this.x = x / 16;
         this.y = y / 16;
     }
@@ -23,7 +23,7 @@ public class GateOpenCheckAction extends Action {
     @Override
     public boolean act(float delta) {
 
-        if(gate.locked) {
+        if(door.locked) {
             return false;
         }
 
@@ -36,13 +36,13 @@ public class GateOpenCheckAction extends Action {
                         ((int) creature.getX() / 16 == x && (int) creature.getY() / 16 == y)
                 );
 
-        if (gate.getState()) { // opened
+        if (door.getState()) { // opened
             if (!areThereAnyNearby) {
-                gate.toggleState();
+                door.toggleState();
             }
         } else {
             if (areThereAnyNearby) {
-                gate.toggleState();
+                door.toggleState();
             }
         }
         //System.out.println("elapsed: " + (System.currentTimeMillis() - s));
