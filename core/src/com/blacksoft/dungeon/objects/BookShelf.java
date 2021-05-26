@@ -16,7 +16,7 @@ public class BookShelf extends AbstractMapObject {
     private static TextureRegion textureRegion;
 
     static {
-        textureRegion = new TextureRegion(new Texture(Gdx.files.internal("tile/Library.png")));
+        textureRegion = new TextureRegion(new Texture(Gdx.files.internal("tile/BookShelf.png")));
     }
 
     @Override

@@ -9,7 +9,7 @@ public class TwoWayRoomE extends SectorTemplate {
 
     private Character[][] sectorMap = new Character[][]{
             {'W', 'T', 'W', 'T', 'W'},
-            {'W', '.', '.', '.', 'W'},
+            {'W', '@', '.', '@', 'W'},
             {'W', '.', '.', '.', '.'},
             {'W', '.', '.', '.', 'W'},
             {'W', 'W', 'D', 'W', 'W'}

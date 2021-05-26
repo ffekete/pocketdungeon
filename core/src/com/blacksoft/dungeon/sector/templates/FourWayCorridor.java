@@ -6,11 +6,11 @@ import java.util.List;
 public class FourWayCorridor extends SectorTemplate {
 
     private Character[][] sectorMap = new Character[][]{
-            {'W', 'W', '.', 'W', 'W'},
-            {'W', 'W', '.', 'W', 'W'},
+            {'W', 'W', 'D', 'W', 'W'},
+            {'W', 'T', '.', 'T', 'W'},
             {'.', '.', '.', '.', '.'},
             {'W', 'W', '.', 'W', 'W'},
-            {'W', 'W', '.', 'W', 'W'}
+            {'W', 'W', 'D', 'W', 'W'}
     };
 
     @Override

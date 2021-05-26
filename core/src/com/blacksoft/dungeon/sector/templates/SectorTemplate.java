@@ -35,6 +35,7 @@ public abstract class SectorTemplate {
 
         boolean placeWallObjects = new Random().nextBoolean();
         boolean placeDoor = new Random().nextInt(5) == 0;
+        boolean placeDecorObjects = new Random().nextInt(5) == 0;
 
         switch (c) {
             case 'W':
@@ -47,6 +48,12 @@ public abstract class SectorTemplate {
             case 'D':
                 if(placeDoor) {
                     node.object = new Door();
+                }
+                node.tile = GameState.baseEmptyTile;
+                break;
+            case '@':
+                if(placeDecorObjects) {
+                    node.object = DecorObjects.I.pickOneRandom();
                 }
                 node.tile = GameState.baseEmptyTile;
                 break;
