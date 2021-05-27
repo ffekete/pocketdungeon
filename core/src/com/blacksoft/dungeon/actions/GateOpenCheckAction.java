@@ -2,7 +2,7 @@ package com.blacksoft.dungeon.actions;
 
 
 import com.badlogic.gdx.scenes.scene2d.Action;
-import com.blacksoft.dungeon.objects.Door;
+import com.blacksoft.dungeon.objects.floor.Door;
 import com.blacksoft.state.GameState;
 
 public class GateOpenCheckAction extends Action {

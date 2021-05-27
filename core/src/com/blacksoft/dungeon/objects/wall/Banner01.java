@@ -1,35 +1,29 @@
-package com.blacksoft.dungeon.objects;
+package com.blacksoft.dungeon.objects.wall;
 
-import box2dLight.Light;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
-import com.blacksoft.dungeon.Tile;
-import com.blacksoft.dungeon.lighting.LightSourceFactory;
-import com.blacksoft.state.Config;
-import com.blacksoft.state.GameState;
+import com.blacksoft.dungeon.objects.AbstractMapObject;
 
-public class BookShelf extends AbstractMapObject {
-
-    public int x,y;
+public class Banner01 extends AbstractMapObject {
 
     private static TextureRegion textureRegion;
 
     static {
-        textureRegion = new TextureRegion(new Texture(Gdx.files.internal("tile/BookShelf.png")));
+        textureRegion = new TextureRegion(new Texture(Gdx.files.internal("tile/Banner01.png")));
     }
+
+    public int x, y;
 
     @Override
     public void place(int x,
                       int y) {
-
         this.x = x / 16;
         this.y = y / 16;
     }
 
     @Override
     public void destroy() {
-
     }
 
     @Override

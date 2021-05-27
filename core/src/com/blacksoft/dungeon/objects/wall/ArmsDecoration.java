@@ -1,20 +1,16 @@
-package com.blacksoft.dungeon.objects;
+package com.blacksoft.dungeon.objects.wall;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
-import com.blacksoft.dungeon.Tile;
+import com.blacksoft.dungeon.objects.AbstractMapObject;
 
-public class TreasureChest extends AbstractMapObject {
+public class ArmsDecoration extends AbstractMapObject {
 
-    private static TextureRegion textureRegionClosed;
-    private static TextureRegion textureRegionOpened;
-
-    private boolean opened = false;
+    private static TextureRegion textureRegion;
 
     static {
-        textureRegionClosed = new TextureRegion(new Texture(Gdx.files.internal("tile/TreasureChest.png")));
-        textureRegionOpened = new TextureRegion(new Texture(Gdx.files.internal("tile/TreasureChestOpened.png")));
+        textureRegion = new TextureRegion(new Texture(Gdx.files.internal("tile/ArmsDecoration.png")));
     }
 
     public int x, y;
@@ -22,7 +18,8 @@ public class TreasureChest extends AbstractMapObject {
     @Override
     public void place(int x,
                       int y) {
-
+        this.x = x / 16;
+        this.y = y / 16;
     }
 
     @Override
@@ -41,7 +38,7 @@ public class TreasureChest extends AbstractMapObject {
 
     @Override
     public TextureRegion getTextureRegion() {
-        return opened ? textureRegionOpened : textureRegionClosed;
+        return textureRegion;
     }
 
     @Override

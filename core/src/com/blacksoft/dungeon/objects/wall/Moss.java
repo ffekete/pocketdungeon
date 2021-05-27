@@ -1,15 +1,16 @@
-package com.blacksoft.dungeon.objects;
+package com.blacksoft.dungeon.objects.wall;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
+import com.blacksoft.dungeon.objects.AbstractMapObject;
 
-public class Banner extends AbstractMapObject {
+public class Moss extends AbstractMapObject {
 
     private static TextureRegion textureRegion;
 
     static {
-        textureRegion = new TextureRegion(new Texture(Gdx.files.internal("tile/Banner01.png")));
+        textureRegion = new TextureRegion(new Texture(Gdx.files.internal("tile/Moss.png")));
     }
 
     public int x, y;

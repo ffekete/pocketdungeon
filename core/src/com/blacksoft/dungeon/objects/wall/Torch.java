@@ -1,4 +1,4 @@
-package com.blacksoft.dungeon.objects;
+package com.blacksoft.dungeon.objects.wall;
 
 import box2dLight.Light;
 import com.badlogic.gdx.Gdx;
@@ -9,6 +9,7 @@ import com.badlogic.gdx.utils.Array;
 import com.blacksoft.dungeon.Tile;
 import com.blacksoft.dungeon.lighting.FlickeringLightAction;
 import com.blacksoft.dungeon.lighting.LightSourceFactory;
+import com.blacksoft.dungeon.objects.AbstractMapObject;
 import com.blacksoft.state.Config;
 import com.blacksoft.state.GameState;
 

@@ -1,37 +1,31 @@
-package com.blacksoft.dungeon.objects;
+package com.blacksoft.dungeon.objects.floor;
 
-import box2dLight.Light;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
-import com.blacksoft.dungeon.Tile;
-import com.blacksoft.dungeon.lighting.LightSourceFactory;
-import com.blacksoft.state.Config;
-import com.blacksoft.state.GameState;
+import com.blacksoft.dungeon.objects.AbstractMapObject;
 
-public class Graveyard  extends AbstractMapObject {
-
-    private Light lightSource;
+public class Table extends AbstractMapObject {
 
     public int x,y;
 
     private static TextureRegion textureRegion;
 
     static {
-        textureRegion = new TextureRegion(new Texture(Gdx.files.internal("tile/Grave.png")));
+        textureRegion = new TextureRegion(new Texture(Gdx.files.internal("tile/Table.png")));
     }
 
     @Override
     public void place(int x,
                       int y) {
-        this.lightSource = LightSourceFactory.getGraveyardLightSource(x / 16 * 16 + 8,y / 16 * 16 + 8);
+
         this.x = x / 16;
         this.y = y / 16;
     }
 
     @Override
     public void destroy() {
-        lightSource.dispose();
+
     }
 
     @Override

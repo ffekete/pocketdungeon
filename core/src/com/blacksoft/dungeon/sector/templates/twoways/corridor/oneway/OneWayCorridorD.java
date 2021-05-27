@@ -8,7 +8,7 @@ import java.util.List;
 public class OneWayCorridorD extends SectorTemplate {
 
     private Character[][] sectorMap = new Character[][]{
-            {'W', 'W', 'W', 'W', 'W'},
+            {'W', 'W', 'M', 'W', 'W'},
             {'W', 'W', '.', 'W', 'W'},
             {'W', 'W', '.', 'W', 'W'},
             {'W', 'W', '.', 'W', 'W'},

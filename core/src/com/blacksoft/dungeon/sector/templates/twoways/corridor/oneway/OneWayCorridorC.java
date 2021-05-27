@@ -9,7 +9,7 @@ public class OneWayCorridorC extends SectorTemplate {
 
     private Character[][] sectorMap = new Character[][]{
             {'W', 'W', 'W', 'W', 'W'},
-            {'W', 'W', 'W', 'W', 'W'},
+            {'W', 'M', 'M', 'M', 'W'},
             {'W', '.', '.', '.', '.'},
             {'W', 'W', 'W', 'W', 'W'},
             {'W', 'W', 'W', 'W', 'W'}

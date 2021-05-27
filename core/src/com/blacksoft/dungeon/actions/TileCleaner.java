@@ -2,7 +2,7 @@ package com.blacksoft.dungeon.actions;
 
 import com.blacksoft.dungeon.Dungeon;
 import com.blacksoft.dungeon.Tile;
-import com.blacksoft.dungeon.objects.Door;
+import com.blacksoft.dungeon.objects.floor.Door;
 
 import static com.blacksoft.state.Config.MAP_HEIGHT;
 import static com.blacksoft.state.Config.MAP_WIDTH;

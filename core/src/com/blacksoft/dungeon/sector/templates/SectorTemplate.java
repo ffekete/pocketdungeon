@@ -1,7 +1,11 @@
 package com.blacksoft.dungeon.sector.templates;
 
 import com.blacksoft.dungeon.Node;
-import com.blacksoft.dungeon.objects.*;
+import com.blacksoft.dungeon.objects.floor.Door;
+import com.blacksoft.dungeon.objects.floor.DungeonEntrance;
+import com.blacksoft.dungeon.objects.group.DecorObjects;
+import com.blacksoft.dungeon.objects.group.WallObjects;
+import com.blacksoft.dungeon.objects.wall.Moss;
 import com.blacksoft.state.GameState;
 
 import java.util.List;
@@ -44,6 +48,12 @@ public abstract class SectorTemplate {
             case 'E':
                 node.object = new DungeonEntrance();
                 node.tile = GameState.baseEmptyTile;
+                break;
+            case 'M':
+                if(placeWallObjects) {
+                    node.object = new Moss();
+                }
+                node.tile = GameState.baseWallTile;
                 break;
             case 'D':
                 if(placeDoor) {

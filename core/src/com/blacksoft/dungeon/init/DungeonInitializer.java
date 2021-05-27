@@ -3,7 +3,6 @@ package com.blacksoft.dungeon.init;
 import com.badlogic.gdx.scenes.scene2d.actions.ParallelAction;
 import com.blacksoft.dungeon.Dungeon;
 import com.blacksoft.dungeon.NodeTraverser;
-import com.blacksoft.dungeon.objects.action.PlaceObjectsAction;
 import com.blacksoft.dungeon.sector.SectorPlacer;
 import com.blacksoft.dungeon.sector.SectorSelector;
 import com.blacksoft.dungeon.sector.templates.Entrance;

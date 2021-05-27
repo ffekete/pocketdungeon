@@ -28,6 +28,8 @@ public class Dungeon {
     public static final String DUNGEON_LAYER = "dungeon";
     public static final String ABOVE_LAYER = "dungeonAbove";
 
+    public static final TextureRegion frameTextureRegion = new TextureRegion(new Texture(Gdx.files.internal("tile/DungeonMapFrame.png")));
+
     private static final Tile DEFAULT_TILE = Tile.Rock;
 
     public Node[][] nodes = new Node[MAP_WIDTH][MAP_HEIGHT];
@@ -81,8 +83,15 @@ public class Dungeon {
         nodes[x][y].object = object;
     }
 
+    public void addStaticTile(int x, int y, TextureRegion textureRegion) {
+        TiledMapTileLayer layer = (TiledMapTileLayer) tiledMap.getLayers().get(ABOVE_LAYER);
+        TiledMapTileLayer.Cell cell = new TiledMapTileLayer.Cell();
+        layer.setCell(x,y, cell);
+        cell.setTile(new StaticTiledMapTile(textureRegion));
+    }
+
     private TiledMapTileLayer addLayer(String name) {
-        TiledMapTileLayer layer = new TiledMapTileLayer(MAP_WIDTH, MAP_HEIGHT, TEXTURE_SIZE, TEXTURE_SIZE);
+        TiledMapTileLayer layer = new TiledMapTileLayer(MAP_WIDTH + 1, MAP_HEIGHT + 1, TEXTURE_SIZE, TEXTURE_SIZE);
         layer.setName(name);
         tiledMap.getLayers().add(layer);
         return layer;

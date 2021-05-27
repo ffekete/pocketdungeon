@@ -1,4 +1,7 @@
-package com.blacksoft.dungeon.objects;
+package com.blacksoft.dungeon.objects.group;
+
+import com.blacksoft.dungeon.objects.*;
+import com.blacksoft.dungeon.objects.wall.*;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -18,7 +21,10 @@ public class WallObjects {
 
         objects.add(() -> new ArmsDecoration());
 
-        objects.add(() -> new Banner());
+        objects.add(() -> new Moss());
+
+        objects.add(() -> new Banner01());
+        objects.add(() -> new Banner02());
     }
 
     public AbstractMapObject pickOneRandom() {

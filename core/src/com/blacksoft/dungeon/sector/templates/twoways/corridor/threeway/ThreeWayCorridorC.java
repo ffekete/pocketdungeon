@@ -9,7 +9,7 @@ public class ThreeWayCorridorC extends SectorTemplate {
 
     private Character[][] sectorMap = new Character[][]{
             {'W', 'W', 'W', 'W', 'W'},
-            {'W', 'T', 'W', 'T', 'W'},
+            {'W', 'T', 'M', 'T', 'W'},
             {'.', '.', '.', '.', '.'},
             {'W', 'W', 'D', 'W', 'W'},
             {'W', 'W', '.', 'W', 'W'}

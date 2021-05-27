@@ -1,9 +1,10 @@
-package com.blacksoft.dungeon.objects;
+package com.blacksoft.dungeon.objects.floor;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.blacksoft.dungeon.Tile;
+import com.blacksoft.dungeon.objects.AbstractMapObject;
 
 public class DoorOpenedAboveObject extends AbstractMapObject {
 

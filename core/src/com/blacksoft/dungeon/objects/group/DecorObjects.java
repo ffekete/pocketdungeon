@@ -1,4 +1,7 @@
-package com.blacksoft.dungeon.objects;
+package com.blacksoft.dungeon.objects.group;
+
+import com.blacksoft.dungeon.objects.*;
+import com.blacksoft.dungeon.objects.floor.*;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -17,7 +20,8 @@ public class DecorObjects {
         objects.add(() -> new BookShelf());
 
         objects.add(() -> new Graveyard());
-        objects.add(() -> new Graveyard());
+
+        objects.add(() -> new Table());
 
         objects.add(() -> new TreasureChest());
         objects.add(() -> new TreasureChest());

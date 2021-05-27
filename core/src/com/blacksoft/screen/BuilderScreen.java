@@ -20,6 +20,7 @@ import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.badlogic.gdx.utils.viewport.FitViewport;
 import com.blacksoft.NewGameInitializer;
 import com.blacksoft.screen.action.MoveLightToMouseAction;
+import com.blacksoft.screen.render.FrameRenderer;
 import com.blacksoft.screen.render.OrthogonalAboveTilesTiledMapRenderer;
 import com.blacksoft.screen.render.OrthogonalTiledMapRenderer;
 import com.blacksoft.state.GameState;
@@ -175,6 +176,10 @@ public class BuilderScreen extends ScreenAdapter {
 //            }
 //        }
 //        shapeRenderer.end();
+
+        spriteBatch.begin();
+        FrameRenderer.I.render(spriteBatch);
+        spriteBatch.end();
 
         GameState.uiViewport.apply();
         //GameState.orthographicUICamera.update();
