@@ -1,11 +1,10 @@
 package com.blacksoft.dungeon.sector.templates;
 
 import com.blacksoft.dungeon.Node;
-import com.blacksoft.dungeon.objects.floor.Cross;
-import com.blacksoft.dungeon.objects.floor.Door;
-import com.blacksoft.dungeon.objects.floor.DungeonEntrance;
-import com.blacksoft.dungeon.objects.floor.Graveyard;
+import com.blacksoft.dungeon.objects.floor.*;
+import com.blacksoft.dungeon.objects.group.Carpets;
 import com.blacksoft.dungeon.objects.group.DecorObjects;
+import com.blacksoft.dungeon.objects.group.GroundDecorObjects;
 import com.blacksoft.dungeon.objects.group.WallObjects;
 import com.blacksoft.dungeon.objects.wall.Moss;
 import com.blacksoft.state.GameState;
@@ -47,8 +46,26 @@ public abstract class SectorTemplate {
             case 'W':
                 node.tile = GameState.baseWallTile;
                 break;
+            case ',':
+                if (new Random().nextInt(5) == 0) {
+                    node.object = GroundDecorObjects.I.pickOneRandom();
+                }
+                node.tile = GameState.baseEmptyTile;
+                break;
+            case '#':
+                node.object = Carpets.I.pickOneRandom();
+                node.tile = GameState.baseEmptyTile;
+                break;
             case 'g':
                 node.object = new Graveyard();
+                node.tile = GameState.baseEmptyTile;
+                break;
+            case 'b':
+                node.object = new BookShelf();
+                node.tile = GameState.baseEmptyTile;
+                break;
+            case 't':
+                node.object = new Table();
                 node.tile = GameState.baseEmptyTile;
                 break;
             case '+':
@@ -60,25 +77,25 @@ public abstract class SectorTemplate {
                 node.tile = GameState.baseEmptyTile;
                 break;
             case 'M':
-                if(placeWallObjects) {
+                if (placeWallObjects) {
                     node.object = new Moss();
                 }
                 node.tile = GameState.baseWallTile;
                 break;
             case 'D':
-                if(placeDoor) {
+                if (placeDoor) {
                     node.object = new Door();
                 }
                 node.tile = GameState.baseEmptyTile;
                 break;
             case '@':
-                if(placeDecorObjects) {
+                if (placeDecorObjects) {
                     node.object = DecorObjects.I.pickOneRandom();
                 }
                 node.tile = GameState.baseEmptyTile;
                 break;
             case 'T':
-                if(placeWallObjects) {
+                if (placeWallObjects) {
                     node.object = WallObjects.I.pickOneRandom();
                 }
                 node.tile = GameState.baseWallTile;

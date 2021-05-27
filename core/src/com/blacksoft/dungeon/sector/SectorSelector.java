@@ -2,25 +2,24 @@ package com.blacksoft.dungeon.sector;
 
 import com.blacksoft.dungeon.sector.templates.FourWayCorridor;
 import com.blacksoft.dungeon.sector.templates.SectorTemplate;
-import com.blacksoft.dungeon.sector.templates.twoways.corridor.oneway.OneWayCorridorA;
-import com.blacksoft.dungeon.sector.templates.twoways.corridor.oneway.OneWayCorridorB;
-import com.blacksoft.dungeon.sector.templates.twoways.corridor.oneway.OneWayCorridorC;
-import com.blacksoft.dungeon.sector.templates.twoways.corridor.oneway.OneWayCorridorD;
-import com.blacksoft.dungeon.sector.templates.twoways.corridor.threeway.ThreeWayCorridorA;
-import com.blacksoft.dungeon.sector.templates.twoways.corridor.threeway.ThreeWayCorridorB;
-import com.blacksoft.dungeon.sector.templates.twoways.corridor.threeway.ThreeWayCorridorC;
-import com.blacksoft.dungeon.sector.templates.twoways.corridor.threeway.ThreeWayCorridorD;
-import com.blacksoft.dungeon.sector.templates.twoways.corridor.twoway.*;
-import com.blacksoft.dungeon.sector.templates.twoways.room.SecretRoom;
-import com.blacksoft.dungeon.sector.templates.twoways.room.oneway.*;
-import com.blacksoft.dungeon.sector.templates.twoways.room.threeway.ThreeWayRoomA;
-import com.blacksoft.dungeon.sector.templates.twoways.room.threeway.ThreeWayRoomB;
-import com.blacksoft.dungeon.sector.templates.twoways.room.threeway.ThreeWayRoomC;
-import com.blacksoft.dungeon.sector.templates.twoways.room.threeway.ThreeWayRoomD;
-import com.blacksoft.dungeon.sector.templates.twoways.room.twoway.*;
+import com.blacksoft.dungeon.sector.templates.corridor.oneway.OneWayCorridorA;
+import com.blacksoft.dungeon.sector.templates.corridor.oneway.OneWayCorridorB;
+import com.blacksoft.dungeon.sector.templates.corridor.oneway.OneWayCorridorC;
+import com.blacksoft.dungeon.sector.templates.corridor.oneway.OneWayCorridorD;
+import com.blacksoft.dungeon.sector.templates.corridor.threeway.ThreeWayCorridorA;
+import com.blacksoft.dungeon.sector.templates.corridor.threeway.ThreeWayCorridorB;
+import com.blacksoft.dungeon.sector.templates.corridor.threeway.ThreeWayCorridorC;
+import com.blacksoft.dungeon.sector.templates.corridor.threeway.ThreeWayCorridorD;
+import com.blacksoft.dungeon.sector.templates.corridor.twoway.*;
+import com.blacksoft.dungeon.sector.templates.room.SecretRoom;
+import com.blacksoft.dungeon.sector.templates.room.oneway.*;
+import com.blacksoft.dungeon.sector.templates.room.threeway.ThreeWayRoomA;
+import com.blacksoft.dungeon.sector.templates.room.threeway.ThreeWayRoomB;
+import com.blacksoft.dungeon.sector.templates.room.threeway.ThreeWayRoomC;
+import com.blacksoft.dungeon.sector.templates.room.threeway.ThreeWayRoomD;
+import com.blacksoft.dungeon.sector.templates.room.twoway.*;
 import com.blacksoft.state.GameState;
 
-import java.lang.reflect.Array;
 import java.util.*;
 import java.util.stream.Collectors;
 
@@ -67,6 +66,11 @@ public class SectorSelector {
         sectors.add(new CryptB());
         sectors.add(new CryptC());
         sectors.add(new CryptD());
+
+        sectors.add(new LibraryA());
+        sectors.add(new LibraryB());
+        sectors.add(new LibraryC());
+        sectors.add(new LibraryD());
 
         sectors.add(new FourWayCorridor());
     }
