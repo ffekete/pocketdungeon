@@ -57,7 +57,7 @@ public class TileCleaner {
             return false;
         }
 
-        return dungeon.nodes[x][y].tile != Tile.Rock && dungeon.nodes[x][y].tile != Tile.Torch && !(
+        return !dungeon.nodes[x][y].tile.isSolid() && !(
                 dungeon.nodes[x][y].tile == Tile.DoorClosed && ((Door) dungeon.nodes[x][y].object).locked);
     }
 

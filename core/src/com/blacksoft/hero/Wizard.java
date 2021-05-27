@@ -31,7 +31,7 @@ public class Wizard extends Hero {
 
     @Override
     public float getSpeed() {
-        return 1.5f;
+        return 1f;
     }
 
     @Override

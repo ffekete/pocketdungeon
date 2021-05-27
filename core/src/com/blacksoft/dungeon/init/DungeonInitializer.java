@@ -1,6 +1,7 @@
 package com.blacksoft.dungeon.init;
 
 import com.badlogic.gdx.scenes.scene2d.actions.ParallelAction;
+import com.badlogic.gdx.scenes.scene2d.actions.SequenceAction;
 import com.blacksoft.dungeon.Dungeon;
 import com.blacksoft.dungeon.NodeTraverser;
 import com.blacksoft.dungeon.sector.SectorPlacer;
@@ -12,7 +13,7 @@ import com.blacksoft.state.GameState;
 
 public class DungeonInitializer {
 
-    public static void init(Dungeon dungeon) {
+    public static void init(Dungeon dungeon, SequenceAction sequenceAction) {
 
         SectorSelector sectorSelector = new SectorSelector();
 
@@ -40,6 +41,6 @@ public class DungeonInitializer {
 
         NodeTraverser.countRooms();
 
-        GameState.stage.addAction(sectorPlacementAction);
+        sequenceAction.addAction(sectorPlacementAction);
     }
 }

@@ -3,6 +3,7 @@ package com.blacksoft.hero.action;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.scenes.scene2d.actions.MoveToAction;
 import com.blacksoft.creature.Creature;
+import com.blacksoft.creature.State;
 import com.blacksoft.creature.action.ResetCreatureActionsAction;
 import com.blacksoft.dungeon.actions.TileCleaner;
 import com.blacksoft.hero.Party;
@@ -26,12 +27,14 @@ public class MoveAndExplorePartyToTileAction extends MoveToAction {
     @Override
     protected void begin() {
         super.begin();
+        party.state = State.Walk;
     }
 
     @Override
     protected void end() {
         super.end();
         this.party.explored[(int)getX() / 16][(int) getY() / 16] = true;
+        party.state = State.Idle;
     }
 
     @Override
@@ -52,6 +55,7 @@ public class MoveAndExplorePartyToTileAction extends MoveToAction {
         if(!TileCleaner.canTraverse(GameState.dungeon, (int)creature.targetNode.x,(int)creature.targetNode.y)) {
             creature.setPosition(previousNode.x * 16, previousNode.y * 16);
             creature.addAction(new ResetPartyActionsAction(creature));
+            party.state = State.Idle;
             return true;
         }
 

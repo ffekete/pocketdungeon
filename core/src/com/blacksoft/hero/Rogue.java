@@ -31,7 +31,7 @@ public class Rogue extends Hero {
 
     @Override
     public float getSpeed() {
-        return 1f;
+        return 0.9f;
     }
 
     @Override

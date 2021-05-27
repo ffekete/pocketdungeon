@@ -10,7 +10,7 @@ public class DesktopLauncher {
         LwjglApplicationConfiguration config = new LwjglApplicationConfiguration();
         config.width = Config.SCREEN_WIDTH;
         config.height = Config.SCREEN_HEIGHT;
-        config.fullscreen = true;
+        //config.fullscreen = true;
         new LwjglApplication(new DungeonBuilder(), config);
     }
 }

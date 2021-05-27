@@ -41,8 +41,7 @@ public class BattleFinishedCheckingAction extends Action {
             GameState.uiStage.addActor(UIFactory.I.addMovingLabelShadow("BUILD PHASE"));
             GameState.uiStage.addActor(UIFactory.I.addMovingLabel("BUILD PHASE"));
 
-            GameState.gamePhase = GamePhase.Build;
-            GameState.userAction = UserAction.Clean;
+            GameState.userAction = UserAction.Idle;
 
             UIState.battleScreen.remove();
             UIState.battleSelectionCursor.setVisible(false);

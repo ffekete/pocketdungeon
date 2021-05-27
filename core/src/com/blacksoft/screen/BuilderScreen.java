@@ -6,7 +6,6 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.InputMultiplexer;
 import com.badlogic.gdx.ScreenAdapter;
-import com.badlogic.gdx.ai.pfa.Connection;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
@@ -20,7 +19,6 @@ import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.badlogic.gdx.utils.viewport.FitViewport;
 import com.blacksoft.NewGameInitializer;
-import com.blacksoft.dungeon.Node;
 import com.blacksoft.screen.action.MoveLightToMouseAction;
 import com.blacksoft.screen.render.FrameRenderer;
 import com.blacksoft.screen.render.OrthogonalAboveTilesTiledMapRenderer;
@@ -81,7 +79,6 @@ public class BuilderScreen extends ScreenAdapter {
         // MISC
         GameState.tileMarker = new TileMarker();
         GameState.tileMarker.setVisible(false);
-        GameState.userAction = UserAction.Clean;
 
         // INPUT
         GameState.stage.addListener(new ClickListener(Input.Buttons.RIGHT) {
