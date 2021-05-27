@@ -19,8 +19,6 @@ public class DecorObjects {
         objects.add(() -> new BookShelf());
         objects.add(() -> new BookShelf());
 
-        objects.add(() -> new Graveyard());
-
         objects.add(() -> new Table());
 
         objects.add(() -> new TreasureChest());

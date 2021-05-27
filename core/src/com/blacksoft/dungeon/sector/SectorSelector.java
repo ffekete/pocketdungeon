@@ -12,10 +12,7 @@ import com.blacksoft.dungeon.sector.templates.twoways.corridor.threeway.ThreeWay
 import com.blacksoft.dungeon.sector.templates.twoways.corridor.threeway.ThreeWayCorridorD;
 import com.blacksoft.dungeon.sector.templates.twoways.corridor.twoway.*;
 import com.blacksoft.dungeon.sector.templates.twoways.room.SecretRoom;
-import com.blacksoft.dungeon.sector.templates.twoways.room.oneway.OneWayRoomA;
-import com.blacksoft.dungeon.sector.templates.twoways.room.oneway.OneWayRoomB;
-import com.blacksoft.dungeon.sector.templates.twoways.room.oneway.OneWayRoomC;
-import com.blacksoft.dungeon.sector.templates.twoways.room.oneway.OneWayRoomD;
+import com.blacksoft.dungeon.sector.templates.twoways.room.oneway.*;
 import com.blacksoft.dungeon.sector.templates.twoways.room.threeway.ThreeWayRoomA;
 import com.blacksoft.dungeon.sector.templates.twoways.room.threeway.ThreeWayRoomB;
 import com.blacksoft.dungeon.sector.templates.twoways.room.threeway.ThreeWayRoomC;
@@ -65,6 +62,11 @@ public class SectorSelector {
         sectors.add(new OneWayRoomB());
         sectors.add(new OneWayRoomC());
         sectors.add(new OneWayRoomD());
+
+        sectors.add(new CryptA());
+        sectors.add(new CryptB());
+        sectors.add(new CryptC());
+        sectors.add(new CryptD());
 
         sectors.add(new FourWayCorridor());
     }
