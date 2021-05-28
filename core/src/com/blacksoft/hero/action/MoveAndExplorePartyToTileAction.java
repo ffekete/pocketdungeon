@@ -1,5 +1,6 @@
 package com.blacksoft.hero.action;
 
+import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.scenes.scene2d.actions.MoveToAction;
 import com.blacksoft.creature.Creature;
@@ -7,6 +8,7 @@ import com.blacksoft.creature.State;
 import com.blacksoft.creature.action.ResetCreatureActionsAction;
 import com.blacksoft.dungeon.actions.TileCleaner;
 import com.blacksoft.hero.Party;
+import com.blacksoft.screen.input.KeyConfig;
 import com.blacksoft.state.GameState;
 
 public class MoveAndExplorePartyToTileAction extends MoveToAction {
@@ -33,14 +35,21 @@ public class MoveAndExplorePartyToTileAction extends MoveToAction {
     @Override
     protected void end() {
         super.end();
-        this.party.explored[(int)getX() / 16][(int) getY() / 16] = true;
-        party.state = State.Idle;
+        this.party.explored[(int) getX() / 16][(int) getY() / 16] = true;
+        if ((Gdx.input.isKeyPressed(KeyConfig.LEFT)
+                || Gdx.input.isKeyPressed(KeyConfig.RIGHT)
+                || Gdx.input.isKeyPressed(KeyConfig.UP)
+                || Gdx.input.isKeyPressed(KeyConfig.DOWN))) {
+            party.state = State.WalkContinue;
+        } else {
+            party.state = State.Idle;
+        }
     }
 
     @Override
     public boolean act(float delta) {
 
-        if(GameState.paused) {
+        if (GameState.paused) {
             return false;
         }
 
@@ -52,7 +61,7 @@ public class MoveAndExplorePartyToTileAction extends MoveToAction {
             creature.targetNode = new Vector2(targetNode.x / 16, targetNode.y / 16);
         }
 
-        if(!TileCleaner.canTraverse(GameState.dungeon, (int)creature.targetNode.x,(int)creature.targetNode.y)) {
+        if (!TileCleaner.canTraverse(GameState.dungeon, (int) creature.targetNode.x, (int) creature.targetNode.y)) {
             creature.setPosition(previousNode.x * 16, previousNode.y * 16);
             creature.addAction(new ResetPartyActionsAction(creature));
             party.state = State.Idle;

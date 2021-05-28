@@ -6,32 +6,40 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
+import com.blacksoft.creature.Direction;
+import com.blacksoft.creature.State;
 import com.blacksoft.state.Config;
 
 import static com.blacksoft.state.Config.TEXTURE_SIZE;
 
 public class Wizard extends Hero {
 
-    public static Texture texture;
+    public static Texture walkingAnimationTexture;
+    public static Texture walkingUpAnimationTexture;
+    public static Texture idleAnimationTexture;
 
-    private final Animation<TextureRegion> animation;
-
-    private float duration = 0f;
+    private final Animation<TextureRegion> walkAnimation;
+    private final Animation<TextureRegion> walkUpAnimation;
+    private final Animation<TextureRegion> idleAnimation;
 
     static {
-        texture = new Texture("hero/Wizard.png");
+        walkingAnimationTexture = new Texture("hero/Wizard_walk_right.png");
+        walkingUpAnimationTexture = new Texture("hero/Wizard_walk_up.png");
+        idleAnimationTexture = new Texture("hero/Wizard_idle.png");
     }
 
     public Wizard(Party party) {
         super(party);
         this.hp = getMaxHp();
         this.mp = getMaxMp();
-        animation = new Animation<>(0.6f, TextureRegion.split(texture, TEXTURE_SIZE, TEXTURE_SIZE)[0]);
+        walkAnimation = new Animation<>(0.175f, TextureRegion.split(walkingAnimationTexture, TEXTURE_SIZE, TEXTURE_SIZE)[0]);
+        walkUpAnimation = new Animation<>(0.175f, TextureRegion.split(walkingUpAnimationTexture, TEXTURE_SIZE, TEXTURE_SIZE)[0]);
+        idleAnimation = new Animation<>(0.2f, TextureRegion.split(idleAnimationTexture, TEXTURE_SIZE, TEXTURE_SIZE)[0]);
     }
 
     @Override
     public float getSpeed() {
-        return 1f;
+        return 0.6f;
     }
 
     @Override
@@ -41,7 +49,26 @@ public class Wizard extends Hero {
         Color color = getColor();
         batch.setColor(color.r, color.g, color.b, color.a * parentAlpha);
 
-        batch.draw(animation.getKeyFrame(duration, true), getX(), getY());
+
+        TextureRegion textureRegion;
+        if(state == State.Idle) {
+            textureRegion = idleAnimation.getKeyFrame(duration, true);
+        } else {
+            if(direction == Direction.Left || direction == Direction.Right) {
+                textureRegion = walkAnimation.getKeyFrame(duration, true);
+            } else {
+                textureRegion = walkUpAnimation.getKeyFrame(duration, true);
+            }
+        }
+
+        if(direction == Direction.Left && !textureRegion.isFlipX()) {
+            textureRegion.flip(true, false);
+        } else if (direction == Direction.Right && textureRegion.isFlipX()){
+            textureRegion.flip(true, false);
+        }
+
+        batch.draw(textureRegion, getX(), getY() + 4f);
+
         batch.setColor(color);
     }
 
@@ -57,7 +84,7 @@ public class Wizard extends Hero {
 
     @Override
     public Animation<TextureRegion> getAnimation() {
-        return this.animation;
+        return this.walkAnimation;
     }
 
     @Override

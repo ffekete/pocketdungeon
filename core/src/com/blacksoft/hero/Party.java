@@ -5,6 +5,7 @@ import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.actions.SequenceAction;
 import com.blacksoft.creature.Creature;
+import com.blacksoft.creature.Direction;
 import com.blacksoft.creature.State;
 import com.blacksoft.dungeon.Node;
 import com.blacksoft.state.Config;
@@ -26,6 +27,7 @@ public class Party extends Actor {
     public Vector2 targetNode;
 
     public State state = State.Idle;
+    public Direction direction = Direction.Right;
 
     @Override
     public void act(float delta) {
@@ -34,6 +36,8 @@ public class Party extends Actor {
                 .forEach(hero -> {
                     hero.setX(getX());
                     hero.setY(getY());
+                    hero.setState(state);
+                    hero.direction = direction;
                 });
     }
 

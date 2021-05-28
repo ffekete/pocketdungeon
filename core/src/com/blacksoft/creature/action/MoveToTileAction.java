@@ -24,13 +24,13 @@ public class MoveToTileAction extends MoveToAction {
     @Override
     protected void begin() {
         super.begin();
-        ((Creature) actor).state = State.Walk;
+        ((Creature) actor).setState(State.Walk);
     }
 
     @Override
     protected void end() {
         super.end();
-        ((Creature) actor).state = State.Idle;
+        ((Creature) actor).setState(State.Idle);
     }
 
     @Override

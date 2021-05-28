@@ -26,7 +26,8 @@ public abstract class Creature extends Actor {
     public int hp;
     public int mp;
 
-    public State state = State.Idle;
+    protected State state = State.Idle;
+    protected float duration = 0f;
 
     // modifiers
     private List<Modifier> modifiers = new ArrayList<>();
@@ -118,5 +119,14 @@ public abstract class Creature extends Actor {
             }
         }
         modifiers.add(modifier);
+    }
+
+    public void setState(State state) {
+        this.state = state;
+        //this.duration = 0f;
+    }
+
+    public State getState() {
+        return state;
     }
 }

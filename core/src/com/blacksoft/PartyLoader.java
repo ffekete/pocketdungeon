@@ -3,6 +3,7 @@ package com.blacksoft;
 import com.badlogic.gdx.scenes.scene2d.actions.Actions;
 import com.badlogic.gdx.scenes.scene2d.actions.SequenceAction;
 import com.blacksoft.battle.action.BattleInitiationAction;
+import com.blacksoft.creature.Skeleton;
 import com.blacksoft.hero.Party;
 import com.blacksoft.hero.Rogue;
 import com.blacksoft.hero.Wizard;
@@ -17,8 +18,7 @@ public class PartyLoader {
         Party party = new Party();
         GameState.party = party;
 
-        Wizard wizard = new Wizard(party);
-        party.heroes.add(wizard);
+        party.heroes.add(new Wizard(party));
         party.heroes.add(new Rogue(party));
 
         party.setX(Config.DUNGEON_ENTRANCE_LOCATION.x * 16);
