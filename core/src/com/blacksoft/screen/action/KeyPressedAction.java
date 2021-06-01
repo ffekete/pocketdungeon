@@ -28,42 +28,7 @@ public class KeyPressedAction extends Action {
                     GameState.party.addAction(moveToTileAction);
                 } else {
                     party.state = State.Idle;
-                }
-            }
-        }
-
-        if (Gdx.input.isKeyPressed(KeyConfig.DOWN)) {
-            if (party.state == State.Idle || party.state == State.WalkContinue) {
-                party.direction = Direction.Left;
-                if (TileTypeDetector.canTraverse(GameState.dungeon, (int) party.getX() / 16, (int) party.getY() / 16 - 1)) {
-                    MoveAndExplorePartyToTileAction moveToTileAction = new MoveAndExplorePartyToTileAction(party, new Vector2(party.getX(), party.getY() - 16));
-                    GameState.party.addAction(moveToTileAction);
-                } else {
-                    party.state = State.Idle;
-                }
-            }
-        }
-
-        if (Gdx.input.isKeyPressed(KeyConfig.RIGHT)) {
-            if (party.state == State.Idle || party.state == State.WalkContinue) {
-                party.direction = Direction.Right;
-                if (TileTypeDetector.canTraverse(GameState.dungeon, (int) party.getX() / 16 + 1, (int) party.getY() / 16)) {
-                    MoveAndExplorePartyToTileAction moveToTileAction = new MoveAndExplorePartyToTileAction(party, new Vector2(party.getX() + 16, party.getY()));
-                    GameState.party.addAction(moveToTileAction);
-                } else {
-                    party.state = State.Idle;
-                }
-            }
-        }
-
-        if (Gdx.input.isKeyPressed(KeyConfig.UP)) {
-            if (party.state == State.Idle || party.state == State.WalkContinue) {
-                party.direction = Direction.Up;
-                if (TileTypeDetector.canTraverse(GameState.dungeon, (int) party.getX() / 16, (int) party.getY() / 16 + 1)) {
-                    MoveAndExplorePartyToTileAction moveToTileAction = new MoveAndExplorePartyToTileAction(party, new Vector2(party.getX(), party.getY() + 16));
-                    GameState.party.addAction(moveToTileAction);
-                } else {
-                    party.state = State.Idle;
+                    party.direction = party.direction == Direction.Up || party.direction == Direction.Down ? Direction.Left : party.direction;
                 }
             }
         }
@@ -76,6 +41,46 @@ public class KeyPressedAction extends Action {
                     GameState.party.addAction(moveToTileAction);
                 } else {
                     party.state = State.Idle;
+                    party.direction = party.direction == Direction.Up || party.direction == Direction.Down ? Direction.Left : party.direction;
+                }
+            }
+        }
+
+        if (Gdx.input.isKeyPressed(KeyConfig.RIGHT)) {
+            if (party.state == State.Idle || party.state == State.WalkContinue) {
+                party.direction = Direction.Right;
+                if (TileTypeDetector.canTraverse(GameState.dungeon, (int) party.getX() / 16 + 1, (int) party.getY() / 16)) {
+                    MoveAndExplorePartyToTileAction moveToTileAction = new MoveAndExplorePartyToTileAction(party, new Vector2(party.getX() + 16, party.getY()));
+                    GameState.party.addAction(moveToTileAction);
+                } else {
+                    party.state = State.Idle;
+                    party.direction = party.direction == Direction.Up || party.direction == Direction.Down ? Direction.Left : party.direction;
+                }
+            }
+        }
+
+        if (Gdx.input.isKeyPressed(KeyConfig.UP)) {
+            if (party.state == State.Idle || party.state == State.WalkContinue) {
+                party.direction = Direction.Up;
+                if (TileTypeDetector.canTraverse(GameState.dungeon, (int) party.getX() / 16, (int) party.getY() / 16 + 1)) {
+                    MoveAndExplorePartyToTileAction moveToTileAction = new MoveAndExplorePartyToTileAction(party, new Vector2(party.getX(), party.getY() + 16));
+                    GameState.party.addAction(moveToTileAction);
+                } else {
+                    party.state = State.Idle;
+                    party.direction = party.direction == Direction.Up || party.direction == Direction.Down ? Direction.Left : party.direction;
+                }
+            }
+        }
+
+        if (Gdx.input.isKeyPressed(KeyConfig.DOWN)) {
+            if (party.state == State.Idle || party.state == State.WalkContinue) {
+                party.direction = Direction.Down;
+                if (TileTypeDetector.canTraverse(GameState.dungeon, (int) party.getX() / 16, (int) party.getY() / 16 - 1)) {
+                    MoveAndExplorePartyToTileAction moveToTileAction = new MoveAndExplorePartyToTileAction(party, new Vector2(party.getX(), party.getY() - 16));
+                    GameState.party.addAction(moveToTileAction);
+                } else {
+                    party.state = State.Idle;
+                    party.direction = party.direction == Direction.Up || party.direction == Direction.Down ? Direction.Left : party.direction;
                 }
             }
         }

@@ -11,7 +11,7 @@ import com.blacksoft.state.GameState;
 
 public class Door extends AbstractMapObject {
 
-    private boolean opened = false;
+    public boolean opened = false;
     public int x, y;
     public boolean locked = false;
 
@@ -19,14 +19,14 @@ public class Door extends AbstractMapObject {
     private static TextureRegion closedTextureRegion;
 
     static {
-        openedTextureRegion = new TextureRegion(new Texture(Gdx.files.internal("tile/DoorClosed.png")));
+        openedTextureRegion = new TextureRegion(new Texture(Gdx.files.internal("tile/Transparent.png")));
         closedTextureRegion = new TextureRegion(new Texture(Gdx.files.internal("tile/DoorClosed.png")));
     }
 
     @Override
     public void place(int x,
                       int y) {
-
+        super.blocking = false;
     }
 
     @Override
@@ -40,7 +40,7 @@ public class Door extends AbstractMapObject {
 
     @Override
     public void toggleState() {
-
+        this.opened = !this.opened;
     }
 
     @Override

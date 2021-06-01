@@ -11,7 +11,6 @@ import com.blacksoft.dungeon.objects.AbstractMapObject;
 public class DungeonEntrance extends AbstractMapObject {
 
     public int x,y;
-    public int level = 1;
     private Light lightSource;
 
     private static TextureRegion textureRegion;
@@ -26,6 +25,7 @@ public class DungeonEntrance extends AbstractMapObject {
         this.lightSource = LightSourceFactory.getDungeonEntranceLightSource(x / 16 * 16 + 8,y / 16 * 16 + 8);
         this.x = x / 16;
         this.y = y / 16;
+        super.blocking = false;
     }
 
     @Override

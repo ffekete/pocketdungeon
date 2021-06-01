@@ -85,6 +85,7 @@ public abstract class SectorTemplate {
             case 'D':
                 if (placeDoor) {
                     node.object = new Door();
+                    node.aboveObject = new DoorAbove();
                 }
                 node.tile = GameState.baseEmptyTile;
                 break;

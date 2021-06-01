@@ -18,7 +18,7 @@ public class Gutter01 extends AbstractMapObject {
     @Override
     public void place(int x,
                       int y) {
-
+        super.blocking = false;
     }
 
     @Override
