@@ -18,8 +18,6 @@ import static com.blacksoft.state.Config.*;
 public class DungeonFowLayer {
 
     public static TextureRegion unexploredAreaCoverTexture = new TextureRegion(new Texture(Gdx.files.internal("tile/UnexploredArea.png")));
-    public static Animation<TextureRegion> unexploredAreaCoverAnimation = new Animation<TextureRegion>(0.3f, TextureRegion.split(unexploredAreaCoverTexture.getTexture(), TEXTURE_SIZE, TEXTURE_SIZE)[0]);
-
 
     public boolean[][] explored = new boolean[Config.MAP_WIDTH][Config.MAP_HEIGHT];
 
@@ -30,12 +28,7 @@ public class DungeonFowLayer {
                 TiledMapTileLayer tiledMapTileLayer = (TiledMapTileLayer) GameState.dungeon.tiledMap.getLayers().get(Dungeon.FOW_LAYER);
                 TiledMapTileLayer.Cell cell = new TiledMapTileLayer.Cell();
 
-                Array<StaticTiledMapTile> tiles = new Array<>();
-                for (TextureRegion textureRegion: unexploredAreaCoverAnimation.getKeyFrames()) {
-                    tiles.add(new StaticTiledMapTile(textureRegion));
-                }
-
-                cell.setTile(new AnimatedTiledMapTile(0.3f, tiles));
+                cell.setTile(new FowTileMapTile(unexploredAreaCoverTexture, i, j));
                 tiledMapTileLayer.setCell(i,j, cell);
             }
         }
