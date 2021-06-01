@@ -1,6 +1,8 @@
 package com.blacksoft;
 
+import com.badlogic.gdx.scenes.scene2d.actions.ParallelAction;
 import com.badlogic.gdx.scenes.scene2d.actions.SequenceAction;
+import com.blacksoft.dungeon.fow.action.UpdateFowAction;
 import com.blacksoft.dungeon.generator.CastleDungeonGenerator;
 import com.blacksoft.dungeon.init.DungeonInitializer;
 import com.blacksoft.screen.action.ContinuousFollowCameraAction;
@@ -12,6 +14,7 @@ import com.blacksoft.state.GameState;
 public class NewGameInitializer {
 
     public static void init() {
+
         SequenceAction initAction = new SequenceAction();
         DungeonInitializer.init(initAction, new CastleDungeonGenerator());
 
@@ -23,7 +26,13 @@ public class NewGameInitializer {
 
         initAction.addAction(new FollowCameraAction());
         initAction.addAction(new ZoomCameraToTargetAction());
-        initAction.addAction(new ContinuousFollowCameraAction());
+
+        ParallelAction followAndUpdateFowAction = new ParallelAction();
+
+        followAndUpdateFowAction.addAction(new UpdateFowAction());
+        followAndUpdateFowAction.addAction(new ContinuousFollowCameraAction());
+
+        initAction.addAction(followAndUpdateFowAction);
 
         GameState.stage.addAction(initAction);
 

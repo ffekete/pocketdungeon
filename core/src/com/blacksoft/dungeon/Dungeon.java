@@ -25,6 +25,7 @@ public class Dungeon {
 
     public static final String DUNGEON_LAYER = "dungeon";
     public static final String ABOVE_LAYER = "dungeonAbove";
+    public static final String FOW_LAYER = "dungeonFowAbove";
 
     public static final TextureRegion frameTextureRegion = new TextureRegion(new Texture(Gdx.files.internal("tile/DungeonMapFrame.png")));
 
@@ -45,6 +46,7 @@ public class Dungeon {
 
         TiledMapTileLayer layer = addLayer(DUNGEON_LAYER);
         TiledMapTileLayer aboveLayer = addLayer(ABOVE_LAYER);
+        TiledMapTileLayer fowLayer = addLayer(FOW_LAYER);
 
         for (int i = 0; i < MAP_WIDTH; i++) {
             for (int j = 0; j < MAP_HEIGHT; j++) {

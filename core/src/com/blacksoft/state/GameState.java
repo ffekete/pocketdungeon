@@ -12,6 +12,7 @@ import com.blacksoft.creature.Creature;
 import com.blacksoft.dungeon.Dungeon;
 import com.blacksoft.dungeon.Tile;
 import com.blacksoft.dungeon.actions.AbstractAction;
+import com.blacksoft.dungeon.fow.DungeonFowLayer;
 import com.blacksoft.dungeon.pathfinder.CityGraph;
 import com.blacksoft.dungeon.phase.GamePhase;
 import com.blacksoft.hero.Party;
@@ -42,6 +43,8 @@ public class GameState {
     public static Stage uiStage;
     public static TileMarker tileMarker;
     public static UserAction userAction = UserAction.Idle;
+
+    public static DungeonFowLayer dungeonFowLayer;
 
     public static RayHandler rayHandler;
     public static PointLight mouseLightSource;

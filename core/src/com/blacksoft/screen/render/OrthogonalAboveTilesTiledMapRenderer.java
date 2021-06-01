@@ -53,13 +53,13 @@ public class OrthogonalAboveTilesTiledMapRenderer extends BatchTiledMapRenderer 
 
     @Override
     public void renderTileLayer(TiledMapTileLayer layer) {
-        if (layer.getName().equals(Dungeon.ABOVE_LAYER)) {
+        if (layer.getName().equals(Dungeon.ABOVE_LAYER) || layer.getName().equals(Dungeon.FOW_LAYER)) {
 
-            layer.setOpacity(0.1f);
+            layer.setOpacity(1f);
 
             Color batchColor = batch.getColor();
 
-            final float color = Color.toFloatBits(batchColor.r, batchColor.g, batchColor.b, batchColor.a * 0.1f);
+            final float color = Color.toFloatBits(batchColor.r, batchColor.g, batchColor.b, batchColor.a);
 
             final int layerWidth = layer.getWidth();
             final int layerHeight = layer.getHeight();

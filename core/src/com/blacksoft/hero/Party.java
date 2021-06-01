@@ -55,4 +55,8 @@ public class Party extends Actor {
                 .max(Float::compareTo)
                 .orElse(0f);
     }
+
+    public int getVisibilityRange() {
+        return 3;
+    }
 }
