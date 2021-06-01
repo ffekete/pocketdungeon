@@ -1,6 +1,6 @@
 package com.blacksoft.dungeon;
 
-import com.blacksoft.dungeon.actions.TileCleaner;
+import com.blacksoft.dungeon.actions.TileTypeDetector;
 import com.blacksoft.state.GameState;
 
 import java.util.ArrayDeque;
@@ -18,7 +18,7 @@ public class NodeTraverser {
         for (int i = 0; i < MAP_WIDTH; i++) {
             for (int j = 0; j < MAP_HEIGHT; j++) {
 
-                if (rooms[i][j] == 0 && TileCleaner.canTraverse(GameState.dungeon, i, j)) {
+                if (rooms[i][j] == 0 && TileTypeDetector.canTraverse(GameState.dungeon, i, j)) {
                     traverse(i, j, ++room, rooms);
                 }
             }
@@ -45,19 +45,19 @@ public class NodeTraverser {
 
             rooms[(int) current.x][(int) current.y] = roomNumber;
 
-            if (current.x != 0 && TileCleaner.canTraverse(GameState.dungeon, (int) current.x - 1, (int) current.y) && !visited[(int) current.x - 1][(int) current.y]) {
+            if (current.x != 0 && TileTypeDetector.canTraverse(GameState.dungeon, (int) current.x - 1, (int) current.y) && !visited[(int) current.x - 1][(int) current.y]) {
                 arrayDeque.add(GameState.dungeon.nodes[(int) current.x - 1][(int) current.y]);
             }
 
-            if (current.x != MAP_WIDTH - 1 && TileCleaner.canTraverse(GameState.dungeon, (int) current.x + 1, (int) current.y) && !visited[(int) current.x + 1][(int) current.y]) {
+            if (current.x != MAP_WIDTH - 1 && TileTypeDetector.canTraverse(GameState.dungeon, (int) current.x + 1, (int) current.y) && !visited[(int) current.x + 1][(int) current.y]) {
                 arrayDeque.add(GameState.dungeon.nodes[(int) current.x + 1][(int) current.y]);
             }
 
-            if (current.y != 0 && TileCleaner.canTraverse(GameState.dungeon, (int) current.x, (int) current.y - 1) && !visited[(int) current.x][(int) current.y - 1]) {
+            if (current.y != 0 && TileTypeDetector.canTraverse(GameState.dungeon, (int) current.x, (int) current.y - 1) && !visited[(int) current.x][(int) current.y - 1]) {
                 arrayDeque.add(GameState.dungeon.nodes[(int) current.x][(int) current.y - 1]);
             }
 
-            if (current.y != MAP_HEIGHT - 1 && TileCleaner.canTraverse(GameState.dungeon, (int) current.x, (int) current.y + 1) && !visited[(int) current.x][(int) current.y + 1]) {
+            if (current.y != MAP_HEIGHT - 1 && TileTypeDetector.canTraverse(GameState.dungeon, (int) current.x, (int) current.y + 1) && !visited[(int) current.x][(int) current.y + 1]) {
                 arrayDeque.add(GameState.dungeon.nodes[(int) current.x][(int) current.y + 1]);
             }
         }

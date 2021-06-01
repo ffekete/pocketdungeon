@@ -7,31 +7,12 @@ import static com.blacksoft.state.Config.TEXTURE_SIZE;
 
 public enum Tile {
 
-    Transparent(true, true, TEXTURE_SIZE, TEXTURE_SIZE),
-    Rock(true, true, TEXTURE_SIZE, TEXTURE_SIZE),
-    Empty(false, true, TEXTURE_SIZE, TEXTURE_SIZE),
-    Grave(false, false, TEXTURE_SIZE, TEXTURE_SIZE * 2),
-    Torch(true, true, TEXTURE_SIZE, TEXTURE_SIZE),
-    MysteriousCoffin(false, false, TEXTURE_SIZE, TEXTURE_SIZE),
-    Treasury(false, false, TEXTURE_SIZE, TEXTURE_SIZE),
-    DungeonEntrance(false, false, TEXTURE_SIZE, TEXTURE_SIZE * 2),
-    RestingArea(false, true, TEXTURE_SIZE, TEXTURE_SIZE),
-    DoorClosed(true, true, TEXTURE_SIZE, TEXTURE_SIZE * 2),
-    DoorOpened(false, true, TEXTURE_SIZE * 2, TEXTURE_SIZE * 2),
-    BookShelf(false, false, TEXTURE_SIZE, TEXTURE_SIZE * 2);
+    BrickWall(true, true, TEXTURE_SIZE, TEXTURE_SIZE),
+    EmptyTiles(false, true, TEXTURE_SIZE, TEXTURE_SIZE);
 
     static {
-        Rock.canMergeWith = Arrays.asList(Torch, Rock);
-        Empty.canMergeWith = Arrays.asList(Empty, DungeonEntrance, Treasury, DoorOpened, DoorClosed, BookShelf);
-        BookShelf.canMergeWith = Arrays.asList(Empty, DungeonEntrance, Treasury, BookShelf);
-        Grave.canMergeWith = Arrays.asList(Grave);
-        Torch.canMergeWith = Arrays.asList(Rock, Torch);
-        MysteriousCoffin.canMergeWith = Empty.canMergeWith;
-        Treasury.canMergeWith = BookShelf.canMergeWith;
-        DungeonEntrance.canMergeWith = BookShelf.canMergeWith;
-        RestingArea.canMergeWith = Arrays.asList(RestingArea);
-        DoorOpened.canMergeWith = Arrays.asList(Empty);
-        DoorClosed.canMergeWith = Arrays.asList(Empty);
+        BrickWall.canMergeWith = Arrays.asList(BrickWall);
+        EmptyTiles.canMergeWith = Arrays.asList(EmptyTiles);
     }
 
     private boolean solid;

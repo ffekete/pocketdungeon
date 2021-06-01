@@ -16,15 +16,18 @@ public class Wizard extends Hero {
 
     public static Texture walkingAnimationTexture;
     public static Texture walkingUpAnimationTexture;
+    public static Texture walkingDownAnimationTexture;
     public static Texture idleAnimationTexture;
 
     private final Animation<TextureRegion> walkAnimation;
     private final Animation<TextureRegion> walkUpAnimation;
+    private final Animation<TextureRegion> walkDownAnimation;
     private final Animation<TextureRegion> idleAnimation;
 
     static {
         walkingAnimationTexture = new Texture("hero/Wizard_walk_right.png");
         walkingUpAnimationTexture = new Texture("hero/Wizard_walk_up.png");
+        walkingDownAnimationTexture = new Texture("hero/Wizard_walk_down.png");
         idleAnimationTexture = new Texture("hero/Wizard_idle.png");
     }
 
@@ -32,8 +35,9 @@ public class Wizard extends Hero {
         super(party);
         this.hp = getMaxHp();
         this.mp = getMaxMp();
-        walkAnimation = new Animation<>(0.175f, TextureRegion.split(walkingAnimationTexture, TEXTURE_SIZE, TEXTURE_SIZE)[0]);
+        walkAnimation = new Animation<>(0.15f, TextureRegion.split(walkingAnimationTexture, TEXTURE_SIZE, TEXTURE_SIZE)[0]);
         walkUpAnimation = new Animation<>(0.175f, TextureRegion.split(walkingUpAnimationTexture, TEXTURE_SIZE, TEXTURE_SIZE)[0]);
+        walkDownAnimation = new Animation<>(0.175f, TextureRegion.split(walkingDownAnimationTexture, TEXTURE_SIZE, TEXTURE_SIZE)[0]);
         idleAnimation = new Animation<>(0.2f, TextureRegion.split(idleAnimationTexture, TEXTURE_SIZE, TEXTURE_SIZE)[0]);
     }
 
@@ -56,8 +60,10 @@ public class Wizard extends Hero {
         } else {
             if(direction == Direction.Left || direction == Direction.Right) {
                 textureRegion = walkAnimation.getKeyFrame(duration, true);
-            } else {
+            } else if (direction == Direction.Up){
                 textureRegion = walkUpAnimation.getKeyFrame(duration, true);
+            } else {
+                textureRegion = walkDownAnimation.getKeyFrame(duration, true);
             }
         }
 

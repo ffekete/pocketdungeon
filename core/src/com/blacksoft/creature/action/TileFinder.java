@@ -3,7 +3,7 @@ package com.blacksoft.creature.action;
 import com.badlogic.gdx.math.Vector2;
 import com.blacksoft.dungeon.Node;
 import com.blacksoft.dungeon.Tile;
-import com.blacksoft.dungeon.actions.TileCleaner;
+import com.blacksoft.dungeon.actions.TileTypeDetector;
 import com.blacksoft.hero.Party;
 import com.blacksoft.state.GameState;
 
@@ -54,7 +54,7 @@ public class TileFinder {
                                 int y,
                                 Deque<Vector2> queue,
                                 boolean[][] visited) {
-        if (x >= 0 && x < MAP_WIDTH && y >= 0 && y < MAP_HEIGHT && !visited[x][y] && TileCleaner.canTraverse(GameState.dungeon, x, y)) {
+        if (x >= 0 && x < MAP_WIDTH && y >= 0 && y < MAP_HEIGHT && !visited[x][y] && TileTypeDetector.canTraverse(GameState.dungeon, x, y)) {
             queue.add(new Vector2(x, y));
         }
     }
@@ -97,7 +97,7 @@ public class TileFinder {
                                           int y,
                                           Deque<Vector2> queue,
                                           boolean[][] visited) {
-        if (x >= 0 && x < MAP_WIDTH && y >= 0 && y < MAP_HEIGHT && !visited[x][y] && TileCleaner.canTraverse(GameState.dungeon, x, y)) {
+        if (x >= 0 && x < MAP_WIDTH && y >= 0 && y < MAP_HEIGHT && !visited[x][y] && TileTypeDetector.canTraverse(GameState.dungeon, x, y)) {
             queue.add(new Vector2(x, y));
         }
     }

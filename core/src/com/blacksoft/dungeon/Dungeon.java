@@ -4,8 +4,6 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.ai.pfa.Connection;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
-import com.badlogic.gdx.maps.MapObject;
-import com.badlogic.gdx.maps.objects.TextureMapObject;
 import com.badlogic.gdx.maps.tiled.TiledMap;
 import com.badlogic.gdx.maps.tiled.TiledMapTile;
 import com.badlogic.gdx.maps.tiled.TiledMapTileLayer;
@@ -30,7 +28,7 @@ public class Dungeon {
 
     public static final TextureRegion frameTextureRegion = new TextureRegion(new Texture(Gdx.files.internal("tile/DungeonMapFrame.png")));
 
-    private static final Tile DEFAULT_TILE = Tile.Rock;
+    private static final Tile DEFAULT_TILE = Tile.BrickWall;
 
     public Node[][] nodes = new Node[MAP_WIDTH][MAP_HEIGHT];
 
@@ -59,10 +57,7 @@ public class Dungeon {
                 nodes[i][j].x = i;
                 nodes[i][j].y = j;
 
-                GroundTiledMapTile tile = new GroundTiledMapTile(new TextureRegion(new Texture(Gdx.files.internal("tile/Rock.png"))), i, j, Tile.Rock);
-                TiledMapTileLayer.Cell cell = new TiledMapTileLayer.Cell();
-                cell.setTile(tile);
-                layer.setCell(i, j, cell);
+                replaceTileToNewTile(i,j,GameState.baseWallTile);
             }
         }
 
@@ -105,7 +100,8 @@ public class Dungeon {
 
     public void replaceTileToNewTile(int x,
                                      int y,
-                                     Tile target, boolean reConnectNeighbours) {
+                                     Tile target,
+                                     boolean reConnectNeighbours) {
         TiledMapTileLayer layer = (TiledMapTileLayer) tiledMap.getLayers().get(DUNGEON_LAYER);
         nodes[x][y].tile = target;
         nodes[x][y].object = null;

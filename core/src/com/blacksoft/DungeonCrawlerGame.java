@@ -11,7 +11,7 @@ import com.blacksoft.screen.UIFactory;
 import com.blacksoft.state.GameState;
 import com.blacksoft.state.UIState;
 
-public class DungeonBuilder extends ApplicationAdapter {
+public class DungeonCrawlerGame extends ApplicationAdapter {
     SpriteBatch batch;
 
     ScreenAdapter builderScreen;

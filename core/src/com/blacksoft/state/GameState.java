@@ -30,8 +30,8 @@ import static com.blacksoft.state.Config.MAP_WIDTH;
 
 public class GameState {
 
-    public static Tile baseEmptyTile = Tile.Empty;
-    public static Tile baseWallTile = Tile.Rock;
+    public static Tile baseEmptyTile = Tile.EmptyTiles;
+    public static Tile baseWallTile = Tile.BrickWall;
 
     public static OrthographicCamera orthographicCamera;
     public static OrthographicCamera orthographicUICamera;

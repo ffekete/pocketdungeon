@@ -5,7 +5,7 @@ import com.badlogic.gdx.scenes.scene2d.actions.MoveToAction;
 import com.blacksoft.creature.Creature;
 import com.blacksoft.creature.Direction;
 import com.blacksoft.creature.State;
-import com.blacksoft.dungeon.actions.TileCleaner;
+import com.blacksoft.dungeon.actions.TileTypeDetector;
 import com.blacksoft.state.GameState;
 
 public class MoveToTileAction extends MoveToAction {
@@ -54,7 +54,7 @@ public class MoveToTileAction extends MoveToAction {
             }
         }
 
-        if(!TileCleaner.canTraverse(GameState.dungeon, (int)creature.targetNode.x,(int)creature.targetNode.y)) {
+        if(!TileTypeDetector.canTraverse(GameState.dungeon, (int)creature.targetNode.x,(int)creature.targetNode.y)) {
             creature.setPosition(previousNode.x * 16, previousNode.y * 16);
             creature.addAction(new ResetCreatureActionsAction(creature));
             return true;

@@ -3,10 +3,8 @@ package com.blacksoft.hero.action;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.scenes.scene2d.actions.MoveToAction;
-import com.blacksoft.creature.Creature;
 import com.blacksoft.creature.State;
-import com.blacksoft.creature.action.ResetCreatureActionsAction;
-import com.blacksoft.dungeon.actions.TileCleaner;
+import com.blacksoft.dungeon.actions.TileTypeDetector;
 import com.blacksoft.hero.Party;
 import com.blacksoft.screen.input.KeyConfig;
 import com.blacksoft.state.GameState;
@@ -61,7 +59,7 @@ public class MoveAndExplorePartyToTileAction extends MoveToAction {
             creature.targetNode = new Vector2(targetNode.x / 16, targetNode.y / 16);
         }
 
-        if (!TileCleaner.canTraverse(GameState.dungeon, (int) creature.targetNode.x, (int) creature.targetNode.y)) {
+        if (!TileTypeDetector.canTraverse(GameState.dungeon, (int) creature.targetNode.x, (int) creature.targetNode.y)) {
             creature.setPosition(previousNode.x * 16, previousNode.y * 16);
             creature.addAction(new ResetPartyActionsAction(creature));
             party.state = State.Idle;

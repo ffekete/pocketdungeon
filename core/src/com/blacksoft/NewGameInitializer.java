@@ -1,7 +1,7 @@
 package com.blacksoft;
 
 import com.badlogic.gdx.scenes.scene2d.actions.SequenceAction;
-import com.blacksoft.dungeon.Dungeon;
+import com.blacksoft.dungeon.generator.CastleDungeonGenerator;
 import com.blacksoft.dungeon.init.DungeonInitializer;
 import com.blacksoft.screen.action.ContinuousFollowCameraAction;
 import com.blacksoft.screen.action.FollowCameraAction;
@@ -12,11 +12,8 @@ import com.blacksoft.state.GameState;
 public class NewGameInitializer {
 
     public static void init() {
-        Dungeon dungeon = new Dungeon();
-        GameState.dungeon = dungeon;
-
         SequenceAction initAction = new SequenceAction();
-        DungeonInitializer.init(dungeon, initAction);
+        DungeonInitializer.init(initAction, new CastleDungeonGenerator());
 
         PartyLoader.load(initAction);
 
