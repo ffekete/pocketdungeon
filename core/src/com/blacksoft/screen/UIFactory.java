@@ -13,6 +13,7 @@ import com.badlogic.gdx.scenes.scene2d.actions.*;
 import com.badlogic.gdx.scenes.scene2d.ui.*;
 import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
 import com.blacksoft.creature.Creature;
+import com.blacksoft.skill.Skill;
 import com.blacksoft.state.Config;
 import com.blacksoft.state.GameState;
 import com.blacksoft.state.UIState;
@@ -20,6 +21,8 @@ import com.blacksoft.ui.AnimatedImage;
 import com.blacksoft.ui.DynamicLabel;
 import com.blacksoft.ui.DynamicProgressBar;
 import com.blacksoft.ui.action.IntAction;
+
+import java.util.ArrayList;
 
 import static com.blacksoft.state.Config.FLOATING_ITEMS_DURATION;
 import static com.blacksoft.state.Config.SCREEN_HEIGHT;
@@ -514,7 +517,7 @@ public class UIFactory {
         AnimatedImage animatedImage = new AnimatedImage(animation);
 
         UIState.selectionMarker = animatedImage;
-
+        UIState.selectionMarker.setScale(1f);
         UIState.selectionMarker.setVisible(false);
 
         GameState.uiStage.addActor(animatedImage);
@@ -533,6 +536,18 @@ public class UIFactory {
         Cursor cursor = Gdx.graphics.newCursor(pm, 0, 0);
         pm.dispose();
         return cursor;
+    }
+
+    public static AnimatedImage createSkillIcon(Creature creature, Skill skill) {
+        AnimatedImage skillImage = new AnimatedImage(
+                new Animation<>(0.3f, TextureRegion.split(skill.getIcon(), 16, 16)[0]));
+
+        UIFactory.I.disableSkill(skillImage);
+
+        GameState.battleSkillIcons.computeIfAbsent(creature, value -> new ArrayList<>());
+        GameState.battleSkillIcons.get(creature).add(skillImage);
+
+        return skillImage;
     }
 
     public void updateLabelAmount(int old,

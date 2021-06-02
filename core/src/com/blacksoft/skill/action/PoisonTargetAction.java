@@ -16,9 +16,10 @@ public class PoisonTargetAction extends Action {
     @Override
     public boolean act(float delta) {
 
-        GameState.battlePhase = BattlePhase.Act;
-
         if (GameState.nextAttackTarget != null) {
+
+            GameState.battlePhase = BattlePhase.Act;
+
             SequenceAction attackAnimationAction = new SequenceAction();
 
             attackAnimationAction.setActor(GameState.battleImages.get(GameState.battleSelectedCreature));

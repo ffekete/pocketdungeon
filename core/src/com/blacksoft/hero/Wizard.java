@@ -8,6 +8,8 @@ import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.blacksoft.creature.Direction;
 import com.blacksoft.creature.State;
+import com.blacksoft.skill.Poison;
+import com.blacksoft.skill.SpellBook;
 import com.blacksoft.state.Config;
 
 import static com.blacksoft.state.Config.TEXTURE_SIZE;
@@ -33,6 +35,27 @@ public class Wizard extends Hero {
 
     public Wizard(Party party) {
         super(party);
+        SpellBook spellBook = new SpellBook();
+        spellBook.addSpell(new Poison(), this);
+        spellBook.addSpell(new Poison(), this);
+        spellBook.addSpell(new Poison(), this);
+        spellBook.addSpell(new Poison(), this);
+        spellBook.addSpell(new Poison(), this);
+        spellBook.addSpell(new Poison(), this);
+        spellBook.addSpell(new Poison(), this);
+        spellBook.addSpell(new Poison(), this);
+        spellBook.addSpell(new Poison(), this);
+        spellBook.addSpell(new Poison(), this);
+        spellBook.addSpell(new Poison(), this);
+        spellBook.addSpell(new Poison(), this);
+        spellBook.addSpell(new Poison(), this);
+        spellBook.addSpell(new Poison(), this);
+        spellBook.addSpell(new Poison(), this);
+        spellBook.addSpell(new Poison(), this);
+        spellBook.addSpell(new Poison(), this);
+        spellBook.addSpell(new Poison(), this);
+        spellBook.addSpell(new Poison(), this);
+        skills.add(spellBook);
         this.hp = getMaxHp();
         this.mp = getMaxMp();
         walkAnimation = new Animation<>(0.15f, TextureRegion.split(walkingAnimationTexture, TEXTURE_SIZE, TEXTURE_SIZE)[0]);

@@ -43,6 +43,15 @@ public class RemoveFromBattleCheckerAction extends Action {
                 removeSkillImagesAction.addAction(Actions.removeActor());
                 image.addAction(removeSkillImagesAction);
             });
+
+            targetCreature.skills.forEach(skill -> {
+                SequenceAction removeSkillImagesAction = new SequenceAction();
+                for (AnimatedImage value : skill.getSkillsAndIcons().values()) {
+                    removeSkillImagesAction.addAction(Actions.fadeOut(0.1f));
+                    removeSkillImagesAction.addAction(Actions.removeActor());
+                    value.addAction(removeSkillImagesAction);
+                }
+            });
         }
 
         return true;

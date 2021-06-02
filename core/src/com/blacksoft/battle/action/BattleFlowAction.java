@@ -3,6 +3,7 @@ package com.blacksoft.battle.action;
 import com.badlogic.gdx.scenes.scene2d.Action;
 import com.badlogic.gdx.scenes.scene2d.actions.Actions;
 import com.badlogic.gdx.scenes.scene2d.actions.SequenceAction;
+import com.blacksoft.battle.BattleScreenInitializer;
 import com.blacksoft.battle.BattlePhase;
 import com.blacksoft.battle.BattleSequence;
 import com.blacksoft.creature.Creature;
@@ -18,6 +19,9 @@ import com.blacksoft.user.actions.UserAction;
 import java.util.Collection;
 import java.util.List;
 import java.util.Optional;
+
+import static com.blacksoft.state.Config.BATTLE_SCREEN_POS_X;
+import static com.blacksoft.state.Config.BATTLE_SCREEN_POS_Y;
 
 public class BattleFlowAction extends Action {
 
@@ -48,8 +52,8 @@ public class BattleFlowAction extends Action {
             GameState.userAction = UserAction.Disabled; // let's disable uer action until a user controlled creature is selected
 
             UIState.battleSelectionCursor.setVisible(true);
-            UIState.battleSelectionCursor.setPosition(GameState.battleImages.get(GameState.battleSelectedCreature).getX() + 90, GameState.battleImages.get(GameState.battleSelectedCreature).getY() + 60);
-            UIState.battleSelectionCursor.setSize(48, 48);
+            UIState.battleSelectionCursor.setPosition(GameState.battleImages.get(GameState.battleSelectedCreature).getX() + BATTLE_SCREEN_POS_X, GameState.battleImages.get(GameState.battleSelectedCreature).getY() + BATTLE_SCREEN_POS_Y);
+            UIState.battleSelectionCursor.setSize(BattleScreenInitializer.HERO_CELL_WIDTH, BattleScreenInitializer.HERO_CELL_WIDTH);
             UIState.battleSelectionCursor.toFront();
 
             SequenceAction sequenceAction = new SequenceAction();
@@ -63,7 +67,7 @@ public class BattleFlowAction extends Action {
             // if still alive after modifiers
             if (GameState.battleSelectedCreature.hp > 0) {
 
-                GameState.battlePhase =  BattlePhase.Prepare_stg_2;
+                GameState.battlePhase = BattlePhase.Prepare_stg_2;
 
                 GameState.battleSkillIcons.values().stream().flatMap(Collection::stream)
                         .forEach(UIFactory.I::disableSkill);

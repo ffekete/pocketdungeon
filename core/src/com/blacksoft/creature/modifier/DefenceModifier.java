@@ -11,6 +11,9 @@ import com.blacksoft.skill.MeleeDefense;
 import com.blacksoft.state.GameState;
 import com.blacksoft.ui.AnimatedImage;
 
+import static com.blacksoft.state.Config.BATTLE_SCREEN_POS_X;
+import static com.blacksoft.state.Config.BATTLE_SCREEN_POS_Y;
+
 public class DefenceModifier implements Modifier{
 
     private int duration;
@@ -31,7 +34,7 @@ public class DefenceModifier implements Modifier{
             duration--;
             target.tempDefenceModifier += amount;
             AnimatedImage image = GameState.battleImages.get(target);
-            Label label = UIFactory.I.createFloatingLabelWithIcon(amount, new TextureRegion(MeleeDefense.icon), (int)image.getX() + 90 + 24, (int)image.getY() + 60 + 48, sequenceAction);
+            Label label = UIFactory.I.createFloatingLabelWithIcon(amount, new TextureRegion(MeleeDefense.icon), (int)image.getX() + BATTLE_SCREEN_POS_X + 24, (int)image.getY() + BATTLE_SCREEN_POS_Y + 48, sequenceAction);
             sequenceAction.addAction(Actions.delay(0.5f));
         }
     }
@@ -55,7 +58,7 @@ public class DefenceModifier implements Modifier{
     public void start(SequenceAction sequenceAction) {
         target.tempDefenceModifier += amount;
         AnimatedImage image = GameState.battleImages.get(target);
-        UIFactory.I.createFloatingLabelWithIcon(amount, new TextureRegion(MeleeDefense.icon), (int)image.getX() + 90 + 24, (int)image.getY() + 60 + 48, sequenceAction);
+        UIFactory.I.createFloatingLabelWithIcon(amount, new TextureRegion(MeleeDefense.icon), (int)image.getX() + BATTLE_SCREEN_POS_X + 24, (int)image.getY() + BATTLE_SCREEN_POS_Y + 48, sequenceAction);
         sequenceAction.addAction(Actions.delay(0.5f));
     }
 

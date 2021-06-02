@@ -4,20 +4,25 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Cursor;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.scenes.scene2d.Action;
+import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.blacksoft.creature.Creature;
 import com.blacksoft.skill.action.CancellableAction;
 import com.blacksoft.skill.action.PoisonTargetAction;
 import com.blacksoft.state.UIState;
+import com.blacksoft.ui.AnimatedImage;
 import com.blacksoft.user.actions.UserAction;
 
+import java.util.Collection;
+import java.util.Collections;
 import java.util.List;
+import java.util.Map;
 
 public class Poison implements Skill {
 
     public static final Texture icon;
 
     static {
-        icon = new Texture(Gdx.files.internal("skill/PoisonIcon.png"));
+        icon = new Texture(Gdx.files.internal("skill/PoisonSpellIcon.png"));
     }
 
     @Override
@@ -38,5 +43,15 @@ public class Poison implements Skill {
     @Override
     public Cursor getCursor() {
         return UIState.attackCursor;
+    }
+
+    @Override
+    public Table getSubmenu() {
+        return null;
+    }
+
+    @Override
+    public Map<Skill, AnimatedImage> getSkillsAndIcons() {
+        return Collections.emptyMap();
     }
 }

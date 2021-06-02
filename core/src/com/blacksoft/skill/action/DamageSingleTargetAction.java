@@ -22,6 +22,9 @@ import com.blacksoft.ui.AnimatedImage;
 import com.blacksoft.user.actions.SetUserAction;
 import com.blacksoft.user.actions.UserAction;
 
+import static com.blacksoft.state.Config.BATTLE_SCREEN_POS_X;
+import static com.blacksoft.state.Config.BATTLE_SCREEN_POS_Y;
+
 public class DamageSingleTargetAction extends Action {
 
     private int damage;
@@ -44,13 +47,13 @@ public class DamageSingleTargetAction extends Action {
 
             int calculatedDamage = Math.max(1, damage - this.targetCreature.getMeleeDefence());
 
-            UIFactory.I.createFloatingLabel(calculatedDamage, (int) nextAttackTarget.getX() + 90 + 16, (int) nextAttackTarget.getY() + 60 + 32);
+            UIFactory.I.createFloatingLabel(calculatedDamage, (int) nextAttackTarget.getX() + BATTLE_SCREEN_POS_X + 16, (int) nextAttackTarget.getY() + BATTLE_SCREEN_POS_Y + 32);
 
             AnimatedImage animatedImage = new AnimatedImage(
                     new Animation<>(0.025f, TextureRegion.split(UIState.meleeAttackAnimationsTexture.getTexture(), 16, 16)[0]), false);
 
-            animatedImage.setPosition(this.nextAttackTarget.getX() + 70, this.nextAttackTarget.getY() + 60);
-            animatedImage.setScale(4f);
+            animatedImage.setPosition(this.nextAttackTarget.getX() + BATTLE_SCREEN_POS_X, this.nextAttackTarget.getY() + BATTLE_SCREEN_POS_Y);
+            animatedImage.setScale(2f);
 
             SequenceAction playAttackEffectAnimationAction = new SequenceAction();
             playAttackEffectAnimationAction.addAction(Actions.delay(0.2f));
@@ -58,8 +61,6 @@ public class DamageSingleTargetAction extends Action {
             animatedImage.addAction(playAttackEffectAnimationAction);
             GameState.uiStage.addActor(animatedImage);
 
-
-            System.out.println("Selected creature is attacking: " + GameState.battleSelectedCreature);
             Image creatureImage = GameState.battleImages.get(GameState.battleSelectedCreature);
 
             SequenceAction attackAnimationAction = new SequenceAction();

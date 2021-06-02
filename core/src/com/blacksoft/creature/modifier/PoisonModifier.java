@@ -18,6 +18,9 @@ import com.blacksoft.state.UIState;
 import com.blacksoft.ui.AnimatedImage;
 import com.sun.org.apache.xpath.internal.operations.Mod;
 
+import static com.blacksoft.state.Config.BATTLE_SCREEN_POS_X;
+import static com.blacksoft.state.Config.BATTLE_SCREEN_POS_Y;
+
 public class PoisonModifier implements Modifier {
 
     public int duration;
@@ -38,7 +41,7 @@ public class PoisonModifier implements Modifier {
             duration--;
 
             AnimatedImage image = GameState.battleImages.get(target);
-            Label label = UIFactory.I.createTwoFloatingLabelsWithTwoIconFromString(Integer.toString(amount), String.format("%s", duration), new TextureRegion(Poison.icon),new TextureRegion(UIState.hourglassIconImage), (int) image.getX() + 90 + 24, (int) image.getY() + 60 + 48, sequenceAction);
+            Label label = UIFactory.I.createTwoFloatingLabelsWithTwoIconFromString(Integer.toString(amount), String.format("%s", duration), new TextureRegion(Poison.icon),new TextureRegion(UIState.hourglassIconImage), (int) image.getX() + BATTLE_SCREEN_POS_X + 24, (int) image.getY() + BATTLE_SCREEN_POS_Y + 48, sequenceAction);
             sequenceAction.addAction(Actions.delay(0.8f));
             sequenceAction.addAction(new ReduceHpAction(target, amount));
             sequenceAction.addAction(new RemoveFromBattleCheckerAction(target));
@@ -62,7 +65,7 @@ public class PoisonModifier implements Modifier {
     @Override
     public void start(SequenceAction sequenceAction) {
         AnimatedImage image = GameState.battleImages.get(target);
-        UIFactory.I.createFloatingIcon(UIState.poisonEffectTexture, (int) image.getX() + 90 + 24, (int) image.getY() + 60 + 48, sequenceAction);
+        UIFactory.I.createFloatingIcon(UIState.poisonEffectTexture, (int) image.getX() + BATTLE_SCREEN_POS_X + 24, (int) image.getY() + BATTLE_SCREEN_POS_Y + 48, sequenceAction);
         sequenceAction.addAction(Actions.delay(0.5f));
     }
 

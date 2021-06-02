@@ -15,9 +15,7 @@ import com.blacksoft.ui.AnimatedImage;
 
 public class UIState {
 
-    public static Label goldLabel;
     public static AnimatedImage selectionMarker;
-    public static Table creatureListTable;
     public static AnimatedImage battleSelectionCursor;
 
     // CURSORS

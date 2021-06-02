@@ -4,13 +4,12 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
-import com.blacksoft.battle.BattleInitializer;
+import com.blacksoft.battle.BattleScreenInitializer;
 import com.blacksoft.creature.Skeleton;
 import com.blacksoft.dungeon.objects.AbstractMapObject;
 import com.blacksoft.hero.Party;
 import com.blacksoft.state.GameState;
 
-import java.lang.reflect.Array;
 import java.util.Arrays;
 
 import static com.blacksoft.state.Config.TEXTURE_SIZE;
@@ -47,7 +46,7 @@ public class EventObject extends AbstractMapObject {
     @Override
     public void interact(Party party) {
         if(!disabled) {
-            BattleInitializer.init(Arrays.asList(new Skeleton()), GameState.party);
+            BattleScreenInitializer.init(Arrays.asList(new Skeleton()), GameState.party);
             disabled = true;
         }
     }
