@@ -4,6 +4,7 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.blacksoft.dungeon.objects.AbstractMapObject;
+import com.blacksoft.hero.Party;
 
 public class Banner02 extends AbstractMapObject {
 
@@ -32,7 +33,7 @@ public class Banner02 extends AbstractMapObject {
     }
 
     @Override
-    public void toggleState() {
+    public void interact(Party party) {
 
     }
 

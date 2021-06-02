@@ -2,8 +2,6 @@ package com.blacksoft;
 
 import com.badlogic.gdx.scenes.scene2d.actions.Actions;
 import com.badlogic.gdx.scenes.scene2d.actions.SequenceAction;
-import com.blacksoft.battle.action.BattleInitiationAction;
-import com.blacksoft.creature.Skeleton;
 import com.blacksoft.hero.Party;
 import com.blacksoft.hero.Rogue;
 import com.blacksoft.hero.Wizard;
@@ -30,8 +28,6 @@ public class PartyLoader {
         initAction.addAction(Actions.delay(0.5f));
         initAction.addAction(addPartyToStageAction);
         initAction.setActor(party);
-
-        party.addAction(new BattleInitiationAction(party));
     }
 
 }

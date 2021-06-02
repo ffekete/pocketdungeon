@@ -4,6 +4,7 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.blacksoft.dungeon.objects.AbstractMapObject;
+import com.blacksoft.hero.Party;
 
 public class DoorAbove extends AbstractMapObject {
 
@@ -35,8 +36,10 @@ public class DoorAbove extends AbstractMapObject {
     }
 
     @Override
-    public void toggleState() {
-        this.opened = !this.opened;
+    public void interact(Party party) {
+        this.opened = true;
+
+
     }
 
     @Override

@@ -7,6 +7,7 @@ import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.blacksoft.dungeon.Tile;
 import com.blacksoft.dungeon.lighting.LightSourceFactory;
 import com.blacksoft.dungeon.objects.AbstractMapObject;
+import com.blacksoft.hero.Party;
 import com.blacksoft.state.Config;
 import com.blacksoft.state.GameState;
 
@@ -39,7 +40,7 @@ public class BookShelf extends AbstractMapObject {
     }
 
     @Override
-    public void toggleState() {
+    public void interact(Party party) {
 
     }
 

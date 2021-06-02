@@ -70,27 +70,27 @@ public class BattleFlowAction extends Action {
 
                 GameState.battleSkillIcons.get(GameState.battleSelectedCreature).forEach(UIFactory.I::enableSkill);
 
-                if (heroes.contains(GameState.battleSelectedCreature)) {
+                if (creatures.contains(GameState.battleSelectedCreature)) {
                     // choose action, attack
                     Skill skill = GameState.battleSelectedCreature.skills.get(0); // todo improve skill selection
 
                     // pick a target
-                    Optional<Creature> target = creatures.stream().filter(creature -> creature.hp > 0).findFirst();
+                    Optional<Creature> target = GameState.party.heroes.stream().filter(creature -> creature.hp > 0).findFirst();
 
-                    target.ifPresent(creature -> {
-                        GameState.nextAttackTarget = creature;
-                        GameState.nextAttackTargetImage = GameState.battleImages.get(creature);
+                    target.ifPresent(targetCreature -> {
+                        GameState.nextAttackTarget = targetCreature;
+                        GameState.nextAttackTargetImage = GameState.battleImages.get(targetCreature);
 
                         SequenceAction sequenceAction = new SequenceAction();
                         sequenceAction.addAction(Actions.delay(0.6f));
-                        sequenceAction.addAction(new SelectTargetAction(creature));
+                        sequenceAction.addAction(new SelectTargetAction(targetCreature));
                         sequenceAction.addAction(Actions.delay(0.4f));
                         sequenceAction.addAction(skill.getAction().apply(GameState.battleSelectedCreature, creatures, heroes));
                         sequenceAction.addAction(new RemoveTargetSelectionAction());
                         GameState.stage.addAction(sequenceAction);
                     });
                 } else {
-                    // monster
+                    // hero
                     GameState.userAction = UserAction.Idle;
                 }
             } else {

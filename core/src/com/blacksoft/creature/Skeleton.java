@@ -75,7 +75,7 @@ public class Skeleton extends Creature {
 
     @Override
     public Animation<TextureRegion> getAnimation() {
-        return this.walkAnimation;
+        return this.idleAnimation;
     }
 
     @Override

@@ -5,7 +5,6 @@ import box2dLight.RayHandler;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.scenes.scene2d.Action;
 import com.badlogic.gdx.scenes.scene2d.Stage;
-import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.utils.viewport.Viewport;
 import com.blacksoft.battle.BattlePhase;
 import com.blacksoft.creature.Creature;
@@ -14,7 +13,6 @@ import com.blacksoft.dungeon.Tile;
 import com.blacksoft.dungeon.actions.AbstractAction;
 import com.blacksoft.dungeon.fow.DungeonFowLayer;
 import com.blacksoft.dungeon.pathfinder.CityGraph;
-import com.blacksoft.dungeon.phase.GamePhase;
 import com.blacksoft.hero.Party;
 import com.blacksoft.ui.AnimatedImage;
 import com.blacksoft.ui.DynamicProgressBar;
@@ -51,15 +49,9 @@ public class GameState {
 
     public static List<AbstractAction> actions = new ArrayList<>();
 
-    public static List<Creature> creatures = new ArrayList<>();
-
     public static CityGraph cityGraph;
 
-    public static Map<Creature, Table> creatureListEntriesOnSidePanel = new HashMap<>();
-
     public static boolean paused;
-
-    public static GamePhase gamePhase = GamePhase.Build;
 
     // invader party stuff
     public static Party party = null;

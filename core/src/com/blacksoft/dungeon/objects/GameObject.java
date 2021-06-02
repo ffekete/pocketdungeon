@@ -2,6 +2,7 @@ package com.blacksoft.dungeon.objects;
 
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.blacksoft.dungeon.Tile;
+import com.blacksoft.hero.Party;
 
 public interface GameObject {
 
@@ -12,7 +13,7 @@ public interface GameObject {
 
     boolean getState();
 
-    void toggleState();
+    void interact(Party party);
 
     TextureRegion getTextureRegion();
 }

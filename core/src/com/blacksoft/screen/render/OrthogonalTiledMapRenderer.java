@@ -200,7 +200,7 @@ public class OrthogonalTiledMapRenderer extends BatchTiledMapRenderer {
 
                         cell.getTile().getObjects().forEach((o) -> {
                                     TextureMapObject textureMapObject = (TextureMapObject) o;
-                                    batch.draw(textureMapObject.getTextureRegion().getTexture(), x1, y1);
+                                    batch.draw(textureMapObject.getTextureRegion(), x1, y1);
                                 }
                         );
 

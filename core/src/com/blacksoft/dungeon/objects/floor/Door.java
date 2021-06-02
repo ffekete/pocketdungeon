@@ -3,10 +3,10 @@ package com.blacksoft.dungeon.objects.floor;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
-import com.blacksoft.dungeon.Tile;
-import com.blacksoft.dungeon.actions.GateOpenCheckAction;
+import com.blacksoft.dungeon.Dungeon;
+import com.blacksoft.dungeon.actions.TileTypeDetector;
 import com.blacksoft.dungeon.objects.AbstractMapObject;
-import com.blacksoft.state.Config;
+import com.blacksoft.hero.Party;
 import com.blacksoft.state.GameState;
 
 public class Door extends AbstractMapObject {
@@ -27,6 +27,8 @@ public class Door extends AbstractMapObject {
     public void place(int x,
                       int y) {
         super.blocking = false;
+        this.x = x;
+        this.y = y;
     }
 
     @Override
@@ -39,8 +41,11 @@ public class Door extends AbstractMapObject {
     }
 
     @Override
-    public void toggleState() {
-        this.opened = !this.opened;
+    public void interact(Party party) {
+        this.opened = true;
+
+        DoorAbove doorAbove = TileTypeDetector.getObject(GameState.dungeon, Dungeon.ABOVE_LAYER, x / 16, y / 16, DoorAbove.class);
+        doorAbove.opened = true;
     }
 
     @Override

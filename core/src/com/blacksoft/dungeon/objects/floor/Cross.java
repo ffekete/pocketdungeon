@@ -6,6 +6,7 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.blacksoft.dungeon.lighting.LightSourceFactory;
 import com.blacksoft.dungeon.objects.AbstractMapObject;
+import com.blacksoft.hero.Party;
 
 public class Cross extends AbstractMapObject {
 
@@ -38,7 +39,7 @@ public class Cross extends AbstractMapObject {
     }
 
     @Override
-    public void toggleState() {
+    public void interact(Party party) {
 
     }
 

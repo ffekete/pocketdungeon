@@ -90,7 +90,7 @@ public class Wizard extends Hero {
 
     @Override
     public Animation<TextureRegion> getAnimation() {
-        return this.walkAnimation;
+        return this.idleAnimation;
     }
 
     @Override

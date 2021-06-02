@@ -5,6 +5,7 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.blacksoft.dungeon.Tile;
 import com.blacksoft.dungeon.objects.AbstractMapObject;
+import com.blacksoft.hero.Party;
 
 public class TreasureChest extends AbstractMapObject {
 
@@ -36,8 +37,8 @@ public class TreasureChest extends AbstractMapObject {
     }
 
     @Override
-    public void toggleState() {
-
+    public void interact(Party party) {
+        this.opened = true;
     }
 
     @Override

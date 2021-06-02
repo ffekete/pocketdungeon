@@ -1,6 +1,7 @@
 package com.blacksoft.hero.action;
 
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.maps.MapObject;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.scenes.scene2d.actions.MoveToAction;
 import com.blacksoft.creature.Direction;
@@ -48,6 +49,11 @@ public class MoveAndExplorePartyToTileAction extends MoveToAction {
             party.state = State.Idle;
             party.direction = party.direction == Direction.Up || party.direction == Direction.Down ? Direction.Left : party.direction;
         }
+
+        // interacting with items
+        Party creature = (Party) actor;
+        TileTypeDetector.getObjects(GameState.dungeon, Dungeon.DUNGEON_LAYER, (int) creature.targetNode.x, (int) creature.targetNode.y).forEach(o -> o.interact(GameState.party));
+
     }
 
     @Override
@@ -65,27 +71,12 @@ public class MoveAndExplorePartyToTileAction extends MoveToAction {
             creature.targetNode = new Vector2(targetNode.x / 16, targetNode.y / 16);
         }
 
-
-        // opening doors
-        Door object = TileTypeDetector.getObject(GameState.dungeon, Dungeon.DUNGEON_LAYER, (int) creature.targetNode.x, (int) creature.targetNode.y, Door.class);
-        if(object != null) {
-            object.opened = true;
-
-            DoorAbove doorAbove = TileTypeDetector.getObject(GameState.dungeon, Dungeon.ABOVE_LAYER, (int) creature.targetNode.x, (int) creature.targetNode.y, DoorAbove.class);
-            doorAbove.opened = true;
-        }
-
-        // opening chests
-        TreasureChest treasureChest = TileTypeDetector.getObject(GameState.dungeon, Dungeon.DUNGEON_LAYER, (int) creature.targetNode.x, (int) creature.targetNode.y, TreasureChest.class);
-        if(treasureChest != null) {
-            treasureChest.opened = true;
-        }
-
         if (!TileTypeDetector.canTraverse(GameState.dungeon, (int) creature.targetNode.x, (int) creature.targetNode.y) || TileTypeDetector.hasAnyBlockingObjects(GameState.dungeon, Dungeon.DUNGEON_LAYER, (int) creature.targetNode.x, (int) creature.targetNode.y)) {
             creature.setPosition(previousNode.x * 16, previousNode.y * 16);
             creature.addAction(new ResetPartyActionsAction(creature));
             party.state = State.Idle;
             party.direction = party.direction == Direction.Up || party.direction == Direction.Down ? Direction.Left : party.direction;
+            TileTypeDetector.getObjects(GameState.dungeon, Dungeon.DUNGEON_LAYER, (int) creature.targetNode.x, (int) creature.targetNode.y).forEach(o -> o.interact(GameState.party));
             return true;
         }
 

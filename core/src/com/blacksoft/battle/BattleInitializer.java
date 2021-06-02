@@ -13,8 +13,12 @@ import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
 import com.blacksoft.battle.action.BattleFlowAction;
 import com.blacksoft.battle.action.MoveBattleToFinishTurnAction;
+import com.blacksoft.battle.action.ResetPartyStatusAction;
 import com.blacksoft.creature.Creature;
+import com.blacksoft.creature.Direction;
+import com.blacksoft.creature.State;
 import com.blacksoft.hero.Party;
+import com.blacksoft.hero.action.ResetPartyActionsAction;
 import com.blacksoft.screen.UIFactory;
 import com.blacksoft.skill.Skill;
 import com.blacksoft.state.Config;
@@ -41,6 +45,15 @@ public class BattleInitializer {
 
         UIState.battleScreen = battleScreen;
 
+        GameState.party.direction = Direction.Left;
+        GameState.party.state = State.Idle;
+        GameState.party.heroes.forEach(hero -> {
+            hero.direction = Direction.Left;
+            hero.setState(State.Idle);
+        });
+
+        GameState.creaturesInvolvedInBattle = creatures;
+
         battleScreen.background(new TextureRegionDrawable(UIState.battleScreenBackground));
         battleScreen.setSize(300, 200);
 
@@ -61,30 +74,15 @@ public class BattleInitializer {
             // CREATURE
             if (i < creatures.size()) {
                 Creature creature = creatures.get(i);
+                creature.setState(State.Idle);
+                creature.direction = Direction.Right;
                 AnimatedImage creatureImage = new AnimatedImage(creatures.get(i).getAnimation());
 
                 battleScreen.add(creatureImage).size(48, 48).center().colspan(Config.MAX_SKILLS_SIZE);
                 GameState.battleImages.put(creature, creatureImage);
                 BattleSequence.add(creature);
-            } else {
-                battleScreen.add().size(48, 48).colspan(Config.MAX_SKILLS_SIZE);
-            }
 
-            // SEPARATOR
-            battleScreen.add().size(48, 48);
-
-            // HERO
-            if (i < party.heroes.size()) {
-                AnimatedImage heroImage = new AnimatedImage(party.heroes.get(i).getAnimation());
-                battleScreen.add(heroImage).size(48, 48).center().colspan(Config.MAX_SKILLS_SIZE);
-                party.heroes.get(i).setPosition(0, 0);
-
-                Creature hero = party.heroes.get(i);
-                BattleSequence.add(hero);
-
-                GameState.battleImages.put(hero, heroImage);
-
-                heroImage.addListener(new InputListener() {
+                creatureImage.addListener(new InputListener() {
 
                     @Override
                     public void enter(InputEvent event,
@@ -94,7 +92,7 @@ public class BattleInitializer {
                                       Actor fromActor) {
                         UIState.selectionMarker.setVisible(true);
                         UIState.selectionMarker.toFront();
-                        UIState.selectionMarker.setPosition(heroImage.getX() + 90 + 16, heroImage.getY() + 60 + 48);
+                        UIState.selectionMarker.setPosition(creatureImage.getX() + 90 + 16, creatureImage.getY() + 60 + 48);
                     }
 
                     @Override
@@ -114,14 +112,38 @@ public class BattleInitializer {
                                              int button) {
 
                         if (GameState.nextBattleAction != null) {
-                            GameState.nextAttackTarget = hero;
-                            GameState.nextAttackTargetImage = heroImage;
+                            GameState.nextAttackTarget = creature;
+                            GameState.nextAttackTargetImage = creatureImage;
                             Gdx.graphics.setCursor(UIState.defaultCursor);
                         }
 
                         return true;
                     }
                 });
+            } else {
+                battleScreen.add().size(48, 48).colspan(Config.MAX_SKILLS_SIZE);
+            }
+
+            // SEPARATOR
+            battleScreen.add().size(48, 48);
+
+            // HERO
+            if (i < party.heroes.size()) {
+
+                party.state = State.Idle;
+                party.direction = Direction.Left;
+
+                party.heroes.get(i).setState(State.Idle);
+                party.heroes.get(i).direction = Direction.Left;
+
+                AnimatedImage heroImage = new AnimatedImage(party.heroes.get(i).getAnimation());
+                battleScreen.add(heroImage).size(48, 48).center().colspan(Config.MAX_SKILLS_SIZE);
+                party.heroes.get(i).setPosition(0, 0);
+
+                Creature hero = party.heroes.get(i);
+                BattleSequence.add(hero);
+
+                GameState.battleImages.put(hero, heroImage);
 
             } else {
                 battleScreen.add().size(48, 48).colspan(Config.MAX_SKILLS_SIZE);
@@ -210,6 +232,30 @@ public class BattleInitializer {
 
                     GameState.battleSkillIcons.computeIfAbsent(creature, value -> new ArrayList<>());
                     GameState.battleSkillIcons.get(creature).add(skillImage);
+                }
+            }
+
+            for (int j = skillsIndex; j < 4; j++) {
+                battleScreen.add().size(12); // empty spaces
+            }
+
+            battleScreen.add().size(48, 16);
+
+            if (i < party.heroes.size()) {
+                Creature hero = party.heroes.get(i);
+                skillsIndex = hero.skills.size();
+                for (int j = 0; j < skillsIndex; j++) {
+
+                    Skill skill = hero.skills.get(j);
+
+                    AnimatedImage skillImage = new AnimatedImage(
+                            new Animation<>(0.3f, TextureRegion.split(hero.skills.get(j).getIcon(), 16, 16)[0]));
+                    battleScreen.add(skillImage).size(10).pad(1);
+
+                    GameState.battleSkillIcons.computeIfAbsent(hero, value -> new ArrayList<>());
+                    GameState.battleSkillIcons.get(hero).add(skillImage);
+
+                    GameState.nextBattleAction = skill.getAction().apply(hero, party.heroes, creatures);
 
                     skillImage.addListener(new InputListener() {
                         @Override
@@ -240,41 +286,16 @@ public class BattleInitializer {
                             if (GameState.userAction == UserAction.Idle && GameState.battlePhase == BattlePhase.Prepare_stg_2) {
                                 Gdx.graphics.setCursor(skill.getCursor());
                                 GameState.userAction = skill.getUserAction();
-                                GameState.nextBattleAction = skill.getAction().apply(creature, creatures, party.heroes);
+                                GameState.nextBattleAction = skill.getAction().apply(hero, creatures, party.heroes);
                                 GameState.uiStage.addAction(GameState.nextBattleAction);
 
                                 // disable other skills
-                                GameState.battleSkillIcons.get(creature).forEach(UIFactory.I::disableSkill);
+                                GameState.battleSkillIcons.get(hero).forEach(UIFactory.I::disableSkill);
                             }
 
                             return true;
                         }
                     });
-
-                }
-            }
-
-            for (int j = skillsIndex; j < 4; j++) {
-                battleScreen.add().size(12); // empty spaces
-            }
-
-            battleScreen.add().size(48, 16);
-
-            if (i < party.heroes.size()) {
-                Creature hero = party.heroes.get(i);
-                skillsIndex = hero.skills.size();
-                for (int j = 0; j < skillsIndex; j++) {
-
-                    Skill skill = hero.skills.get(j);
-
-                    AnimatedImage skillImage = new AnimatedImage(
-                            new Animation<>(0.3f, TextureRegion.split(hero.skills.get(j).getIcon(), 16, 16)[0]));
-                    battleScreen.add(skillImage).size(10).pad(1);
-                    UIFactory.I.disableSkill(skillImage);
-                    GameState.battleSkillIcons.computeIfAbsent(hero, value -> new ArrayList<>());
-                    GameState.battleSkillIcons.get(hero).add(skillImage);
-
-                    GameState.nextBattleAction = skill.getAction().apply(hero, party.heroes, creatures);
                 }
             } else {
                 skillsIndex = 0;
@@ -293,6 +314,7 @@ public class BattleInitializer {
 
         GameState.battlePhase = BattlePhase.NotStartedYet;
 
+        startBattleAction.addAction(new ResetPartyStatusAction());
         startBattleAction.addAction(Actions.delay(4f));
         startBattleAction.addAction(new MoveBattleToFinishTurnAction());
         startBattleAction.addAction(new BattleFlowAction(creatures, party.heroes));

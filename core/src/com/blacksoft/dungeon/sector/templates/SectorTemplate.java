@@ -27,6 +27,10 @@ public abstract class SectorTemplate {
 
                 nodeMap[j][i] = mapToNode(getStringTemplate()[SECTOR_SIZE - i - 1][j]);
 
+                if(i == 2 && j == 2) {
+                    nodeMap[i][j].object = new EventObject();
+                }
+
             }
         }
 
