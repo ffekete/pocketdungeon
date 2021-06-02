@@ -10,7 +10,7 @@ import com.blacksoft.dungeon.objects.AbstractMapObject;
 import com.blacksoft.state.Config;
 import com.blacksoft.state.GameState;
 
-public class Graveyard  extends AbstractMapObject {
+public class Grave extends AbstractMapObject {
 
     private Light lightSource;
 
@@ -19,7 +19,7 @@ public class Graveyard  extends AbstractMapObject {
     private static TextureRegion textureRegion;
 
     static {
-        textureRegion = new TextureRegion(new Texture(Gdx.files.internal("tile/Grave.png")));
+        textureRegion = new TextureRegion(new Texture(Gdx.files.internal("object/ground/Grave.png")));
     }
 
     @Override

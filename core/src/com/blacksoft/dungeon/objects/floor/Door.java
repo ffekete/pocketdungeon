@@ -19,8 +19,8 @@ public class Door extends AbstractMapObject {
     private static TextureRegion closedTextureRegion;
 
     static {
-        openedTextureRegion = new TextureRegion(new Texture(Gdx.files.internal("tile/Transparent.png")));
-        closedTextureRegion = new TextureRegion(new Texture(Gdx.files.internal("tile/DoorClosed.png")));
+        openedTextureRegion = new TextureRegion(new Texture(Gdx.files.internal("object/ground/Transparent.png")));
+        closedTextureRegion = new TextureRegion(new Texture(Gdx.files.internal("object/ground/DoorClosed.png")));
     }
 
     @Override

@@ -14,8 +14,8 @@ public class TreasureChest extends AbstractMapObject {
     public boolean opened = false;
 
     static {
-        textureRegionClosed = new TextureRegion(new Texture(Gdx.files.internal("tile/TreasureChest.png")));
-        textureRegionOpened = new TextureRegion(new Texture(Gdx.files.internal("tile/TreasureChestOpened.png")));
+        textureRegionClosed = new TextureRegion(new Texture(Gdx.files.internal("object/ground/TreasureChest.png")));
+        textureRegionOpened = new TextureRegion(new Texture(Gdx.files.internal("object/ground/TreasureChestOpened.png")));
     }
 
     public int x, y;

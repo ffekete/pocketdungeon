@@ -10,7 +10,7 @@ public class Gutter01 extends AbstractMapObject {
     private static TextureRegion textureRegionClosed;
 
     static {
-        textureRegionClosed = new TextureRegion(new Texture(Gdx.files.internal("tile/Gutter.png")));
+        textureRegionClosed = new TextureRegion(new Texture(Gdx.files.internal("object/ground/Gutter.png")));
     }
 
     public int x, y;

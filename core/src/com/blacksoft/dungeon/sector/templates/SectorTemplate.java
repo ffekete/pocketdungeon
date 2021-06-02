@@ -57,7 +57,7 @@ public abstract class SectorTemplate {
                 node.tile = GameState.baseEmptyTile;
                 break;
             case 'g':
-                node.object = new Graveyard();
+                node.object = new Grave();
                 node.tile = GameState.baseEmptyTile;
                 break;
             case 'b':

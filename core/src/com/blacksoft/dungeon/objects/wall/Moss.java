@@ -10,7 +10,7 @@ public class Moss extends AbstractMapObject {
     private static TextureRegion textureRegion;
 
     static {
-        textureRegion = new TextureRegion(new Texture(Gdx.files.internal("tile/Moss.png")));
+        textureRegion = new TextureRegion(new Texture(Gdx.files.internal("object/wall/Moss.png")));
     }
 
     public int x, y;

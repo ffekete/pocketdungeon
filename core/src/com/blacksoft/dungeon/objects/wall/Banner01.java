@@ -10,7 +10,7 @@ public class Banner01 extends AbstractMapObject {
     private static TextureRegion textureRegion;
 
     static {
-        textureRegion = new TextureRegion(new Texture(Gdx.files.internal("tile/Banner01.png")));
+        textureRegion = new TextureRegion(new Texture(Gdx.files.internal("object/wall/Banner01.png")));
     }
 
     public int x, y;

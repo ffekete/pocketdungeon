@@ -16,7 +16,7 @@ public class DungeonEntrance extends AbstractMapObject {
     private static TextureRegion textureRegion;
 
     static {
-        textureRegion = new TextureRegion(new Texture(Gdx.files.internal("tile/DungeonEntrance.png")));
+        textureRegion = new TextureRegion(new Texture(Gdx.files.internal("object/ground/DungeonEntrance.png")));
     }
 
     @Override

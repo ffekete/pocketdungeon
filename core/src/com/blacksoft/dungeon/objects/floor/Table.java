@@ -12,7 +12,7 @@ public class Table extends AbstractMapObject {
     private static TextureRegion textureRegion;
 
     static {
-        textureRegion = new TextureRegion(new Texture(Gdx.files.internal("tile/Table.png")));
+        textureRegion = new TextureRegion(new Texture(Gdx.files.internal("object/ground/Table.png")));
     }
 
     @Override

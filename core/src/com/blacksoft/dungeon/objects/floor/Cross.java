@@ -16,7 +16,7 @@ public class Cross extends AbstractMapObject {
     private static TextureRegion textureRegion;
 
     static {
-        textureRegion = new TextureRegion(new Texture(Gdx.files.internal("tile/Cross.png")));
+        textureRegion = new TextureRegion(new Texture(Gdx.files.internal("object/ground/Cross.png")));
     }
 
     @Override

@@ -17,7 +17,7 @@ public class VampireCoffin extends AbstractMapObject {
     public int x, y;
 
     static {
-        textureRegion = new TextureRegion(new Texture(Gdx.files.internal("tile/MysteriousCoffin.png")));
+        textureRegion = new TextureRegion(new Texture(Gdx.files.internal("object/ground/MysteriousCoffin.png")));
     }
 
     public int level = 1;

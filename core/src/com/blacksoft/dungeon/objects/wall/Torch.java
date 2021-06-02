@@ -20,8 +20,8 @@ public class Torch extends AbstractMapObject {
     private static Animation<TextureRegion> animation;
 
     static {
-        textureRegion = new TextureRegion(new Texture(Gdx.files.internal("tile/Torch.png")));
-        textureRegion2 = new TextureRegion(new Texture(Gdx.files.internal("tile/Torch2.png")));
+        textureRegion = new TextureRegion(new Texture(Gdx.files.internal("object/wall/Torch.png")));
+        textureRegion2 = new TextureRegion(new Texture(Gdx.files.internal("object/wall/Torch2.png")));
         Array<TextureRegion> regions = new Array<>();
         regions.add(textureRegion, textureRegion2);
         animation = new Animation<>(0.25f, regions);
